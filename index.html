@@ -186,6 +186,97 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: #1d1d1f;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(111, 172, 255, 0.1);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            z-index: 2000;
+            padding: 80px 0 20px;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            padding: 0 30px;
+        }
+
+        .mobile-nav-links a {
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #1d1d1f;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            color: #6facff;
+        }
+
+        .mobile-nav-links .nav-cta {
+            background: linear-gradient(135deg, #6facff, #aacfff);
+            color: white !important;
+            padding: 15px 20px;
+            border-radius: 25px;
+            text-align: center;
+            margin-top: 20px;
+            border-bottom: none;
+        }
+
+        .mobile-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #1d1d1f;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .mobile-close-btn:hover {
+            background: rgba(111, 172, 255, 0.1);
         }
 
         @media (max-width: 768px) {
@@ -195,6 +286,20 @@
             
             .mobile-menu-btn {
                 display: block;
+            }
+
+            .nav-container {
+                padding: 0 15px;
+            }
+
+            .logo img {
+                height: 35px !important;
+            }
+
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
             }
         }
 
@@ -462,6 +567,7 @@
             margin-top: 8px;
         }
 
+        /* Mobile Optimizations */
         @media (max-width: 768px) {
             .section {
                 padding: 60px 0;
@@ -485,6 +591,66 @@
                 margin-right: 0;
                 margin-bottom: 15px;
             }
+
+            .hero p {
+                padding: 15px 20px;
+                font-size: 1.1rem;
+            }
+
+            .cta-button {
+                padding: 14px 28px;
+                font-size: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .stat-item {
+                padding: 20px 10px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .faq-question {
+                padding: 20px;
+                font-size: 1rem;
+            }
+
+            .faq-answer {
+                padding: 0 20px 20px;
+            }
+
+            .info-card {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            .hero p {
+                padding: 12px 15px;
+                font-size: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            .section {
+                padding: 40px 0;
+            }
         }
 
         .internal-link {
@@ -497,6 +663,38 @@
         .internal-link:hover {
             color: #5a9cef;
             text-decoration: underline;
+        }
+
+        /* ALL IN Features Mobile Optimization */
+        .all-in-features {
+            padding: 20px !important;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .feature-check {
+            flex-shrink: 0;
+            margin-right: 10px;
+            margin-top: 2px;
+        }
+
+        @media (min-width: 600px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
         }
 
         /* Footer */
@@ -573,6 +771,15 @@
                 flex-direction: column;
                 gap: 15px;
             }
+
+            .footer {
+                padding: 40px 0 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
         }
     </style>
 </head>
@@ -591,9 +798,22 @@
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#kurse" class="nav-cta">Vorbereitung starten</a></li>
             </ul>
-            <button class="mobile-menu-btn">☰</button>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close-btn" onclick="closeMobileMenu()">×</button>
+        <div class="mobile-nav-links">
+            <a href="#info" onclick="closeMobileMenu()">Prüfungsinfos</a>
+            <a href="#ablauf" onclick="closeMobileMenu()">Ablauf</a>
+            <a href="#kosten" onclick="closeMobileMenu()">Kosten</a>
+            <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+            <a href="#kurse" class="nav-cta" onclick="closeMobileMenu()">Vorbereitung starten</a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero gradient-bg section">
@@ -877,39 +1097,39 @@
                     <span style="font-weight: 800; font-size: 1.3rem; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">Du sparst 2.455 €</span>
                 </div>
                 
-                <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; margin: 30px 0; border: 1px solid rgba(255,255,255,0.2);">
+                <div class="all-in-features" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 25px; border-radius: 20px; margin: 30px 0; border: 1px solid rgba(255,255,255,0.2);">
                     <h4 style="color: white; margin-bottom: 20px; font-size: 1.4rem;">Das ist alles enthalten:</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; text-align: left;">
-                        <div>
-                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white;">✓</span>
-                                <span style="font-weight: 600;">Komplette Stoffvermittlung</span>
+                    <div class="features-grid">
+                        <div class="features-column">
+                            <div class="feature-item">
+                                <span class="feature-check" style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 0.95rem;">Komplette Stoffvermittlung</span>
                             </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white;">✓</span>
-                                <span style="font-weight: 600;">Klausurtechnik & -training</span>
+                            <div class="feature-item">
+                                <span class="feature-check" style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 0.95rem;">Klausurtechnik & -training</span>
                             </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white;">✓</span>
-                                <span style="font-weight: 600;">WLW+ Lernplattform</span>
+                            <div class="feature-item">
+                                <span class="feature-check" style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 0.95rem;">WLW+ Lernplattform</span>
                             </div>
-                            <div style="display: flex; align-items: center;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white;">✓</span>
-                                <span style="font-weight: 600;">Umfangreiche Materialien</span>
+                            <div class="feature-item">
+                                <span class="feature-check" style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 0.95rem;">Umfangreiche Materialien</span>
                             </div>
                         </div>
-                        <div>
-                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white;">✓</span>
-                                <span style="font-weight: 600;">Zugang Whatsgruppen</span>
+                        <div class="features-column">
+                            <div class="feature-item">
+                                <span class="feature-check" style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 0.95rem;">Zugang Whatsgruppen</span>
                             </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white;">✓</span>
-                                <span style="font-weight: 600;">Teilnahme-Zertifikat</span>
+                            <div class="feature-item">
+                                <span class="feature-check" style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 0.95rem;">Teilnahme-Zertifikat</span>
                             </div>
-                            <div style="display: flex; align-items: center;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white;">✓</span>
-                                <span style="font-weight: 600;">Individuelle Betreuung</span>
+                            <div class="feature-item">
+                                <span class="feature-check" style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; color: white; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 0.95rem;">Individuelle Betreuung</span>
                             </div>
                         </div>
                     </div>
@@ -1002,8 +1222,6 @@
         </div>
     </footer>
 
-
-
     <script>
         // Navigation scroll effect
         window.addEventListener('scroll', function() {
@@ -1015,7 +1233,24 @@
             }
         });
 
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileOverlay = document.getElementById('mobileOverlay');
+            
+            mobileMenu.classList.add('active');
+            mobileOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileOverlay = document.getElementById('mobileOverlay');
+            
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
 
         // FAQ Toggle Functionality
         function toggleFAQ(element) {
@@ -1065,7 +1300,7 @@
                     entry.target.style.animationPlayState = 'running';
                 }
             });
-        }, observerOptions);
+        }, observerOptions;
 
         document.querySelectorAll('.section').forEach(section => {
             section.style.animationPlayState = 'paused';
@@ -1083,5 +1318,6 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976b25fd328e2942',t:'MTc1NjQ2MTA3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976bb7b2e039a2c1',t:'MTc1NjQ2NzAzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
