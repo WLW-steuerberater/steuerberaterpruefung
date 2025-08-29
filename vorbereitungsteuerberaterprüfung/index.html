@@ -76,9 +76,10 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             z-index: 1000;
-            padding: 15px 0;
+            padding: 12px 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            min-height: 60px;
         }
 
         .navbar.scrolled {
@@ -93,6 +94,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            min-height: 48px;
         }
 
         .logo {
@@ -100,20 +102,27 @@
             align-items: center;
             text-decoration: none;
             color: #1d1d1f;
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            height: 36px;
+            width: auto;
+            max-width: 120px;
         }
 
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: linear-gradient(135deg, #6facff, #aacfff);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 12px;
+            margin-right: 10px;
             font-weight: 700;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .logo-text {
@@ -323,20 +332,61 @@
 
             .nav-container {
                 padding: 0 15px;
+                min-height: 44px;
             }
 
             .navbar {
-                padding: 12px 0;
+                padding: 8px 0;
+                min-height: 56px;
             }
 
             .logo img {
-                height: 35px !important;
+                height: 32px !important;
+                max-width: 100px !important;
             }
 
             .logo-icon {
-                width: 35px;
-                height: 35px;
-                font-size: 1.1rem;
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+                margin-right: 8px;
+            }
+
+            .mobile-menu-btn {
+                font-size: 1.6rem;
+                padding: 8px;
+                min-width: 40px;
+                min-height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 10px;
+            }
+
+            .navbar {
+                padding: 6px 0;
+                min-height: 52px;
+            }
+
+            .logo img {
+                height: 28px !important;
+                max-width: 90px !important;
+            }
+
+            .logo-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 0.9rem;
+                margin-right: 6px;
+            }
+
+            .mobile-menu-btn {
+                font-size: 1.4rem;
+                padding: 6px;
+                min-width: 36px;
+                min-height: 36px;
             }
         }
 
@@ -744,6 +794,63 @@
         /* Pause animation on hover */
         .instructors-carousel:hover .carousel-track {
             animation-play-state: paused;
+        }
+
+        /* Features Mobile Styles */
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
+            
+            .features-container {
+                padding: 20px !important;
+                margin: 25px 0 !important;
+            }
+            
+            .feature-item {
+                margin-bottom: 12px !important;
+                min-height: 36px !important;
+            }
+            
+            .feature-item span:first-child {
+                width: 28px !important;
+                height: 28px !important;
+                font-size: 1rem !important;
+                margin-right: 12px !important;
+            }
+            
+            .feature-item span:last-child {
+                font-size: 0.95rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .features-container {
+                padding: 15px !important;
+                margin: 20px 0 !important;
+            }
+            
+            .features-container h4 {
+                font-size: 1.2rem !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .feature-item {
+                margin-bottom: 10px !important;
+                min-height: 32px !important;
+            }
+            
+            .feature-item span:first-child {
+                width: 24px !important;
+                height: 24px !important;
+                font-size: 0.9rem !important;
+                margin-right: 10px !important;
+            }
+            
+            .feature-item span:last-child {
+                font-size: 0.9rem !important;
+            }
         }
 
         /* Mobile Optimizations */
@@ -1399,41 +1506,40 @@
                     <span style="font-weight: 800; font-size: 1.3rem; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">Du sparst 2.455 €</span>
                 </div>
                 
-                <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 25px; border-radius: 20px; margin: 30px 0; border: 1px solid rgba(255,255,255,0.2);">
-                    <h4 style="color: white; margin-bottom: 20px; font-size: 1.4rem;">Alles was du brauchst:</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; text-align: left;">
-                        <div>
-                            <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem;">✓</span>
-                                <span style="font-weight: 600;">Komplette Stoffvermittlung</span>
+                <div class="features-container" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 25px; border-radius: 20px; margin: 30px 0; border: 1px solid rgba(255,255,255,0.2);">
+                    <h4 style="color: white; margin-bottom: 20px; font-size: 1.4rem; text-align: center;">Alles was du brauchst:</h4>
+                    <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; text-align: left;">
+                        <div class="features-column">
+                            <div class="feature-item" style="display: flex; align-items: center; margin-bottom: 15px; min-height: 40px;">
+                                <span style="background: rgba(255,255,255,0.2); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 1.1rem; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 1rem; line-height: 1.3;">Komplette Stoffvermittlung</span>
                             </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem;">✓</span>
-                                <span style="font-weight: 600;">Klausurtechnik & -training</span>
+                            <div class="feature-item" style="display: flex; align-items: center; margin-bottom: 15px; min-height: 40px;">
+                                <span style="background: rgba(255,255,255,0.2); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 1.1rem; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 1rem; line-height: 1.3;">Klausurtechnik & -training</span>
                             </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem;">✓</span>
-                                <span style="font-weight: 600;">WLW+ Lernplattform</span>
+                            <div class="feature-item" style="display: flex; align-items: center; margin-bottom: 15px; min-height: 40px;">
+                                <span style="background: rgba(255,255,255,0.2); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 1.1rem; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 1rem; line-height: 1.3;">WLW+ Lernplattform</span>
                             </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem;">✓</span>
-                                <span style="font-weight: 600;">Umfangreiche Materialien</span>
+                            <div class="feature-item" style="display: flex; align-items: center; margin-bottom: 15px; min-height: 40px;">
+                                <span style="background: rgba(255,255,255,0.2); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 1.1rem; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 1rem; line-height: 1.3;">Umfangreiche Materialien</span>
                             </div>
                         </div>
-                        <div>
-                            <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem;">✓</span>
-                                <span style="font-weight: 600;">Persönliche Betreuung</span>
+                        <div class="features-column">
+                            <div class="feature-item" style="display: flex; align-items: center; margin-bottom: 15px; min-height: 40px;">
+                                <span style="background: rgba(255,255,255,0.2); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 1.1rem; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 1rem; line-height: 1.3;">Persönliche Betreuung</span>
                             </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem;">✓</span>
-                                <span style="font-weight: 600;">WhatsApp-Gruppen</span>
+                            <div class="feature-item" style="display: flex; align-items: center; margin-bottom: 15px; min-height: 40px;">
+                                <span style="background: rgba(255,255,255,0.2); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 1.1rem; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 1rem; line-height: 1.3;">WhatsApp-Gruppen</span>
                             </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                                <span style="background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem;">✓</span>
-                                <span style="font-weight: 600;">Teilnahme-Zertifikat</span>
+                            <div class="feature-item" style="display: flex; align-items: center; margin-bottom: 15px; min-height: 40px;">
+                                <span style="background: rgba(255,255,255,0.2); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 1.1rem; flex-shrink: 0;">✓</span>
+                                <span style="font-weight: 600; font-size: 1rem; line-height: 1.3;">Teilnahme-Zertifikat</span>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -1615,5 +1721,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d518107395ad9',t:'MTc1NjQ4MzgyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d6176c5065b4e',t:'MTc1NjQ4NDQ3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
