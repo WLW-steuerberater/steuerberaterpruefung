@@ -15,24 +15,15 @@
         "@type": "Article",
         "headline": "Griffregister Steuerberaterprüfung: Sinnvoll oder Zeitverschwendung?",
         "description": "Umfassender Guide zu Griffregistern in der Steuerberaterprüfung - Vorteile, Nachteile und warum WLW-Griffregister die beste Wahl sind",
-        "author": {
-            "@type": "Organization",
-            "name": "WLW"
-        },
+        "author": {"@type": "Organization","name": "WLW"},
         "publisher": {
             "@type": "Organization",
             "name": "WLW",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://s1.directupload.eu/images/250829/qrodfdgf.png"
-            }
+            "logo": {"@type": "ImageObject","url": "https://s1.directupload.eu/images/250829/qrodfdgf.png"}
         },
         "datePublished": "2024-01-15",
         "dateModified": "2024-01-15",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://wlw-steuern.de/griffregister-steuerberaterprüfung"
-        }
+        "mainEntityOfPage": {"@type": "WebPage","@id": "https://wlw-steuern.de/griffregister-steuerberaterprüfung"}
     }
     </script>
 
@@ -42,656 +33,220 @@
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Sind Griffregister in der Steuerberaterprüfung erlaubt?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Ja, Griffregister sind in der Steuerberaterprüfung erlaubt. Sie dürfen Stichworte notieren, die aus der Überschrift und dem Paragraphen bestehen, ohne zusätzliche Inhalte hinzuzufügen."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Welche Griffregister sind die besten für die Steuerberaterprüfung?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "WLW-Griffregister sind seit 2009 das bewährte Original mit schnellem Zugriff, maximaler Übersicht und einem bewährten Farbsystem für optimale Effizienz."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Sollte ich alle Paragraphen mit Griffregistern markieren?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Nein, eine vollständige Markierung aller Paragraphen ist nicht zielführend. Fokussieren Sie sich auf wichtige Paragraphen, die Sie schnell finden müssen."
-                }
-            }
+            {"@type":"Question","name":"Sind Griffregister in der Steuerberaterprüfung erlaubt?","acceptedAnswer":{"@type":"Answer","text":"Ja, Griffregister sind in der Steuerberaterprüfung erlaubt. Sie dürfen Stichworte notieren, die aus der Überschrift und dem Paragraphen bestehen, ohne zusätzliche Inhalte hinzuzufügen."}},
+            {"@type":"Question","name":"Welche Griffregister sind die besten für die Steuerberaterprüfung?","acceptedAnswer":{"@type":"Answer","text":"WLW-Griffregister sind seit 2009 das bewährte Original mit schnellem Zugriff, maximaler Übersicht und einem bewährten Farbsystem für optimale Effizienz."}},
+            {"@type":"Question","name":"Sollte ich alle Paragraphen mit Griffregistern markieren?","acceptedAnswer":{"@type":"Answer","text":"Nein, eine vollständige Markierung aller Paragraphen ist nicht zielführend. Fokussieren Sie sich auf wichtige Paragraphen, die Sie schnell finden müssen."}}
         ]
     }
     </script>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
-            overflow-x: hidden;
-            width: 100%;
-            max-width: 100vw;
-        }
+        html { overflow-x: hidden; width: 100%; max-width: 100vw; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #1d1d1f;
-            background: white;
-            overflow-x: hidden;
-            width: 100%;
-            max-width: 100vw;
+            line-height: 1.6; color: #1d1d1f; background: white;
+            overflow-x: hidden; width: 100%; max-width: 100vw;
         }
 
-        .gradient-bg {
-            background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);
+        /* ===== NAVBAR (aus zweitem Code) ===== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000; padding: 15px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled { background: rgba(255,255,255,0.98); box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; text-decoration: none; color: #1d1d1f; }
+        .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, #6facff, #aacfff); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-weight: 700; color: white; font-size: 1.2rem; }
+        .nav-links { display: flex; list-style: none; gap: 30px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #424245; font-weight: 500; transition: color 0.3s ease; position: relative; }
+        .nav-links a:hover { color: #6facff; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #6facff; transition: width 0.3s ease; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta { background: linear-gradient(135deg, #6facff, #aacfff); color: white !important; padding: 10px 20px; border-radius: 25px; font-weight: 600; transition: all 0.3s ease; }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(111,172,255,0.3); }
+        .nav-cta::after { display: none; }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #1d1d1f; padding: 8px; border-radius: 8px; transition: background 0.3s ease; }
+        .mobile-menu-btn:hover { background: rgba(111,172,255,0.1); }
+        .mobile-menu { position: fixed; top: 0; left: -100%; width: 280px; height: 100vh; background: white; z-index: 2000; padding: 80px 0 20px; box-shadow: 2px 0 20px rgba(0,0,0,0.1); transition: left 0.3s ease; overflow-y: auto; }
+        .mobile-menu.active { left: 0; }
+        .mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1500; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .mobile-overlay.active { opacity: 1; visibility: visible; }
+        .mobile-nav-links { display: flex; flex-direction: column; padding: 0 30px; }
+        .mobile-nav-links a { padding: 15px 0; border-bottom: 1px solid #f0f0f0; color: #1d1d1f; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s ease; }
+        .mobile-nav-links a:hover { color: #6facff; }
+        .mobile-nav-links .nav-cta { background: linear-gradient(135deg, #6facff, #aacfff); color: white !important; padding: 15px 20px; border-radius: 25px; text-align: center; margin-top: 20px; border-bottom: none; }
+        .mobile-close-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 1.8rem; color: #1d1d1f; cursor: pointer; padding: 8px; border-radius: 8px; transition: background 0.3s ease; }
+        .mobile-close-btn:hover { background: rgba(111,172,255,0.1); }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .nav-container { padding: 0 15px; }
+            .logo img { height: 35px !important; }
+            .logo-icon { width: 35px; height: 35px; font-size: 1.1rem; }
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section {
-            padding: 80px 0;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        .gradient-bg { background: linear-gradient(180deg, #6facff 0%, #aacfff 100%); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section { padding: 80px 0; opacity: 0; transform: translateY(30px); animation: fadeInUp 0.8s ease forwards; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
         .hero {
-            min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            animation-delay: 0.2s;
+            min-height: 100vh; min-height: 100dvh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; color: white; animation-delay: 0.2s;
             padding: 60px 0;
-            position: relative;
-            overflow: hidden;
+            /* Platz unter der fixen Navbar, wie im zweiten Code */
+            padding-top: 80px;
+            position: relative; overflow: hidden;
         }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; margin-bottom: 24px; letter-spacing: -0.02em; }
+        .hero p { font-size: clamp(1.2rem, 2vw, 1.4rem); margin-bottom: 40px; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto; font-weight: 400; line-height: 1.7; text-shadow: 0 2px 4px rgba(0,0,0,0.1); background: rgba(255,255,255,0.1); padding: 20px 30px; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); }
+        .cta-button { display: inline-block; background: white; color: #6facff; padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); background: #f8f9fa; }
 
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 24px;
-            letter-spacing: -0.02em;
-        }
+        .content-section { background: white; animation-delay: 0.4s; }
+        h2 { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 32px; color: #1d1d1f; letter-spacing: -0.01em; }
+        h3 { font-size: clamp(1.3rem, 3vw, 1.5rem); font-weight: 600; margin-bottom: 20px; color: #1d1d1f; }
+        p { font-size: 1.1rem; margin-bottom: 20px; color: #424245; }
 
-        .hero p {
-            font-size: clamp(1.2rem, 2vw, 1.4rem);
-            margin-bottom: 40px;
-            opacity: 0.95;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 400;
-            line-height: 1.7;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin: 60px 0; }
+        .info-card { background: #f8f9fa; padding: 40px; border-radius: 20px; transition: all 0.3s ease; border: 1px solid #e5e5e7; }
+        .info-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
 
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #6facff;
-            padding: 16px 32px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
+        .problem-card { background: linear-gradient(135deg, #ff6b6b, #ffa8a8); color: white; }
+        .problem-card h3 { color: white; }
+        .solution-card { background: linear-gradient(135deg, #4ecdc4, #7fdbda); color: white; }
+        .solution-card h3 { color: white; }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-            background: #f8f9fa;
-        }
+        .faq-section { background: #f8f9fa; animation-delay: 0.6s; }
+        .faq-item { background: white; border-radius: 15px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .faq-question { padding: 25px; cursor: pointer; font-weight: 600; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s ease; }
+        .faq-question:hover { background: #f8f9fa; }
+        .faq-answer { padding: 0 25px 25px; display: none; color: #424245; }
+        .faq-answer.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .faq-icon { transition: transform 0.3s ease; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
 
-        .content-section {
-            background: white;
-            animation-delay: 0.4s;
-        }
+        .highlight-box { background: linear-gradient(135deg, #6facff, #aacfff); color: white; padding: 40px; border-radius: 20px; text-align: center; margin: 60px 0; }
+        .highlight-box h3 { color: white; margin-bottom: 15px; }
+        .highlight-box p { color: rgba(255,255,255,0.9); margin-bottom: 25px; }
+        .highlight-link { display: inline-block; background: white; color: #6facff; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
+        .highlight-link:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
 
-        h2 {
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            font-weight: 700;
-            margin-bottom: 32px;
-            color: #1d1d1f;
-            letter-spacing: -0.01em;
-        }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin: 40px 0; }
+        .stat-item { text-align: center; padding: 30px 20px; }
+        .stat-number { font-size: 2.5rem; font-weight: 700; color: #6facff; display: block; }
+        .stat-label { font-size: 0.9rem; color: #86868b; margin-top: 8px; }
 
-        h3 {
-            font-size: clamp(1.3rem, 3vw, 1.5rem);
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #1d1d1f;
-        }
+        .internal-link { color: #6facff; text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
+        .internal-link:hover { color: #5a9cef; text-decoration: underline; }
 
-        p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: #424245;
-        }
+        .pros-cons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 60px 0; }
+        .pros-card { background: linear-gradient(135deg, #4ecdc4, #7fdbda); color: white; padding: 40px; border-radius: 20px; }
+        .cons-card { background: linear-gradient(135deg, #ff6b6b, #ffa8a8); color: white; padding: 40px; border-radius: 20px; }
+        .pros-card h3, .cons-card h3 { color: white; margin-bottom: 25px; }
+        .pros-list, .cons-list { list-style: none; padding: 0; }
+        .pros-list li, .cons-list li { margin-bottom: 15px; padding-left: 30px; position: relative; color: rgba(255,255,255,0.95); }
+        .pros-list li::before { content: "✓"; position: absolute; left: 0; color: white; font-weight: bold; font-size: 1.2rem; }
+        .cons-list li::before { content: "✗"; position: absolute; left: 0; color: white; font-weight: bold; font-size: 1.2rem; }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin: 60px 0;
-        }
+        .tip-box { background: linear-gradient(135deg, #ffd93d, #ffed4e); color: #1d1d1f; padding: 30px; border-radius: 20px; margin: 40px 0; border-left: 5px solid #ff6b6b; }
+        .tip-box h4 { color: #1d1d1f; margin-bottom: 15px; font-size: 1.3rem; }
+        .tip-box p, .tip-box ul, .tip-box li { color: #424245; }
 
-        .info-card {
-            background: #f8f9fa;
-            padding: 40px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            border: 1px solid #e5e5e7;
-        }
+        /* ===== FOOTER (aus zweitem Code) ===== */
+        .footer { background: #1d1d1f; color: white; padding: 60px 0 30px; margin-top: 80px; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-section h4 { font-size: 1.2rem; font-weight: 600; margin-bottom: 20px; color: white; }
+        .footer-section p, .footer-section a { color: #86868b; text-decoration: none; line-height: 1.8; transition: color 0.3s ease; }
+        .footer-section a:hover { color: #6facff; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-bottom { border-top: 1px solid #333; padding-top: 30px; text-align: center; color: #86868b; font-size: 0.9rem; }
+        .footer-bottom-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; flex-wrap: wrap; }
+        .footer-bottom-links a { color: #86868b; text-decoration: none; transition: color 0.3s ease; }
+        .footer-bottom-links a:hover { color: #6facff; }
 
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .problem-card {
-            background: linear-gradient(135deg, #ff6b6b, #ffa8a8);
-            color: white;
-        }
-
-        .problem-card h3 {
-            color: white;
-        }
-
-        .solution-card {
-            background: linear-gradient(135deg, #4ecdc4, #7fdbda);
-            color: white;
-        }
-
-        .solution-card h3 {
-            color: white;
-        }
-
-        .faq-section {
-            background: #f8f9fa;
-            animation-delay: 0.6s;
-        }
-
-        .faq-item {
-            background: white;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .faq-question {
-            padding: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s ease;
-        }
-
-        .faq-question:hover {
-            background: #f8f9fa;
-        }
-
-        .faq-answer {
-            padding: 0 25px 25px;
-            display: none;
-            color: #424245;
-        }
-
-        .faq-answer.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .faq-icon {
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(45deg);
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, #6facff, #aacfff);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            margin: 60px 0;
-        }
-
-        .highlight-box h3 {
-            color: white;
-            margin-bottom: 15px;
-        }
-
-        .highlight-box p {
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 25px;
-        }
-
-        .highlight-link {
-            display: inline-block;
-            background: white;
-            color: #6facff;
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .highlight-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 30px 20px;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #6facff;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #86868b;
-            margin-top: 8px;
-        }
-
-        .internal-link {
-            color: #6facff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .internal-link:hover {
-            color: #5a9cef;
-            text-decoration: underline;
-        }
-
-        .pros-cons-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 60px 0;
-        }
-
-        .pros-card {
-            background: linear-gradient(135deg, #4ecdc4, #7fdbda);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-        }
-
-        .cons-card {
-            background: linear-gradient(135deg, #ff6b6b, #ffa8a8);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-        }
-
-        .pros-card h3, .cons-card h3 {
-            color: white;
-            margin-bottom: 25px;
-        }
-
-        .pros-list, .cons-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .pros-list li, .cons-list li {
-            margin-bottom: 15px;
-            padding-left: 30px;
-            position: relative;
-            color: rgba(255,255,255,0.95);
-        }
-
-        .pros-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .cons-list li::before {
-            content: "✗";
-            position: absolute;
-            left: 0;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .tip-box {
-            background: linear-gradient(135deg, #ffd93d, #ffed4e);
-            color: #1d1d1f;
-            padding: 30px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border-left: 5px solid #ff6b6b;
-        }
-
-        .tip-box h4 {
-            color: #1d1d1f;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .tip-box p {
-            color: #424245;
-            margin-bottom: 15px;
-        }
-
-        .tip-box ul {
-            color: #424245;
-            padding-left: 20px;
-        }
-
-        .tip-box li {
-            margin-bottom: 8px;
-        }
-
-        /* Mobile Optimizations */
+        /* Mobile Optimizations (aus deinem ersten Code, leicht harmonisiert) */
         @media (max-width: 768px) {
-            body {
-                overflow-x: hidden;
-                width: 100%;
-                max-width: 100vw;
-            }
-            
-            .section {
-                padding: 50px 0;
-                width: 100%;
-                max-width: 100vw;
-                overflow-x: hidden;
-            }
-            
-            .container {
-                padding: 0 15px;
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-            }
-            
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                width: 100%;
-            }
-
-            .pros-cons-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-
-            .hero {
-                padding: 60px 0;
-                min-height: 100vh;
-                min-height: 100dvh;
-                width: 100%;
-                max-width: 100vw;
-                overflow-x: hidden;
-                box-sizing: border-box;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .hero .container {
-                width: 100%;
-                max-width: 100%;
-                padding: 0 10px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                min-height: calc(100vh - 120px);
-                min-height: calc(100dvh - 120px);
-            }
-
-            .hero h1 {
-                font-size: 1.7rem;
-                line-height: 1.2;
-                margin-bottom: 18px;
-                padding: 0;
-                width: 100%;
-                word-wrap: break-word;
-                hyphens: auto;
-            }
-
-            .hero p {
-                padding: 15px 18px;
-                font-size: 0.95rem;
-                margin-bottom: 25px;
-                line-height: 1.4;
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-                word-wrap: break-word;
-            }
-
-            .cta-button {
-                padding: 12px 24px;
-                font-size: 0.95rem;
-                min-height: 44px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 25px;
-                max-width: 90%;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-
-            .stat-item {
-                padding: 25px 15px;
-            }
-
-            .stat-number {
-                font-size: 2.2rem;
-            }
-
-            .faq-question {
-                padding: 22px 20px;
-                font-size: 1.1rem;
-                min-height: 60px;
-            }
-
-            .faq-answer {
-                padding: 0 20px 25px;
-                font-size: 1rem;
-                line-height: 1.6;
-            }
-
-            .info-card {
-                padding: 35px 25px;
-            }
-
-            h2 {
-                font-size: 2rem;
-                margin-bottom: 25px;
-                line-height: 1.2;
-            }
-
-            h3 {
-                font-size: 1.4rem;
-                margin-bottom: 18px;
-            }
-
-            p {
-                font-size: 1.05rem;
-                line-height: 1.6;
-            }
+            body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+            .section { padding: 50px 0; width: 100%; max-width: 100vw; overflow-x: hidden; }
+            .container { padding: 0 15px; width: 100%; max-width: 100%; box-sizing: border-box; }
+            .info-grid { grid-template-columns: 1fr; gap: 25px; width: 100%; }
+            .pros-cons-grid { grid-template-columns: 1fr; gap: 25px; }
+            .hero { padding: 60px 0; min-height: 100vh; min-height: 100dvh; width: 100%; max-width: 100vw; overflow-x: hidden; box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
+            .hero .container { width: 100%; max-width: 100%; padding: 0 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: calc(100vh - 120px); min-height: calc(100dvh - 120px); }
+            .hero h1 { font-size: 1.7rem; line-height: 1.2; margin-bottom: 18px; padding: 0; width: 100%; word-wrap: break-word; hyphens: auto; }
+            .hero p { padding: 15px 18px; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.4; width: 100%; max-width: 100%; box-sizing: border-box; word-wrap: break-word; }
+            .cta-button { padding: 12px 24px; font-size: 0.95rem; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 25px; max-width: 90%; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .stat-item { padding: 25px 15px; }
+            .stat-number { font-size: 2.2rem; }
+            .faq-question { padding: 22px 20px; font-size: 1.1rem; min-height: 60px; }
+            .faq-answer { padding: 0 20px 25px; font-size: 1rem; line-height: 1.6; }
+            .info-card { padding: 35px 25px; }
+            .footer-bottom-links { flex-direction: column; gap: 15px; }
+            .footer { padding: 40px 0 20px; }
+            .footer-content { grid-template-columns: 1fr; gap: 30px; }
         }
-
         @media (max-width: 480px) {
-            body {
-                overflow-x: hidden;
-                width: 100%;
-                max-width: 100vw;
-            }
-            
-            .hero {
-                padding: 40px 0;
-                min-height: 100vh;
-                min-height: 100dvh;
-                width: 100%;
-                max-width: 100vw;
-                overflow-x: hidden;
-                box-sizing: border-box;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .hero .container {
-                width: 100%;
-                max-width: 100%;
-                padding: 0 8px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                min-height: calc(100vh - 80px);
-                min-height: calc(100dvh - 80px);
-            }
-
-            .hero h1 {
-                font-size: 1.5rem;
-                line-height: 1.2;
-                margin-bottom: 15px;
-                padding: 0;
-                width: 100%;
-                word-wrap: break-word;
-                hyphens: auto;
-            }
-
-            .hero p {
-                padding: 12px 15px;
-                font-size: 0.9rem;
-                margin-bottom: 20px;
-                line-height: 1.4;
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-                word-wrap: break-word;
-            }
-
-            .cta-button {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-                min-height: 40px;
-                margin-bottom: 20px;
-                max-width: 85%;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .stat-item {
-                padding: 20px 15px;
-            }
-
-            .stat-number {
-                font-size: 2rem;
-            }
-
-            .container {
-                padding: 0 15px;
-            }
-
-            .section {
-                padding: 40px 0;
-            }
-
-            .info-card {
-                padding: 25px 20px;
-            }
-
-            .faq-question {
-                padding: 18px 15px;
-                font-size: 1rem;
-                min-height: 55px;
-            }
-
-            .faq-answer {
-                padding: 0 15px 20px;
-            }
-
-            h2 {
-                font-size: 1.7rem;
-                margin-bottom: 20px;
-            }
-
-            h3 {
-                font-size: 1.2rem;
-                margin-bottom: 15px;
-            }
+            body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+            .hero { padding: 40px 0; min-height: 100vh; min-height: 100dvh; width: 100%; max-width: 100vw; overflow-x: hidden; box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
+            .hero .container { width: 100%; max-width: 100%; padding: 0 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: calc(100vh - 80px); min-height: calc(100dvh - 80px); }
+            .hero h1 { font-size: 1.5rem; line-height: 1.2; margin-bottom: 15px; }
+            .hero p { padding: 12px 15px; font-size: 0.9rem; margin-bottom: 20px; }
+            .cta-button { padding: 10px 20px; font-size: 0.9rem; min-height: 40px; margin-bottom: 20px; max-width: 85%; }
+            .stats-grid { grid-template-columns: 1fr; gap: 15px; }
+            .stat-item { padding: 20px 15px; }
+            .stat-number { font-size: 2rem; }
+            .container { padding: 0 15px; }
+            .section { padding: 40px 0; }
+            .info-card { padding: 25px 20px; }
+            .faq-question { padding: 18px 15px; font-size: 1rem; min-height: 55px; }
+            .faq-answer { padding: 0 15px 20px; }
+            h2 { font-size: 1.7rem; margin-bottom: 20px; }
+            h3 { font-size: 1.2rem; margin-bottom: 15px; }
         }
     </style>
 </head>
 <body>
+    <!-- ===== Navigation (wie im zweiten Code) ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="https://s1.directupload.eu/images/250829/txvc5uzo.png" alt="WLW Logo" style="height: 40px; width: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-icon" style="display: none;">W</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#kontroverse">Kontroverse</a></li>
+                <li><a href="#wahrheit">Wahrheit</a></li>
+                <li><a href="#griffregister">Vorteile</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#cta" class="nav-cta">Jetzt bestellen</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close-btn" onclick="closeMobileMenu()">×</button>
+        <div class="mobile-nav-links">
+            <a href="#kontroverse" onclick="closeMobileMenu()">Kontroverse</a>
+            <a href="#wahrheit" onclick="closeMobileMenu()">Wahrheit</a>
+            <a href="#griffregister" onclick="closeMobileMenu()">Vorteile</a>
+            <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+            <a href="#cta" class="nav-cta" onclick="closeMobileMenu()">Jetzt bestellen</a>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero gradient-bg section">
         <div class="container">
@@ -768,14 +323,9 @@
                 </div>
             </div>
             
-            <!-- Erstes Produktbild -->
             <div style="text-align: center; margin: 50px 0;">
                 <img src="https://s1.directupload.eu/images/250901/9o4mhxzi.jpg" alt="WLW Griffregister Produktbild" style="width: 100%; max-width: 400px; height: auto; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);" onerror="this.src=''; this.alt='Bild konnte nicht geladen werden'; this.style.display='none';">
             </div>
-
-
-
-
         </div>
     </section>
 
@@ -816,30 +366,17 @@
                 </div>
             </div>
 
-            <!-- Zweites Produktbild -->
             <div style="text-align: center; margin: 50px 0;">
                 <img src="https://s1.directupload.eu/images/250901/xvmgdxu3.jpg" alt="WLW Griffregister Detail" style="width: 100%; max-width: 450px; height: auto; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);" onerror="this.src=''; this.alt='Bild konnte nicht geladen werden'; this.style.display='none';">
             </div>
 
-            <!-- Einklebeservice Section -->
             <div style="background: #f8f9fa; padding: 30px; border-radius: 20px; margin: 40px 0; border: 1px solid #e5e5e7;">
                 <h3 style="color: #1d1d1f; text-align: center; margin-bottom: 20px; font-size: 1.5rem;">Einklebeservice auf Folien – griffbereit, sauber, zeitsparend</h3>
-                
                 <p style="text-align: center; color: #424245; margin-bottom: 25px; font-size: 1rem; line-height: 1.6;">Sparen Sie 12-15 Stunden Vorbereitungszeit! Unsere Experten kleben alle Griffregister präzise auf Folien, die Sie einfach in Ihre Loseblattsammlung einsortieren können.</p>
-                
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; text-align: center;">
-                    <div>
-                        <div style="background: #6facff; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 1rem; font-weight: bold;">12h</div>
-                        <p style="color: #424245; font-size: 0.9rem; margin: 0;">Zeit sparen</p>
-                    </div>
-                    <div>
-                        <div style="background: #4ecdc4; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 1rem;">📋</div>
-                        <p style="color: #424245; font-size: 0.9rem; margin: 0;">Kein Umkleben</p>
-                    </div>
-                    <div>
-                        <div style="background: #ff6b6b; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 1rem;">👁️</div>
-                        <p style="color: #424245; font-size: 0.9rem; margin: 0;">Perfekte Übersicht</p>
-                    </div>
+                    <div><div style="background: #6facff; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 1rem; font-weight: bold;">12h</div><p style="color: #424245; font-size: 0.9rem; margin: 0;">Zeit sparen</p></div>
+                    <div><div style="background: #4ecdc4; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 1rem;">📋</div><p style="color: #424245; font-size: 0.9rem; margin: 0;">Kein Umkleben</p></div>
+                    <div><div style="background: #ff6b6b; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 1rem;">👁️</div><p style="color: #424245; font-size: 0.9rem; margin: 0;">Perfekte Übersicht</p></div>
                 </div>
             </div>
 
@@ -864,7 +401,6 @@
     <section class="faq-section section" id="faq">
         <div class="container">
             <h2>Häufige Fragen zu Griffregistern</h2>
-            
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFAQ(this)">
                     <span>Sind Griffregister in der Steuerberaterprüfung überhaupt erlaubt?</span>
@@ -874,7 +410,6 @@
                     <p>Ja, Griffregister sind in der Steuerberaterprüfung ausdrücklich erlaubt. Sie dürfen Stichworte auf die Griffregister oder andere Klebestreifen notieren, die aus der Überschrift und dem Paragraphen bestehen. Wichtig: Es darf nichts hinzugefügt werden, was sich nicht in der ursprünglichen Überschrift wiederfindet.</p>
                 </div>
             </div>
-
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFAQ(this)">
                     <span>Darf ich eigene Notizen auf die Griffregister schreiben?</span>
@@ -884,7 +419,6 @@
                     <p>Sie dürfen Stichworte notieren, die aus der Überschrift und dem Paragraphen bestehen. Wie Sie die Stichwörter abkürzen und ob Sie Paragraphen-Zeichen verwenden, bleibt Ihnen überlassen – solange nichts hinzukommt, was sich in der Überschrift nicht wiederfindet.</p>
                 </div>
             </div>
-
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFAQ(this)">
                     <span>Sollte ich alle Paragraphen mit Griffregistern markieren?</span>
@@ -894,7 +428,6 @@
                     <p>Nein, das ist nicht zielführend. Die Markierung soll dabei helfen, Zeit zu sparen und wichtige Paragraphen schnell aufzuschlagen. Eine Vollmarkierung führt zur Reizüberflutung und ist kontraproduktiv. Konzentrieren Sie sich auf die wirklich relevanten Normen.</p>
                 </div>
             </div>
-
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFAQ(this)">
                     <span>Was ist die beste Vorgehensweise beim Beschriften?</span>
@@ -904,7 +437,6 @@
                     <p>Beachten Sie, dass Sie in der Prüfungssituation schnell erkennen sollten, worum es geht. Die einfachste Kennzeichnung ist meist die effektivste. Viele erfahrene Kandidaten notieren sich lediglich die Zahlen der wichtigsten Paragraphen auf Klebestreifen.</p>
                 </div>
             </div>
-
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFAQ(this)">
                     <span>Warum sind WLW-Griffregister besser als andere?</span>
@@ -914,7 +446,6 @@
                     <p>WLW-Griffregister sind das bewährte Original seit 2009. Sie bieten schnellen Zugriff durch klar strukturierte Schlagwörter, maximale Übersicht ohne überflüssige Fundstellen und ein bewährtes Farbsystem. Dazu kommt unsere jahrzehntelange Erfahrung in der Steuerberater-Ausbildung.</p>
                 </div>
             </div>
-
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFAQ(this)">
                     <span>Gibt es eine Möglichkeit, beim Griffregister-Kleben Zeit zu sparen?</span>
@@ -922,7 +453,6 @@
                 </div>
                 <div class="faq-answer">
                     <p><strong>Ja, mit unserem professionellen Einklebeservice!</strong> Anstatt 12-15 Stunden selbst zu kleben, erhalten Sie alle Griffregister bereits perfekt auf Folien eingeklebt. Diese können Sie einfach in Ihre Loseblattsammlung einsortieren – fertig!</p>
-                    
                     <p><strong>Die Vorteile:</strong></p>
                     <ul style="margin-left: 20px; margin-bottom: 15px;">
                         <li>Sparen Sie 12-15 Stunden wertvolle Lernzeit</li>
@@ -931,11 +461,9 @@
                         <li>Sofort einsatzbereit für Ihre Prüfungsvorbereitung</li>
                         <li>Perfekte Übersicht durch saubere Anordnung</li>
                     </ul>
-                    
                     <p>Investieren Sie Ihre Zeit lieber ins Lernen statt ins Kleben – der Einklebeservice macht es möglich!</p>
                 </div>
             </div>
-
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFAQ(this)">
                     <span>Wie gehe ich mit der Platzproblematik in den Gesetzesbüchern um?</span>
@@ -943,9 +471,7 @@
                 </div>
                 <div class="faq-answer">
                     <p><strong>Unser Tipp:</strong> Sortieren Sie für die schriftliche Prüfung nicht benötigte Seiten aus und nehmen Sie diese in einem zusätzlichen Beck-Ordner mit.</p>
-                    
                     <p><strong>Für die schriftliche Prüfung nicht unbedingt benötigt:</strong></p>
-                    
                     <p><strong>Steuergesetze:</strong></p>
                     <ul style="margin-left: 20px; margin-bottom: 15px;">
                         <li>Versicherungssteuergesetz 620</li>
@@ -955,7 +481,6 @@
                         <li>Kraftfahrzeugsteuergesetz 660</li>
                         <li>KraftStDV 665</li>
                     </ul>
-                    
                     <p><strong>Steuerrichtlinien:</strong></p>
                     <ul style="margin-left: 20px;">
                         <li>Bundesumzugskostengesetz 29</li>
@@ -987,14 +512,65 @@
         </div>
     </section>
 
+    <!-- ===== Footer (wie im zweiten Code) ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>WLW</h4>
+                    <p>Dein Partner für eine erfolgreiche Steuerberaterprüfung. Mit über 25 Jahren Erfahrung und tausenden erfolgreichen Absolventen.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Vorbereitung</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://wlw-steuern.de/kurse">Kurse</a></li>
+                        <li><a href="https://wlw-steuern.de/shop">Lernmaterialien</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <p>WLW<br>Dr. Wirth GbR<br><br>Würzburger Str. 59<br>96049 Bamberg<br><br>
+                    <a href="tel:+4995170066-0">0951/70066-0</a><br>
+                    <a href="mailto:info@wlw-steuern.de">info@wlw-steuern.de</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-links">
+                    <a href="https://wlw-steuern.de/impressum" target="_blank">Impressum</a>
+                    <a href="https://wlw-steuern.de/datenschutz" target="_blank">Datenschutz</a>
+                    <a href="https://wlw-steuern.de/agb" target="_blank">AGB</a>
+                </div>
+                <p>&copy; WLW. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // FAQ Toggle Functionality
+        // Navbar Scroll-Effekt (wie im zweiten Code)
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) { navbar.classList.add('scrolled'); }
+            else { navbar.classList.remove('scrolled'); }
+        });
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.getElementById('mobileOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.getElementById('mobileOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // FAQ Toggle (dein vorhandenes Verhalten)
         function toggleFAQ(element) {
             const faqItem = element.parentElement;
             const answer = faqItem.querySelector('.faq-answer');
             const icon = element.querySelector('.faq-icon');
-            
-            // Close all other FAQ items
+
             document.querySelectorAll('.faq-item').forEach(item => {
                 if (item !== faqItem) {
                     const otherAnswer = item.querySelector('.faq-answer');
@@ -1006,8 +582,7 @@
                     }
                 }
             });
-            
-            // Toggle current FAQ item
+
             if (answer.style.display === 'block') {
                 answer.style.display = 'none';
                 icon.textContent = '+';
@@ -1019,26 +594,17 @@
             }
         }
 
-        // Smooth scrolling for internal links
+        // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
             });
         });
 
-        // Staggered animation for sections
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        // Staggered Animation für Sections
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1047,13 +613,12 @@
                 }
             });
         }, observerOptions);
-
         document.querySelectorAll('.section').forEach(section => {
             section.style.animationPlayState = 'paused';
             observer.observe(section);
         });
 
-        // Add hover effects to cards
+        // Hover-Effekte
         document.querySelectorAll('.info-card, .faq-item, .advantage-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-5px)';
@@ -1061,7 +626,6 @@
                     this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)';
                 }
             });
-            
             card.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0)';
                 if (this.classList.contains('advantage-card')) {
@@ -1070,5 +634,8 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97831d45a7419286',t:'MTc1NjcxMjM3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+    <!-- (Beibehalten) Cloudflare/Host Script aus deinem Original -->
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97831d45a7419286',t:'MTc1NjcxMjM3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
 </html>
