@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WLW Klausurenkurse 2026 - Steuerberaterprüfung</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);
+            animation: gradientShift 8s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background: linear-gradient(180deg, #6facff 0%, #aacfff 100%); }
+            50% { background: linear-gradient(180deg, #5a9bef 0%, #9abfef 100%); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .fade-in-delay-1 { animation-delay: 0.2s; }
+        .fade-in-delay-2 { animation-delay: 0.4s; }
+        .fade-in-delay-3 { animation-delay: 0.6s; }
+        .fade-in-delay-4 { animation-delay: 0.8s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hover-lift {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .city-dot {
+            fill: #3b82f6;
+            stroke: white;
+            stroke-width: 3;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.3));
+        }
+        
+        .city-dot:hover {
+            fill: #1e40af;
+            r: 12;
+            stroke-width: 4;
+            filter: drop-shadow(0 8px 16px rgba(30, 64, 175, 0.5));
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .city-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            fill: #1f2937;
+            text-anchor: middle;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(255,255,255,0.8));
+        }
+        
+        .city-dot:hover + .city-label {
+            font-size: 15px;
+            fill: #1e40af;
+        }
+        
+        .city-card {
+            border: 2px solid transparent;
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .city-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transition: left 1s ease;
+        }
+        
+        .city-card:hover::before {
+            left: 100%;
+        }
+        
+        .city-card:hover {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2);
+        }
+        
+        .city-card.active {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.3);
+        }
+        
+        .germany-map {
+            transition: all 0.5s ease;
+        }
+        
+        .germany-map:hover {
+            transform: scale(1.05);
+        }
+        
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transition: all 0.6s ease;
+            transform: translate(-50%, -50%);
+        }
+        
+        .feature-card:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px) rotate(1deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .btn-hover {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .btn-hover:hover::before {
+            left: 100%;
+        }
+        
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .nav-item {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-item:hover::after {
+            width: 100%;
+        }
+        
+        .nav-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white z-50 shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="text-white px-4 py-2 rounded font-bold text-xl" style="background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);">WLW</div>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#start" class="nav-item text-gray-600 hover:text-blue-600">Start</a>
+                    <a href="#standorte" class="nav-item text-gray-600 hover:text-blue-600">Standorte</a>
+                    <a href="#inhalte" class="nav-item text-gray-600 hover:text-blue-600">Inhalte</a>
+                    <a href="#buchen" class="btn-hover text-white px-4 py-2 rounded" style="background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);">Buchen</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="start" class="relative text-white py-32 mt-16 overflow-hidden">
+        <!-- Background Video -->
+        <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover z-0">
+            <source src="https://www.dropbox.com/scl/fi/4aztzgq1yaoqbgg7mrsdx/Design_ohne_Titel-4-1.mp4?rlkey=igd487bg1szqx6dfhtbl35rf9&raw=1" type="video/mp4">
+        </video>
+        
+        <!-- Dark overlay for better text readability -->
+        <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+        
+        <!-- Content overlay -->
+        <div class="relative z-20 container mx-auto px-4 text-center">
+            <div class="fade-in bg-red-500 text-white font-bold py-2 px-6 rounded-full mb-8 inline-block floating">
+                07. - 12. September 2026
+            </div>
+            <h1 class="fade-in fade-in-delay-1 text-4xl md:text-6xl font-bold mb-6 text-glow">Steuerberaterprüfung Klausurenkurse 2026</h1>
+            <h2 class="fade-in fade-in-delay-2 text-xl md:text-3xl font-semibold mb-6">Deutschlandweit | WLW Original</h2>
+            <p class="fade-in fade-in-delay-3 text-lg md:text-xl mb-8 max-w-4xl mx-auto">
+                <span class="font-bold">✓ 2x Probeexamen ✓ Professionelle Korrektur ✓ Ausführliche Besprechung</span>
+            </p>
+            <div class="fade-in fade-in-delay-4 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#buchen" class="btn-hover bg-white font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition" style="color: #6facff;">
+                    <i class="fas fa-pen-alt mr-2"></i>Jetzt buchen
+                </a>
+                <a href="#standorte" class="btn-hover border-2 border-white text-white font-bold py-4 px-8 rounded-lg hover:bg-white transition hover:text-blue-600">
+                    Standorte ansehen
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warum WLW Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-gray-800">Warum WLW Klausurenkurse?</h2>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                    Bereite dich optimal auf die schriftliche Steuerberaterprüfung vor mit unserem seit 1997 bewährten Konzept.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="scroll-reveal feature-card text-center bg-blue-50 rounded-xl p-8 hover-lift">
+                    <div class="text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);">
+                        <i class="fas fa-file-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">2x Probeexamen</h3>
+                    <p class="text-gray-600">Zwei vollständige Prüfungssimulationen unter realen Bedingungen.</p>
+                </div>
+                
+                <div class="scroll-reveal feature-card text-center bg-green-50 rounded-xl p-8 hover-lift" style="animation-delay: 0.2s;">
+                    <div class="bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check-double text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Professionelle Korrektur</h3>
+                    <p class="text-gray-600">Detaillierte Bewertung und Feedback von erfahrenen Korrektoren.</p>
+                </div>
+                
+                <div class="scroll-reveal feature-card text-center bg-purple-50 rounded-xl p-8 hover-lift" style="animation-delay: 0.4s;">
+                    <div class="bg-purple-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-comments text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Ausführliche Besprechung</h3>
+                    <p class="text-gray-600">Gemeinsame Analyse der Lösungswege mit TOP-Dozenten.</p>
+                </div>
+                
+                <div class="scroll-reveal feature-card text-center bg-orange-50 rounded-xl p-8 hover-lift" style="animation-delay: 0.6s;">
+                    <div class="bg-orange-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-map-marker-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">5 Standorte deutschlandweit</h3>
+                    <p class="text-gray-600">Wähle den Standort, der für dich am besten erreichbar ist.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Standorte Section -->
+    <section id="standorte" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-gray-800">Klausurenkurse deutschlandweit</h2>
+                <p class="text-lg text-gray-600">Wähle deinen bevorzugten Standort für die Klausurenkurse vom 07. - 12. September 2026</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Deutschland Karte -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold mb-8 text-center text-gray-800">Unsere Standorte</h3>
+                    <div class="max-w-xl mx-auto germany-map">
+                        <img src="https://s1.directupload.eu/images/250927/fd9qovbf.png" 
+                             alt="WLW Standorte Deutschlandkarte" 
+                             class="w-full transition-transform duration-300"
+                             onerror="this.src=''; this.alt='Karte konnte nicht geladen werden'; this.style.display='none';">
+                    </div>
+
+                </div>
+                
+                <!-- Standort Details -->
+                <div class="space-y-4">
+                    <div class="scroll-reveal city-card bg-white rounded-xl p-6 shadow-lg hover-lift" data-city="Berlin">
+                        <div class="flex items-center mb-4">
+                            <div class="rounded-full p-3 mr-4" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Berlin</h3>
+                                <p class="text-gray-600">Hauptstadt-Standort</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <p class="font-semibold text-gray-700">Datum:</p>
+                                <p class="text-gray-600">07. - 12.09.2026</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700">Verfügbarkeit:</p>
+                                <p class="text-green-600 font-semibold">Verfügbar</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-reveal city-card bg-white rounded-xl p-6 shadow-lg hover-lift" data-city="München" style="animation-delay: 0.1s;">
+                        <div class="flex items-center mb-4">
+                            <div class="rounded-full p-3 mr-4" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">München</h3>
+                                <p class="text-gray-600">Bayern-Zentrum</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <p class="font-semibold text-gray-700">Datum:</p>
+                                <p class="text-gray-600">07. - 12.09.2026</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700">Verfügbarkeit:</p>
+                                <p class="text-green-600 font-semibold">Verfügbar</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-reveal city-card bg-white rounded-xl p-6 shadow-lg hover-lift" data-city="Düsseldorf" style="animation-delay: 0.2s;">
+                        <div class="flex items-center mb-4">
+                            <div class="rounded-full p-3 mr-4" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Düsseldorf</h3>
+                                <p class="text-gray-600">NRW-Standort</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <p class="font-semibold text-gray-700">Datum:</p>
+                                <p class="text-gray-600">07. - 12.09.2026</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700">Verfügbarkeit:</p>
+                                <p class="text-green-600 font-semibold">Verfügbar</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-reveal city-card bg-white rounded-xl p-6 shadow-lg hover-lift" data-city="Hamburg" style="animation-delay: 0.3s;">
+                        <div class="flex items-center mb-4">
+                            <div class="rounded-full p-3 mr-4" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Hamburg</h3>
+                                <p class="text-gray-600">Norddeutschland</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <p class="font-semibold text-gray-700">Datum:</p>
+                                <p class="text-gray-600">07. - 12.09.2026</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700">Verfügbarkeit:</p>
+                                <p class="text-green-600 font-semibold">Verfügbar</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-reveal city-card bg-white rounded-xl p-6 shadow-lg hover-lift" data-city="Bamberg" style="animation-delay: 0.4s;">
+                        <div class="flex items-center mb-4">
+                            <div class="rounded-full p-3 mr-4" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
+                                <i class="fas fa-home text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Bamberg</h3>
+                                <p class="text-gray-600">WLW Hauptsitz</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <p class="font-semibold text-gray-700">Datum:</p>
+                                <p class="text-gray-600">07. - 12.09.2026</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700">Verfügbarkeit:</p>
+                                <p class="text-green-600 font-semibold">Verfügbar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bestehensquoten Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-gray-800">Bestehensquoten 2024</h2>
+                <p class="text-lg text-gray-600">Unsere Erfolgsstatistik spricht für sich</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Deutschland Balken -->
+                <div class="scroll-reveal bg-white rounded-2xl p-8 shadow-lg text-center">
+                    <h3 class="text-2xl font-bold mb-8 text-gray-800">Deutschlandweit</h3>
+                    
+                    <div class="relative mb-6">
+                        <div class="w-full bg-gray-200 rounded-full h-8 overflow-hidden">
+                            <div class="progress-bar-germany h-full bg-gray-400 rounded-full flex items-center justify-end pr-4 transition-all duration-2000 ease-out" 
+                                 style="width: 0%;" data-target="52.1">
+                                <span class="text-white font-bold text-sm opacity-0 transition-opacity duration-500 delay-1500">52,1%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-4xl font-bold text-gray-600 mb-2 germany-percentage">0,0%</div>
+                    <p class="text-gray-500">Bestehensquote bundesweit</p>
+                </div>
+                
+                <!-- WLW Balken -->
+                <div class="scroll-reveal bg-white rounded-2xl p-8 shadow-lg text-center" style="animation-delay: 0.2s;">
+                    <h3 class="text-2xl font-bold mb-8" style="color: #6facff;">WLW-Teilnehmer</h3>
+                    
+                    <div class="relative mb-6">
+                        <div class="w-full bg-gray-200 rounded-full h-8 overflow-hidden">
+                            <div class="progress-bar-wlw h-full rounded-full flex items-center justify-end pr-4 transition-all duration-2000 ease-out" style="background: linear-gradient(180deg, #6facff 0%, #aacfff 100%); width: 0%;" data-target="79.6">
+                                <span class="text-white font-bold text-sm opacity-0 transition-opacity duration-500 delay-1500">79,6%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-4xl font-bold mb-2 wlw-percentage" style="color: #6facff;">0,0%</div>
+                    <p class="text-gray-500">WLW-Teilnehmer Vollzeitkurs 17-Wochen Bamberg</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    <span class="font-bold" style="color: #6facff;">+27,5 Prozentpunkte</span> höhere Erfolgsquote bei WLW-Teilnehmern im Vergleich zum Bundesdurchschnitt
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <img src="https://s1.directupload.eu/images/250829/55phpccn.jpg" 
+                     alt="WLW Klausurenkurs Übersicht" 
+                     class="w-full rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                     onerror="this.src=''; this.alt='Bild konnte nicht geladen werden'; this.style.display='none';">
+            </div>
+        </div>
+    </section>
+
+    <!-- Inhalte Section -->
+    <section id="inhalte" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">Das erwartet dich im Klausurenkurs</h2>
+                <p class="text-xl text-gray-600">6 intensive Tage für deinen Prüfungserfolg</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center bg-gray-50 rounded-xl p-8">
+                    <div class="text-4xl mb-4">📝</div>
+                    <h3 class="text-xl font-bold mb-4">Klausur 1</h3>
+                    <p class="text-gray-600">Steuerliches Verfahrensrecht, Steuerstrafrecht, Bewertungsrecht</p>
+                </div>
+                
+                <div class="text-center bg-gray-50 rounded-xl p-8">
+                    <div class="text-4xl mb-4">💼</div>
+                    <h3 class="text-xl font-bold mb-4">Klausur 2</h3>
+                    <p class="text-gray-600">Ertragsteuern, Gewerbesteuer, Grundsteuer</p>
+                </div>
+                
+                <div class="text-center bg-gray-50 rounded-xl p-8">
+                    <div class="text-4xl mb-4">🏢</div>
+                    <h3 class="text-xl font-bold mb-4">Klausur 3</h3>
+                    <p class="text-gray-600">Umsatzsteuer, Erbschaft- und Schenkungsteuer, Verkehrsteuern</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jetzt buchen Section -->
+    <section id="buchen" class="py-16 gradient-bg text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-6">Jetzt Klausurenkurs buchen</h2>
+            
+            <div class="bg-white bg-opacity-20 rounded-2xl p-6 shadow-xl mb-6 inline-block">
+                <div class="text-2xl font-bold mb-2">07. - 12. September 2026</div>
+                <div class="text-lg font-semibold">Deutschlandweit | 5 Standorte verfügbar</div>
+            </div>
+            
+            <p class="text-lg mb-8 max-w-2xl mx-auto">
+                Sichere dir jetzt deinen Platz im WLW Klausurenkurs und gehe optimal vorbereitet in die Steuerberaterprüfung!
+            </p>
+            
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="https://www.wlw-bamberg.de/klausurenkurse" target="_blank" rel="noopener noreferrer" 
+                   class="bg-white text-blue-600 font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition text-xl">
+                    <i class="fas fa-pen-alt mr-2"></i>Klausurenkurs buchen
+                </a>
+                
+                <a href="tel:095170066-0" 
+                   class="border-2 border-white text-white font-bold py-4 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition text-xl">
+                    <i class="fas fa-phone mr-2"></i>Beratung: 0951/70066-0
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="bg-blue-600 text-white px-4 py-2 rounded font-bold text-xl mb-4 inline-block">WLW</div>
+                    <p class="text-gray-400 mb-4">Seit Jahrzehnten dein Partner für die Vorbereitung auf die Steuerberaterprüfung.</p>
+                    <div class="space-y-2 text-gray-400">
+                        <p>Würzburger Str. 59</p>
+                        <p>96049 Bamberg</p>
+                        <p>Telefon: 0951/70066-0</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Rechtliches</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#impressum" class="text-gray-400 hover:text-white">Impressum</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Datenschutz</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Kontakt</h3>
+                    <p class="text-gray-400">Hast du Fragen zu den Klausurenkursen? Unser Team steht dir gerne zur Verfügung.</p>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2025 WLW Dr. Wirth GbR. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            
+            // Interactive map
+            const cityDots = document.querySelectorAll('.city-dot');
+            const cityCards = document.querySelectorAll('.city-card');
+            
+            cityDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const cityName = this.getAttribute('data-city');
+                    
+                    // Remove active state from all cards
+                    cityCards.forEach(card => {
+                        card.classList.remove('active');
+                    });
+                    
+                    // Add active state to selected city card
+                    const targetCard = document.querySelector(`.city-card[data-city="${cityName}"]`);
+                    if (targetCard) {
+                        targetCard.classList.add('active');
+                        targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            });
+            
+            // Scroll reveal animation
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all scroll-reveal elements
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Progress bar animations with number counting
+            const progressObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const germanyBar = document.querySelector('.progress-bar-germany');
+                        const wlwBar = document.querySelector('.progress-bar-wlw');
+                        const germanyNumber = document.querySelector('.germany-percentage');
+                        const wlwNumber = document.querySelector('.wlw-percentage');
+                        
+                        if (germanyBar && !germanyBar.classList.contains('animated')) {
+                            germanyBar.classList.add('animated');
+                            
+                            // Animate Germany bar
+                            setTimeout(() => {
+                                germanyBar.style.width = '52.1%';
+                                germanyBar.style.transition = 'width 3s ease-out';
+                                
+                                // Animate Germany number
+                                if (germanyNumber) {
+                                    animateNumber(germanyNumber, 0, 52.1, 3000);
+                                }
+                                
+                                setTimeout(() => {
+                                    const span = germanyBar.querySelector('span');
+                                    if (span) span.style.opacity = '1';
+                                }, 2500);
+                            }, 500);
+                        }
+                        
+                        if (wlwBar && !wlwBar.classList.contains('animated')) {
+                            wlwBar.classList.add('animated');
+                            
+                            // Animate WLW bar
+                            setTimeout(() => {
+                                wlwBar.style.width = '79.6%';
+                                wlwBar.style.transition = 'width 3s ease-out';
+                                
+                                // Animate WLW number
+                                if (wlwNumber) {
+                                    animateNumber(wlwNumber, 0, 79.6, 3000);
+                                }
+                                
+                                setTimeout(() => {
+                                    const span = wlwBar.querySelector('span');
+                                    if (span) span.style.opacity = '1';
+                                }, 2500);
+                            }, 800);
+                        }
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            // Number animation function
+            function animateNumber(element, start, end, duration) {
+                const startTime = performance.now();
+                
+                function updateNumber(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    // Easing function for smooth animation
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    const current = start + (end - start) * easeOut;
+                    
+                    element.textContent = current.toFixed(1) + '%';
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(updateNumber);
+                    }
+                }
+                
+                requestAnimationFrame(updateNumber);
+            }
+            
+            // Observe progress bars section
+            const progressBarsSection = document.querySelector('.progress-bar-germany');
+            if (progressBarsSection) {
+                const section = progressBarsSection.closest('section');
+                if (section) {
+                    progressObserver.observe(section);
+                }
+            }
+            
+            // Add parallax effect to hero section
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('.gradient-bg');
+                const speed = scrolled * 0.5;
+                
+                if (parallax) {
+                    parallax.style.transform = `translateY(${speed}px)`;
+                }
+            });
+            
+            // Add hover sound effect simulation (visual feedback)
+            document.querySelectorAll('.btn-hover, .hover-lift, .city-dot').forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.transform = this.style.transform + ' scale(1.05)';
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    this.style.transform = this.style.transform.replace(' scale(1.05)', '');
+                });
+            });
+            
+            // Typing effect for main title
+            const title = document.querySelector('h1');
+            if (title) {
+                const text = title.textContent;
+                title.textContent = '';
+                
+                let i = 0;
+                const typeWriter = () => {
+                    if (i < text.length) {
+                        title.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 100);
+                    }
+                };
+                
+                setTimeout(typeWriter, 1000);
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98569cc4f5109287',t:'MTc1ODkzMDA4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
