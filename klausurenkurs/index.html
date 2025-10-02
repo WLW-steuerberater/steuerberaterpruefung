@@ -40,9 +40,65 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        .hover-lift:hover {
+        .hover-lift:hover,
+        .hover-lift:active,
+        .hover-lift:focus {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        /* Mobile touch optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .hover-lift:active {
+                transform: translateY(-5px) scale(1.01);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            
+            /* Improve touch targets on mobile */
+            .btn-hover, .nav-item, .city-card, .feature-card {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* Better spacing for mobile */
+            .city-card {
+                margin-bottom: 1rem;
+            }
+            
+            /* Larger text on mobile for better readability */
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Additional mobile optimizations */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            /* Better button sizing on mobile */
+            .btn-hover {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            /* Improved grid spacing */
+            .grid {
+                gap: 1rem;
+            }
+            
+            /* Better video sizing on mobile */
+            video {
+                object-position: center;
+            }
         }
         
         .city-dot {
@@ -104,11 +160,20 @@
             left: 100%;
         }
         
-        .city-card:hover {
+        .city-card:hover,
+        .city-card:active,
+        .city-card:focus {
             border-color: #3b82f6;
             background-color: #eff6ff;
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2);
+        }
+        
+        @media (hover: none) and (pointer: coarse) {
+            .city-card:active {
+                transform: translateY(-2px) scale(1.01);
+                box-shadow: 0 8px 15px rgba(59, 130, 246, 0.15);
+            }
         }
         
         .city-card.active {
@@ -149,9 +214,18 @@
             height: 300px;
         }
         
-        .feature-card:hover {
+        .feature-card:hover,
+        .feature-card:active,
+        .feature-card:focus {
             transform: translateY(-8px) rotate(1deg);
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        @media (hover: none) and (pointer: coarse) {
+            .feature-card:active {
+                transform: translateY(-4px) rotate(0.5deg);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
         }
         
         .btn-hover {
@@ -175,9 +249,18 @@
             left: 100%;
         }
         
-        .btn-hover:hover {
+        .btn-hover:hover,
+        .btn-hover:active,
+        .btn-hover:focus {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        @media (hover: none) and (pointer: coarse) {
+            .btn-hover:active {
+                transform: translateY(-1px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            }
         }
         
         .nav-item {
@@ -201,8 +284,16 @@
             width: 100%;
         }
         
-        .nav-item:hover {
+        .nav-item:hover,
+        .nav-item:active,
+        .nav-item:focus {
             transform: translateY(-2px);
+        }
+        
+        @media (hover: none) and (pointer: coarse) {
+            .nav-item:active {
+                transform: translateY(-1px);
+            }
         }
         
         .scroll-reveal {
@@ -252,6 +343,22 @@
                     <a href="#dozenten" class="nav-item text-gray-600 hover:text-blue-600">Dozenten</a>
                     <a href="https://wlw-steuern.de/product/klausurenkurse" target="_blank" rel="noopener noreferrer" class="btn-hover text-white px-4 py-2 rounded" style="background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);">Jetzt buchen</a>
                 </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-gray-600 hover:text-blue-600 focus:outline-none" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden bg-white border-t border-gray-200 py-4">
+                <div class="flex flex-col space-y-4 px-4">
+                    <a href="#start" class="nav-item text-gray-600 hover:text-blue-600 py-2" onclick="closeMobileMenu()">Start</a>
+                    <a href="#standorte" class="nav-item text-gray-600 hover:text-blue-600 py-2" onclick="closeMobileMenu()">Standorte</a>
+                    <a href="#inhalte" class="nav-item text-gray-600 hover:text-blue-600 py-2" onclick="closeMobileMenu()">Inhalte</a>
+                    <a href="#dozenten" class="nav-item text-gray-600 hover:text-blue-600 py-2" onclick="closeMobileMenu()">Dozenten</a>
+                    <a href="https://wlw-steuern.de/product/klausurenkurse" target="_blank" rel="noopener noreferrer" class="btn-hover text-white px-4 py-3 rounded text-center font-bold" style="background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);">Jetzt buchen</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -289,7 +396,7 @@
                 <span class="font-bold">✓ 2x Probeexamen ✓ Professionelle Korrektur ✓ Ausführliche Besprechung</span>
             </p>
             <div class="fade-in fade-in-delay-4 flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#buchen" class="btn-hover bg-white font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition" style="color: #6facff;">
+                <a href="https://wlw-steuern.de/product/klausurenkurse" target="_blank" rel="noopener noreferrer" class="btn-hover bg-white font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition" style="color: #6facff;">
                     <i class="fas fa-shopping-cart mr-2"></i>Jetzt buchen
                 </a>
                 <a href="#standorte" class="btn-hover border-2 border-white text-white font-bold py-4 px-8 rounded-lg hover:bg-white transition hover:text-blue-600">
@@ -1127,6 +1234,41 @@
             }
         }
         
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuButton = document.querySelector('button[onclick="toggleMobileMenu()"] i');
+            
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                menuButton.classList.remove('fa-bars');
+                menuButton.classList.add('fa-times');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuButton.classList.remove('fa-times');
+                menuButton.classList.add('fa-bars');
+            }
+        }
+        
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuButton = document.querySelector('button[onclick="toggleMobileMenu()"] i');
+            
+            mobileMenu.classList.add('hidden');
+            menuButton.classList.remove('fa-times');
+            menuButton.classList.add('fa-bars');
+        }
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuButton = document.querySelector('button[onclick="toggleMobileMenu()"]');
+            
+            if (!mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+                closeMobileMenu();
+            }
+        });
+        
         // Neue Funktionen für die Buchungssektion
         function buchungFormular() {
             alert('Buchungsformular wird geöffnet. Hier würde normalerweise das Anmeldeformular für den Klausurenkurs erscheinen.');
@@ -1140,5 +1282,5 @@
             }
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9885b7803048e0d7',t:'MTc1OTQyNDAxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9885c5e735d3b541',t:'MTc1OTQyNDYwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
