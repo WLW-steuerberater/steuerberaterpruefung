@@ -47,59 +47,7 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
         
-        /* Mobile touch optimizations */
-        @media (hover: none) and (pointer: coarse) {
-            .hover-lift:active {
-                transform: translateY(-5px) scale(1.01);
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            }
-            
-            /* Improve touch targets on mobile */
-            .btn-hover, .nav-item, .city-card, .feature-card {
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            /* Better spacing for mobile */
-            .city-card {
-                margin-bottom: 1rem;
-            }
-            
-            /* Larger text on mobile for better readability */
-            .hero-section h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-section h2 {
-                font-size: 1.5rem;
-            }
-        }
-        
-        /* Additional mobile optimizations */
-        @media (max-width: 768px) {
-            .container {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-            
-            /* Better button sizing on mobile */
-            .btn-hover {
-                padding: 1rem 1.5rem;
-                font-size: 1rem;
-            }
-            
-            /* Improved grid spacing */
-            .grid {
-                gap: 1rem;
-            }
-            
-            /* Better video sizing on mobile */
-            video {
-                object-position: center;
-            }
-        }
+
         
         .city-dot {
             fill: #3b82f6;
@@ -372,18 +320,18 @@
                 
                 <!-- Mobile Menu Button -->
                 <button class="md:hidden text-gray-600 hover:text-blue-600 focus:outline-none" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars text-2xl"></i>
+                    <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
             
             <!-- Mobile Menu -->
-            <div id="mobileMenu" class="md:hidden hidden bg-white border-t border-gray-200 py-4">
-                <div class="flex flex-col space-y-4 px-4">
-                    <a href="#start" class="nav-item text-gray-600 hover:text-blue-600 py-2" onclick="closeMobileMenu()">Start</a>
-                    <a href="#standorte" class="nav-item text-gray-600 hover:text-blue-600 py-2" onclick="closeMobileMenu()">Standorte</a>
-                    <a href="#inhalte" class="nav-item text-gray-600 hover:text-blue-600 py-2" onclick="closeMobileMenu()">Inhalte</a>
-                    <a href="#dozenten" class="nav-item text-gray-600 hover:text-blue-600 py-2" onclick="closeMobileMenu()">Dozenten</a>
-                    <a href="https://wlw-steuern.de/product/klausurenkurse" target="_blank" rel="noopener noreferrer" class="btn-hover text-white px-4 py-3 rounded text-center font-bold" style="background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);">Jetzt buchen</a>
+            <div id="mobileMenu" class="md:hidden hidden bg-white border-t border-gray-200 py-4 shadow-lg">
+                <div class="flex flex-col space-y-2">
+                    <a href="#start" class="nav-item text-gray-600 hover:text-blue-600 py-2 px-4" onclick="closeMobileMenu()">Start</a>
+                    <a href="#standorte" class="nav-item text-gray-600 hover:text-blue-600 py-2 px-4" onclick="closeMobileMenu()">Standorte</a>
+                    <a href="#inhalte" class="nav-item text-gray-600 hover:text-blue-600 py-2 px-4" onclick="closeMobileMenu()">Inhalte</a>
+                    <a href="#dozenten" class="nav-item text-gray-600 hover:text-blue-600 py-2 px-4" onclick="closeMobileMenu()">Dozenten</a>
+                    <a href="https://wlw-steuern.de/product/klausurenkurse" target="_blank" rel="noopener noreferrer" class="btn-hover text-white px-4 py-2 rounded mx-4 mt-2 text-center" style="background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);">Jetzt buchen</a>
                 </div>
             </div>
         </div>
@@ -405,20 +353,39 @@
         
         <!-- Content overlay -->
         <div class="relative z-20 container mx-auto px-4 text-center">
-            <div class="fade-in bg-red-500 text-white font-bold py-2 px-6 rounded-full mb-8 inline-block floating">
+            <div class="fade-in bg-red-500 text-white font-bold py-3 px-6 rounded-full mb-6 inline-block floating text-sm md:text-base">
                 07. - 12. September 2026
             </div>
-            <h1 class="fade-in fade-in-delay-1 text-4xl md:text-6xl font-bold mb-6 text-glow">Steuerberaterprüfung Klausurenkurse 2026</h1>
-            <h2 class="fade-in fade-in-delay-2 text-xl md:text-3xl font-semibold mb-6">Deutschlandweit | WLW Original</h2>
-            <p class="fade-in fade-in-delay-3 text-lg md:text-xl mb-8 max-w-4xl mx-auto">
-                <span class="font-bold">✓ 2x Probeexamen ✓ Professionelle Korrektur ✓ Ausführliche Besprechung</span>
-            </p>
-            <div class="fade-in fade-in-delay-4 flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://wlw-steuern.de/product/klausurenkurse" target="_blank" rel="noopener noreferrer" class="btn-hover bg-white font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition" style="color: #6facff;">
+            <h1 class="fade-in fade-in-delay-1 hero-section text-2xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 text-glow leading-tight">
+                Steuerberaterprüfung Klausurenkurse 2026
+            </h1>
+            <h2 class="fade-in fade-in-delay-2 hero-section text-lg md:text-xl lg:text-3xl font-semibold mb-4 md:mb-6">
+                Deutschlandweit | WLW Original
+            </h2>
+            <div class="fade-in fade-in-delay-3 mb-6 md:mb-8 max-w-4xl mx-auto">
+                <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-white border-opacity-30">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 text-sm md:text-base font-semibold">
+                        <div class="flex items-center justify-center text-center">
+                            <i class="fas fa-edit mr-2 text-green-300"></i>
+                            <span>2x Probeexamen</span>
+                        </div>
+                        <div class="flex items-center justify-center text-center">
+                            <i class="fas fa-check-circle mr-2 text-green-300"></i>
+                            <span>Professionelle Korrektur</span>
+                        </div>
+                        <div class="flex items-center justify-center text-center">
+                            <i class="fas fa-comments mr-2 text-green-300"></i>
+                            <span>Ausführliche Besprechung</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fade-in fade-in-delay-4 flex flex-col gap-4 justify-center items-center max-w-md mx-auto">
+                <a href="https://wlw-steuern.de/product/klausurenkurse" target="_blank" rel="noopener noreferrer" class="btn-hover bg-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition w-full" style="color: #6facff;">
                     <i class="fas fa-shopping-cart mr-2"></i>Jetzt buchen
                 </a>
-                <a href="#standorte" class="btn-hover border-2 border-white text-white font-bold py-4 px-8 rounded-lg hover:bg-white transition hover:text-blue-600">
-                    Standorte ansehen
+                <a href="#standorte" class="btn-hover border-2 border-white text-white font-bold py-4 px-8 rounded-xl hover:bg-white transition hover:text-blue-600 w-full">
+                    <i class="fas fa-map-marker-alt mr-2"></i>Standorte ansehen
                 </a>
             </div>
         </div>
@@ -481,148 +448,147 @@
                 <p class="text-lg text-gray-600">Wähle deinen bevorzugten Standort für die Klausurenkurse vom 07. - 12. September 2026</p>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                 <!-- Deutschland Karte -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg">
-                    <h3 class="text-2xl font-bold mb-8 text-center text-gray-800">Unsere Standorte</h3>
-                    <div class="max-w-xl mx-auto germany-map">
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg order-2 lg:order-1">
+                    <h3 class="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-center text-gray-800">Unsere Standorte</h3>
+                    <div class="max-w-sm md:max-w-xl mx-auto germany-map">
                         <img src="https://s1.directupload.eu/images/250927/fd9qovbf.png" 
                              alt="WLW Standorte Deutschlandkarte" 
-                             class="w-full transition-transform duration-300"
+                             class="w-full transition-transform duration-300 rounded-lg"
                              loading="lazy"
                              onerror="this.src=''; this.alt='Karte konnte nicht geladen werden'; this.style.display='none';">
                     </div>
-
                 </div>
                 
                 <!-- Standort Details -->
-                <div class="space-y-4">
-                    <div class="scroll-reveal city-card bg-white rounded-xl p-6 shadow-lg hover-lift" data-city="Berlin">
-                        <div class="flex items-center mb-4">
-                            <div class="rounded-full p-3 mr-4 text-xl" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
+                <div class="space-y-3 md:space-y-4 order-1 lg:order-2">
+                    <div class="scroll-reveal city-card bg-white rounded-xl p-4 md:p-6 shadow-lg hover-lift" data-city="Berlin">
+                        <div class="flex items-start md:items-center mb-4">
+                            <div class="rounded-full p-2 md:p-3 mr-3 md:mr-4 text-lg md:text-xl flex-shrink-0" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <div class="flex-1">
-                                <div class="flex items-center gap-2">
-                                    <h3 class="text-xl font-bold">Berlin</h3>
-                                    <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold">NEU</span>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h3 class="text-lg md:text-xl font-bold">Berlin</h3>
+                                    <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold flex-shrink-0">NEU</span>
                                 </div>
-                                <p class="text-gray-600">Hauptstadt-Standort</p>
+                                <p class="text-gray-600 text-sm md:text-base">Hauptstadt-Standort</p>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <p class="font-semibold text-gray-700">Datum:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 text-sm">
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <p class="font-semibold text-gray-700 mb-1">Datum:</p>
                                 <p class="text-gray-600">07. - 12.09.2026</p>
                             </div>
-                            <div>
-                                <p class="font-semibold text-gray-700">Preis:</p>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <p class="font-semibold text-gray-700 mb-1">Preis:</p>
                                 <div class="flex flex-col">
-                                    <span class="text-green-600 font-bold">ab € 549</span>
+                                    <span class="text-green-600 font-bold text-lg">ab € 549</span>
                                     <span class="text-xs text-gray-500">Willkommenspreis</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="scroll-reveal city-card bg-white rounded-xl p-6 shadow-lg hover-lift" data-city="München" style="animation-delay: 0.1s;">
-                        <div class="flex items-center mb-4">
-                            <div class="rounded-full p-3 mr-4 text-xl" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
+                    <div class="scroll-reveal city-card bg-white rounded-xl p-4 md:p-6 shadow-lg hover-lift" data-city="München" style="animation-delay: 0.1s;">
+                        <div class="flex items-start md:items-center mb-4">
+                            <div class="rounded-full p-2 md:p-3 mr-3 md:mr-4 text-lg md:text-xl flex-shrink-0" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <div>
-                                <h3 class="text-xl font-bold">München</h3>
-                                <p class="text-gray-600">Bayern-Zentrum</p>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg md:text-xl font-bold mb-1">München</h3>
+                                <p class="text-gray-600 text-sm md:text-base">Bayern-Zentrum</p>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <p class="font-semibold text-gray-700">Datum:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 text-sm">
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <p class="font-semibold text-gray-700 mb-1">Datum:</p>
                                 <p class="text-gray-600">07. - 12.09.2026</p>
                             </div>
-                            <div>
-                                <p class="font-semibold text-gray-700">Preis:</p>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <p class="font-semibold text-gray-700 mb-1">Preis:</p>
                                 <div class="flex flex-col">
-                                    <span class="text-green-600 font-bold">ab € 549</span>
+                                    <span class="text-green-600 font-bold text-lg">ab € 549</span>
                                     <span class="text-xs text-gray-500">Willkommenspreis</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="scroll-reveal city-card bg-white rounded-xl p-6 shadow-lg hover-lift" data-city="Düsseldorf" style="animation-delay: 0.2s;">
-                        <div class="flex items-center mb-4">
-                            <div class="rounded-full p-3 mr-4 text-xl" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
+                    <div class="scroll-reveal city-card bg-white rounded-xl p-4 md:p-6 shadow-lg hover-lift" data-city="Düsseldorf" style="animation-delay: 0.2s;">
+                        <div class="flex items-start md:items-center mb-4">
+                            <div class="rounded-full p-2 md:p-3 mr-3 md:mr-4 text-lg md:text-xl flex-shrink-0" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <div class="flex-1">
-                                <div class="flex items-center gap-2">
-                                    <h3 class="text-xl font-bold">Düsseldorf</h3>
-                                    <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold">NEU</span>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h3 class="text-lg md:text-xl font-bold">Düsseldorf</h3>
+                                    <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold flex-shrink-0">NEU</span>
                                 </div>
-                                <p class="text-gray-600">NRW-Standort</p>
+                                <p class="text-gray-600 text-sm md:text-base">NRW-Standort</p>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <p class="font-semibold text-gray-700">Datum:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 text-sm">
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <p class="font-semibold text-gray-700 mb-1">Datum:</p>
                                 <p class="text-gray-600">07. - 12.09.2026</p>
                             </div>
-                            <div>
-                                <p class="font-semibold text-gray-700">Preis:</p>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <p class="font-semibold text-gray-700 mb-1">Preis:</p>
                                 <div class="flex flex-col">
-                                    <span class="text-green-600 font-bold">ab € 549</span>
+                                    <span class="text-green-600 font-bold text-lg">ab € 549</span>
                                     <span class="text-xs text-gray-500">Willkommenspreis</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="scroll-reveal city-card bg-white rounded-xl p-6 shadow-lg hover-lift" data-city="Hamburg" style="animation-delay: 0.3s;">
-                        <div class="flex items-center mb-4">
-                            <div class="rounded-full p-3 mr-4 text-xl" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
+                    <div class="scroll-reveal city-card bg-white rounded-xl p-4 md:p-6 shadow-lg hover-lift" data-city="Hamburg" style="animation-delay: 0.3s;">
+                        <div class="flex items-start md:items-center mb-4">
+                            <div class="rounded-full p-2 md:p-3 mr-3 md:mr-4 text-lg md:text-xl flex-shrink-0" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <div class="flex-1">
-                                <div class="flex items-center gap-2">
-                                    <h3 class="text-xl font-bold">Hamburg</h3>
-                                    <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold">NEU</span>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h3 class="text-lg md:text-xl font-bold">Hamburg</h3>
+                                    <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold flex-shrink-0">NEU</span>
                                 </div>
-                                <p class="text-gray-600">Norddeutschland</p>
+                                <p class="text-gray-600 text-sm md:text-base">Norddeutschland</p>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <p class="font-semibold text-gray-700">Datum:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 text-sm">
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <p class="font-semibold text-gray-700 mb-1">Datum:</p>
                                 <p class="text-gray-600">07. - 12.09.2026</p>
                             </div>
-                            <div>
-                                <p class="font-semibold text-gray-700">Preis:</p>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <p class="font-semibold text-gray-700 mb-1">Preis:</p>
                                 <div class="flex flex-col">
-                                    <span class="text-green-600 font-bold">ab € 549</span>
+                                    <span class="text-green-600 font-bold text-lg">ab € 549</span>
                                     <span class="text-xs text-gray-500">Willkommenspreis</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="scroll-reveal city-card bg-white rounded-xl p-6 shadow-lg hover-lift" data-city="Bamberg" style="animation-delay: 0.4s;">
-                        <div class="flex items-center mb-4">
-                            <div class="rounded-full p-3 mr-4 text-xl" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
+                    <div class="scroll-reveal city-card bg-white rounded-xl p-4 md:p-6 shadow-lg hover-lift" data-city="Bamberg" style="animation-delay: 0.4s;">
+                        <div class="flex items-start md:items-center mb-4">
+                            <div class="rounded-full p-2 md:p-3 mr-3 md:mr-4 text-lg md:text-xl flex-shrink-0" style="background: rgba(111, 172, 255, 0.1); color: #6facff;">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <div>
-                                <h3 class="text-xl font-bold">Bamberg</h3>
-                                <p class="text-gray-600">Nordbayern</p>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg md:text-xl font-bold mb-1">Bamberg</h3>
+                                <p class="text-gray-600 text-sm md:text-base">Nordbayern</p>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <p class="font-semibold text-gray-700">Datum:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 text-sm">
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <p class="font-semibold text-gray-700 mb-1">Datum:</p>
                                 <p class="text-gray-600">07. - 12.09.2026</p>
                             </div>
-                            <div>
-                                <p class="font-semibold text-gray-700">Preis:</p>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <p class="font-semibold text-gray-700 mb-1">Preis:</p>
                                 <div class="flex flex-col">
                                     <span class="text-blue-600 font-bold text-lg">ab € 640</span>
                                 </div>
@@ -963,31 +929,31 @@
                     </a>
                 </div>
                 
-                <div class="fade-in fade-in-delay-4 grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 max-w-4xl mx-auto">
+                <div class="fade-in fade-in-delay-4 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-12 max-w-4xl mx-auto">
                     <!-- Kontakt Karte -->
-                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 hover-lift border border-white border-opacity-20">
-                        <div class="text-4xl mb-4">
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-6 md:p-8 hover-lift border border-white border-opacity-20">
+                        <div class="text-3xl md:text-4xl mb-3 md:mb-4 text-center md:text-left">
                             <i class="fas fa-phone"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-4">Telefonische Beratung</h3>
-                        <p class="mb-6 text-white text-opacity-90">
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-center md:text-left">Telefonische Beratung</h3>
+                        <p class="mb-4 md:mb-6 text-white text-opacity-90 text-center md:text-left text-sm md:text-base">
                             Lass dich persönlich beraten und finde den perfekten Standort für dich
                         </p>
-                        <a href="tel:+49951700660" class="btn-hover bg-white text-blue-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition inline-block">
+                        <a href="tel:+49951700660" class="btn-hover bg-white text-blue-600 font-bold py-3 md:py-3 px-4 md:px-6 rounded-xl hover:bg-gray-100 transition block text-center md:inline-block">
                             <i class="fas fa-phone mr-2"></i>0951 700660
                         </a>
                     </div>
                     
                     <!-- Email Karte -->
-                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 hover-lift border border-white border-opacity-20">
-                        <div class="text-4xl mb-4">
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-6 md:p-8 hover-lift border border-white border-opacity-20">
+                        <div class="text-3xl md:text-4xl mb-3 md:mb-4 text-center md:text-left">
                             <i class="fas fa-envelope"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-4">E-Mail Anfrage</h3>
-                        <p class="mb-6 text-white text-opacity-90">
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-center md:text-left">E-Mail Anfrage</h3>
+                        <p class="mb-4 md:mb-6 text-white text-opacity-90 text-center md:text-left text-sm md:text-base">
                             Schreibe uns deine Fragen und erhalte alle Informationen per E-Mail
                         </p>
-                        <a href="mailto:info@wlw-bamberg.de" class="btn-hover bg-white text-blue-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition inline-block">
+                        <a href="mailto:info@wlw-bamberg.de" class="btn-hover bg-white text-blue-600 font-bold py-3 md:py-3 px-4 md:px-6 rounded-xl hover:bg-gray-100 transition block text-center md:inline-block">
                             <i class="fas fa-envelope mr-2"></i>E-Mail senden
                         </a>
                     </div>
@@ -1315,5 +1281,5 @@
             }
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'989c083d6304e0d7',t:'MTc1OTY1ODAwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'989c27ef246ae0d7',t:'MTc1OTY1OTMwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
