@@ -325,6 +325,32 @@
             position: relative;
             overflow: hidden;
         }
+        
+        /* Hero Slideshow Styles */
+        .hero-slideshow {
+            position: relative;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide.fade-out {
+            opacity: 0;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -365,25 +391,17 @@
 
     <!-- Hero Section -->
     <section id="start" class="relative text-white py-32 mt-16 overflow-hidden">
-        <!-- Background Video -->
-        <video 
-            autoplay 
-            muted 
-            loop 
-            playsinline 
-            webkit-playsinline 
-            x-webkit-airplay="allow" 
-            disablepictureinpicture
-            preload="metadata"
-            class="absolute inset-0 w-full h-full object-cover z-0"
-            style="pointer-events: none;"
-            onloadstart="this.muted = true; this.volume = 0;"
-            oncanplay="this.play().catch(e => console.log('Autoplay prevented:', e));">
-            <source src="https://www.dropbox.com/scl/fi/4aztzgq1yaoqbgg7mrsdx/Design_ohne_Titel-4-1.mp4?rlkey=igd487bg1szqx6dfhtbl35rf9&raw=1" type="video/mp4">
-        </video>
+        <!-- Background Image Slideshow -->
+        <div class="hero-slideshow absolute inset-0 w-full h-full z-0">
+            <div class="slide active" style="background-image: url('https://www.dropbox.com/scl/fi/ir1b2e4p8lj0q0yejymvq/Design-ohne-Titel-13-1.png?rlkey=ra1xe4ip35arixyjwskzudbc1&raw=1');"></div>
+            <div class="slide" style="background-image: url('https://www.dropbox.com/scl/fi/azjt2qf5etlxbcvojvskx/Design-ohne-Titel-14-1.png?rlkey=96flo0x0au1yfr1c2903rq4n9&raw=1');"></div>
+            <div class="slide" style="background-image: url('https://www.dropbox.com/scl/fi/m2e1j07i48t4ikxm23rbf/Design-ohne-Titel-15-1.png?rlkey=o4e8ktd8u8usonhbomophwar8&raw=1');"></div>
+            <div class="slide" style="background-image: url('https://www.dropbox.com/scl/fi/4pyyxffqdkcbyyk2g1zev/Design-ohne-Titel-16-1.png?rlkey=fp1cznjavjt3sot23t9n0ko4y&raw=1');"></div>
+            <div class="slide" style="background-image: url('https://www.dropbox.com/scl/fi/d863nehgsutpmw45q0abl/Design-ohne-Titel-17-1.png?rlkey=rfbiuhnzi3k8h8gvx37iqkgdk&raw=1');"></div>
+        </div>
         
         <!-- Dark overlay for better text readability -->
-        <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+        <div class="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
         
         <!-- Content overlay -->
         <div class="relative z-20 container mx-auto px-4 text-center">
@@ -407,49 +425,49 @@
     </section>
 
     <!-- Warum WLW Section -->
-    <section class="py-20 bg-white">
+    <section class="py-12 md:py-20 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <div class="inline-block text-white px-6 py-3 rounded-full mb-6 font-bold text-lg shadow-lg" style="background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);">
+            <div class="text-center mb-12 md:mb-16">
+                <div class="inline-block text-white px-4 py-2 md:px-6 md:py-3 rounded-full mb-4 md:mb-6 font-bold text-sm md:text-lg shadow-lg" style="background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);">
                     Seit 1997 - Über 25 Jahre Erfahrung
                 </div>
-                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-gray-800">Warum WLW Klausurenkurse?</h2>
-                <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                <h2 class="text-2xl md:text-3xl lg:text-5xl font-bold mb-4 md:mb-6 text-gray-800 px-2">Warum WLW Klausurenkurse?</h2>
+                <p class="text-base md:text-lg text-gray-600 max-w-4xl mx-auto px-2">
                     Bereite dich optimal auf die schriftliche Steuerberaterprüfung vor mit unserem <span class="font-bold" style="color: #6facff;">seit 1997 bewährten Konzept</span>. Über 25 Jahre Erfahrung in der Steuerberaterprüfung-Vorbereitung sprechen für sich.
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="scroll-reveal feature-card text-center bg-blue-50 rounded-xl p-8 hover-lift">
-                    <div class="text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl" style="background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+                <div class="scroll-reveal feature-card text-center bg-blue-50 rounded-xl p-6 md:p-8 hover-lift">
+                    <div class="text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 text-xl md:text-2xl" style="background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);">
                         <i class="fas fa-edit"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">2x Probeexamen</h3>
-                    <p class="text-gray-600">Zwei vollständige Prüfungssimulationen unter realen Bedingungen.</p>
+                    <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4">2x Probeexamen</h3>
+                    <p class="text-sm md:text-base text-gray-600 leading-relaxed">Zwei vollständige Prüfungssimulationen unter realen Bedingungen.</p>
                 </div>
                 
-                <div class="scroll-reveal feature-card text-center bg-green-50 rounded-xl p-8 hover-lift" style="animation-delay: 0.2s;">
-                    <div class="bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <div class="scroll-reveal feature-card text-center bg-green-50 rounded-xl p-6 md:p-8 hover-lift" style="animation-delay: 0.2s;">
+                    <div class="bg-green-600 text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 text-xl md:text-2xl">
                         <i class="fas fa-check-circle"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Professionelle Korrektur</h3>
-                    <p class="text-gray-600">Detaillierte Bewertung und Feedback von erfahrenen Korrektoren.</p>
+                    <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4">Professionelle Korrektur</h3>
+                    <p class="text-sm md:text-base text-gray-600 leading-relaxed">Detaillierte Bewertung und Feedback von erfahrenen Korrektoren.</p>
                 </div>
                 
-                <div class="scroll-reveal feature-card text-center bg-purple-50 rounded-xl p-8 hover-lift" style="animation-delay: 0.4s;">
-                    <div class="bg-purple-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <div class="scroll-reveal feature-card text-center bg-purple-50 rounded-xl p-6 md:p-8 hover-lift" style="animation-delay: 0.4s;">
+                    <div class="bg-purple-600 text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 text-xl md:text-2xl">
                         <i class="fas fa-comments"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Ausführliche Besprechung</h3>
-                    <p class="text-gray-600">Gemeinsame Analyse der Lösungswege mit TOP-Dozenten.</p>
+                    <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4">Ausführliche Besprechung</h3>
+                    <p class="text-sm md:text-base text-gray-600 leading-relaxed">Gemeinsame Analyse der Lösungswege mit TOP-Dozenten.</p>
                 </div>
                 
-                <div class="scroll-reveal feature-card text-center bg-orange-50 rounded-xl p-8 hover-lift" style="animation-delay: 0.6s;">
-                    <div class="bg-orange-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <div class="scroll-reveal feature-card text-center bg-orange-50 rounded-xl p-6 md:p-8 hover-lift" style="animation-delay: 0.6s;">
+                    <div class="bg-orange-600 text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 text-xl md:text-2xl">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">5 Standorte deutschlandweit</h3>
-                    <p class="text-gray-600">Wähle den Standort, der für dich am besten erreichbar ist.</p>
+                    <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4">5 Standorte deutschlandweit</h3>
+                    <p class="text-sm md:text-base text-gray-600 leading-relaxed">Wähle den Standort, der für dich am besten erreichbar ist.</p>
                 </div>
             </div>
         </div>
@@ -991,10 +1009,7 @@
                     <div class="flex items-center mb-4">
                         <img src="https://wlw-steuern.de/build/assets/logo-f86961a4.svg" alt="WLW Logo" class="h-16 w-auto mr-4" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                         <div class="text-white px-4 py-2 rounded font-bold text-2xl mr-4 hidden" style="background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);">WLW</div>
-                        <div>
-                            <h3 class="text-xl font-bold">WLW</h3>
-                            <p class="text-gray-400">Seit 1997 - Dein Partner für die Steuerberaterprüfung</p>
-                        </div>
+
                     </div>
                     <p class="text-gray-300 mb-4">
                         Mit über 25 Jahren Erfahrung in der Steuerberaterprüfung-Vorbereitung sind wir Ihr verlässlicher Partner auf dem Weg zum Steuerberater. Unsere Klausurenkurse haben bereits tausenden von Kandidaten zum Erfolg verholfen.
@@ -1037,6 +1052,24 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Hero Slideshow
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+            
+            function nextSlide() {
+                // Entferne active Klasse vom aktuellen Slide
+                slides[currentSlide].classList.remove('active');
+                
+                // Gehe zum nächsten Slide
+                currentSlide = (currentSlide + 1) % slides.length;
+                
+                // Füge active Klasse zum neuen Slide hinzu
+                slides[currentSlide].classList.add('active');
+            }
+            
+            // Starte Slideshow nach 2.5 Sekunden
+            setInterval(nextSlide, 2500);
+            
             // Smooth scrolling
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -1282,5 +1315,5 @@
             }
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9885c5e735d3b541',t:'MTc1OTQyNDYwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'989c083d6304e0d7',t:'MTc1OTY1ODAwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
