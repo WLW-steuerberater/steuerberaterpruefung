@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WLW Steuern - Mündliche Prüfungsvorbereitung</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #6facff, #aacfff);
+            min-height: 100vh;
+            color: #1d1d1f;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: #1d1d1f;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #6facff;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #1d1d1f;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: #1d1d1f;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: #6facff;
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 120px 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            transition: all 0.8s ease-in-out;
+            opacity: 1;
+            height: 12rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero h1.fade-out {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .hero h1.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 18px 36px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Erfolgsquote Section */
+        .success-stats {
+            background: white;
+            padding: 60px 0;
+            color: #1d1d1f;
+            margin-top: 50px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ffffff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Products Section */
+        .products {
+            background: #f8f9fa;
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: #1d1d1f;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: #f5f5f7;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #6facff, #aacfff);
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1d1d1f;
+        }
+
+        .product-card p {
+            color: #86868b;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6facff, #aacfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .product-button {
+            background: linear-gradient(135deg, #6facff, #aacfff);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .product-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(111, 172, 255, 0.3);
+        }
+
+        /* Dozenten Section */
+        .instructors {
+            background: white;
+            padding: 100px 0;
+        }
+
+        .instructor-card {
+            background: #f5f5f7;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .instructor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .instructor-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #6facff, #aacfff);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        /* Special Features Section */
+        .special-features {
+            background: #f5f5f7;
+            padding: 100px 0;
+        }
+
+        .special-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .special-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .special-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #6facff, #aacfff);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: white;
+            padding: 100px 0;
+        }
+
+        .testimonial-card {
+            background: #f5f5f7;
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6facff, #aacfff);
+            border-radius: 50%;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        /* Features Section */
+        .features {
+            background: #f5f5f7;
+            padding: 100px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6facff, #aacfff);
+            border-radius: 15px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .feature h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1d1d1f;
+        }
+
+        .feature p {
+            color: #86868b;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #1d1d1f;
+            color: white;
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-section a {
+            color: #86868b;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #424245;
+            padding-top: 20px;
+            color: #86868b;
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            /* Header Mobile */
+            header {
+                padding: 12px 0;
+            }
+            
+            .logo {
+                height: 35px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                padding: 10px;
+                font-size: 1.3rem;
+            }
+
+            .mobile-menu {
+                padding: 15px;
+            }
+
+            .mobile-menu a {
+                padding: 12px 0;
+                font-size: 1rem;
+            }
+
+            /* Hero Mobile */
+            .hero {
+                padding: 60px 0 40px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+                height: auto;
+                margin-bottom: 20px;
+                line-height: 1.2;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 30px;
+                padding: 0 10px;
+            }
+
+            /* Hero checkmarks mobile */
+            .hero div[style*="display: flex; flex-wrap: wrap"] {
+                gap: 12px !important;
+                margin-bottom: 30px !important;
+            }
+
+            .hero div[style*="display: flex; align-items: center"] {
+                font-size: 0.85rem !important;
+            }
+            
+            .cta-button {
+                padding: 14px 28px;
+                font-size: 1rem;
+                border-radius: 30px;
+            }
+
+            /* Features Mobile */
+            .features {
+                padding: 50px 0;
+            }
+
+            .features div[style*="background: linear-gradient"] {
+                margin-bottom: 30px !important;
+                max-width: 280px !important;
+            }
+
+            .features div[style*="font-size: 1rem"] {
+                font-size: 0.9rem !important;
+            }
+
+            .features div[style*="display: grid; grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
+
+            .features div[style*="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))"] {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+                margin-bottom: 15px !important;
+            }
+
+            .features div[style*="max-width: 600px"] {
+                grid-template-columns: 1fr !important;
+                max-width: 100% !important;
+            }
+
+            /* Success Stats Mobile */
+            .success-stats {
+                padding: 40px 0;
+            }
+
+            .success-stats #successRate {
+                font-size: 2.5rem !important;
+            }
+
+            .success-stats .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+
+            /* Products Mobile */
+            .products {
+                padding: 50px 0;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            /* Featured Product Mobile */
+            .product-card.featured-product {
+                padding: 25px !important;
+            }
+
+            .product-card.featured-product h3 {
+                font-size: 2.2rem !important;
+                margin-bottom: 15px !important;
+            }
+
+            .product-card.featured-product p {
+                font-size: 1.1rem !important;
+                margin-bottom: 20px !important;
+            }
+
+            .product-card.featured-product div[style*="font-size: 2.5rem"] {
+                font-size: 2rem !important;
+            }
+
+            .product-card.featured-product div[style*="display: grid; grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+                gap: 12px !important;
+                margin: 15px 0 !important;
+            }
+
+            .product-card.featured-product div[style*="background: rgba(255,255,255,0.1)"] {
+                padding: 12px !important;
+            }
+
+            .product-card.featured-product .product-button {
+                font-size: 1rem !important;
+                padding: 14px 24px !important;
+            }
+
+            /* Individual Products Mobile */
+            .product-card {
+                padding: 20px;
+                min-height: auto;
+            }
+            
+            .product-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+
+            .product-card p {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+
+            .product-card div[style*="display: flex; flex-direction: column"] {
+                gap: 8px !important;
+                margin: 15px 0 !important;
+            }
+
+            .product-card div[style*="background: rgba(111, 172, 255, 0.1)"] {
+                padding: 10px !important;
+                font-size: 0.85rem;
+            }
+
+            .product-card div[style*="color: #28a745"] {
+                font-size: 0.8rem !important;
+            }
+            
+            .price {
+                font-size: 1.4rem;
+            }
+
+            /* Section Titles Mobile */
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 30px;
+                padding: 0 10px;
+            }
+
+            /* Instructors Mobile */
+            .instructors {
+                padding: 50px 0;
+            }
+
+            .instructor-carousel-container {
+                margin: 0 -15px;
+            }
+
+            .instructor-card {
+                min-width: 250px !important;
+                padding: 20px;
+            }
+            
+            .instructor-avatar {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+
+            .instructor-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+
+            .instructor-card p {
+                font-size: 0.9rem;
+            }
+
+            /* Special Features Mobile */
+            .special-features {
+                padding: 50px 0;
+            }
+
+            .special-features div[style*="display: grid"] {
+                grid-template-columns: 1fr !important;
+                gap: 30px !important;
+            }
+            
+            .special-card {
+                padding: 25px;
+            }
+            
+            .special-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+            
+            .special-card h3 {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+
+            .special-card p {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+
+            .special-card ul {
+                font-size: 0.85rem;
+            }
+
+            /* Testimonials Mobile */
+            .testimonials {
+                padding: 50px 0;
+            }
+
+            .testimonials div[style*="display: grid"] {
+                grid-template-columns: 1fr !important;
+                gap: 25px !important;
+            }
+            
+            .testimonial-card {
+                padding: 20px;
+            }
+
+            .testimonial-avatar {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+                margin-right: 15px;
+            }
+
+            .testimonial-card h4 {
+                font-size: 1rem;
+            }
+
+            .testimonial-card p[style*="color: #6facff"] {
+                font-size: 0.85rem;
+            }
+
+            .testimonial-card p[style*="font-style: italic"] {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            .stars {
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+
+            /* Footer Mobile */
+            footer {
+                padding: 40px 0 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin-bottom: 25px;
+                text-align: left;
+            }
+
+            .footer-section h4 {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+
+            .footer-section a {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+            }
+
+            .footer-bottom {
+                font-size: 0.85rem;
+                padding-top: 15px;
+            }
+
+            /* Floating elements - hide on mobile for performance */
+            .floating-elements {
+                display: none;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 12px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+                padding: 0 5px;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+                padding: 0 5px;
+            }
+
+            .hero div[style*="display: flex; flex-wrap: wrap"] {
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 8px !important;
+            }
+
+            .product-card.featured-product h3 {
+                font-size: 1.8rem !important;
+            }
+
+            .product-card.featured-product p {
+                font-size: 1rem !important;
+            }
+
+            .product-card.featured-product div[style*="font-size: 2rem"] {
+                font-size: 1.6rem !important;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+                padding: 0 5px;
+            }
+
+            .instructor-card {
+                min-width: 220px !important;
+            }
+
+            .special-card, .testimonial-card {
+                padding: 20px;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in-up.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in-left.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in-right.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s ease-out;
+        }
+
+        .scale-in.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .stagger-animation {
+            transition-delay: 0.2s;
+        }
+
+        .stagger-animation:nth-child(2) {
+            transition-delay: 0.4s;
+        }
+
+        .stagger-animation:nth-child(3) {
+            transition-delay: 0.6s;
+        }
+
+        .stagger-animation:nth-child(4) {
+            transition-delay: 0.8s;
+        }
+
+        .stagger-animation:nth-child(5) {
+            transition-delay: 1.0s;
+        }
+
+        .stagger-animation:nth-child(6) {
+            transition-delay: 1.2s;
+        }
+
+        /* Interactive Elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-circle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-circle:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-circle:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-circle:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 40%;
+            left: 70%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @keyframes scrollInstructors {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .instructor-carousel-container:hover .instructor-carousel {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+    </div>
+
+    <header>
+        <nav class="container">
+            <img src="https://wlw-steuern.de/build/assets/logo-f86961a4.svg" alt="WLW Steuern Logo" class="logo" onerror="this.src=''; this.alt='Logo konnte nicht geladen werden'; this.style.display='none';">
+            <ul class="nav-links">
+                <li><a href="#produkte">Produkte</a></li>
+                <li><a href="#erfolgsquote">Erfolgsquote</a></li>
+                <li><a href="#dozenten">Dozenten</a></li>
+                <li><a href="#erfolgsgeschichten">Erfolgsgeschichten</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="#produkte" onclick="closeMobileMenu()">Produkte</a>
+                <a href="#erfolgsquote" onclick="closeMobileMenu()">Erfolgsquote</a>
+                <a href="#dozenten" onclick="closeMobileMenu()">Dozenten</a>
+                <a href="#erfolgsgeschichten" onclick="closeMobileMenu()">Erfolgsgeschichten</a>
+                <a href="#kontakt" onclick="closeMobileMenu()">Kontakt</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="fade-in-up">Erfolg in deiner mündlichen StB-Prüfung?</h1>
+                <div class="fade-in-up" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 600px; margin: 0 auto 40px; text-align: center;">
+                    <div class="stagger-animation" style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #00ff00; font-size: 1rem; font-weight: 900; text-shadow: 0 0 2px #00ff00;">✓</span>
+                        <span style="font-size: 0.9rem; font-weight: 500; opacity: 0.95;">Flexible Vorbereitung</span>
+                    </div>
+                    <div class="stagger-animation" style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #00ff00; font-size: 1rem; font-weight: 900; text-shadow: 0 0 2px #00ff00;">✓</span>
+                        <span style="font-size: 0.9rem; font-weight: 500; opacity: 0.95;">Bewährte Methoden</span>
+                    </div>
+                    <div class="stagger-animation" style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #00ff00; font-size: 1rem; font-weight: 900; text-shadow: 0 0 2px #00ff00;">✓</span>
+                        <span style="font-size: 0.9rem; font-weight: 500; opacity: 0.95;">Individuelle Betreuung</span>
+                    </div>
+                    <div class="stagger-animation" style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #00ff00; font-size: 1rem; font-weight: 900; text-shadow: 0 0 2px #00ff00;">✓</span>
+                        <span style="font-size: 0.9rem; font-weight: 500; opacity: 0.95;">Einzigartiges Lernmaterial</span>
+                    </div>
+                </div>
+                <a href="#produkte" class="cta-button fade-in-up">Jetzt starten</a>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <!-- Experience Banner -->
+                <div class="scale-in" style="background: linear-gradient(135deg, #6facff, #aacfff); color: white; padding: 8px 20px; border-radius: 16px; text-align: center; margin: 0 auto 40px; max-width: 350px; box-shadow: 0 4px 16px rgba(111, 172, 255, 0.3);">
+                    <div style="font-size: 1rem; font-weight: 700; margin-bottom: 2px;">Seit 1997</div>
+                    <div style="font-size: 0.8rem; opacity: 0.9;">Über 25 Jahre Erfahrung</div>
+                </div>
+                
+                <h2 class="section-title fade-in-up" style="font-size: 2rem; margin-bottom: 30px;">Warum WLW?</h2>
+                <div class="fade-in-up" style="text-align: center; max-width: 700px; margin: 0 auto 40px; color: #86868b; font-size: 1rem; line-height: 1.5;">
+                    Bereite dich mit WLW optimal auf die mündliche Steuerberaterprüfung vor – mit über 25 Jahren Erfahrung, einzigartigem Lernmaterial, persönlicher Betreuung und deutschlandweitem Zugang zu topaktuellen Prüfungsprotokollen.
+                </div>
+                
+                <!-- Erste Reihe: 3 Karten -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                    <div class="fade-in-left stagger-animation" style="background: linear-gradient(135deg, #5C9BD5, #8BB6E8); color: white; padding: 20px; border-radius: 16px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 6px 20px rgba(92, 155, 213, 0.2);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: white;">Einzigartiges Lernmaterial</h3>
+                        <p style="color: white; font-size: 0.9rem; line-height: 1.4;">200+ Vortragsthemen, FAQ-Lehrbriefe und strukturierte Materialien perfekt auf die Prüfung abgestimmt</p>
+                    </div>
+                    
+                    <div class="fade-in-up stagger-animation" style="background: linear-gradient(135deg, #E09952, #F2B366); color: white; padding: 20px; border-radius: 16px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 6px 20px rgba(224, 153, 82, 0.2);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: white;">25+ Jahre Erfahrung</h3>
+                        <p style="color: white; font-size: 0.9rem; line-height: 1.4;">Seit 1997 erfolgreich. Unsere Dozenten wissen genau, worauf es ankommt – fachlich und methodisch</p>
+                    </div>
+                    
+                    <div class="fade-in-right stagger-animation" style="background: linear-gradient(135deg, #70A85C, #8FBF7A); color: white; padding: 20px; border-radius: 16px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 6px 20px rgba(112, 168, 92, 0.2);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: white;">Deutschlandweit flexibel</h3>
+                        <p style="color: white; font-size: 0.9rem; line-height: 1.4;">Online, in Bamberg oder München – überall die gleiche intensive und effektive Vorbereitung</p>
+                    </div>
+                </div>
+                
+                <!-- Zweite Reihe: 2 Karten zentriert -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 600px; margin: 0 auto;">
+                    <div style="background: linear-gradient(135deg, #9B7BB8, #B899D1); color: white; padding: 20px; border-radius: 16px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 6px 20px rgba(155, 123, 184, 0.2);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: white;">Persönliche Betreuung</h3>
+                        <p style="color: white; font-size: 0.9rem; line-height: 1.4;">Individuelle Begleitung mit direktem Feedback für eine gezielte und selbstbewusste Vorbereitung</p>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #5A9B94, #7BB5AE); color: white; padding: 20px; border-radius: 16px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 6px 20px rgba(90, 155, 148, 0.2);" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: white;">Protokollzugang deutschlandweit</h3>
+                        <p style="color: white; font-size: 0.9rem; line-height: 1.4;">Aktuelle Prüfungsprotokolle aus ganz Deutschland – laufend aktualisiert, sogar während der Prüfungen</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Erfolgsquote Section -->
+        <section class="success-stats" id="erfolgsquote" style="background: white; padding: 40px 0; color: #1d1d1f; margin-top: 0;">
+            <div class="container">
+                <h2 class="section-title fade-in-up" style="color: #1d1d1f; margin-bottom: 25px; font-size: 1.8rem;">Unsere Bestehensquote</h2>
+                
+                <!-- Success Rate Display -->
+                <div class="scale-in" style="text-align: center; margin: 0 auto 20px;">
+                    <div id="successRate" style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #6facff, #aacfff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px;">96,1%</div>
+                </div>
+                
+                <p class="fade-in-up" style="text-align: center; color: #86868b; font-size: 0.9rem; margin-bottom: 20px;">
+                    <strong>WLW-Teilnehmer Mündliche Prüfung 2024/25</strong>
+                </p>
+            </div>
+        </section>
+
+        <section class="products" id="produkte">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Unsere Kurse & Produkte</h2>
+                
+                <!-- WLW ALL IN - Hauptprodukt -->
+                <div style="margin-bottom: 60px;">
+                    <div class="product-card featured-product scale-in" onclick="window.open('https://wlw-steuern.de/product/wlw-all-in-mundliche-prufung', '_blank')" style="background: linear-gradient(135deg, #6facff, #aacfff); color: white; max-width: 900px; margin: 0 auto; cursor: pointer;">
+                        <div class="product-icon" style="background: rgba(255, 255, 255, 0.2); display: none;"></div>
+                        <h3 style="color: white; font-size: 2.8rem; font-weight: 800; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">WLW ALL IN</h3>
+                        <p style="color: white; font-size: 1.3rem; font-weight: 500; margin-bottom: 15px; opacity: 0.95;">Alles für die mündliche Prüfung in einem unschlagbaren Gesamtpaket</p>
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px;">
+                            <div style="color: white; font-size: 2.5rem; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">1.945 €</div>
+                            <div style="background: #28a745; color: white; padding: 8px 16px; border-radius: 20px; font-size: 1rem; font-weight: 700; border: 2px solid #28a745; box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);">Spare 390 €</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; text-align: left;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #00ff00; font-size: 1.4rem; font-weight: 900; text-shadow: 0 0 2px #00ff00;">✓</span>
+                                    <strong>Vorbereitungskurs</strong>
+                                </div>
+                                <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">8 Tage Unterricht + Aufzeichnungen + Skripten</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #00ff00; font-size: 1.4rem; font-weight: 900; text-shadow: 0 0 2px #00ff00;">✓</span>
+                                    <strong>Probeexamen</strong>
+                                </div>
+                                <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">Realistische Prüfungssimulation + Zuhören bei anderen</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #00ff00; font-size: 1.4rem; font-weight: 900; text-shadow: 0 0 2px #00ff00;">✓</span>
+                                    <strong>200+ Vortragsthemen</strong>
+                                </div>
+                                <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">inkl. Musterlösungen</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #00ff00; font-size: 1.4rem; font-weight: 900; text-shadow: 0 0 2px #00ff00;">✓</span>
+                                    <strong>300+ Karteikarten</strong>
+                                </div>
+                                <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">Nicht-Steuerfächer</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #00ff00; font-size: 1.4rem; font-weight: 900; text-shadow: 0 0 2px #00ff00;">✓</span>
+                                    <strong>Lehrbriefe</strong>
+                                </div>
+                                <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">Nicht-Steuerfächer</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #00ff00; font-size: 1.4rem; font-weight: 900; text-shadow: 0 0 2px #00ff00;">✓</span>
+                                    <strong>Rechtsprechung</strong>
+                                </div>
+                                <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">Aktuell + BMF-Schreiben</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #00ff00; font-size: 1.4rem; font-weight: 900; text-shadow: 0 0 2px #00ff00;">✓</span>
+                                    <strong>FAQ Lehrbriefe</strong>
+                                </div>
+                                <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">Die häufigsten Fragen aus allen Prüfungsfächern</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #00ff00; font-size: 1.4rem; font-weight: 900; text-shadow: 0 0 2px #00ff00;">✓</span>
+                                    <strong>Protokollzugang</strong>
+                                </div>
+                                <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">Deutschlandweit + laufend aktualisiert</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="color: #00ff00; font-size: 1.4rem; font-weight: 900; text-shadow: 0 0 2px #00ff00;">✓</span>
+                                    <strong>Persönliche Betreuung</strong>
+                                </div>
+                                <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">Individuelle Begleitung + direktes Feedback</div>
+                            </div>
+                        </div>
+
+
+
+                        <a href="https://wlw-steuern.de/product/wlw-all-in-mundliche-prufung" target="_blank" rel="noopener noreferrer" class="product-button" style="background: rgba(255, 255, 255, 0.2); border: 2px solid white; font-size: 1.2rem; padding: 16px 32px; text-decoration: none; display: inline-block;">Jetzt buchen & sparen</a>
+                    </div>
+                </div>
+
+                <h3 class="fade-in-up" style="text-align: center; font-size: 1.8rem; margin-bottom: 40px; color: #1d1d1f;">Oder einzeln buchen:</h3>
+                
+                <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+                    <div class="product-card fade-in-left stagger-animation" style="padding: 30px; cursor: default;">
+                        <h3 style="font-size: 1.3rem;">Kurse</h3>
+                        <p style="font-size: 0.95rem;">Wähle deinen passenden Kurs</p>
+                        <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0;">
+                            <div onclick="selectProduct('vorbereitungskurs')" style="background: rgba(111, 172, 255, 0.1); padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; text-align: left;" onmouseover="this.style.borderColor='#6facff'" onmouseout="this.style.borderColor='transparent'">
+                                <strong>Vorbereitungskurs</strong>
+                                <div style="color: #28a745; font-weight: 700; font-size: 0.9rem; margin: 2px 0;">795 €</div>
+                                <small style="color: #86868b;">8 Tage Unterricht + Aufzeichnungen + Skripten</small>
+                            </div>
+                            <div onclick="selectProduct('selbststudium')" style="background: rgba(111, 172, 255, 0.1); padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; text-align: left;" onmouseover="this.style.borderColor='#6facff'" onmouseout="this.style.borderColor='transparent'">
+                                <strong>Selbststudium</strong>
+                                <div style="color: #28a745; font-weight: 700; font-size: 0.9rem; margin: 2px 0;">1.195 €</div>
+                                <small style="color: #86868b;">Flexibles Lernen im eigenen Tempo</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card fade-in-up stagger-animation" style="padding: 30px; cursor: default;">
+                        <h3 style="font-size: 1.3rem;">Lernmaterialien</h3>
+                        <p style="font-size: 0.95rem;">Einzigartige Unterlagen für deinen Erfolg</p>
+                        <div style="display: flex; flex-direction: column; gap: 8px; margin: 20px 0; text-align: left;">
+                            <div onclick="selectProduct('vortragsthemen')" style="background: rgba(111, 172, 255, 0.1); padding: 10px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent;" onmouseover="this.style.borderColor='#6facff'" onmouseout="this.style.borderColor='transparent'">
+                                <strong>200+ Vortragsthemen</strong>
+                                <div style="color: #28a745; font-weight: 700; font-size: 0.8rem; margin: 2px 0;">492 €</div>
+                                <small style="color: #86868b;">inkl. Musterlösungen</small>
+                            </div>
+                            <div onclick="selectProduct('karteikarten')" style="background: rgba(111, 172, 255, 0.1); padding: 10px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent;" onmouseover="this.style.borderColor='#6facff'" onmouseout="this.style.borderColor='transparent'">
+                                <strong>300+ Karteikarten</strong>
+                                <div style="color: #28a745; font-weight: 700; font-size: 0.8rem; margin: 2px 0;">128,40 €</div>
+                                <small style="color: #86868b;">Nicht-Steuerfächer</small>
+                            </div>
+                            <div onclick="selectProduct('lehrbriefe')" style="background: rgba(111, 172, 255, 0.1); padding: 10px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent;" onmouseover="this.style.borderColor='#6facff'" onmouseout="this.style.borderColor='transparent'">
+                                <strong>Lehrbriefe</strong>
+                                <div style="color: #28a745; font-weight: 700; font-size: 0.8rem; margin: 2px 0;">347,75 €</div>
+                                <small style="color: #86868b;">Nicht-Steuerfächer</small>
+                            </div>
+                            <div onclick="selectProduct('faq')" style="background: rgba(111, 172, 255, 0.1); padding: 10px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent;" onmouseover="this.style.borderColor='#6facff'" onmouseout="this.style.borderColor='transparent'">
+                                <strong>FAQ Lehrbriefe</strong>
+                                <div style="color: #28a745; font-weight: 700; font-size: 0.8rem; margin: 2px 0;">524,30 €</div>
+                                <small style="color: #86868b;">Die häufigsten Fragen aus allen Prüfungsfächern</small>
+                            </div>
+                            <div onclick="selectProduct('rechtsprechung')" style="background: rgba(111, 172, 255, 0.1); padding: 10px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent;" onmouseover="this.style.borderColor='#6facff'" onmouseout="this.style.borderColor='transparent'">
+                                <strong>Rechtsprechung</strong>
+                                <div style="color: #28a745; font-weight: 700; font-size: 0.8rem; margin: 2px 0;">89,99 €</div>
+                                <small style="color: #86868b;">Aktuell + BMF-Schreiben</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card fade-in-right stagger-animation" style="padding: 30px; cursor: default;">
+                        <h3 style="font-size: 1.3rem;">Simulationen</h3>
+                        <p style="font-size: 0.95rem;">Praxisnahe Prüfungsvorbereitung</p>
+                        <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0;">
+                            <div onclick="selectProduct('probeexamen')" style="background: rgba(111, 172, 255, 0.1); padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; text-align: left;" onmouseover="this.style.borderColor='#6facff'" onmouseout="this.style.borderColor='transparent'">
+                                <strong>Probeexamen</strong>
+                                <div style="color: #28a745; font-weight: 700; font-size: 0.9rem; margin: 2px 0;">345,00 €</div>
+                                <small style="color: #86868b;">Realistische Prüfungssimulation + Zuhören bei anderen</small>
+                            </div>
+                            <div onclick="selectProduct('intensivpruefung')" style="background: rgba(111, 172, 255, 0.1); padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; text-align: left;" onmouseover="this.style.borderColor='#6facff'" onmouseout="this.style.borderColor='transparent'">
+                                <strong>Intensivprüfungssimulation</strong>
+                                <div style="color: #28a745; font-weight: 700; font-size: 0.9rem; margin: 2px 0;">895 €</div>
+                                <small style="color: #86868b;">Intensive Einzelbetreuung + Feedback</small>
+                            </div>
+                            <div onclick="selectProduct('vortragstraining')" style="background: rgba(111, 172, 255, 0.1); padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; text-align: left;" onmouseover="this.style.borderColor='#6facff'" onmouseout="this.style.borderColor='transparent'">
+                                <strong>Vortragstraining</strong>
+                                <div style="color: #28a745; font-weight: 700; font-size: 0.9rem; margin: 2px 0;">180 €</div>
+                                <small style="color: #86868b;">Fachliche Bewertung + Rhetorik</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dozenten Section -->
+        <section class="instructors" id="dozenten">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Unsere erfahrenen Dozenten</h2>
+                <div class="instructor-carousel-container fade-in-up" style="overflow: hidden; position: relative;">
+                    <div class="instructor-carousel" style="display: flex; gap: 40px; animation: scrollInstructors 20s linear infinite;">
+                        <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
+                            <div class="instructor-avatar">👨‍💼</div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Dr. Michael Weber</h3>
+                            <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Steuerberater & Prüfer</p>
+                        </div>
+                        <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
+                            <div class="instructor-avatar">👩‍💼</div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Prof. Dr. Sarah Klein</h3>
+                            <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Professorin & Autorin</p>
+                        </div>
+                        <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
+                            <div class="instructor-avatar">👨‍🎓</div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Thomas Müller</h3>
+                            <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Wirtschaftsprüfer & Coach</p>
+                        </div>
+                        <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
+                            <div class="instructor-avatar">👩‍⚖️</div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Dr. Andrea Schmidt</h3>
+                            <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Rechtsanwältin & Dozentin</p>
+                        </div>
+                        <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
+                            <div class="instructor-avatar">👨‍💻</div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Prof. Dr. Klaus Bauer</h3>
+                            <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">BWL-Professor & Berater</p>
+                        </div>
+                        <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
+                            <div class="instructor-avatar">👩‍🏫</div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Dr. Julia Fischer</h3>
+                            <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Steuerberaterin & Trainerin</p>
+                        </div>
+                        <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
+                            <div class="instructor-avatar">👨‍⚖️</div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Dr. Robert Wagner</h3>
+                            <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Richter & Prüfer</p>
+                        </div>
+                        <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
+                            <div class="instructor-avatar">👩‍💼</div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Prof. Dr. Maria Hoffmann</h3>
+                            <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Wirtschaftsprüferin & Autorin</p>
+                        </div>
+                        <!-- Duplicate cards for seamless loop -->
+                        <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
+                            <div class="instructor-avatar">👨‍💼</div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Dr. Michael Weber</h3>
+                            <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Steuerberater & Prüfer</p>
+                        </div>
+                        <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
+                            <div class="instructor-avatar">👩‍💼</div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Prof. Dr. Sarah Klein</h3>
+                            <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Professorin & Autorin</p>
+                        </div>
+                        <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
+                            <div class="instructor-avatar">👨‍🎓</div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Thomas Müller</h3>
+                            <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Wirtschaftsprüfer & Coach</p>
+                        </div>
+                        <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
+                            <div class="instructor-avatar">👩‍⚖️</div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Dr. Andrea Schmidt</h3>
+                            <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Rechtsanwältin & Dozentin</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Was WLW besonders macht Section -->
+        <section class="special-features">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Was WLW besonders macht</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 50px;">
+                    <div class="special-card fade-in-left stagger-animation">
+                        <div class="special-icon">🎯</div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: #1d1d1f;">Individuelle Betreuung</h3>
+                        <p style="color: #86868b; line-height: 1.6; margin-bottom: 20px;">Jeder Teilnehmer erhält persönliche Betreuung und individuelles Feedback. Wir gehen auf Ihre spezifischen Schwächen ein und entwickeln gemeinsam Strategien für Ihren Erfolg.</p>
+                        <ul style="color: #86868b; line-height: 1.8;">
+                            <li>Persönliche Lernpläne</li>
+                            <li>Einzelcoaching-Termine</li>
+                            <li>Direktes Dozenten-Feedback</li>
+                        </ul>
+                    </div>
+                    <div class="special-card fade-in-up stagger-animation">
+                        <div class="special-icon">📚</div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: #1d1d1f;">Einzigartige Materialien</h3>
+                        <p style="color: #86868b; line-height: 1.6; margin-bottom: 20px;">Unsere selbst entwickelten Lernmaterialien basieren auf jahrelanger Erfahrung und werden kontinuierlich aktualisiert. Praxisnah und prüfungsrelevant.</p>
+                        <ul style="color: #86868b; line-height: 1.8;">
+                            <li>Exklusive Vortragsthemen</li>
+                            <li>Aktuelle Rechtsprechung</li>
+                            <li>Prüfungsprotokalle deutschlandweit</li>
+                        </ul>
+                    </div>
+                    <div class="special-card fade-in-right stagger-animation">
+                        <div class="special-icon">🎪</div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: #1d1d1f;">Realistische Simulation</h3>
+                        <p style="color: #86868b; line-height: 1.6; margin-bottom: 20px;">Unsere Probeexamen sind so realitätsnah wie möglich gestaltet. Sie erleben die Prüfungssituation authentisch und können anderen Kandidaten zuhören.</p>
+                        <ul style="color: #86868b; line-height: 1.8;">
+                            <li>Originalgetreue Prüfungsatmosphäre</li>
+                            <li>Echte Prüfer als Dozenten</li>
+                            <li>Lernen durch Zuhören bei anderen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Erfolgsgeschichten Section -->
+        <section class="testimonials" id="erfolgsgeschichten">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Erfolgsgeschichten unserer Teilnehmer</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+                    <div class="testimonial-card fade-in-up stagger-animation">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">👩</div>
+                            <div>
+                                <h4 style="margin: 0; color: #1d1d1f;">Lisa Schmidt</h4>
+                                <p style="margin: 5px 0 0 0; color: #6facff; font-weight: 600;">Steuerberaterin</p>
+                            </div>
+                        </div>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p style="color: #86868b; line-height: 1.6; font-style: italic;">"Dank WLW habe ich meine mündliche Prüfung mit Bravour bestanden! Die Probeexamen waren so realitätsnah, dass ich in der echten Prüfung völlig entspannt war. Besonders die individuellen Tipps der Dozenten haben mir sehr geholfen."</p>
+                    </div>
+                    <div class="testimonial-card fade-in-up stagger-animation">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">👨</div>
+                            <div>
+                                <h4 style="margin: 0; color: #1d1d1f;">Marco Weber</h4>
+                                <p style="margin: 5px 0 0 0; color: #6facff; font-weight: 600;">Steuerberater</p>
+                            </div>
+                        </div>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p style="color: #86868b; line-height: 1.6; font-style: italic;">"Nach einem gescheiterten ersten Versuch war ich sehr unsicher. WLW hat mir das Vertrauen zurückgegeben. Die strukturierte Vorbereitung und die erfahrenen Dozenten haben den Unterschied gemacht. Bestanden mit 'gut'!"</p>
+                    </div>
+                    <div class="testimonial-card fade-in-up stagger-animation">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">👩</div>
+                            <div>
+                                <h4 style="margin: 0; color: #1d1d1f;">Anna Müller</h4>
+                                <p style="margin: 5px 0 0 0; color: #6facff; font-weight: 600;">Steuerberaterin</p>
+                            </div>
+                        </div>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p style="color: #86868b; line-height: 1.6; font-style: italic;">"Die Flexibilität bei WLW war perfekt für mich als berufstätige Mutter. Online-Kurse, Aufzeichnungen und die umfangreichen Materialien haben es möglich gemacht. Vielen Dank für die tolle Betreuung!"</p>
+                    </div>
+                    <div class="testimonial-card fade-in-up stagger-animation">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">👨</div>
+                            <div>
+                                <h4 style="margin: 0; color: #1d1d1f;">David Klein</h4>
+                                <p style="margin: 5px 0 0 0; color: #6facff; font-weight: 600;">Steuerberater</p>
+                            </div>
+                        </div>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p style="color: #86868b; line-height: 1.6; font-style: italic;">"Besonders beeindruckt hat mich die Qualität der Vortragsthemen und Musterlösungen. Die Dozenten kennen die Prüfer und wissen genau, worauf es ankommt. Eine Investition, die sich definitiv gelohnt hat!"</p>
+                    </div>
+                    <div class="testimonial-card fade-in-up stagger-animation">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">👩</div>
+                            <div>
+                                <h4 style="margin: 0; color: #1d1d1f;">Jennifer Bauer</h4>
+                                <p style="margin: 5px 0 0 0; color: #6facff; font-weight: 600;">Steuerberaterin</p>
+                            </div>
+                        </div>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p style="color: #86868b; line-height: 1.6; font-style: italic;">"Das Vortragstraining war ein Gamechanger für mich. Ich war sehr nervös beim Präsentieren, aber die Dozenten haben mir geholfen, selbstsicher aufzutreten. Bestanden beim ersten Versuch!"</p>
+                    </div>
+                    <div class="testimonial-card fade-in-up stagger-animation">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">👨</div>
+                            <div>
+                                <h4 style="margin: 0; color: #1d1d1f;">Stefan Fischer</h4>
+                                <p style="margin: 5px 0 0 0; color: #6facff; font-weight: 600;">Steuerberater</p>
+                            </div>
+                        </div>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p style="color: #86868b; line-height: 1.6; font-style: italic;">"Die Kombination aus Online-Flexibilität und persönlicher Betreuung ist einzigartig. Auch die Protokollsammlung war Gold wert - so wusste ich genau, was mich erwartet. Absolute Empfehlung!"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </section>
+    </main>
+
+    <footer id="kontakt">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <a href="mailto:info@wlw-steuern.de">info@wlw-steuern.de</a>
+                    <a href="tel:+49123456789">+49 123 456 789</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Kurse</h4>
+                    <a href="#produkte">Intensivkurs</a>
+                    <a href="#produkte">Premium Paket</a>
+                    <a href="#produkte">Basis Materialien</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Service</h4>
+                    <a href="#">FAQ</a>
+                    <a href="#">Support</a>
+                    <a href="#">Termine</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 WLW Steuern. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function selectProduct(productType) {
+            const productNames = {
+                'allin': 'WLW ALL IN',
+                'vorbereitungskurs': 'Vorbereitungskurs',
+                'selbststudium': 'Selbststudium',
+                'lernmaterialien': 'Lernmaterialien',
+                'praxistraining': 'Praxistraining',
+                'probeexamen': 'Probeexamen',
+                'intensivpruefung': 'Intensivprüfungssimulation',
+                'vortragstraining': 'Vortragstraining',
+                'vortragsthemen': '200+ Vortragsthemen',
+                'karteikarten': '300+ Karteikarten',
+                'lehrbriefe': 'Lehrbriefe Nichtsteuerfächer',
+                'rechtsprechung': 'Aktuelle Rechtsprechung',
+                'faq': 'FAQ Lehrbriefe',
+                'protokolle': 'Protokollzugang'
+            };
+            
+            // Smooth scroll to top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            // Show selection feedback
+            setTimeout(() => {
+                const selectedProduct = productNames[productType];
+                const heroTitle = document.querySelector('.hero h1');
+                const originalTitle = heroTitle.textContent;
+                
+                heroTitle.textContent = `${selectedProduct} ausgewählt!`;
+                heroTitle.style.color = '#ffffff';
+                
+                setTimeout(() => {
+                    heroTitle.textContent = originalTitle;
+                }, 2000);
+            }, 500);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.remove('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Animated title change
+        function animateTitle() {
+            const heroTitle = document.querySelector('.hero h1');
+            const titles = ['Erfolg in deiner mündlichen StB-Prüfung?', 'WLW<br>ist die Lösung'];
+            let currentIndex = 0;
+
+            function changeTitle() {
+                // Fade out
+                heroTitle.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    // Change text
+                    currentIndex = (currentIndex + 1) % titles.length;
+                    heroTitle.innerHTML = titles[currentIndex];
+                    
+                    // Fade in
+                    heroTitle.classList.remove('fade-out');
+                    heroTitle.classList.add('fade-in');
+                    
+                    setTimeout(() => {
+                        heroTitle.classList.remove('fade-in');
+                    }, 800);
+                }, 400);
+            }
+
+            // Start animation after 3 seconds, then repeat every 4 seconds
+            setTimeout(() => {
+                changeTitle();
+                setInterval(changeTitle, 4000);
+            }, 3000);
+        }
+
+        // Start title animation when page loads
+        window.addEventListener('load', animateTitle);
+
+        // Add success rate animation
+        function animateSuccessRate() {
+            const successRate = document.getElementById('successRate');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        let current = 0;
+                        const target = 96.1;
+                        const increment = target / 60;
+                        
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            successRate.textContent = current.toFixed(1) + '%';
+                        }, 30);
+                        
+                        observer.unobserve(successRate);
+                    }
+                });
+            });
+            
+            observer.observe(successRate);
+        }
+
+        // Add counter animation for success stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('.success-stats [style*="font-size: 2.5rem"]');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = counter.textContent;
+                        const isRating = target.includes('/');
+                        const isPlus = target.includes('+');
+                        
+                        let finalNumber;
+                        if (isRating) {
+                            finalNumber = parseFloat(target);
+                        } else if (isPlus) {
+                            finalNumber = parseInt(target);
+                        } else {
+                            finalNumber = parseInt(target);
+                        }
+                        
+                        let current = 0;
+                        const increment = finalNumber / 50;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= finalNumber) {
+                                current = finalNumber;
+                                clearInterval(timer);
+                            }
+                            
+                            if (isRating) {
+                                counter.textContent = current.toFixed(1) + '/5';
+                            } else if (isPlus) {
+                                counter.textContent = Math.floor(current) + '+';
+                            } else {
+                                counter.textContent = Math.floor(current);
+                            }
+                        }, 50);
+                        
+                        observer.unobserve(counter);
+                    }
+                });
+            });
+            
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        // Scroll Animation Observer
+        function initScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right, .scale-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add a small delay for stagger effect
+                        const delay = entry.target.classList.contains('stagger-animation') ? 
+                            parseInt(getComputedStyle(entry.target).transitionDelay) * 1000 : 0;
+                        
+                        setTimeout(() => {
+                            entry.target.classList.add('animate');
+                        }, delay);
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Start animations when page loads
+        window.addEventListener('load', () => {
+            animateSuccessRate();
+            animateCounters();
+            initScrollAnimations();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ff34fc7713dc84',t:'MTc2MDY5NzkzMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
