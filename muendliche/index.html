@@ -1008,6 +1008,149 @@
         .instructor-carousel-container:hover .instructor-carousel {
             animation-play-state: paused;
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #6facff, #aacfff);
+            color: white;
+            padding: 30px;
+            border-radius: 20px 20px 0 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-body {
+            padding: 40px;
+            line-height: 1.6;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .sample-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #6facff;
+        }
+
+        .sample-question {
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .sample-answer {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .sample-structure {
+            background: rgba(111, 172, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Mobile Modal Styles */
+        @media (max-width: 768px) {
+            .modal-content {
+                max-width: 95%;
+                max-height: 95%;
+                margin: 10px;
+            }
+
+            .modal-header {
+                padding: 20px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .close-modal {
+                top: 15px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+
+            .sample-card {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1208,7 +1351,9 @@
 
 
 
-                        <a href="https://wlw-steuern.de/product/wlw-all-in-mundliche-prufung" target="_blank" rel="noopener noreferrer" class="product-button" style="background: rgba(255, 255, 255, 0.2); border: 2px solid white; font-size: 1.2rem; padding: 16px 32px; text-decoration: none; display: inline-block;">Jetzt buchen & sparen</a>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                            <a href="https://wlw-steuern.de/product/wlw-all-in-mundliche-prufung" target="_blank" rel="noopener noreferrer" class="product-button" style="background: rgba(255, 255, 255, 0.2); border: 2px solid white; font-size: 1.2rem; padding: 16px 32px; text-decoration: none; display: inline-block;">Jetzt buchen & sparen</a>
+                        </div>
                     </div>
                 </div>
 
@@ -1364,38 +1509,34 @@
         <!-- Was WLW besonders macht Section -->
         <section class="special-features">
             <div class="container">
-                <h2 class="section-title fade-in-up">Was WLW besonders macht</h2>
+                <h2 class="section-title fade-in-up">Was WLW einzigartig macht</h2>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 50px;">
                     <div class="special-card fade-in-left stagger-animation">
-                        <div class="special-icon">🎯</div>
-                        <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: #1d1d1f;">Individuelle Betreuung</h3>
-                        <p style="color: #86868b; line-height: 1.6; margin-bottom: 20px;">Jeder Teilnehmer erhält persönliche Betreuung und individuelles Feedback. Wir gehen auf Ihre spezifischen Schwächen ein und entwickeln gemeinsam Strategien für Ihren Erfolg.</p>
+                        <div class="special-icon">📋</div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: #1d1d1f;">Vortragsthemen</h3>
+                        <p style="color: #86868b; line-height: 1.6; margin-bottom: 20px;">Mit unseren über 200 ausgearbeiteten Kurzvorträgen auf handlichen DIN A5-Karten bereiten Sie sich gezielt und praxisnah auf die mündliche Steuerberaterprüfung vor. Jede Karte hilft Ihnen, Ihren Vortrag strukturiert, souverän und überzeugend zu gestalten.</p>
                         <ul style="color: #86868b; line-height: 1.8;">
-                            <li>Persönliche Lernpläne</li>
-                            <li>Einzelcoaching-Termine</li>
-                            <li>Direktes Dozenten-Feedback</li>
+                            <li><strong>Praxisorientierte Inhalte:</strong> Alle Themen sind vollständig ausgearbeitet und sofort anwendbar</li>
+                            <li><strong>Realitätsnahes Üben:</strong> Das handliche Format ermöglicht authentisches Training für die Prüfungssituation</li>
+                            <li><strong>Flexible Lernformate:</strong> Als Print- oder Digitalversion verfügbar – lernen Sie, wann und wo Sie möchten</li>
                         </ul>
+                        <div style="text-align: center; margin-top: 25px;">
+                            <button onclick="openVortragsthemenModal()" style="background: #6facff; color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-size: 1rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 20px rgba(111, 172, 255, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">Muster anschauen</button>
+                        </div>
                     </div>
                     <div class="special-card fade-in-up stagger-animation">
-                        <div class="special-icon">📚</div>
-                        <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: #1d1d1f;">Einzigartige Materialien</h3>
-                        <p style="color: #86868b; line-height: 1.6; margin-bottom: 20px;">Unsere selbst entwickelten Lernmaterialien basieren auf jahrelanger Erfahrung und werden kontinuierlich aktualisiert. Praxisnah und prüfungsrelevant.</p>
+                        <div class="special-icon">❓</div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: #1d1d1f;">Häufig gestellte Fragen</h3>
+                        <p style="color: #86868b; line-height: 1.6; margin-bottom: 20px;">Unser umfassendes Lehrbriefprodukt „FAQ – Frequently Asked Questions" bereitet Sie optimal auf die mündliche Steuerberaterprüfung vor. Anhand authentischer Originalfragen der letzten Jahre trainieren Sie gezielt die Themen, die in der Prüfung wirklich zählen – mit präzisen, fundierten Antworten für jede Situation.</p>
                         <ul style="color: #86868b; line-height: 1.8;">
-                            <li>Exklusive Vortragsthemen</li>
-                            <li>Aktuelle Rechtsprechung</li>
-                            <li>Prüfungsprotokalle deutschlandweit</li>
+                            <li><strong>Echte Prüfungsfragen:</strong> Basierend auf Originalprotokollen früherer Prüfungen</li>
+                            <li><strong>Strukturierte Aufbereitung:</strong> Nach Themenbereichen gegliedert – für effizientes, fokussiertes Lernen</li>
                         </ul>
+                        <div style="text-align: center; margin-top: 25px;">
+                            <button onclick="openFAQModal()" style="background: #6facff; color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-size: 1rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 20px rgba(111, 172, 255, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">Muster anschauen</button>
+                        </div>
                     </div>
-                    <div class="special-card fade-in-right stagger-animation">
-                        <div class="special-icon">🎪</div>
-                        <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: #1d1d1f;">Realistische Simulation</h3>
-                        <p style="color: #86868b; line-height: 1.6; margin-bottom: 20px;">Unsere Probeexamen sind so realitätsnah wie möglich gestaltet. Sie erleben die Prüfungssituation authentisch und können anderen Kandidaten zuhören.</p>
-                        <ul style="color: #86868b; line-height: 1.8;">
-                            <li>Originalgetreue Prüfungsatmosphäre</li>
-                            <li>Echte Prüfer als Dozenten</li>
-                            <li>Lernen durch Zuhören bei anderen</li>
-                        </ul>
-                    </div>
+
                 </div>
             </div>
         </section>
@@ -1477,6 +1618,138 @@
 
         </section>
     </main>
+
+    <!-- Vortragsthemen Modal -->
+    <div id="vortragsthemenModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-modal" onclick="closeVortragsthemenModal()">&times;</button>
+                <h2 style="margin: 0; font-size: 2rem;">Muster: Vortragsthemen</h2>
+                <p style="margin: 10px 0 0 0; opacity: 0.9; font-size: 1.1rem;">Einblick in unsere über 200 ausgearbeiteten Vortragsthemen</p>
+            </div>
+            <div class="modal-body">
+                <div class="sample-card">
+                    <div class="sample-question">Beispiel Vortragsthema: "Betriebsausgabenabzug bei gemischt veranlassten Aufwendungen"</div>
+                    <div class="sample-answer">
+                        <strong>I. Problemstellung</strong><br>
+                        Bei gemischt veranlassten Aufwendungen stellt sich die Frage, inwieweit diese als Betriebsausgaben abzugsfähig sind. Dies betrifft insbesondere Aufwendungen, die sowohl betrieblich als auch privat veranlasst sind.
+                        
+                        <div class="sample-structure">
+                            <strong>Gliederungsvorschlag:</strong><br>
+                            1. Definition gemischt veranlasster Aufwendungen<br>
+                            2. Aufteilungsgebot vs. Abzugsverbot<br>
+                            3. Rechtsprechung des BFH<br>
+                            4. Praktische Anwendung und Beispiele<br>
+                            5. Nachweis- und Dokumentationspflichten
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(40, 167, 69, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid #28a745;">
+                        <strong>💡 Prüfungstipp:</strong> Bereiten Sie sich auf Nachfragen zu konkreten Beispielen vor (Geschäftsessen, Firmenfahrzeug, häusliches Arbeitszimmer).
+                    </div>
+                </div>
+
+                <div class="sample-card">
+                    <div class="sample-question">Beispiel Vortragsthema: "Steuerliche Behandlung von Rückstellungen"</div>
+                    <div class="sample-answer">
+                        <strong>I. Definition und Abgrenzung</strong><br>
+                        Rückstellungen sind ungewisse Verbindlichkeiten oder drohende Verluste aus schwebenden Geschäften. Sie dienen der periodengerechten Gewinnermittlung.
+                        
+                        <div class="sample-structure">
+                            <strong>Gliederungsvorschlag:</strong><br>
+                            1. Rückstellungsarten und -zwecke<br>
+                            2. Bilanzielle vs. steuerliche Behandlung<br>
+                            3. Bewertung und Auflösung<br>
+                            4. Besonderheiten bei verschiedenen Rückstellungsarten<br>
+                            5. Aktuelle Rechtsprechung
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(40, 167, 69, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid #28a745;">
+                        <strong>💡 Prüfungstipp:</strong> Unterscheiden Sie klar zwischen Pensionsrückstellungen, Gewährleistungsrückstellungen und Prozessrückstellungen.
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #6facff, #aacfff); color: white; padding: 30px; border-radius: 15px; text-align: center; margin-top: 40px;">
+                    <h3 style="margin: 0 0 15px 0; font-size: 1.5rem;">Über 200 vollständig ausgearbeitete Themen!</h3>
+                    <p style="margin: 0 0 20px 0; opacity: 0.9;">Jedes Vortragsthema ist strukturiert aufgebaut mit Gliederungsvorschlag, Prüfungstipps und aktueller Rechtsprechung.</p>
+                    <button onclick="window.open('https://wlw-steuern.de/product/karteikarten-vortragsthemen', '_blank'); closeVortragsthemenModal();" style="background: rgba(255, 255, 255, 0.2); border: 2px solid white; color: white; padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; font-size: 1rem;">Jetzt Vortragsthemen sichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Modal -->
+    <div id="faqModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-modal" onclick="closeFAQModal()">&times;</button>
+                <h2 style="margin: 0; font-size: 2rem;">Muster: FAQ Lehrbriefe</h2>
+                <p style="margin: 10px 0 0 0; opacity: 0.9; font-size: 1.1rem;">Häufig gestellte Fragen aus echten Prüfungsprotokollen</p>
+            </div>
+            <div class="modal-body">
+                <div class="sample-card">
+                    <div class="sample-question">FAQ Einkommensteuer: "Wann liegt eine Liebhaberei vor?"</div>
+                    <div class="sample-answer">
+                        <strong>Frage aus Prüfungsprotokoll München 2024:</strong><br>
+                        "Erläutern Sie die Abgrenzung zwischen Gewinnerzielungsabsicht und Liebhaberei bei einer Vermietungstätigkeit."<br><br>
+                        
+                        <strong>Strukturierte Antwort:</strong><br>
+                        Eine Liebhaberei liegt vor, wenn die Tätigkeit nicht mit Gewinnerzielungsabsicht ausgeübt wird. Indizien sind:
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>Dauerhaft negative Einkünfte ohne Aussicht auf Besserung</li>
+                            <li>Fehlende betriebswirtschaftliche Planung</li>
+                            <li>Überwiegend private Nutzung</li>
+                            <li>Unangemessene Miethöhe bei Verwandtengeschäften</li>
+                        </ul>
+                        
+                        <div class="sample-structure">
+                            <strong>Prüfungsrelevant:</strong> 20-Jahres-Prognose bei Vermietung, Totalüberschussprognose
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sample-card">
+                    <div class="sample-question">FAQ Umsatzsteuer: "Steuerbare Leistung vs. steuerfreie Leistung"</div>
+                    <div class="sample-answer">
+                        <strong>Häufige Prüferfrage:</strong><br>
+                        "Grenzen Sie steuerbare, steuerpflichtige und steuerfreie Umsätze voneinander ab."<br><br>
+                        
+                        <strong>Systematische Antwort:</strong><br>
+                        <strong>1. Steuerbare Leistung (§ 1 UStG):</strong> Erfüllt alle Tatbestandsmerkmale<br>
+                        <strong>2. Steuerpflichtige Leistung:</strong> Steuerbar + nicht befreit<br>
+                        <strong>3. Steuerfreie Leistung (§ 4 UStG):</strong> Steuerbar aber befreit
+                        
+                        <div class="sample-structure">
+                            <strong>Merkhilfe:</strong> Erst prüfen ob steuerbar, dann ob befreit → Prüfungsschema beherrschen!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sample-card">
+                    <div class="sample-question">FAQ Bewertungsrecht: "Teilwert vs. gemeiner Wert"</div>
+                    <div class="sample-answer">
+                        <strong>Typische Nachfrage:</strong><br>
+                        "Was ist der Unterschied zwischen Teilwert und gemeinem Wert?"<br><br>
+                        
+                        <strong>Präzise Antwort:</strong><br>
+                        <strong>Teilwert (§ 6 Abs. 1 Nr. 1 S. 3 EStG):</strong> Betrag, den ein Erwerber des ganzen Betriebs für das einzelne Wirtschaftsgut ansetzen würde<br><br>
+                        <strong>Gemeiner Wert (§ 9 BewG):</strong> Preis, der im gewöhnlichen Geschäftsverkehr erzielt werden könnte
+                        
+                        <div style="background: rgba(255, 193, 7, 0.1); padding: 10px; border-radius: 8px; margin-top: 10px;">
+                            <strong>⚠️ Prüfungsfalle:</strong> Teilwert ist meist höher als gemeiner Wert, da Synergieeffekte berücksichtigt werden!
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #6facff, #aacfff); color: white; padding: 30px; border-radius: 15px; text-align: center; margin-top: 40px;">
+                    <h3 style="margin: 0 0 15px 0; font-size: 1.5rem;">Hunderte echte Prüfungsfragen!</h3>
+                    <p style="margin: 0 0 20px 0; opacity: 0.9;">Alle FAQ-Lehrbriefe basieren auf authentischen Prüfungsprotokollen aus ganz Deutschland und werden laufend aktualisiert.</p>
+                    <button onclick="window.open('https://wlw-steuern.de/product/lehrbriefe-faq-aktuelle-rechtsprechung-bmf-schreiben', '_blank'); closeFAQModal();" style="background: rgba(255, 255, 255, 0.2); border: 2px solid white; color: white; padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; font-size: 1rem;">Jetzt FAQ Lehrbriefe sichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer id="kontakt">
         <div class="container">
@@ -1719,6 +1992,52 @@
             });
         }
 
+        // Modal functions
+        function openVortragsthemenModal() {
+            const modal = document.getElementById('vortragsthemenModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeVortragsthemenModal() {
+            const modal = document.getElementById('vortragsthemenModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        function openFAQModal() {
+            const modal = document.getElementById('faqModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeFAQModal() {
+            const modal = document.getElementById('faqModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            const vortragsthemenModal = document.getElementById('vortragsthemenModal');
+            const faqModal = document.getElementById('faqModal');
+            
+            if (e.target === vortragsthemenModal) {
+                closeVortragsthemenModal();
+            }
+            if (e.target === faqModal) {
+                closeFAQModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeVortragsthemenModal();
+                closeFAQModal();
+            }
+        });
+
         // Start animations when page loads
         window.addEventListener('load', () => {
             animateSuccessRate();
@@ -1726,5 +2045,5 @@
             initScrollAnimations();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ff4bf7b11a9844',t:'MTc2MDY5ODg3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ff73f9235f141d',t:'MTc2MDcwMDUxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
