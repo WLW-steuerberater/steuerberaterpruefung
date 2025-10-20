@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vorbereitung Mündliche Steuerberaterprüfung | Kurse und Lernmaterialien | WLW </title>
+    <title>Vorbereitung mündliche Steuerberaterprüfung | Kurse & Lernmaterialien | WLW </title>
     <meta name="description" content="Bereite dich optimal auf die mündliche Steuerberaterprüfung vor! ✓ 96,1% Bestehensquote ✓ 25+ Jahre Erfahrung ✓ 200+ Vortragsthemen ✓ Persönliche Betreuung ✓ Deutschlandweit">
     <meta name="keywords" content="mündliche Steuerberaterprüfung, Steuerberater Vorbereitung, WLW Steuern, Vortragsthemen, Probeexamen, FAQ Lehrbriefe, Bamberg, München">
-    <meta name="author" content="WLW">
+    <meta name="author" content="WLW ">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -32,6 +32,19 @@
     <meta name="revisit-after" content="7 days">
     <link rel="canonical" href="https://wlw-steuern.de/">
     
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://www.dropbox.com/scl/fi/rsmbqo0ol1tn0i1d6uzyq/Design-ohne-Titel-20.png?rlkey=f4fvhnslb2lqx9peygrvy2wao&raw=1" as="image">
+    <link rel="preload" href="https://www.dropbox.com/scl/fi/gq8g6uulkafvfmnukh4wa/Foto-29.08.25-11-14-24.png?rlkey=3hybuwwrohnaa06vgn4de3g8u&raw=1" as="image">
+    
+    <!-- DNS prefetch for external domains -->
+    <link rel="dns-prefetch" href="//www.dropbox.com">
+    <link rel="dns-prefetch" href="//uc42686614c7a9859c4dee4e75cc.dl.dropboxusercontent.com">
+    <link rel="dns-prefetch" href="//wlw-steuern.de">
+    
+    <!-- Performance hints -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://www.dropbox.com/scl/fi/gq8g6uulkafvfmnukh4wa/Foto-29.08.25-11-14-24.png?rlkey=3hybuwwrohnaa06vgn4de3g8u&raw=1">
     <style>
@@ -47,6 +60,59 @@
 
         * {
             box-sizing: border-box;
+        }
+
+        /* Critical CSS - Above the fold */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 20px 0;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 120px 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            transition: all 0.8s ease-in-out;
+            opacity: 1;
+            height: 12rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Lazy load styles */
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .lazy-load.loaded {
+            opacity: 1;
         }
 
         .container {
@@ -735,7 +801,7 @@
 
     <header>
         <nav class="container">
-            <img src="https://www.dropbox.com/scl/fi/rsmbqo0ol1tn0i1d6uzyq/Design-ohne-Titel-20.png?rlkey=f4fvhnslb2lqx9peygrvy2wao&raw=1" alt="WLW Steuern Logo" style="height: 50px; width: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <img src="https://www.dropbox.com/scl/fi/rsmbqo0ol1tn0i1d6uzyq/Design-ohne-Titel-20.png?rlkey=f4fvhnslb2lqx9peygrvy2wao&raw=1" alt="WLW Steuern Logo" style="height: 50px; width: auto;" loading="eager" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <svg width="200" height="50" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
                 <rect x="10" y="10" width="30" height="30" rx="5" fill="#6facff"/>
                 <text x="50" y="32" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1d1d1f">WLW Steuern</text>
@@ -1011,50 +1077,50 @@
                 <div class="instructor-carousel-container fade-in-up" style="overflow: hidden; position: relative;">
                     <div class="instructor-carousel" style="display: flex; gap: 40px;">
                         <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
-                            <img src="https://uc42686614c7a9859c4dee4e75cc.dl.dropboxusercontent.com/cd/0/inline/CzlVKDUrSezPCR6R251wunGb_l-mWYL14BdIOWH6tb8iRe_UB-vrWd5_AnAjXDRFrcVB6LYwCUIj6Il750hX7wYbvwcAIAZELxfPNx-sxgmz-a3LlQcmI_ayC0GFUfk4GD4P_c7EB-fUFYOowRL18gKf/file#" alt="Dr. Klaus Dumser" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img data-src="https://uc42686614c7a9859c4dee4e75cc.dl.dropboxusercontent.com/cd/0/inline/CzlVKDUrSezPCR6R251wunGb_l-mWYL14BdIOWH6tb8iRe_UB-vrWd5_AnAjXDRFrcVB6LYwCUIj6Il750hX7wYbvwcAIAZELxfPNx-sxgmz-a3LlQcmI_ayC0GFUfk4GD4P_c7EB-fUFYOowRL18gKf/file#" alt="Dr. Klaus Dumser" class="lazy-load" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" loading="lazy" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="instructor-avatar" style="display: none;">👨‍💼</div>
                             <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Dr. Klaus Dumser</h3>
                             <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Steuerberater, Rechtsanwalt<br>Fachanwalt für Steuerrecht</p>
                         </div>
                         <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
-                            <img src="https://www.dropbox.com/scl/fi/ee84fsrjxaxamuaee5yak/Foto-30.11.24-14-19-59.jpg?rlkey=by1dyfylkvsg8lso2u1lsmbrx&raw=1" alt="Ronja Reinwald" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img data-src="https://www.dropbox.com/scl/fi/ee84fsrjxaxamuaee5yak/Foto-30.11.24-14-19-59.jpg?rlkey=by1dyfylkvsg8lso2u1lsmbrx&raw=1" alt="Ronja Reinwald" class="lazy-load" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" loading="lazy" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="instructor-avatar" style="display: none;">👩‍💼</div>
                             <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Ronja Reinwald</h3>
                             <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Steuerberaterin<br>Master of Arts</p>
                         </div>
                         <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
-                            <img src="https://www.dropbox.com/scl/fi/indi080sg1i8aymfxrbys/Krenzin.png?rlkey=8txkek6o2kj1zo2s24mk5a03y&raw=1" alt="Dr. Andreas Krenzin" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img data-src="https://www.dropbox.com/scl/fi/indi080sg1i8aymfxrbys/Krenzin.png?rlkey=8txkek6o2kj1zo2s24mk5a03y&raw=1" alt="Dr. Andreas Krenzin" class="lazy-load" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" loading="lazy" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="instructor-avatar" style="display: none;">👨‍🎓</div>
                             <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Dr. Andreas Krenzin</h3>
                             <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Steuerberater<br>Diplom Kaufmann</p>
                         </div>
                         <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
-                            <img src="https://www.dropbox.com/scl/fi/rr1cakchf96ch2ayc4e57/Foto-30.11.24-14-45-24.jpg?rlkey=bjqy5canh91olchmazk91kbaw&raw=1" alt="Maria Wirth" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img data-src="https://www.dropbox.com/scl/fi/rr1cakchf96ch2ayc4e57/Foto-30.11.24-14-45-24.jpg?rlkey=bjqy5canh91olchmazk91kbaw&raw=1" alt="Maria Wirth" class="lazy-load" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" loading="lazy" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="instructor-avatar" style="display: none;">👩‍💼</div>
                             <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Maria Wirth</h3>
                             <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Steuerberaterin<br>Dipl.-Finanzwirtin (FH)</p>
                         </div>
                         <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
-                            <img src="https://www.dropbox.com/scl/fi/9pkly17nf2h04jodd7e3j/Foto-30.11.24-15-17-26.jpg?rlkey=ymd1lmyz2hf3o8lb7b7ii6wun&raw=1" alt="Daniel Scherf" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img data-src="https://www.dropbox.com/scl/fi/9pkly17nf2h04jodd7e3j/Foto-30.11.24-15-17-26.jpg?rlkey=ymd1lmyz2hf3o8lb7b7ii6wun&raw=1" alt="Daniel Scherf" class="lazy-load" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" loading="lazy" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="instructor-avatar" style="display: none;">👨‍💼</div>
                             <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Daniel Scherf</h3>
                             <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Steuerberater<br>Dipl.-Finanzwirt (FH)</p>
                         </div>
                         <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
-                            <img src="https://www.dropbox.com/scl/fi/hp4gcnkxinqhd14tworyb/Foto-30.11.24-14-27-00.jpg?rlkey=ejr18ndjr9c707wa89mbg5xei&raw=1" alt="Baretti" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img data-src="https://www.dropbox.com/scl/fi/hp4gcnkxinqhd14tworyb/Foto-30.11.24-14-27-00.jpg?rlkey=ejr18ndjr9c707wa89mbg5xei&raw=1" alt="Baretti" class="lazy-load" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" loading="lazy" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="instructor-avatar" style="display: none;">👨‍💼</div>
                             <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Dr. Christian Baretti</h3>
                             <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Steuerberater<br>Diplom-Volkswirt</p>
                         </div>
                         <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
-                            <img src="https://www.dropbox.com/scl/fi/6pmgncb1w3ozow6bb6l8p/Foto-30.11.24-14-49-52.jpg?rlkey=ldbi2q9okyzrnuesoh6t7gjnk&raw=1" alt="Hans Priller" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img data-src="https://www.dropbox.com/scl/fi/6pmgncb1w3ozow6bb6l8p/Foto-30.11.24-14-49-52.jpg?rlkey=ldbi2q9okyzrnuesoh6t7gjnk&raw=1" alt="Hans Priller" class="lazy-load" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" loading="lazy" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="instructor-avatar" style="display: none;">👨‍💼</div>
                             <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Hans Priller</h3>
                             <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">exam. Steuerberater<br>Dipl.-Finanzwirt (FH)</p>
                         </div>
 
                         <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
-                            <img src="https://www.dropbox.com/scl/fi/wj1j994bpft25310463js/Foto-30.11.24-14-25-54.jpg?rlkey=45y0j06eaeu1f49422o54b1dq&raw=1" alt="Dr. Carsten Farr" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img data-src="https://www.dropbox.com/scl/fi/wj1j994bpft25310463js/Foto-30.11.24-14-25-54.jpg?rlkey=45y0j06eaeu1f49422o54b1dq&raw=1" alt="Dr. Carsten Farr" class="lazy-load" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" loading="lazy" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="instructor-avatar" style="display: none;">👨‍⚖️</div>
                             <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Dr. Carsten Farr</h3>
                             <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Volljurist</p>
@@ -1062,7 +1128,7 @@
                         
                         <!-- Duplicate for seamless loop -->
                         <div class="instructor-card" style="min-width: 300px; flex-shrink: 0;">
-                            <img src="https://uc42686614c7a9859c4dee4e75cc.dl.dropboxusercontent.com/cd/0/inline/CzlVKDUrSezPCR6R251wunGb_l-mWYL14BdIOWH6tb8iRe_UB-vrWd5_AnAjXDRFrcVB6LYwCUIj6Il750hX7wYbvwcAIAZELxfPNx-sxgmz-a3LlQcmI_ayC0GFUfk4GD4P_c7EB-fUFYOowRL18gKf/file#" alt="Dr. Klaus Dumser" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img data-src="https://uc42686614c7a9859c4dee4e75cc.dl.dropboxusercontent.com/cd/0/inline/CzlVKDUrSezPCR6R251wunGb_l-mWYL14BdIOWH6tb8iRe_UB-vrWd5_AnAjXDRFrcVB6LYwCUIj6Il750hX7wYbvwcAIAZELxfPNx-sxgmz-a3LlQcmI_ayC0GFUfk4GD4P_c7EB-fUFYOowRL18gKf/file#" alt="Dr. Klaus Dumser" class="lazy-load" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px; display: block;" loading="lazy" onerror="this.src=''; this.alt='Foto nicht verfügbar'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="instructor-avatar" style="display: none;">👨‍💼</div>
                             <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #1d1d1f;">Dr. Klaus Dumser</h3>
                             <p style="color: #6facff; font-weight: 600; margin-bottom: 15px;">Steuerberater, Rechtsanwalt<br>Fachanwalt für Steuerrecht</p>
@@ -1185,7 +1251,7 @@
 
                     <div class="testimonial-card fade-in-up stagger-animation">
                         <div class="testimonial-header">
-                            <img src="https://wlw-steuern.de/storage/review-photos/2H5LHus8DtP4Al6n2uZdkJEfFpVrHVo69OSrtGD9.png" alt="Yaoyao" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-right: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img data-src="https://wlw-steuern.de/storage/review-photos/2H5LHus8DtP4Al6n2uZdkJEfFpVrHVo69OSrtGD9.png" alt="Yaoyao" class="lazy-load" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-right: 20px;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="testimonial-avatar" style="display: none;">👩</div>
                             <div>
                                 <h4 style="margin: 0; color: #1d1d1f;">Yaoyao</h4>
@@ -1197,7 +1263,7 @@
                     </div>
                     <div class="testimonial-card fade-in-up stagger-animation">
                         <div class="testimonial-header">
-                            <img src="https://wlw-steuern.de/storage/review-photos/VhmgY3xl4DsYnUQRAWbYj96lALUcfZU3wmNXEKJn.jpg" alt="Kathrin Leistner" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-right: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img data-src="https://wlw-steuern.de/storage/review-photos/VhmgY3xl4DsYnUQRAWbYj96lALUcfZU3wmNXEKJn.jpg" alt="Kathrin Leistner" class="lazy-load" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-right: 20px;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="testimonial-avatar" style="display: none;">👩</div>
                             <div>
                                 <h4 style="margin: 0; color: #1d1d1f;">Kathrin Leistner</h4>
@@ -1209,7 +1275,7 @@
                     </div>
                     <div class="testimonial-card fade-in-up stagger-animation">
                         <div class="testimonial-header">
-                            <img src="https://wlw-steuern.de/storage/review-photos/N8To3xabRAslcOUEtj6yK6663BkcW3AJyUaLQfLS.jpg" alt="Florian Schubert" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-right: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img data-src="https://wlw-steuern.de/storage/review-photos/N8To3xabRAslcOUEtj6yK6663BkcW3AJyUaLQfLS.jpg" alt="Florian Schubert" class="lazy-load" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-right: 20px;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="testimonial-avatar" style="display: none;">👨</div>
                             <div>
                                 <h4 style="margin: 0; color: #1d1d1f;">Florian Schubert</h4>
@@ -1221,7 +1287,7 @@
                     </div>
                     <div class="testimonial-card fade-in-up stagger-animation">
                         <div class="testimonial-header">
-                            <img src="https://wlw-steuern.de/storage/review-photos/ePHarfsH7lTxDLt4ifrdHpAILmV53fMaXSZ0V2W2.jpg" alt="Stefanie Heinle" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-right: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img data-src="https://wlw-steuern.de/storage/review-photos/ePHarfsH7lTxDLt4ifrdHpAILmV53fMaXSZ0V2W2.jpg" alt="Stefanie Heinle" class="lazy-load" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-right: 20px;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="testimonial-avatar" style="display: none;">👩</div>
                             <div>
                                 <h4 style="margin: 0; color: #1d1d1f;">Stefanie Heinle</h4>
@@ -1322,8 +1388,7 @@
             });
         }
 
-        // Run animation on scroll and load
-        window.addEventListener('scroll', animateOnScroll);
+        // Run animation on load
         window.addEventListener('load', animateOnScroll);
 
         // Hero title rotation
@@ -1396,6 +1461,49 @@
                 mobileMenu.classList.remove('active');
             }
         });
+
+        // Lazy loading for images
+        function lazyLoadImages() {
+            const lazyImages = document.querySelectorAll('img[data-src]');
+            
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.add('loaded');
+                        img.removeAttribute('data-src');
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px'
+            });
+
+            lazyImages.forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Initialize lazy loading
+        document.addEventListener('DOMContentLoaded', lazyLoadImages);
+
+        // Performance optimization: Debounce scroll events
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Optimized scroll handler
+        const optimizedScrollHandler = debounce(animateOnScroll, 16);
+        window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9918aed8e0f91dc1',t:'MTc2MDk2NTA2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9918bc1e626d35e7',t:'MTc2MDk2NTYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
