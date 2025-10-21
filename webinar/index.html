@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="de" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kostenfreies Webinar: Mündliche Steuerberaterprüfung</title>
+    <link rel="icon" type="image/png" href="https://www.dropbox.com/scl/fi/024t4unrvt67ciavuc05c/Design-ohne-Titel-20-1.png?rlkey=39g3udc4vmumqzwhayu7p0azp&st=eetdt9us&raw=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .fade-in-delay {
+            animation-delay: 0.3s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .pulse-button {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+    </style>
+</head>
+<body class="h-full font-sans text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm fixed w-full top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="https://www.dropbox.com/scl/fi/024t4unrvt67ciavuc05c/Design-ohne-Titel-20-1.png?rlkey=39g3udc4vmumqzwhayu7p0azp&st=eetdt9us&raw=1" 
+                         alt="Marcus Wirth Logo" 
+                         class="h-10 md:h-12 w-auto"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="h-10 md:h-12 px-3 md:px-4 bg-gray-100 rounded flex items-center" style="display: none;">
+                        <span class="text-base md:text-lg font-semibold text-gray-700">Marcus Wirth</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-700 hover:text-blue-600 transition-colors">Über das Webinar</a>
+                    <a href="#expert" class="text-gray-700 hover:text-blue-600 transition-colors">Experte</a>
+                    <a href="#faq" class="text-gray-700 hover:text-blue-600 transition-colors">FAQ</a>
+                    <button onclick="scrollToRegistration()" class="gradient-bg text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition-opacity">
+                        Anmelden
+                    </button>
+                </div>
+                <button onclick="scrollToRegistration()" class="md:hidden gradient-bg text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity">
+                    Anmelden
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg min-h-full flex items-center justify-center px-4 py-12 pt-20 md:py-16 md:pt-24">
+        <div class="max-w-4xl mx-auto text-center text-white">
+            <div class="fade-in">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 md:mb-6 leading-tight">
+                    Mein Weg durch die<br>
+                    <span class="font-semibold">mündliche Steuerberaterprüfung</span>
+                </h1>
+                
+                <p class="text-lg sm:text-xl md:text-2xl font-light mb-6 md:mb-8 opacity-90">
+                    Erlebnisbericht | Fragestunde
+                </p>
+                
+                <div class="glass-effect rounded-2xl p-4 sm:p-6 md:p-8 mb-8 md:mb-10 inline-block w-full max-w-lg md:max-w-none">
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-sm sm:text-base md:text-lg">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="font-medium">12.11.2025</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="font-medium">18:30 Uhr</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                            </svg>
+                            <span class="font-medium">Online via Zoom</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fade-in fade-in-delay">
+                <button onclick="scrollToRegistration()" class="pulse-button bg-white text-blue-600 px-8 sm:px-10 md:px-12 py-3 md:py-4 rounded-full text-lg md:text-xl font-semibold hover:bg-gray-50 transition-all duration-300 shadow-lg w-full sm:w-auto">
+                    Jetzt kostenlos anmelden
+                </button>
+                
+                <p class="mt-4 text-base md:text-lg opacity-80">
+                    Komplett kostenfrei • Keine versteckten Kosten
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-12 md:py-20 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-light mb-4 md:mb-6">Was dich erwartet</h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Ein authentischer Erlebnisbericht aus erster Hand mit wertvollen Tipps für deine mündliche Prüfung
+                </p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <div class="card-hover bg-white rounded-2xl p-6 md:p-8 text-center shadow-sm">
+                    <div class="w-14 h-14 md:w-16 md:h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                        <svg class="w-7 h-7 md:w-8 md:h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-semibold mb-3 md:mb-4">Echte Erfahrungen</h3>
+                    <p class="text-gray-600 text-sm md:text-base">
+                        Authentische Einblicke in den Prüfungsablauf und die Herausforderungen der mündlichen Prüfung
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-white rounded-2xl p-6 md:p-8 text-center shadow-sm">
+                    <div class="w-14 h-14 md:w-16 md:h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                        <svg class="w-7 h-7 md:w-8 md:h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-semibold mb-3 md:mb-4">Interaktive Fragestunde</h3>
+                    <p class="text-gray-600 text-sm md:text-base">
+                        Stelle deine Fragen direkt an unseren Experten und erhalte persönliche Antworten
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-white rounded-2xl p-6 md:p-8 text-center shadow-sm sm:col-span-2 lg:col-span-1">
+                    <div class="w-14 h-14 md:w-16 md:h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                        <svg class="w-7 h-7 md:w-8 md:h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-semibold mb-3 md:mb-4">Experten-Wissen</h3>
+                    <p class="text-gray-600 text-sm md:text-base">
+                        Profitiere vom Fachwissen eines erfolgreichen Steuerberaters mit frischer Prüfungserfahrung
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expert Section -->
+    <section id="expert" class="py-12 md:py-20 px-4 bg-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-light mb-8 md:mb-12">Dein Webinar-Leiter</h2>
+            
+            <div class="bg-gray-50 rounded-3xl p-6 md:p-12">
+                <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mx-auto mb-6 md:mb-8 shadow-lg">
+                    <img src="https://www.dropbox.com/scl/fi/qt7bd0xzy8hg81ig2s6in/Foto-29.08.25-15-06-05.jpg?rlkey=1exgmnthbqj7brga2ionxxxaj&st=31zm12r8&raw=1" 
+                         alt="Marcus Wirth - USt-Experte und Steuerberater" 
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="w-24 h-24 md:w-32 md:h-32 gradient-bg rounded-full flex items-center justify-center" style="display: none;">
+                        <span class="text-2xl md:text-4xl font-bold text-white">MW</span>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl md:text-2xl font-semibold mb-2 md:mb-4">Marcus Wirth</h3>
+                <p class="text-base md:text-lg text-gray-600 mb-6">USt-Experte & Steuerberater</p>
+                
+                <div class="text-left max-w-2xl mx-auto space-y-3 md:space-y-4 text-gray-700">
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-sm md:text-base">Master of Science & Dipl.-Finanzwirt (FH)</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-sm md:text-base">Erfolgreich bestandene Steuerberaterprüfung im letzten Jahr</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-sm md:text-base">Spezialist für Umsatzsteuer</span>
+                    </div>
+                </div>
+                
+                <div class="mt-6 md:mt-8 p-4 md:p-6 bg-blue-50 rounded-2xl">
+                    <p class="text-gray-700 italic text-sm md:text-base">
+                        "Ich weiß genau, wie du dich momentan fühlst. Die Nervosität vor der mündlichen Prüfung kenne ich nur zu gut. 
+                        Lass mich dir zeigen, wie ich es geschafft habe und was wirklich wichtig ist."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-12 md:py-20 px-4 bg-gray-50">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-light text-center mb-12 md:mb-16">Häufige Fragen</h2>
+            
+            <div class="space-y-4 md:space-y-6">
+                <div class="faq-item bg-white rounded-2xl p-6 md:p-8 shadow-sm cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg md:text-xl font-semibold pr-4">Wo findet das Webinar statt?</h3>
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-gray-400 transform transition-transform faq-icon flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-600 hidden">
+                        <p class="text-sm md:text-base">Das Webinar findet online über Zoom statt. Du erhältst den Zugangslink frühzeitig per E-Mail zugeschickt, sodass du dich rechtzeitig einwählen kannst.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-2xl p-6 md:p-8 shadow-sm cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg md:text-xl font-semibold pr-4">Ist das Webinar wirklich kostenlos?</h3>
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-gray-400 transform transition-transform faq-icon flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-600 hidden">
+                        <p class="text-sm md:text-base">Ja, das Webinar ist komplett kostenlos! Es gibt keine versteckten Kosten oder Gebühren. Wir möchten, dass du perfekt auf die mündliche Prüfung vorbereitet bist und teilen unser Wissen gerne mit dir.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-2xl p-6 md:p-8 shadow-sm cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg md:text-xl font-semibold pr-4">Wer hält das Webinar?</h3>
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-gray-400 transform transition-transform faq-icon flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer mt-4 text-gray-600 hidden">
+                        <p class="text-sm md:text-base">Das Webinar hält unser USt-Experte Marcus Wirth. Er ist Master of Science, Dipl.-Finanzwirt (FH) und hat im letzten Jahr die Steuerberaterprüfung erfolgreich abgelegt. Er weiß genau, wie du dich momentan fühlst und kann dir wertvolle Tipps aus erster Hand geben.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registration" class="gradient-bg py-12 md:py-20 px-4">
+        <div class="max-w-2xl mx-auto text-center text-white">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-light mb-6 md:mb-8">Sichere dir jetzt deinen Platz</h2>
+            <p class="text-lg md:text-xl mb-8 md:mb-12 opacity-90">
+                Melde dich kostenlos an und erhalte wertvolle Einblicke für deine mündliche Steuerberaterprüfung
+            </p>
+            
+            <form class="glass-effect rounded-2xl p-6 md:p-8 text-left" action="https://formspree.io/f/xjkadaab" method="POST" onsubmit="handleRegistration(event)">
+                <div class="space-y-6">
+                    <div>
+                        <label for="email" class="block text-sm font-medium mb-2">E-Mail-Adresse</label>
+                        <input type="email" id="email" name="email" required 
+                               class="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 text-base">
+                    </div>
+                    
+
+                    
+                    <button type="submit" 
+                            class="w-full bg-white text-blue-600 py-4 rounded-xl text-lg font-semibold hover:bg-gray-50 transition-all duration-300 shadow-lg">
+                        Jetzt kostenlos anmelden
+                    </button>
+                </div>
+                
+                <p class="text-xs md:text-sm opacity-80 mt-6 text-center">
+                    Deine Daten werden vertraulich behandelt und nicht an Dritte weitergegeben.
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-white rounded-2xl p-6 md:p-8 max-w-md w-full text-center">
+            <div class="w-14 h-14 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                <svg class="w-7 h-7 md:w-8 md:h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl md:text-2xl font-semibold mb-4">Anmeldung erfolgreich!</h3>
+            <p class="text-gray-600 mb-6 text-sm md:text-base">
+                Vielen Dank für deine Anmeldung. Du erhältst von uns vor dem Webinar eine E-Mail mit dem Zoom-Link. Bis dann!
+            </p>
+            <button onclick="closeSuccessMessage()" 
+                    class="gradient-bg text-white px-6 md:px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity w-full sm:w-auto">
+                Verstanden
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function scrollToRegistration() {
+            document.getElementById('registration').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        function toggleFaq(element) {
+            const answer = element.querySelector('.faq-answer');
+            const icon = element.querySelector('.faq-icon');
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+        
+        function handleRegistration(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Submit to Formspree
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Show success message
+                    document.getElementById('successMessage').classList.remove('hidden');
+                    // Reset form
+                    form.reset();
+                } else {
+                    // Handle error
+                    response.json().then(data => {
+                        if (Object.hasOwnProperty.call(data, 'errors')) {
+                            alert('Es gab ein Problem bei der Anmeldung. Bitte versuche es erneut.');
+                        } else {
+                            // Show success message anyway (Formspree sometimes returns non-200 on success)
+                            document.getElementById('successMessage').classList.remove('hidden');
+                            form.reset();
+                        }
+                    });
+                }
+            }).catch(error => {
+                alert('Es gab ein Problem bei der Anmeldung. Bitte versuche es erneut.');
+            });
+        }
+        
+        function closeSuccessMessage() {
+            document.getElementById('successMessage').classList.add('hidden');
+        }
+        
+        // Close success message when clicking outside
+        document.getElementById('successMessage').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeSuccessMessage();
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 md:py-12 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="mb-6 md:mb-8">
+                <h3 class="text-xl md:text-2xl font-light mb-2 md:mb-4">WLW</h3>
+                <p class="text-gray-300 text-sm md:text-base">Erfolgreiche Steuerberater-Vorbereitung seit 1997</p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 md:gap-8 mb-6 md:mb-8">
+                <a href="https://wlw-steuern.de/impressum" target="_blank" rel="noopener noreferrer"
+                   class="text-gray-300 hover:text-white transition-colors duration-300 underline text-sm md:text-base">
+                    Impressum
+                </a>
+                <a href="https://wlw-steuern.de/datenschutz" target="_blank" rel="noopener noreferrer"
+                   class="text-gray-300 hover:text-white transition-colors duration-300 underline text-sm md:text-base">
+                    Datenschutz
+                </a>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-6 md:pt-8">
+                <p class="text-gray-400 text-xs md:text-sm">
+                    © 2025 WLW. Alle Rechte vorbehalten.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script>
+        function scrollToRegistration() {
+            document.getElementById('registration').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        function toggleFaq(element) {
+            const answer = element.querySelector('.faq-answer');
+            const icon = element.querySelector('.faq-icon');
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+        
+        function handleRegistration(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Submit to Formspree
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Show success message
+                    document.getElementById('successMessage').classList.remove('hidden');
+                    // Reset form
+                    form.reset();
+                } else {
+                    // Handle error
+                    response.json().then(data => {
+                        if (Object.hasOwnProperty.call(data, 'errors')) {
+                            alert('Es gab ein Problem bei der Anmeldung. Bitte versuche es erneut.');
+                        } else {
+                            // Show success message anyway (Formspree sometimes returns non-200 on success)
+                            document.getElementById('successMessage').classList.remove('hidden');
+                            form.reset();
+                        }
+                    });
+                }
+            }).catch(error => {
+                alert('Es gab ein Problem bei der Anmeldung. Bitte versuche es erneut.');
+            });
+        }
+        
+        function closeSuccessMessage() {
+            document.getElementById('successMessage').classList.add('hidden');
+        }
+        
+
+        
+        // Close success message when clicking outside
+        document.getElementById('successMessage').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeSuccessMessage();
+            }
+        });
+        
+
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99204e14160735e7',t:'MTc2MTA0NDk5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
