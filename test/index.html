@@ -795,6 +795,11 @@ specific: {
                 }
             });
         }
+// Sicherer Phasenwechsel ohne Header
+function setPhase(text) {
+    const el = document.getElementById('phaseIndicator');
+    if (el) el.textContent = text;
+}
 
         let selectedTopicText = '';
 
@@ -1784,7 +1789,7 @@ specific: {
             // Hide exam phase, show solution phase
             document.getElementById('examPhase').classList.add('hidden');
             document.getElementById('solutionPhase').classList.remove('hidden');
-            document.getElementById('phaseIndicator').textContent = 'Lösung';
+            setPhase('Lösung');
             
             // Update solution examiner info
             const solutionAvatarElement = document.getElementById('solutionExaminerAvatar');
@@ -1902,7 +1907,7 @@ specific: {
             // Hide solution phase, show exam phase
             document.getElementById('solutionPhase').classList.add('hidden');
             document.getElementById('examPhase').classList.remove('hidden');
-            document.getElementById('phaseIndicator').textContent = 'Prüfungsgespräch';
+            setPhase('Prüfungsgespräch');
             
             console.log('Zeige neue Frage an');
             displayCurrentQuestion();
@@ -1912,8 +1917,7 @@ specific: {
             // Hide solution phase, show exam phase
             document.getElementById('solutionPhase').classList.add('hidden');
             document.getElementById('examPhase').classList.remove('hidden');
-            document.getElementById('phaseIndicator').textContent = 'Prüfungsgespräch';
-        }
+            setPhase('Prüfungsgespräch');        }
 
         function showResults() {
             // Stop all audio
@@ -1958,7 +1962,7 @@ specific: {
             document.getElementById('resultsPhase').classList.add('hidden');
             
             // Reset phase indicator
-            document.getElementById('phaseIndicator').textContent = 'Vorbereitung';
+            setPhase('Vorbereitung');
         }
 
         function clearResponse() {
