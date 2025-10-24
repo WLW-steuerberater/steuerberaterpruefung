@@ -248,7 +248,7 @@
                 <div class="question-bubble rounded-lg p-6 mb-6" id="presentationQuestionContainer">
                     <div class="mb-3">
                         <p class="text-lg text-gray-800" id="presentationQuestion">
-                            Bitte stellen Sie sich zunächst vor und beginnen Sie mit Ihrem Vortrag. Nennen Sie am Anfang das Thema, für das Sie sich entschieden haben. Sie können Ihren Vortrag unten eingeben. Nutzen Sie gerne die Diktierfunktion Ihres Handys, damit Sie das Sprechen üben. Anschließend senden Sie Ihren Vortrag ab. Unsere künstliche Intelligenz bewertet ihn und gibt Ihnen Tipps. Unten können Sie einen Timer nutzen, die Musterlösung aufrufen oder mit den Prüfungsrunden starten.
+                            Ich begrüße Sie ganz herzlich zur Simulation Ihrer mündlichen Steuerberaterprüfung. Mein Name ist Dr. Dumser und ich bin heute Ihr Prüfungsvorsitzender. Mit dieser kostenlosen Simulation haben Sie die Möglichkeit, sich realitätsnah auf den Ernstfall vorzubereiten. Die Prüfung besteht aus einem mündlichen Vortrag und einem Prüfungsgespräch, in dem die jeweiligen Prüfer Ihnen Fragen aus ihrem Fachbereich stellen werden. Sie erhalten zunächst drei Vortragsthemen, aus denen Sie eins für Ihren Vortrag wählen. Danach haben Sie dreißig Minuten Zeit, sich auf den Vortrag vorzubereiten. Unten sehen Sie die heutige Prüfungskommission. Ich wünsche Ihnen viel Erfolg! 
                         </p>
                     </div>
                     
@@ -843,22 +843,26 @@ function setPhase(text) {
                 rounds: [
                     [
                         {
-                            question: "Welche umsatzsteuerlichen Aspekte sind bei der Digitalisierung zu beachten?",
+                            question: " Können Sie mir zunächst sagen, wo das Berufsrecht der Steuerberater geregelt ist? Also – in welchen Gesetzen oder Verordnungen finden wir die wesentlichen Vorschriften?",
                             audio: "https://www.dropbox.com/scl/fi/mwbxn2li96043tzfpjp02/K.c.1.mp3?rlkey=ncje8ud4u29hzp4s9p6q8u589&st=a7pdl6sb&raw=1",
-                            solution: "**Umsatzsteuerliche Aspekte der Digitalisierung:**\n• **Ort der Leistung:** Bei digitalen Dienstleistungen gelten besondere Regeln\n• **One-Stop-Shop:** Vereinfachtes Verfahren für EU-weite digitale Services\n• **Reverse-Charge:** Verlagerung der Steuerschuld bei B2B-Geschäften\n• **Kleinunternehmerregelung:** Grenzen bei grenzüberschreitenden digitalen Leistungen\n• **Rechnungsstellung:** Elektronische Rechnungen und deren Anforderungen\n• **Vorsteuerabzug:** Besonderheiten bei digitalen Betriebsausgaben"
+                            solution: “ <strong>Gesetzliche Grundlagen der Steuerberatung:</strong><br>
+• <strong>Im Steuerberatungsgesetz</strong> sowie<br>
+• <strong>in der Durchführungsverordnung zum Steuerberatungsgesetz:</strong> Diese ist formal kein Gesetz, sondern eine Rechtsverordnung.<br>
+• <strong>Daneben in der Berufsordnung der Bundessteuerberaterkammer,</strong> die ebenfalls kein Gesetz darstellt.<br>
+• <strong>Des Weiteren in der Steuerberatervergütungsverordnung,</strong> die formal kein Gesetz, sondern eine Rechtsverordnung ist."
                         },
                         {
-                            question: "Wie wirkt sich die Digitalisierung auf die Umsatzsteuerpraxis aus?",
+                            question: " Was braucht man denn alles, um zur Steuerberaterin bzw. zum Steuerberater bestellt zu werden? Welche Voraussetzungen müssen dafür erfüllt sein?",
                             audio: "https://www.dropbox.com/scl/fi/hhecquyxqqmq4bhcgpseq/K.c.2.mp3?rlkey=syqdw36i9n1eo5s96786llgn2&st=0o7djh9f&raw=1",
                             solution: "**Auswirkungen auf die Umsatzsteuerpraxis:**\n• **Automatisierte Meldungen:** ELSTER und digitale Voranmeldungen\n• **Echtzeitüberwachung:** Kassensysteme mit TSE-Pflicht\n• **Datenanalyse:** Finanzverwaltung nutzt Big Data für Prüfungen\n• **Compliance:** Höhere Anforderungen an Dokumentation und Nachweise\n• **Internationale Verflechtung:** Komplexere grenzüberschreitende Sachverhalte\n• **Beratungsbedarf:** Steigende Nachfrage nach spezialisierter Beratung"
                         },
                         {
-                            question: "Welche Herausforderungen entstehen durch digitale Geschäftsmodelle für die Umsatzsteuer?",
+                            question: " Dann noch eine Frage zu den amtlichen Fachberatertiteln: Welche Fachberatertitel gibt es derzeit, die von der Steuerberaterkammer offiziell verliehen werden können?",
                             audio: "https://www.dropbox.com/scl/fi/tgytqdhuhxsrvk439gxlw/K.c.3.mp3?rlkey=0jaz9p0dq1667rzxa9r9gm9kc&st=z1pcwcm5&raw=1",
                             solution: "**Herausforderungen digitaler Geschäftsmodelle:**\n• **Plattformökonomie:** Abgrenzung zwischen Vermittlung und eigener Leistung\n• **Sharing Economy:** Umsatzsteuerpflicht bei privaten Anbietern\n• **Kryptowährungen:** Steuerliche Behandlung von Bitcoin & Co.\n• **NFTs und digitale Güter:** Neue Leistungsarten und deren Einordnung\n• **Subscription-Modelle:** Dauerleistungen und deren steuerliche Erfassung\n• **Cloud-Services:** Abgrenzung zwischen Dienstleistung und Lieferung"
                         },
                         {
-                            question: "Wie ist der grenzüberschreitende digitale Handel umsatzsteuerlich zu behandeln?",
+                            question: " Und darf man den Titel „Fachberater für Unternehmensnachfolge“ eigentlich zusammen mit dem Steuerberatertitel führen, oder gibt es da Beschränkungen?",
                             audio: "https://www.dropbox.com/scl/fi/k2t6wo1jqsa4dus9hilgs/K.c.4.mp3?rlkey=vmjhg5fymoa2lxc46ney7arns&st=u482py5b&raw=1",
                             solution: "**Grenzüberschreitender digitaler Handel:**\n• **B2C-Geschäfte:** Besteuerung am Ort des Verbrauchers\n• **B2B-Geschäfte:** Reverse-Charge-Verfahren bei Unternehmern\n• **OSS-Verfahren:** One-Stop-Shop für EU-weite Abwicklung\n• **Drittlandgeschäfte:** Besondere Regeln für Nicht-EU-Länder\n• **Schwellenwerte:** 10.000 Euro Grenze für Fernverkäufe\n• **Registrierungspflichten:** Notwendige Anmeldungen in anderen EU-Staaten"
                         }
