@@ -81,7 +81,7 @@
         <!-- Welcome Screen -->
         <div id="welcomeScreen" class="text-center">
             <div class="bg-white rounded-2xl shadow-lg p-8 max-w-2xl mx-auto">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Willkommen zur Prüfungssimulation</h2>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Willkommen zur Prüfungssimulation 1</h2>
                 <!-- Prüfungskommission Vorschau -->
                 <div class="mb-6">
                     <!-- Vorsitzender -->
@@ -96,7 +96,7 @@
                         <!-- Welcome Audio direkt unter Dr. Dumser -->
                         <div class="mt-4">
                             <audio id="welcomeAudio" controls class="w-full" preload="metadata" autoplay>
-                                <source src="https://www.dropbox.com/scl/fi/52pjsifgkctj06swnal6x/Begr-ung.mp3?rlkey=zfgyvnjgbtz7ca95ytubeqecg&raw=1" type="audio/mpeg">
+                                <source src="https://www.dropbox.com/scl/fi/96bz0m47ena4y1teeb8bj/Begr-ung.mp3?rlkey=a5qrkbc8wi7572gjinsxn7dnl&st=1w64td4v&raw=1" type="audio/mpeg">
                                 Ihr Browser unterstützt das Audio-Element nicht.
                             </audio>
                         </div>
@@ -255,7 +255,7 @@
                     <!-- Audio Player for Dr. Dumser -->
                     <div id="presentationAudioPlayer" class="mt-4">
                         <audio id="presentationAudio" controls class="w-full" preload="metadata">
-                            <source src="https://www.dropbox.com/scl/fi/17dsenftulom7wmb11f7u/Einf-hrung-Vortrag.mp3?rlkey=lnabiucnep3k0mhao2gsrlh1h&raw=1" type="audio/mpeg">
+                            <source src="https://www.dropbox.com/scl/fi/xrkxtywr0p376riknh47b/Vortrag.mp3?rlkey=nke47ekt6d8v7vj7tyhdaox3y&st=lyfjd7f3&raw=1" type="audio/mpeg">
                             Ihr Browser unterstützt das Audio-Element nicht.
                         </audio>
                     </div>
@@ -328,14 +328,14 @@
                 <div class="question-bubble rounded-lg p-6 mb-6">
                     <div class="mb-3">
                         <p class="text-lg text-gray-800">
-                            Vielen Dank für Ihren Vortrag. Wir starten nun mit dem Prüfungsgespräch. Die Prüfer werden Ihnen in ihren jeweiligen Fachgebieten Fragen stellen. Bitte beantworten Sie diese. Den Anfang macht Dr. Baretti in VWL, BWL und Berufsrecht.
+                            Vielen Dank für Ihren Vortrag. Wir starten nun mit dem Prüfungsgespräch. Die Prüfer werden Ihnen in ihren jeweiligen Fachgebieten Fragen stellen. Bitte beantworten Sie diese. Den Anfang macht Frau Reinwald in Einkommensteuer.
                         </p>
                     </div>
                     
                     <!-- Audio Player for Transition -->
                     <div class="mt-4">
                         <audio id="transitionAudio" controls class="w-full" preload="metadata">
-                            <source src="https://www.dropbox.com/scl/fi/1v91xizqohktygfw0s2x1/Anfang-Fragerunden.mp3?rlkey=8ek15jo8x2ww8wpj95ii04mgb&raw=1" type="audio/mpeg">
+                            <source src="https://www.dropbox.com/scl/fi/n9sr1838ofcgy423mucns/Fragerunde.mp3?rlkey=mdcqz50ab825yor017u6mew9m&st=0nwgatl5&raw=1" type="audio/mpeg">
                             Ihr Browser unterstützt das Audio-Element nicht.
                         </audio>
                     </div>
@@ -806,10 +806,10 @@ function setPhase(text) {
         // Exam data with solutions
         const examinerData = [
             {
-                name: "Dr. Baretti",
-                field: "VWL, BWL, Berufsrecht", 
-                avatar: "DB",
-                image: "https://s1.directupload.eu/images/250829/zzdffhky.jpg",
+                name: "Reinwald",
+                field: " ESt, IStR, KöSt, GewSt", 
+                avatar: "R",
+                image: " https://s1.directupload.eu/images/250926/iyqmubkd.jpg ",
                 rounds: [
                     [
                         {
@@ -832,455 +832,34 @@ function setPhase(text) {
                             audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
                             solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
                         }
-                    ],
-                    [
-                        {
-                            question: "Runde 2",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: " Lösung Test 2"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 3",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 4",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],                    [
-                        {
-                            question: "Runde 5",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 6",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 7",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 8",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 9",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 10",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 11",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 12",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 13",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 14",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 15",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 16",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 17",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 18",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 19",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-                    [
-                        {
-                            question: "Runde 20",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
-                        },
-                        {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
-                        },
-                        {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
-                        },
-                        {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
-                        }
-                    ],
-
-
-
-
-                ]
+                    ]
+              ]
             },
             {
-                name: "Scherf",
-                field: "Umsatzsteuer",
-                avatar: "S",
-                image: "https://s1.directupload.eu/images/250829/8q6up3ep.jpg",
+                name: "Dr. Baretti",
+                field: " Berufsrecht, VWL, BWL",
+                avatar: "B",
+                image: "https://s1.directupload.eu/images/250829/zzdffhky.jpg",
                 rounds: [
                     [
                         {
                             question: "Welche umsatzsteuerlichen Aspekte sind bei der Digitalisierung zu beachten?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
+                            audio: "https://www.dropbox.com/scl/fi/mwbxn2li96043tzfpjp02/K.c.1.mp3?rlkey=ncje8ud4u29hzp4s9p6q8u589&st=a7pdl6sb&raw=1",
                             solution: "**Umsatzsteuerliche Aspekte der Digitalisierung:**\n• **Ort der Leistung:** Bei digitalen Dienstleistungen gelten besondere Regeln\n• **One-Stop-Shop:** Vereinfachtes Verfahren für EU-weite digitale Services\n• **Reverse-Charge:** Verlagerung der Steuerschuld bei B2B-Geschäften\n• **Kleinunternehmerregelung:** Grenzen bei grenzüberschreitenden digitalen Leistungen\n• **Rechnungsstellung:** Elektronische Rechnungen und deren Anforderungen\n• **Vorsteuerabzug:** Besonderheiten bei digitalen Betriebsausgaben"
                         },
                         {
                             question: "Wie wirkt sich die Digitalisierung auf die Umsatzsteuerpraxis aus?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
+                            audio: "https://www.dropbox.com/scl/fi/hhecquyxqqmq4bhcgpseq/K.c.2.mp3?rlkey=syqdw36i9n1eo5s96786llgn2&st=0o7djh9f&raw=1",
                             solution: "**Auswirkungen auf die Umsatzsteuerpraxis:**\n• **Automatisierte Meldungen:** ELSTER und digitale Voranmeldungen\n• **Echtzeitüberwachung:** Kassensysteme mit TSE-Pflicht\n• **Datenanalyse:** Finanzverwaltung nutzt Big Data für Prüfungen\n• **Compliance:** Höhere Anforderungen an Dokumentation und Nachweise\n• **Internationale Verflechtung:** Komplexere grenzüberschreitende Sachverhalte\n• **Beratungsbedarf:** Steigende Nachfrage nach spezialisierter Beratung"
                         },
                         {
                             question: "Welche Herausforderungen entstehen durch digitale Geschäftsmodelle für die Umsatzsteuer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
+                            audio: "https://www.dropbox.com/scl/fi/tgytqdhuhxsrvk439gxlw/K.c.3.mp3?rlkey=0jaz9p0dq1667rzxa9r9gm9kc&st=z1pcwcm5&raw=1",
                             solution: "**Herausforderungen digitaler Geschäftsmodelle:**\n• **Plattformökonomie:** Abgrenzung zwischen Vermittlung und eigener Leistung\n• **Sharing Economy:** Umsatzsteuerpflicht bei privaten Anbietern\n• **Kryptowährungen:** Steuerliche Behandlung von Bitcoin & Co.\n• **NFTs und digitale Güter:** Neue Leistungsarten und deren Einordnung\n• **Subscription-Modelle:** Dauerleistungen und deren steuerliche Erfassung\n• **Cloud-Services:** Abgrenzung zwischen Dienstleistung und Lieferung"
                         },
                         {
                             question: "Wie ist der grenzüberschreitende digitale Handel umsatzsteuerlich zu behandeln?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
+                            audio: "https://www.dropbox.com/scl/fi/k2t6wo1jqsa4dus9hilgs/K.c.4.mp3?rlkey=vmjhg5fymoa2lxc46ney7arns&st=u482py5b&raw=1",
                             solution: "**Grenzüberschreitender digitaler Handel:**\n• **B2C-Geschäfte:** Besteuerung am Ort des Verbrauchers\n• **B2B-Geschäfte:** Reverse-Charge-Verfahren bei Unternehmern\n• **OSS-Verfahren:** One-Stop-Shop für EU-weite Abwicklung\n• **Drittlandgeschäfte:** Besondere Regeln für Nicht-EU-Länder\n• **Schwellenwerte:** 10.000 Euro Grenze für Fernverkäufe\n• **Registrierungspflichten:** Notwendige Anmeldungen in anderen EU-Staaten"
                         }
                     ]
@@ -2094,3 +1673,4 @@ function setPhase(text) {
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98553e7ab01d1dbb',t:'MTc1ODkxNTc0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
