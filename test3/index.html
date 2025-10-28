@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mündliche Prüfungssimulation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://studio.pickaxe.co/api/embed/bundle.js" defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { 
+            font-family: 'Inter', sans-serif; 
+            box-sizing: border-box;
+        }
+        /* Blocksatz + Silbentrennung für Musterlösungen */
+.musterloesung p,
+.musterloesung li,
+#solutionModelAnswer p,
+#solutionModelAnswer li {
+  text-align: justify;
+  text-justify: inter-word;   /* bessere Wortabstände */
+  hyphens: auto;              /* Silbentrennung (lang="de" ist schon gesetzt) */
+}
+
+/* optional: letzte Zeile nicht „gezogen“ lassen */
+.musterloesung p,
+#solutionModelAnswer p {
+  text-align-last: left;
+}
+
+        .examiner-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, #6facff, #aacfff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            margin: 0 auto 12px;
+        }
+        
+        .timer-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(#ef4444 0deg, #f3f4f6 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .timer-inner {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .question-bubble {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-left: 4px solid #6facff;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .phase-indicator {
+            background: linear-gradient(180deg, #6facff, #aacfff);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="min-h-screen" style="background: linear-gradient(180deg, #6facff, #aacfff);">
+    
+
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto px-6 py-8">
+        
+        <!-- Welcome Screen -->
+        <div id="welcomeScreen" class="text-center">
+            <div class="bg-white rounded-2xl shadow-lg p-8 max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Willkommen zur Prüfungssimulation 1</h2>
+                <!-- Prüfungskommission Vorschau -->
+                <div class="mb-6">
+                    <!-- Vorsitzender -->
+                    <div class="text-center mb-4">
+                        <div class="w-24 h-24 mx-auto mb-2 rounded-full overflow-hidden">
+                            <img src="https://s1.directupload.eu/images/250829/f5677mip.jpg" alt="Dr. Dumser" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="w-full h-full flex items-center justify-center text-white text-2xl font-bold" style="background: linear-gradient(180deg, #6facff, #aacfff); display: none;">DD</div>
+                        </div>
+                        <h4 class="font-semibold text-gray-800">Dr. Dumser</h4>
+                        <p class="text-sm text-gray-600">Prüfungsvorsitzender</p>
+                        
+                        <!-- Welcome Audio direkt unter Dr. Dumser -->
+                        <div class="mt-4">
+                            <audio id="welcomeAudio" controls class="w-full" preload="metadata" autoplay>
+                                <source src="https://www.dropbox.com/scl/fi/vsm0a689s3njcc906jpt8/Begr-ung.mp3?rlkey=gcvs86w1n8jwnvt2kzj9jnxj7&st=2vjbux4a&raw=1" type="audio/mpeg">
+                                Ihr Browser unterstützt das Audio-Element nicht.
+                            </audio>
+                        </div>
+                    </div>
+                    
+                    <!-- Weitere Prüfer -->
+                    <div class="grid grid-cols-5 gap-3 max-w-lg mx-auto">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-1 rounded-full overflow-hidden">
+                                <img src="https://s1.directupload.eu/images/250926/iyqmubkd.jpg" alt="Reinwald" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="w-full h-full flex items-center justify-center text-white text-sm font-bold" style="background: linear-gradient(180deg, #6facff, #aacfff); display: none;">DB</div>
+                            </div>
+                            <p class="text-xs text-gray-700 font-medium">Reinwald</p>
+                            <p class="text-xs text-gray-500"> ESt, IStR, KöSt, GewSt</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-1 rounded-full overflow-hidden">
+                                <img src="https://s1.directupload.eu/images/250829/zzdffhky.jpg" alt="Dr. Baretti" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="w-full h-full flex items-center justify-center text-white text-sm font-bold" style="background: linear-gradient(180deg, #6facff, #aacfff); display: none;">S</div>
+                            </div>
+                            <p class="text-xs text-gray-700 font-medium">Dr. Baretti</p>
+                            <p class="text-xs text-gray-500"> Berufsrecht, VWL, BWL</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-1 rounded-full overflow-hidden">
+                                <img src="https://s1.directupload.eu/images/250829/qoko6duz.jpg" alt="Wirth" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="w-full h-full flex items-center justify-center text-white text-sm font-bold" style="background: linear-gradient(180deg, #6facff, #aacfff); display: none;">W</div>
+                            </div>
+                            <p class="text-xs text-gray-700 font-medium">Wirth</p>
+                            <p class="text-xs text-gray-500">AO, FGO, ErbSt</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-1 rounded-full overflow-hidden">
+                                <img src="https://s1.directupload.eu/images/250829/8q6up3ep.jpg" alt="Scherf" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="w-full h-full flex items-center justify-center text-white text-sm font-bold" style="background: linear-gradient(180deg, #6facff, #aacfff); display: none;">P</div>
+                            </div>
+                            <p class="text-xs text-gray-700 font-medium">Scherf</p>
+                            <p class="text-xs text-gray-500">USt</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-1 rounded-full overflow-hidden">
+                                <img src="https://s1.directupload.eu/images/250926/mw5zoero.jpg" alt="Priller" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="w-full h-full flex items-center justify-center text-white text-sm font-bold" style="background: linear-gradient(180deg, #6facff, #aacfff); display: none;">R</div>
+                            </div>
+                            <p class="text-xs text-gray-700 font-medium">Priller</p>
+                            <p class="text-xs text-gray-500"> BilSt, UmwSt</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ablauf der Prüfung -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Ablauf der Prüfung</h3>
+                    <div class="text-left max-w-md mx-auto space-y-2">
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">1</span>
+                            <span class="text-gray-700">Thema auswählen & 30 Min. vorbereiten</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">2</span>
+                            <span class="text-gray-700">Vortrag halten & direktes Feedback erhalten</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">3</span>
+                            <span class="text-gray-700">Vertiefende Fragen der Prüfungskommission</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="startExam()" class="text-white px-8 py-3 rounded-lg font-semibold transition-colors" style="background: linear-gradient(180deg, #6facff, #aacfff); box-shadow: 0 4px 6px rgba(111, 172, 255, 0.3);" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'">
+                    Prüfung starten
+                </button>
+            </div>
+        </div>
+
+        <!-- Preparation Phase -->
+        <div id="preparationPhase" class="hidden">
+            <!-- Restart Button in Preparation Phase -->
+            <div class="mb-6 text-right">
+                <button onclick="restartExam()" class="text-gray-700 px-4 py-2 rounded-lg font-medium transition-all shadow-md bg-white border border-gray-300 hover:bg-gray-50" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'">
+                    Simulation neu starten
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Timer -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 text-center sticky top-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Vorbereitungszeit</h3>
+                        <div class="timer-circle mx-auto mb-4" id="timerCircle">
+                            <div class="timer-inner" id="timerDisplay">30:00</div>
+                        </div>
+                        <p class="text-sm text-gray-600">Nutze die Zeit, um deinen Vortrag zu strukturieren</p>
+                    </div>
+                </div>
+
+                <!-- Topic Selection -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Wähle dein Vortragsthema</h3>
+                        <div class="space-y-3" id="topicOptions">
+                            <!-- Topics will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Gewähltes Thema</h3>
+                        <div class="rounded-lg p-4" style="background: linear-gradient(180deg, rgba(111, 172, 255, 0.1), rgba(170, 207, 255, 0.1)); border: 1px solid rgba(111, 172, 255, 0.3);">
+                            <p class="text-lg font-medium" style="color: #4a7bb8;" id="selectedTopic">
+                                Bitte wähle zunächst ein Thema aus
+                            </p>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <button onclick="skipToExam()" id="proceedButton" disabled class="text-white px-8 py-3 rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed" style="background: linear-gradient(180deg, #6facff, #aacfff); box-shadow: 0 4px 6px rgba(111, 172, 255, 0.3);" onmouseover="if(!this.disabled) { this.style.transform='translateY(-1px)' }" onmouseout="this.style.transform='translateY(0)'">
+                                Vorbereitung beenden
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Presentation Phase -->
+        <div id="presentationPhase" class="hidden">
+            <!-- Restart Button in Presentation Phase -->
+            <div class="mb-6 text-right">
+                <button onclick="restartExam()" class="text-gray-700 px-4 py-2 rounded-lg font-medium transition-all shadow-md bg-white border border-gray-300 hover:bg-gray-50" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'">
+                    Simulation neu starten
+                </button>
+            </div>
+            
+            <!-- Current Examiner -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <div class="w-24 h-24 mr-4 rounded-full overflow-hidden">
+                            <img src="https://s1.directupload.eu/images/250829/f5677mip.jpg" alt="Dr. Dumser" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="w-full h-full flex items-center justify-center text-white text-2xl font-bold" style="background: linear-gradient(180deg, #6facff, #aacfff); display: none;">DD</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Dr. Dumser</h3>
+                            <p class="text-gray-600">Prüfungsvorsitzender</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Question -->
+                <div class="question-bubble rounded-lg p-6 mb-6" id="presentationQuestionContainer">
+                    <div class="mb-3">
+                        <p class="text-lg text-gray-800" id="presentationQuestion">
+Ich hoffe Sie konnten die Vorbereitungszeit gut nutzen. Beginnen wir jetzt mit Ihrem Vortrag. Bitte stellen Sie sich zunächst vor. Nennen Sie am Anfang das Thema, für das Sie sich entschieden haben. Sie können Ihren Vortrag unten eingeben. Nutzen Sie gerne die Diktierfunktion Ihres Handys, damit Sie das Sprechen üben. Anschließend senden Sie Ihren Vortrag ab. Unsere künstliche Intelligenz bewertet ihn und gibt Ihnen Tipps. Unten können Sie einen Timer nutzen, die Musterlösung aufrufen oder mit den Prüfungsrunden starten.                        </p>
+                    </div>
+                    
+                    <!-- Audio Player for Dr. Dumser -->
+                    <div id="presentationAudioPlayer" class="mt-4">
+                        <audio id="presentationAudio" controls class="w-full" preload="metadata">
+                            <source src="https://www.dropbox.com/scl/fi/xrkxtywr0p376riknh47b/Vortrag.mp3?rlkey=nke47ekt6d8v7vj7tyhdaox3y&st=lyfjd7f3&raw=1" type="audio/mpeg">
+                            Ihr Browser unterstützt das Audio-Element nicht.
+                        </audio>
+                    </div>
+                </div>
+
+                <!-- Response Area -->
+                <div class="mb-6" id="presentationResponseArea">
+                    <!-- Chat Widget for Presentation -->
+                    <div id="presentationChatWidget">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-sm font-medium text-gray-700">Ihr Vortrag an Dr. Dumser:</label>
+                        </div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                            <div id="deployment-dbb15733-7d3c-44d6-98f1-132687e95879"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Presentation Timer -->
+                <div class="bg-gray-50 rounded-lg p-4 mb-6 text-center">
+                    <h4 class="text-sm font-medium text-gray-700 mb-2">Vortragszeit</h4>
+                    <div class="text-2xl font-bold" style="color: #6facff;" id="presentationTimer">00:00</div>
+                    <div class="flex justify-center gap-2 mt-3">
+                        <button onclick="startPresentationTimer()" id="startTimerBtn" class="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded text-sm font-medium transition-colors">
+                            Start
+                        </button>
+                        <button onclick="pausePresentationTimer()" id="pauseTimerBtn" class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded text-sm font-medium transition-colors" disabled>
+                            Pause
+                        </button>
+                        <button onclick="resetPresentationTimer()" id="resetTimerBtn" class="px-3 py-1 bg-gray-500 hover:bg-gray-600 text-white rounded text-sm font-medium transition-colors">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-4">
+                    <button onclick="finishPresentation()" class="text-white px-6 py-2 rounded-lg font-medium transition-all" style="background: linear-gradient(180deg, #6facff, #aacfff); box-shadow: 0 2px 4px rgba(111, 172, 255, 0.3);" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 8px rgba(111, 172, 255, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(111, 172, 255, 0.3)'">
+                        Prüfungsrunden starten
+                    </button>
+                    <button onclick="showSampleSolution()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-medium transition-colors">
+                        Musterlösung
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transition Phase -->
+        <div id="transitionPhase" class="hidden">
+            <!-- Restart Button in Transition Phase -->
+            <div class="mb-6 text-right">
+                <button onclick="restartExam()" class="text-gray-700 px-4 py-2 rounded-lg font-medium transition-all shadow-md bg-white border border-gray-300 hover:bg-gray-50" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'">
+                    Simulation neu starten
+                </button>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 text-center">
+                <div class="flex items-center justify-center mb-6">
+                    <div class="w-24 h-24 mr-4 rounded-full overflow-hidden">
+                        <img src="https://s1.directupload.eu/images/250829/f5677mip.jpg" alt="Dr. Dumser" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-full flex items-center justify-center text-white text-2xl font-bold" style="background: linear-gradient(180deg, #6facff, #aacfff); display: none;">DD</div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800">Dr. Dumser</h3>
+                        <p class="text-gray-600">Prüfungsvorsitzender</p>
+                    </div>
+                </div>
+
+                <!-- Transition Message -->
+                <div class="question-bubble rounded-lg p-6 mb-6">
+                    <div class="mb-3">
+                        <p class="text-lg text-gray-800">
+                            Vielen Dank für Ihren Vortrag. Wir starten nun mit dem Prüfungsgespräch. Die Prüfer werden Ihnen in ihren jeweiligen Fachgebieten Fragen stellen. Bitte beantworten Sie diese.
+                        </p>
+                    </div>
+                    
+                    <!-- Audio Player for Transition -->
+                    <div class="mt-4">
+                        <audio id="transitionAudio" controls class="w-full" preload="metadata">
+                            <source src="https://www.dropbox.com/scl/fi/tam9erb3h0twz8e1yll2s/ElevenLabs_2025-10-28T12_16_07_Felix-Serenitas_pvc_sp97_s48_sb69_v3.mp3?rlkey=gwgq3heh1ivorfnphsihgfev0&st=fozqv7p9&raw=1" type="audio/mpeg">
+                            Ihr Browser unterstützt das Audio-Element nicht.
+                        </audio>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="mt-6">
+                    <button onclick="startExamQuestions()" class="text-white px-8 py-3 rounded-lg font-semibold transition-all" style="background: linear-gradient(180deg, #6facff, #aacfff); box-shadow: 0 4px 6px rgba(111, 172, 255, 0.3);" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'">
+                        Prüfungsgespräch beginnen
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Phase -->
+        <div id="examPhase" class="hidden">
+            <!-- Restart Button in Exam Phase -->
+            <div class="mb-6 text-right">
+                <button onclick="restartExam()" class="text-gray-700 px-4 py-2 rounded-lg font-medium transition-all shadow-md bg-white border border-gray-300 hover:bg-gray-50" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'">
+                    Simulation neu starten
+                </button>
+            </div>
+            
+            <!-- Current Examiner -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <div id="currentExaminerAvatar" class="examiner-avatar mr-4">DB</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800" id="currentExaminerName">Dr. Baretti</h3>
+                            <p class="text-gray-600" id="currentExaminerField">Fachbereich: VWL & BWL</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Prüfer</div>
+                        <div class="text-2xl font-bold" style="color: #6facff;" id="examinerProgress">1 / 6</div>
+                    </div>
+                </div>
+
+                <!-- Current Question -->
+                <div class="question-bubble rounded-lg p-6 mb-6" id="questionContainer">
+                    <div class="mb-3">
+                        <p class="text-lg text-gray-800" id="currentQuestion">
+                            Bitte stellen Sie sich zunächst vor und beginnen Sie mit Ihrem Vortrag zum Thema "Die Auswirkungen der Digitalisierung auf moderne Arbeitsplätze".
+                        </p>
+                    </div>
+                    
+                    <!-- Audio Player for Dr. Schmidt -->
+                    <div id="audioPlayer" class="mt-4 hidden">
+                        <audio id="drSchmidtAudio" controls class="w-full" preload="metadata">
+                            <source src="https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1" type="audio/mpeg">
+                            Ihr Browser unterstützt das Audio-Element nicht.
+                        </audio>
+                    </div>
+                </div>
+
+                <!-- Response Area -->
+                <div class="mb-6" id="responseArea">
+                    <!-- Chat Widget for Dr. Baretti -->
+                    <div id="chatWidget" class="hidden">
+                        <!-- Text area for Dr. Baretti -->
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-sm font-medium text-gray-700">Ihre Antwort an Dr. Baretti:</label>
+                            <div class="flex gap-2">
+                                <button 
+                                    onclick="clearBarettiResponse()" 
+                                    class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
+                                >
+                                    Löschen
+                                </button>
+                            </div>
+                        </div>
+                        <textarea 
+                            id="barettiResponse" 
+                            placeholder="Geben Sie hier Ihre Antwort an Dr. Baretti ein..."
+                            class="w-full h-32 p-4 border border-gray-200 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        ></textarea>
+                    </div>
+                    
+                    <!-- Standard Text Area for other examiners -->
+                    <div id="standardResponse">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-sm font-medium text-gray-700">Ihre Antwort:</label>
+                            <div class="flex gap-2">
+                                <button 
+                                    onclick="clearResponse()" 
+                                    class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
+                                >
+                                    Löschen
+                                </button>
+                            </div>
+                        </div>
+                        <textarea 
+                            id="currentResponse" 
+                            placeholder="Geben Sie hier Ihre Antwort ein..."
+                            class="w-full h-32 p-4 border border-gray-200 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-4">
+                    <button onclick="nextQuestion()" class="text-white px-6 py-2 rounded-lg font-medium transition-all" style="background: linear-gradient(180deg, #6facff, #aacfff); box-shadow: 0 2px 4px rgba(111, 172, 255, 0.3);" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 8px rgba(111, 172, 255, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(111, 172, 255, 0.3)'">
+                        Antwort abgeben & Lösung anzeigen
+                    </button>
+                </div>
+            </div>
+
+            <!-- Examiner Overview -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h3 class="text-lg font-semibold mb-4 text-gray-800">Prüfungskommission</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" id="examinerGrid">
+                    <!-- Examiners will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Solution Phase -->
+        <div id="solutionPhase" class="hidden">
+            <!-- Restart Button in Solution Phase -->
+            <div class="mb-6 text-right">
+                <button onclick="restartExam()" class="text-gray-700 px-4 py-2 rounded-lg font-medium transition-all shadow-md bg-white border border-gray-300 hover:bg-gray-50" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'">
+                    Simulation neu starten
+                </button>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <div id="solutionExaminerAvatar" class="examiner-avatar mr-4">DB</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800" id="solutionExaminerName">Dr. Baretti</h3>
+                            <p class="text-gray-600" id="solutionExaminerField">Fachbereich: VWL & BWL</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Prüfer</div>
+                        <div class="text-2xl font-bold" style="color: #6facff;" id="solutionExaminerProgress">1 / 6</div>
+                    </div>
+                </div>
+
+                <!-- Question -->
+                <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                    <h4 class="text-sm font-medium text-gray-700 mb-2">Frage:</h4>
+                    <p class="text-gray-800" id="solutionQuestion">Welche konkreten Vorteile sehen Sie in der Digitalisierung für Unternehmen?</p>
+                </div>
+
+                <!-- Your Answer -->
+                <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                    <h4 class="text-sm font-medium text-blue-700 mb-2">Ihre Antwort:</h4>
+                    <p class="text-blue-800" id="solutionYourAnswer">Ihre Antwort wird hier angezeigt...</p>
+                </div>
+
+                <!-- Model Solution -->
+                <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                    <h4 class="text-sm font-medium text-gray-700 mb-2">Musterlösung:</h4>
+                    <div class="text-gray-800" id="solutionModelAnswer">
+                        <p class="mb-3"><strong>Hauptvorteile der Digitalisierung für Unternehmen:</strong></p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>Effizienzsteigerung:</strong> Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten</li>
+                            <li><strong>Kostensenkung:</strong> Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten</li>
+                            <li><strong>Verbesserte Datenanalyse:</strong> Bessere Entscheidungsgrundlagen durch datengetriebene Insights</li>
+                            <li><strong>Erhöhte Flexibilität:</strong> Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse</li>
+                            <li><strong>Neue Geschäftsmodelle:</strong> Erschließung digitaler Märkte und Services</li>
+                            <li><strong>Verbesserte Kundenerfahrung:</strong> 24/7 Verfügbarkeit und personalisierte Services</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-4">
+                    <button onclick="continueToNextQuestion()" class="text-white px-6 py-2 rounded-lg font-medium transition-all" style="background: linear-gradient(180deg, #6facff, #aacfff); box-shadow: 0 2px 4px rgba(111, 172, 255, 0.3);" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 8px rgba(111, 172, 255, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(111, 172, 255, 0.3)'">
+                        Weiter zur nächsten Frage
+                    </button>
+                    <button onclick="backToQuestion()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-medium transition-colors">
+                        Zurück zur Frage
+                    </button>
+                </div>
+            </div>
+
+            <!-- Examiner Overview -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h3 class="text-lg font-semibold mb-4 text-gray-800">Prüfungskommission</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" id="solutionExaminerGrid">
+                    <!-- Examiners will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Phase -->
+        <div id="resultsPhase" class="hidden">
+            <div class="bg-white rounded-2xl shadow-lg p-8 text-center max-w-2xl mx-auto">
+                <div class="text-6xl mb-6">🎉</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Prüfung abgeschlossen!</h2>
+                <p class="text-gray-600 mb-6">
+                    Sie haben erfolgreich alle Fragen der 6 Prüfer beantwortet. 
+                    In einer echten Prüfung würden Sie nun das Ergebnis erfahren.
+                </p>
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                    <p class="text-green-800 font-medium">
+                        Simulation erfolgreich durchgeführt! 
+                        Sie haben wertvolle Prüfungserfahrung gesammelt.
+                    </p>
+                </div>
+                <button onclick="restartExam()" class="text-white px-8 py-3 rounded-lg font-semibold transition-all" style="background: linear-gradient(180deg, #6facff, #aacfff); box-shadow: 0 4px 6px rgba(111, 172, 255, 0.3);" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'">
+                    Neue Simulation starten
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // BEARBEITBARER BEREICH: VORTRAGSTHEMEN
+        // ========================================
+        // Hier können Sie alle Vortragsthemen nach Kategorien bearbeiten
+        
+        const topicsByCategory = {
+            // Gruppe 1: ESt, BilSt, etc
+            "Einkommensteuer": [
+                "Steuerliche Behandlung von Trinkgeldern"
+            ],
+            // Gruppe 2: AO, BGB, etc
+            "Abgabenordnung": [
+                "Die tatsächliche Verständigung im Besteuerungsverfahren"
+            ],
+            
+            // Gruppe 3: Spezialgebiete
+            "Bilanzsteuer": [
+                " Bilanzrechtliche Darstellung der Sachgründung einer Personengesellschaft und ihre steuerrechtlichen Auswirkungen"
+            ]
+        };
+
+        // ========================================
+        // BEARBEITBARER BEREICH: MUSTERLÖSUNGEN
+        // ========================================
+        // Hier können Sie die Musterlösungen für die Vorträge bearbeiten
+        
+        const presentationSolutions = {
+            // Allgemeine Struktur für alle Themen
+            general: {
+                introduction: {
+                    title: "1. Einleitung (2-3 Minuten)",
+                    points: [
+                        "<strong>Begrüßung:</strong> \"Sehr geehrte Damen und Herren der Prüfungskommission...\"",
+                        "<strong>Themennennung:</strong> Klare Benennung des gewählten Themas",
+                        "<strong>Gliederung:</strong> Kurze Übersicht über die Struktur des Vortrags",
+                        "<strong>Relevanz:</strong> Warum ist dieses Thema für Steuerberater wichtig?"
+                    ]
+                },
+                mainPart: {
+                    title: "2. Hauptteil (8-10 Minuten)",
+                    points: [
+                        "<strong>Grundlagen:</strong> Definition und rechtliche Einordnung",
+                        "<strong>Aktuelle Rechtslage:</strong> Relevante Gesetze, Verordnungen, BMF-Schreiben",
+                        "<strong>Praktische Anwendung:</strong> Konkrete Beispiele aus der Beratungspraxis",
+                        "<strong>Problembereiche:</strong> Häufige Streitpunkte und Unsicherheiten",
+                        "<strong>Rechtsprechung:</strong> Wichtige BFH-Urteile und deren Auswirkungen"
+                    ]
+                },
+                conclusion: {
+                    title: "3. Schluss (2-3 Minuten)",
+                    points: [
+                        "<strong>Zusammenfassung:</strong> Die wichtigsten Punkte nochmals kurz",
+                        "<strong>Ausblick:</strong> Zukünftige Entwicklungen oder geplante Änderungen",
+                        "<strong>Beratungshinweise:</strong> Was sollten Mandanten beachten?",
+                        "<strong>Abschluss:</strong> \"Vielen Dank für Ihre Aufmerksamkeit\""
+                    ]
+                }
+            },
+            
+// Spezifische Musterlösungen für einzelne Themen (optional)
+specific: {
+    // Beispiel für ein spezifisches Thema:
+    "Modernisierung der Außenprüfung nach DAC 7": {
+        introduction: {
+            title: "1. Einlddddddddddddeitung - Kleinddddddddddduntedddddddddddddrnehmerregelung",
+            points: [
+                "<strong>Begrüßung und Thema:</strong> Die Kleinunternehmerregelung nach § 19 UStG",
+                "<strong>Bedeutung:</strong> Vereinfachung für kleine Unternehmen",
+                "<strong>Gliederung:</strong> Voraussetzungen, Vor-/Nachteile, Verzichtsmöglichkeit"
+            ]
+        },
+        mainPart: {
+            title: "2. Hauptteil - Kleinunternehmerregelung",
+            points: [
+                "<strong>Umsatzgrenzen:</strong> 22.000 € Vorjahr, 50.000 € laufendes Jahr",
+                "<strong>Steuerbefreiung:</strong> Keine USt auf Ausgangsrechnungen",
+                "<strong>Kein Vorsteuerabzug:</strong> Wichtiger Nachteil bei hohen Investitionen",
+                "<strong>Verzichtsmöglichkeit:</strong> Regelbesteuerung für 5 Jahre bindend",
+                "<strong>Rechnungsangaben:</strong> Pflichthinweis auf Steuerbefreiung"
+            ]
+        },
+        conclusion: {
+            title: "3. Schluss - Kleinunternehmerregelung",
+            points: [
+                "<strong>Beratungshinweis:</strong> Individuelle Prüfung der Vor- und Nachteile",
+                "<strong>Grenzüberschreitung:</strong> Automatischer Wechsel zur Regelbesteuerung",
+                "<strong>Dokumentation:</strong> Sorgfältige Umsatzüberwachung erforderlich"
+            ]
+        }
+    },
+
+    // NEU hinzugefügt: Musterlösung für Probe
+    "Probe": {
+        introduction: {
+            title: "1. Einleitung – Probe",
+            points: [
+                "<strong>Begrüßung & Thema:</strong> Vorstellung des Themas 'Probe'",
+                "<strong>Relevanz:</strong> Warum dieses Thema wichtig ist",
+                "<strong>Gliederung:</strong> Übersicht über den Aufbau des Vortrags"
+            ]
+        },
+        mainPart: {
+            title: "2. Hauptteil – Probe",
+            points: [
+                "<strong>Grundlagen:</strong> Definition und Einordnung",
+                "<strong>Praxis:</strong> Beispiele oder typische Anwendungsfälle",
+                "<strong>Probleme:</strong> Herausforderungen und Lösungsansätze"
+            ]
+        },
+        conclusion: {
+            title: "3. Schluss – Probe",
+            points: [
+                "<strong>Zusammenfassung:</strong> Wichtigste Aussagen kurz wiederholen",
+                "<strong>Ausblick:</strong> Wohin die Entwicklung geht",
+                "<strong>Abschluss:</strong> „Vielen Dank für Ihre Aufmerksamkeit.“"
+            ]
+        }
+    }
+    // Weitere spezifische Themen können hier hinzugefügt werden...
+}
+};
+        // ========================================
+        // ENDE DES BEARBEITBAREN BEREICHS
+        // ========================================
+
+        // Function to stop all audio elements
+        function stopAllAudio() {
+            const audioElements = document.querySelectorAll('audio');
+            audioElements.forEach(audio => {
+                if (!audio.paused) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+            });
+        }
+// Sicherer Phasenwechsel ohne Header
+function setPhase(text) {
+    const el = document.getElementById('phaseIndicator');
+    if (el) el.textContent = text;
+}
+
+        let selectedTopicText = '';
+
+        // Exam data with solutions
+        const examinerData = [
+                       {
+                name: "Dr. Dumser",
+                field: "BGB, HGB, InsO, EuropaR",
+                avatar: "DD",
+                image: "https://s1.directupload.eu/images/250829/f5677mip.jpg",
+                rounds: [
+                    [
+                        {
+                            question: "Starten wir ganz allgemein: Welche großen Rechtsgebiete gibt es im deutschen Recht? Und worin unterscheiden sich diese Bereiche voneinander?",
+                            audio: "https://www.dropbox.com/scl/fi/ajzr8jbucgurv67wr7p8q/ElevenLabs_2025-10-26T10_22_01_Felix-Serenitas_pvc_sp97_s48_sb69_v3.mp3?rlkey=fe1hcpz1lvoogl54ji7wh61d9&st=smgtro2s&raw=1",
+                            solution: "Das **deutsche Recht** kann unterteilt werden in das **öffentliche Recht** und das **Privat- bzw. Zivilrecht**.\n\nDas **öffentliche Recht** ist geprägt von einem **Über-Unterordnungsverhältnis zwischen Staat und Bürger**, wie z. B. im **Baurecht**, **Kommunalrecht**, **Immissionsschutzrecht** oder **Steuerrecht**.\n\nDemgegenüber regelt das **Zivilrecht** die **Rechtsbeziehungen der Menschen untereinander**, also von **Individuen auf gleicher Stufe**.\nZum Zivilrecht zählen insbesondere das **Vertragsrecht**, das **Sachenrecht** und das **Erbrecht**."
+                        },
+                        {
+                            question: "Daran anschließend: Welche Gerichtsbarkeiten unterscheidet man in Deutschland?",
+                            audio: "https://www.dropbox.com/scl/fi/jqgdd8c5qc9a5iqyq3pfb/ElevenLabs_2025-10-26T10_22_34_Felix-Serenitas_pvc_sp97_s48_sb69_v3.mp3?rlkey=zgcs0jutmhskigjd5nvho3g97&st=kouikh6c&raw=1",
+                            solution: "Für **Streitigkeiten auf dem Gebiet des Privatrechts** sind die sog. **ordentlichen Gerichte** zuständig.\n**Streitigkeiten auf dem Gebiet des öffentlichen Rechts** werden vor den **Verwaltungsgerichten**, den **Sozialgerichten** oder den **Finanzgerichten** ausgetragen."
+                        },
+                        {
+                            question: "Bei einem Zivilprozess können alle rechtsfähigen Personen Kläger oder Beklagter sein. Man spricht von der sogenannten Parteifähigkeit. Auch juristische Personen können rechtsfähig sein Können Sie mir bitte Beispiele für juristische Personen des Privatrechts nennen und erklären, wie diese ihre Rechtsfähigkeit erlangen? Nennen Sie mir außerdem die Grundform der juristischen Person des privaten Rechts im BGB.",
+                            audio: "https://www.dropbox.com/scl/fi/m8h0zp41h0dvhzg3bhe3r/ElevenLabs_2025-10-26T10_23_03_Felix-Serenitas_pvc_sp97_s48_sb69_v3.mp3?rlkey=372a18jxdyt0dr32fxvsetv2x&st=thcnjz9x&raw=1",
+                            solution: "**Juristische Personen des Privatrechts** sind z. B. **SE**, **AG**, **GmbH**, **KGaA**, **eingetragene Genossenschaften**, **rechtsfähige Vereine**, **rechtsfähige Stiftungen** usw.\nSie erlangen ihre **Rechtsfähigkeit durch Eintragung** in ein bei einem Gericht geführtes **Register** (z. B. **Handelsregister**, **Vereinsregister**).\nGrundform der juristischen Person des privaten Rechts ist der **eingetragene Verein (e. V.)**. Er findet sich in den **§§ 21 ff. BGB**."
+                        },
+                        {
+                            question: "Juristische Personen können also rechtsfähig sein. Wie ist das bei den Personengesellschaften – sind diese ebenfalls rechtsfähig?",
+                            audio: "https://www.dropbox.com/scl/fi/p1lk1h8wwgpqntp3dbm0q/ElevenLabs_2025-10-26T10_24_36_Felix-Serenitas_pvc_sp97_s48_sb69_v3.mp3?rlkey=faoca2ms0kt0rmy9ibr2gli2x&st=7m14nzr4&raw=1",
+                            solution: "Diese Frage ist **aus heutiger Sicht zu bejahen**.\nVor dem **01.01.2024** waren **Personengesellschaften** nur als **(teil-)rechtsfähig** anerkannt, vgl. **§ 124 HGB a.F.** Dies galt v. a. für die **OHG**, **KG**, **PartG**, **PartG mbB** und die **(Außen-)GbR**.\n\nDurch das zum **01.01.2024** in Kraft getretene **Personengesellschaftsrechtsmodernisierungsgesetz (MoPeG)** kam es insoweit zu einer **einschneidenden Veränderung**: In **§ 705 Abs. 2 BGB n.F.** wird die **Rechtsfähigkeit der GbR anerkannt** und eine entsprechende **Definition der rechtsfähigen Gesellschaft** aufgenommen.\nNach **§ 705 Abs. 2 BGB n.F.** kann eine **GbR** als solche „**selber Rechte erwerben und Verbindlichkeiten eingehen, wenn sie nach dem gemeinsamen Willen der Gesellschafter am Rechtsverkehr teilnehmen soll**“.\n\nGleiches gilt ab dem Beginn des Jahres 2024 auch für die **OHG**.\nIn **§ 105 Abs. 2 HGB n.F.** heißt es hierzu nun: „**Die offene Handelsgesellschaft kann Rechte erwerben und Verbindlichkeiten eingehen.**“ Dies gilt über **§ 161 Abs. 2 HGB** sodann auch für die **KG**."
+                        }
+                    ]
+                ]
+            },           
+{
+                name: "Scherf",
+                field: "Umsatzsteuer",
+                avatar: "W",
+                image: "https://s1.directupload.eu/images/250829/8q6up3ep.jpg",
+                rounds: [
+                    [
+                        {
+                            question: "Kommen wir nun zur Umsatzsteuer. Zunächst eine Einordnungsfrage: Wie kann die Umsatzsteuer im Steuersystem eingeordnet werden? Und um was für eine Steuer handelt es sich dabei genau? Bitte erläutern Sie mir kurz die einzelnen Begriffe, die dabei eine Rolle spielen.",
+                            audio: "https://www.dropbox.com/scl/fi/6y16rzjday1yyb5zs6b39/1.d.1.mp3?rlkey=q5r0vs4d8o4qvbfjlpd935u87&st=0rwyhy78&raw=1",
+                            solution: "Die **Umsatzsteuer** ist eine **indirekte Steuer**, da **Steuerschuldner** in der Regel der **leistende Unternehmer** ist und **Steuerträger** der **Endverbraucher**.\nDaneben ist die Umsatzsteuer eine **Gemeinschaftsteuer**, da das Steueraufkommen **Bund, Ländern und Gemeinden** zusteht.\nAußerdem ist die Umsatzsteuer eine **Objektsteuer**, da **persönliche Verhältnisse keine Rolle spielen**.\nAuch eine **Verkehrsteuer** ist die Umsatzsteuer, da sie **an den wirtschaftlichen Verkehr** bzw. **an Rechtsgeschäfte** anknüpft.\nDie Umsatzsteuer, insbesondere die **Einfuhrumsatzsteuer**, hat **Verbrauchsteuercharakter**, da sie den **Endverbrauch besteuert**.\nUnter **Verbrauchsteuern** werden üblicherweise Steuern auf den **Aufwand für den Verbrauch oder Gebrauch eines Gegenstandes** oder die **Inanspruchnahme von Dienstleistungen** verstanden."
+                        },
+                        {
+                            question: " Jetzt ein etwas aktuelleres Thema: Unterliegen „Donations“ von Streamern der Umsatzsteuer? Wie würden Sie das umsatzsteuerlich beurteilen?",
+                            audio: "https://www.dropbox.com/scl/fi/9tf3bvp17e581c69aa5dl/1.d.2.mp3?rlkey=zl8o15h8r3aa2ag2a7ak5o240&st=ku9rsee1&raw=1",
+                            solution: "Ein **Streamer**, der mit einem **eigenen Kanal auf einer Streamingplattform** als Teilnehmer an **Computer-/Videorollenspielen** agiert und dabei **freiwillige Geldzuwendungen (sog. Donations)** von Zuschauern vereinnahmt, erbringt **steuerbare und steuerpflichtige sonstige Leistungen** gem. **§ 3 Abs. 9 S. 1 UStG**.\nDas **FG Düsseldorf** hat das mit **Urteil vom 04.03.2022** festgestellt.\nDamit unterliegen derartige, **freiwillige Geldzuwendungen für die Unterhaltungsleistung des Streamers** der **Umsatzsteuer**."                    
+                        },
+                        {
+                            question: " Nochmal ein Themenwechsel: Vielleicht nennen Sie mir mal drei Fälle, in denen das Halten einer Beteiligung dem unternehmerischen Bereich zugeordnet werden kann.",
+                            audio: "https://www.dropbox.com/scl/fi/pregoos6f9qampdp5ze2t/1.d.3.mp3?rlkey=sca6bjv9z3rwqh66g647di5dv&st=s2lhcez5&raw=1",
+                            solution: "Das **Erwerben, Halten und Veräußern einer gesellschaftsrechtlichen Beteiligung** stellt gem. **Abschnitt 2.3 Abs. 3 S. 5 Umsatzsteuer-Anwendungserlass** nur dann eine **unternehmerische Tätigkeit** dar,\n• soweit **Beteiligungen im Sinne eines gewerblichen Wertpapierhandels** gewerbsmäßig erworben und veräußert werden und dadurch eine **nachhaltige, auf Einnahmeerzielungsabsicht gerichtete Tätigkeit** entfaltet wird, oder\n• wenn die **Beteiligung nicht um ihrer selbst willen gehalten** wird, sondern der **Förderung einer bestehenden oder beabsichtigten unternehmerischen Tätigkeit** (z. B. **Sicherung günstiger Einkaufskonditionen**, **Verschaffung von Einfluss bei potenziellen Konkurrenten**, **Sicherung günstiger Absatzkonditionen**) dient, oder\n• wenn **unmittelbar in die Verwaltung der Gesellschaften**, an denen die Beteiligung besteht, **eingegriffen** wird. Die Eingriffe müssen dabei zwingend durch **unternehmerische Leistungen** erfolgen, z. B. durch das **entgeltliche Erbringen von administrativen, finanziellen, kaufmännischen und technischen Dienstleistungen** an die jeweilige Beteiligungsgesellschaft."
+                        },
+                        {
+                            question: " Ich habe gehört es gibt irgendeine elektronische Schnittstelle. Was hat es umsatzsteuerlich mit dieser elektronischen Schnittstelle auf sich?",
+                            audio: "https://www.dropbox.com/scl/fi/19sq40p64uc68vdmfwq85/1.d.4.mp3?rlkey=cdv9ih6ft1u3sixvnomvjk1ht&st=jrpn6mop&raw=1",
+                            solution: "Hintergrund ist folgendes: Ein **Unternehmer**, der mittels seiner **elektronischen Schnittstelle** die **Lieferung eines Gegenstands**, dessen **Beförderung oder Versendung im Gemeinschaftsgebiet beginnt und endet**, durch einen **nicht im Gemeinschaftsgebiet ansässigen Unternehmer** an einen **Empfänger nach § 3a Abs. 5 S. 1 UStG** unterstützt, wird nach **§ 3 Abs. 3a S. 1 UStG** so behandelt, als ob er diesen Gegenstand für sein Unternehmen **selbst erhalten und geliefert** hätte.\nDamit wird eine **elektronische Schnittstelle** (z. B. der **Betreiber eines Online-Marktplatzes**) bei diesen Lieferungen fiktiv so gestellt, als ob der Betreiber die Lieferung des auf seinem Marktplatz tätigen Versandhändlers selbst erhalten und als ob er diese Lieferung selbst an den Kunden des Versandhändlers ausgeführt hat.\nEs wird also ein **Reihengeschäft fingiert**.\n\nEine **elektronische Schnittstelle im Sinne von § 3 Abs. 3a S. 1 und 2 UStG** ist ein **elektronischer Marktplatz**, eine **elektronische Plattform**, ein **elektronisches Portal** oder **Ähnliches**.\nDer Begriff der elektronischen Schnittstelle ist **sehr weit gefasst**, sodass in den Anwendungsbereich der Vorschriften nicht nur elektronische Marktplätze, Plattformen oder Portale fallen, sondern auch **alle anderen vergleichbaren elektronischen Handelsplätze**."
+                        }
+                    ]
+                ]
+            },
+{
+                name: "Priller",
+                field: " BilSt, UmwSt",
+                avatar: "P",
+                image: "https://s1.directupload.eu/images/250926/mw5zoero.jpg",
+                rounds: [
+                    [
+                        {
+                            question: "Wir starten in das Bilanzsteuerrecht mit folgendem Fall: Ein Mandant kommt in Ihre Kanzlei. Für das Geschäftsjahr 01 wurde ein hoher Gewinn erzielt, und der Steuerbescheid ist bereits wirksam bekannt gegeben worden. Mandant war einverstanden in 01. In 02 wurde unerwartet ein schlechtes Ergebnis erzielt. Mandant möchte nun 01 noch ändern, um das Ergebnis zu senken, z. B. in Form einer Bildung einer Rückstellung. Ist das möglich?",
+                            audio: "https://www.dropbox.com/scl/fi/mrdhyzcsvopey2wteocie/1.h.1.mp3?rlkey=myeeb5g9nce7yqe58kh4swg4t&st=4li4s1hr&raw=1",
+                            solution: "Eine **Bilanzberichtigung in 01** gem. **§ 4 Abs. 2 S. 1 EStG** ist nur möglich, wenn im Fehlerjahr 01 die **Veranlagung nach den Änderungsvorschriften der Abgabenordnung** noch korrigiert werden kann (**H 4.4 „Berichtigung einer Bilanz ...“ Sps. 1 EStH**).\nWenn verfahrensrechtlich keine Korrektur mehr möglich ist, erfolgt eine **erfolgswirksame Bilanzberichtigung in der ersten offenen Veranlagung** (**R 4.4 Abs. 1 S. 9 EStR**).\n\nNeben einer **Bilanzberichtigung (fehlerhafter Bilanzansatz)** können **Bewertungswahlrechte im Rahmen einer Bilanzänderung** neu ausgeübt werden (**§ 4 Abs. 2 S. 2 EStG**).\nVoraussetzung für eine **Bilanzänderung** ist dabei jedoch, dass ein **enger sachlicher und zeitlicher Zusammenhang** zu einer **Bilanzberichtigung gem. § 4 Abs. 2 S. 1 EStG** besteht.\nAußerdem ist die **Bilanzänderung der Höhe nach begrenzt** auf die **Gewinnauswirkung der Bilanzberichtigung**.\n\nUngeachtet der Bestimmungen zur Bilanzänderung können **steuerliche Wahlrechte außerhalb der Bilanz** ausgeübt werden, sofern die **Veranlagung noch nach den Vorschriften der AO korrigiert werden kann**.\nHierunter würde z. B. die **Vornahme eines außerbilanziellen Abzugs eines IAB** gem. **§ 7g Abs. 1 EStG** fallen, sofern das **begünstigte Wirtschaftsgut** noch **nicht angeschafft** wurde (**§ 7g Abs. 2 S. 2 EStG**)."
+                        },
+                        {
+                            question: "Gut passt. Sagen Sie mir mal: Was ist eine atypisch/typisch stille Beteiligung und wie wird diese bilanziert?",
+                            audio: "https://www.dropbox.com/scl/fi/clrn39zf3jl6x589534md/1.h.2.mp3?rlkey=1qvwfo20fl8isex71fv7hx1ue&st=oyvrq5i9&raw=1",
+                            solution: "Als **stille Gesellschaft** bezeichnet man eine Gesellschaft, bei der sich jemand am **Handelsgewerbe eines anderen** in der Weise beteiligt, dass er in das **Vermögen des Inhabers des Handelsgeschäfts** – der **Einzelkaufmann**, aber auch eine **Personen- oder Kapitalgesellschaft** sein kann – eine **Einlage leistet** (**§ 230 HGB**).\n\n**Einkommensteuerlich** ist die **Unterscheidung zwischen typisch und atypisch stiller Gesellschaft** von erheblicher Bedeutung.\nWährend der **typisch Stille** im Wesentlichen wie ein **Darlehensgeber** behandelt wird, ist die **atypisch stille Gesellschaft** als **Mitunternehmerschaft** zu qualifizieren.\nEine atypisch stille Gesellschaft liegt vor, wenn der stille Gesellschafter **Mitunternehmerinitiative entfalten** kann und **Mitunternehmerrisiko trägt**.\n\nEntscheidend ist insbesondere die **Beteiligung an den stillen Reserven** einschließlich eines etwaigen **Geschäfts-/Firmenwerts**.\nIn der **Handelsbilanz** ist die **Einlage des stillen Gesellschafters** grundsätzlich als **Fremdkapital** auszuweisen.\n**Steuerlich** stellen die **Vergütungen an den stillen Gesellschafter** **Betriebsausgaben des Geschäftsherrn** dar.\n\nBei einer **atypisch stillen Gesellschaft** mindert der **Gewinnanteil des atypisch stillen Gesellschafters** nicht den Gewinn der Mitunternehmerschaft.\nEs ist vielmehr eine **Gewinnverteilung zwischen dem Geschäftsherrn und dem atypisch stillen Gesellschafter** vorzunehmen (**einheitlich und gesonderte Gewinnfeststellung** gem. **§§ 179, 180 Abs. 1 S. 1 Nr. 2 Buchst. a AO**)."
+                        },
+                        {
+                            question: "Anderes Thema: Wie kann ein Zuschuss zu einer Maschine behandelt werden?",
+                            audio: "https://www.dropbox.com/scl/fi/sz60zyh6ohg3gztietfpb/1.h.3.mp3?rlkey=wxuzo0x1ciqu14fuoudgqsc46&st=wdz3c07g&raw=1",
+                            solution: "**Handelsrechtlich** ist die **bilanzielle Behandlung eines Investitionszuschusses** nicht geregelt.\nEs bestehen insgesamt **drei Möglichkeiten des Ausweises**:\n• **Minderung der Anschaffungs- bzw. Herstellungskosten** des Vermögensgegenstands um den Betrag des Zuschusses (**sog. direkte Methode**), oder\n• **Ansatz eines passiven Sonderpostens** in Höhe des Zuschusses (**sog. indirekte Methode**), oder\n• **Ausweis als Ertrag**.\n\nHandelsrechtlich ist **umstritten**, ob und welche dieser drei Möglichkeiten zulässig ist.\n\n**Steuerrechtlich** besteht ein **Wahlrecht** zwischen **erfolgsneutraler Behandlung** (Verrechnung des Zuschusses mit AK/HK) und **erfolgswirksamer Behandlung** (Behandlung als Ertrag, ohne Verrechnung mit den AK/HK) des Zuschusses (**R 6.5 Abs. 2 EStR**)."
+                        },
+                        {
+                            question: "Daran anknüpfend sprechen wir mal über das Thema latente Steuern: Ergeben sich latente Steuern bei einem Zuschuss? Wie schauts bei einer § 6b-Rücklage und bei § 7g EStG aus?",
+                            audio: "https://www.dropbox.com/scl/fi/x86kihru5w71gt0f8s6mo/1.h.4.mp3?rlkey=ealnei4eda4qli8aifdoki3wd&st=ckahca80&raw=1",
+                            solution: "Wird der **Zuschuss in der Handelsbilanz erfolgsneutral** (Kürzung der AK), in der **Steuerbilanz jedoch erfolgswirksam** behandelt, kann für die **künftige Steuerentlastung eine aktive latente Steuer** abgegrenzt werden (**§ 274 Abs. 1 S. 2 HGB**).\nIm umgekehrten Fall, d. h. bei **erfolgswirksamer Behandlung in der Handelsbilanz** und **erfolgsneutraler Behandlung in der Steuerbilanz**, ist eine **passive latente Steuer** zu bilanzieren.\n\nDie **Bildung einer § 6b-Rücklage** in der Steuerbilanz führt zu **passiven latenten Steuern** gem. **§ 274 Abs. 1 HGB**, da eine Rücklage seit **BilMoG** in der Handelsbilanz **nicht mehr gebildet werden kann**.\n\nDie **Vornahme eines IAB** erfolgt zwar **außerhalb der Bilanz**, nach **herrschender Meinung (h. M.)** ist hierfür jedoch dennoch eine **passive latente Steuerabgrenzung** gem. **§ 274 Abs. 1 S. 1 HGB** vorzunehmen."
+                        }
+                    ]
+                ]
+            },
+{
+                name: "Dr. Baretti",
+                field: " Berufsrecht, VWL, BWL",
+                avatar: "B",
+                image: "https://s1.directupload.eu/images/250829/zzdffhky.jpg",
+                rounds: [
+                    [
+                        {
+                            question: " Kommen wir nun zum Berufsrecht der Steuerberater. Zunächst eine Frage, die in den letzten Jahren immer wichtiger geworden ist: Was versteht man unter einem Syndikus-Steuerberater?",
+                            audio: "https://www.dropbox.com/scl/fi/dv9lmpclub0polx8vnzs7/1.c.1.mp3?rlkey=z9d91ma9bxqt47iisj6dadfig&st=8mlt7yvp&raw=1",
+                            solution: "Gemäß **§ 58 Nr. 5a Steuerberatungsgesetz (StBerG)** ist die **Bestellung als Syndikus-Steuerberater** möglich.\nDies ermöglicht **Angestellten in Industrieunternehmen und Wirtschaftsverbänden**, neben ihrer **Angestelltentätigkeit als Steuerberater** tätig zu werden.\n\nVoraussetzung ist:\n• dass der Angestellte **Tätigkeiten i. S. d. § 33 Steuerberatungsgesetz** wahrnimmt,\n• der Angestellte **nicht in seiner Eigenschaft als Steuerberater für den eigenen Arbeitgeber tätig** wird; er kann ihn aber **steuerlich beraten und gegenüber dem Finanzamt vertreten**, \n• der **Arbeitgeber mit der Tätigkeit als Steuerberater einverstanden** ist und\n• der Steuerberater durch seine **Angestelltentätigkeit nicht gehindert** ist, seinen **Pflichten als Steuerberater** nachzukommen.\n\nDie **Berufsbezeichnung** eines Syndikus-Steuerberaters lautet **„Steuerberater“**; eine **Pflicht zur Bezeichnung als Syndikus-Steuerberater** besteht **nicht**."
+                        },
+                        {
+                            question: "Und direkt daran anschließend: Welcher Vorteil ergibt sich denn daraus, wenn man sich als Syndikus-Steuerberater bestellen lässt?",
+                            audio: "https://www.dropbox.com/scl/fi/fl2th17jxgpoj9r1ux0ok/1.c.2.mp3?rlkey=ipj1fuy1dn2a0jvf20148x7tz&st=xlepr4x0&raw=1",
+                            solution: "**Vorteile** ergeben sich insbesondere durch die Möglichkeit der **Befreiung von der Beitragspflicht in der gesetzlichen Rentenversicherung** zugunsten einer in der Regel **besseren Altersversorgung durch das Versorgungswerk der Steuerberater**.\nAußerdem kann mit der **Bestellung** dokumentiert werden, dass die **Steuerberaterprüfung bestanden** wurde."
+                        },
+                        {
+                            question: " Nun allgemein zur Berufsausübung: Welche Möglichkeiten haben Sie, den Beruf des Steuerberaters auszuüben? Und welche Vor- und Nachteile ergeben sich aus den verschiedenen Möglichkeiten Ihrer Einschätzung nach?",
+                            audio: "https://www.dropbox.com/scl/fi/wgr307e0fm8kwet0ss1xn/1.c.3.mp3?rlkey=ucwt4z0cx8f65pnsu32v3czdw&st=10sptiuo&raw=1",
+                            solution: "**Steuerberater** können sich zur **gemeinsamen Berufsausübung zu Berufsausübungsgesellschaften** verbinden.\nDiesbezüglich stehen **alle inländischen sowie EU/EWR-Rechtsformen** zur Verfügung.\nIn der Praxis sind insbesondere folgende **Konstellationen** vorzufinden:\n\n• **Die Einzelpraxis:** Eine Einzelpraxis kann nach eigenen Vorstellungen aufgebaut und geführt werden; die **Haftung erfolgt mit dem Privatvermögen**. Der Steuerberater ist **auf sich allein gestellt**, insbesondere angesichts einer sich ständig ändernden Rechtslage und Rechtsprechung. Auch die **Fixkosten** sind vom Steuerberater allein zu tragen.\n\n• **Die Bürogemeinschaft:** Bürogemeinschaften dienen **nicht einer gemeinschaftlichen Berufsausübung**, sondern einer **gemeinsamen Nutzung der Betriebsmittel**, indem Kosten, z. B. Räume oder Büroinfrastruktur, geteilt werden. Eine **gemeinsame Vertretung nach außen** oder eine **gemeinsame Annahme von Mandanten** erfolgt nicht. Bürogemeinschaften dürfen grundsätzlich **mit allen Personen gebildet** werden, auch mit **Gewerbetreibenden**, solange die **Berufspflichten als Steuerberater** gewahrt bleiben. Ausgeschlossen sind nur Personen, mit denen eine Verbindung mit dem steuerberatenden Beruf **unvereinbar** ist (**§ 55h Abs. 2 Steuerberatungsgesetz**), z. B. **Maklern**.\n\n• **Die Sozietät in Form einer GbR:** Die **GbR** tritt im Gegensatz zur Bürogemeinschaft **nach außen in Erscheinung**. Aus dem Mandat sind **alle Gesellschafter berechtigt und verpflichtet**. Die Gesellschafter **haften für die Verbindlichkeiten der Gesellschaft** mit dem gesamten **Privat- und Betriebsvermögen**.\n\n• **Die Berufsausübungsgesellschaft:** Der Begriff **Berufsausübungsgesellschaft** ist der **Oberbegriff für Zusammenschlüsse von Steuerberatern** mit anderen Steuerberatern und/oder **Angehörigen weiterer Freier Berufe**. Neben den klassischen Zusammenschlüssen zwischen **Steuerberatern, Wirtschaftsprüfern und Rechtsanwälten** gibt es zunehmend auch **Zusammenschlüsse mit weiteren Professionen**, z. B. **beratenden Betriebswirten**."
+                        },
+                        {
+                            question: "Zum Abschluss noch eine kleine Frage aus der Betriebswirtschaftslehre, die oft an das Berufsrecht anknüpft: Können Sie mir bitte kurz den Unterschied zwischen einem Share Deal und einem Asset Deal erklären?",
+                            audio: "https://www.dropbox.com/scl/fi/kckahtkgkbsixzerpl8vm/1.c.4.mp3?rlkey=dq7t550vnofeipqofvcnwmnfb&st=alwxc0g2&raw=1",
+                            solution: "Unter einem **Share Deal** versteht man eine spezifische Art des **Unternehmenskaufs**, bei der der Käufer **die Anteile des Unternehmens** vom Verkäufer erwirbt.\nDer Begriff **Asset Deal** meint eine spezifische Art des **Unternehmenskaufs**, bei der der Käufer **sämtliche Wirtschaftsgüter des Unternehmens** vom Verkäufer **einzeln erwirbt**."
+                        }
+                    ]
+                ]
+            },
+ {
+                name: "Reinwald",
+                field: " ESt, IStR, KöSt, GewSt", 
+                avatar: "R",
+                image: " https://s1.directupload.eu/images/250926/iyqmubkd.jpg ",
+                rounds: [
+                    [
+                        {
+                            question: "Welche konkreten Vorteile sehen Sie in der Digitalisierung für Unternehmen?",
+                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
+                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
+                        },
+                        {
+                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
+                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
+                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
+                        },
+                        {
+                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
+                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
+                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
+                        },
+                        {
+                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
+                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
+                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
+                        }
+                    ]
+              ]
+            },
+     {
+                name: "Wirth",
+                field: "AO, FGO, Erbschaftsteuer, Grunderwerbsteuer",
+                avatar: "W",
+                image: "https://s1.directupload.eu/images/250829/qoko6duz.jpg",
+                rounds: [
+                    [
+                        {
+                            question: "Ich prüfe Sie heute in der Abgabenordnung. Ich würde gerne thematisch an die Fragerunde von Herrn Dr. Dumser anknüpfen. Können Sie mir zunächst sagen, ob ein beschränkt Geschäftsfähiger überhaupt eine Steuererklärung abgeben kann?",
+                            audio: "https://www.dropbox.com/scl/fi/pbq684l19gbmb3gk0ky68/k.m.1.mp3?rlkey=gs36uqtpuzb1362a1p5gdwy0l&st=sfiy0q2b&raw=1",
+                            solution: "Nach **§ 149 Abs. 1 AO** bestimmen die Steuergesetze, wer zur Abgabe einer **Steuererklärung verpflichtet** ist.\nHandelt es sich dabei um einen **beschränkt Geschäftsfähigen**, also einen **Minderjährigen**, der das **7., aber noch nicht das 18. Lebensjahr** vollendet hat (**§ 106 BGB**), ist danach zu differenzieren, ob er **steuerlich handlungsfähig** ist oder nicht.\n\n**Beschränkt Geschäftsfähige** können nach **§ 79 Abs. 1 Nr. 2 AO** steuerlich handlungsfähig sein, soweit sie für den Gegenstand des Verfahrens durch Vorschriften des **bürgerlichen Rechts** als geschäftsfähig oder durch Vorschriften des **öffentlichen Rechts** als handlungsfähig anerkannt sind.\nDies ist v. a. der Fall bei **Ermächtigung des Minderjährigen zum selbständigen Betrieb eines Erwerbsgeschäfts** für alle Geschäfte, die der Betrieb mit sich bringt (**§ 112 BGB**), oder im Rahmen eines **Dienst- oder Arbeitsverhältnisses (§ 113 BGB)**.\nSoweit sich nach diesen Vorschriften eine beschränkte Geschäftsfähigkeit ergibt, ist der Minderjährige **steuerlich handlungsfähig** und kann z. B. als **Inhaber eines Gewerbebetriebs** wirksam Erklärungen und Anmeldungen zur **USt**, **LSt** und **GewSt** abgeben.\n\nIst ein beschränkt Geschäftsfähiger nach den Vorschriften des bürgerlichen oder öffentlichen Rechts **nicht handlungsfähig**, muss der **gesetzliche Vertreter** für ihn handeln, um die steuerlichen Pflichten des beschränkt Geschäftsfähigen zu erfüllen (**§ 34 Abs. 1 S. 1 AO**).\nBei Minderjährigen sind regelmäßig die **Eltern gemeinsam gesetzliche Vertreter** (**§§ 1626, 1629 Abs. 1 S. 2 BGB**).\nIn diesem Fall müssen also die **Eltern als gesetzliche Vertreter** des beschränkt Geschäftsfähigen dessen **Steuererklärung abgeben**.\n\nDies gilt im Übrigen auch für die **Abgabe einer Einkommensteuererklärung** bei einem nach **§ 79 Abs. 1 Nr. 2 AO handlungsfähigen Minderjährigen**.\nDenn die Abgabe einer Einkommensteuererklärung ist **nicht von §§ 112 und 113 BGB umfasst**, weil hierbei auch Angaben zu den **Sonderausgaben** oder **außergewöhnlichen Belastungen** erforderlich sind, die nichts mit dem **Erwerbsgeschäft i. S. d. § 112 BGB** oder dem **Dienst- oder Arbeitsverhältnis i. S. d. § 113 BGB** zu tun haben."
+                        },
+                        {
+                            question: "Ich habe Ihnen dazu einen kleinen Fall mitgebracht: Ein Minderjähriger betreibt in der Garage seiner Eltern einen Gewerbebetrieb und ist insoweit auch partiell geschäftsfähig nach § 112 Abs. 1 BGB. Das Finanzamt will einen Umsatzsteuerbescheid an ihn bekanntgeben. An wen ist dieser zu adressieren?",
+                            audio: "https://www.dropbox.com/scl/fi/rbcr1t4ef6a9y0lv12xz4/k.m.2.mp3?rlkey=5zaolj6yx8qpdhbj92krc90qe&st=zvy3k4xq&raw=1",
+                            solution: " **Ermächtigt der gesetzliche Vertreter mit Genehmigung des Familiengerichts den Minderjährigen zum selbständigen Betrieb eines Erwerbsgeschäfts**, so ist der Minderjährige für solche Rechtsgeschäfte **unbeschränkt geschäftsfähig**, welche der Geschäftsbetrieb mit sich bringt (**§ 112 Abs. 1 S. 1 BGB**).\nInsoweit ist der Minderjährige auch im **Besteuerungsverfahren handlungsfähig** nach **§ 79 Abs. 1 Nr. 2 AO**.\n\nDementsprechend sind **Steuerbescheide**, die **ausschließlich diesen Geschäftsbetrieb betreffen**, wie hier der **Umsatzsteuerbescheid**, **nur dem Minderjährigen** – und **nicht auch dessen Eltern** als (gemeinschaftliche) gesetzliche Vertreter nach **§ 34 Abs. 1 S. 1 AO i.V.m. §§ 1626, 1629 Abs. 1 S. 2 BGB** – bekannt zu geben (**vgl. AEAO zu § 122, Nr. 2.2.3**)."
+                        },
+                        {
+                            question: " Der Minderjährige erzielt neben dem Gewerbebetrieb noch andere Einkünfte. Das Finanzamt will einen Einkommensteuerbescheid, der neben den Einkünften aus Gewerbebetrieb noch andere Einkünfte des Minderjährigen beinhaltet, an ihn bekanntgeben. An wen ist dieser zu adressieren?",
+                            audio: "https://www.dropbox.com/scl/fi/tlp8epjdc0gpknrepo74k/k.m.3.mp3?rlkey=nkiv5fh42b7847knn0z2kh964&st=aa8ldt5v&raw=1",
+                            solution: "Hat der Minderjährige wie hier **noch weitere Einkünfte** und werden diese in die **Festsetzung einbezogen**, so kann der **Steuerbescheid nicht durch Bekanntgabe gegenüber dem minderjährigen Steuerschuldner** wirksam werden.\n**Bekanntgabeadressat des Bescheids** sind in einem solchen Fall die **Eltern des Minderjährigen** als dessen (gemeinschaftliche) **gesetzliche Vertreter** nach **§ 34 Abs. 1 S. 1 AO i.V.m. §§ 1626, 1629 Abs. 1 S. 2 BGB** (**vgl. AEAO zu § 122, Nr. 2.2.3 a.E.**)."
+                        },
+                        {
+                            question: "Sehr schön, vielen Dank. Jetzt gehen wir zum Abschluss nochmal weg von dem Minderjährigen. Zählen Sie mir bitte die steuerlichen Nebenleistungen in der AO auf und sagen Sie mir, wo sie im Gesetz stehen.",
+                            audio: "https://www.dropbox.com/scl/fi/q9qi6noldt5y819hjryyj/k.m.4.mp3?rlkey=lto7ejfud1h84z8d26fvbarh2&st=54ekgex4&raw=1",
+                            solution: " **Steuerliche Nebenleistungen** sind nach **§ 3 Abs. 4 AO** u. a.:\n• **Verspätungszuschläge** nach **§ 152 AO**\n• **Zuschläge** nach **§ 162 Abs. 4 und 4a AO**\n• **Mitwirkungsverzögerungsgelder** nach **§ 200a Abs. 2 AO** und **Zuschläge zum Mitwirkungsverzögerungsgeld** nach **§ 200a Abs. 3 AO**\n• **Zinsen** nach den **§§ 233 ff. AO**\n• **Säumniszuschläge** nach **§ 240 AO**\n• **Zwangsgelder** nach **§ 329 AO**"
+                        },
+                        {
+                            question: "Und dann noch eine letzte Frage: Was ist der Sinn und Zweck von Säumniszuschlägen? Und worin liegt der Unterschied zu Verspätungszuschlägen?",
+                            audio: "https://www.dropbox.com/scl/fi/94l61y9u0zmyya0447o6a/k.m.5.mp3?rlkey=o92fswdll4rwroku3bbiw1w8k&st=9d84q7v9&raw=1",
+                            solution: " **Säumniszuschläge** stellen in erster Linie ein **Druckmittel zur Durchsetzung fälliger Steuerforderungen** dar. Sie sind aber auch eine **Gegenleistung für das Hinausschieben der Zahlung** und ein **Ausgleich für den angefallenen Verwaltungsaufwand** (**AEAO zu § 240, Nr. 5**).\n\nBei Vorliegen der **Tatbestandsmerkmale des § 152 Abs. 1 S. 1 AO** (Erklärungspflicht, verspätete oder Nichtabgabe der Steuererklärung, Verschulden) kann ein **Verspätungszuschlag** festgesetzt werden (**Ermessensentscheidung**).\nDas Finanzamt hat nach **pflichtgemäßem Ermessen (§ 5 AO)** zu entscheiden, ob und in welcher Höhe ein Verspätungszuschlag festzusetzen ist.\n\nDie **Festsetzung des Verspätungszuschlags** stellt eine **gebundene Entscheidung** dar, insbesondere wenn die Steuererklärung **nicht binnen 14 Monaten nach Ablauf des Kalenderjahrs** oder in den Fällen **vorzeitiger Anforderung** pflichtwidrig nicht bis zu dem in der Anordnung bestimmten Zeitpunkt abgegeben wurde (**§ 152 Abs. 2 AO**).\n\nAufgrund der **pandemiebedingten Verlängerung der Abgabefristen** gibt es für die **Besteuerungszeiträume 2020 bis 2024** in Bezug auf **§ 152 Abs. 2 AO** **Sonderregelungen**, mithin für die Frage, ob ein Verspätungszuschlag von Amts wegen festzusetzen ist (**siehe AEAO zu § 152, Nr. 1**).\n\nDemgegenüber entsteht ein **Säumniszuschlag kraft Gesetzes**, wenn eine Steuer **nicht am Fälligkeitstag entrichtet** wird (**§ 240 Abs. 1 S. 1 AO**).\nDas Finanzamt hat hierbei **kein Ermessen**. Der Säumniszuschlag wird **nicht durch Verwaltungsakt festgesetzt**, sondern **im Rahmen der Anmahnung von Steuerrückständen angefordert**.\nEtwaige **Unbilligkeiten** können durch **Erlass der Säumniszuschläge** beseitigt werden (**§ 227 AO**)."
+                        }
+                    ]
+                ]
+            }
+        ];
+
+        // Initialize examiners with randomly selected rounds
+        let examiners = [];
+
+        let currentExaminerIndex = 0;
+        let currentQuestionIndex = 0;
+        let preparationTimer;
+        let preparationTimeLeft = 1800; // 30 minutes in seconds
+        
+        // Presentation timer variables
+        let presentationTimer;
+        let presentationTimeElapsed = 0;
+        let isPresentationTimerRunning = false;
+        
+        let examResponses = [];
+
+        // Function to initialize examiners with random rounds
+        function initializeExaminers() {
+            examiners = examinerData.map(examinerTemplate => {
+                // Select a random round (0-4) for each examiner
+                const randomRoundIndex = Math.floor(Math.random() * examinerTemplate.rounds.length);
+                const selectedRound = examinerTemplate.rounds[randomRoundIndex];
+                
+                return {
+                    name: examinerTemplate.name,
+                    field: examinerTemplate.field,
+                    avatar: examinerTemplate.avatar,
+                    image: examinerTemplate.image,
+                    questions: selectedRound
+                };
+            });
+            
+            console.log('Prüfer mit zufälligen Runden initialisiert:', examiners.map(e => e.name));
+        }
+
+        function generateRandomTopics() {
+            const selectedTopics = [];
+            
+            // Gruppe 1: Grundlagen des Steuerrechts (erstes Thema)
+            const group1Categories = ["Privatrecht", "Finanzgerichtsordnung", "Abgabenordnung"];
+            const randomGroup1Category = group1Categories[Math.floor(Math.random() * group1Categories.length)];
+            const group1Topics = topicsByCategory[randomGroup1Category];
+            const selectedGroup1Topic = group1Topics[Math.floor(Math.random() * group1Topics.length)];
+            selectedTopics.push({
+                topic: selectedGroup1Topic,
+                category: randomGroup1Category
+            });
+            
+            // Gruppe 2: Ertragsteuern (zweites Thema)
+            const group2Categories = ["Einkommensteuer", "Bilanzsteuer", "Körperschaftsteuer"];
+            const randomGroup2Category = group2Categories[Math.floor(Math.random() * group2Categories.length)];
+            const group2Topics = topicsByCategory[randomGroup2Category];
+            const selectedGroup2Topic = group2Topics[Math.floor(Math.random() * group2Topics.length)];
+            selectedTopics.push({
+                topic: selectedGroup2Topic,
+                category: randomGroup2Category
+            });
+            
+            // Gruppe 3: Spezialgebiete (drittes Thema)
+            const group3Categories = ["Umsatzsteuer", "Umwandlungssteuer", "Internationales Steuerrecht", "Berufsrecht"];
+            const randomGroup3Category = group3Categories[Math.floor(Math.random() * group3Categories.length)];
+            const group3Topics = topicsByCategory[randomGroup3Category];
+            const selectedGroup3Topic = group3Topics[Math.floor(Math.random() * group3Topics.length)];
+            selectedTopics.push({
+                topic: selectedGroup3Topic,
+                category: randomGroup3Category
+            });
+            
+            return selectedTopics;
+        }
+
+        function selectTopic(topicData, buttonElement) {
+            console.log('Thema ausgewählt:', topicData);
+            selectedTopicText = topicData.topic;
+            
+            const selectedTopicElement = document.getElementById('selectedTopic');
+            if (selectedTopicElement) {
+                selectedTopicElement.textContent = `"${topicData.topic}"`;
+            }
+            
+            // Update button states
+            document.querySelectorAll('.topic-button').forEach(btn => {
+                btn.classList.remove('selected');
+                btn.style.background = 'white';
+                btn.style.borderColor = '#d1d5db';
+            });
+            
+            if (buttonElement) {
+                buttonElement.classList.add('selected');
+                buttonElement.style.background = 'linear-gradient(180deg, rgba(111, 172, 255, 0.1), rgba(170, 207, 255, 0.1))';
+                buttonElement.style.borderColor = '#6facff';
+            }
+            
+            // Enable proceed button
+            const proceedButton = document.getElementById('proceedButton');
+            if (proceedButton) {
+                proceedButton.disabled = false;
+                proceedButton.style.opacity = '1';
+                proceedButton.style.cursor = 'pointer';
+                console.log('Button aktiviert');
+            }
+        }
+
+function displayTopicOptions() {
+  const topicOptions = document.getElementById('topicOptions');
+  if (!topicOptions) {
+    console.error('topicOptions Element nicht gefunden');
+    return;
+  }
+
+  topicOptions.innerHTML = '';
+
+  // Alle Kategorien & Themen exakt so ausgeben, wie sie in topicsByCategory stehen
+  Object.entries(topicsByCategory).forEach(([rawCategory, topics]) => {
+    const category = (rawCategory || '').trim(); // toleranter Umgang mit Leerzeichen im Key
+
+    if (!Array.isArray(topics) || topics.length === 0) return;
+
+    topics.forEach((topic, index) => {
+      const topicButton = document.createElement('div');
+      topicButton.className = 'topic-button p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all hover:border-blue-400';
+      topicButton.style.background = 'white';
+      topicButton.onclick = () => selectTopic({ topic, category }, topicButton);
+
+      topicButton.innerHTML = `
+        <div class="flex items-start">
+          <span class="w-8 h-8 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0" style="background: #6facff;">
+            ${index + 1}
+          </span>
+          <div class="flex-1">
+            <div class="text-gray-800 font-medium mb-1">${topic}</div>
+            <div class="text-xs px-2 py-1 rounded-full inline-block" style="background-color: rgba(111, 172, 255, 0.2); color: #6facff;">
+              ${category}
+            </div>
+          </div>
+        </div>
+      `;
+
+      topicOptions.appendChild(topicButton);
+    });
+  });
+}
+        function startExam() {
+            console.log('startExam() aufgerufen');
+            
+            // Stop welcome audio
+            stopAllAudio();
+            
+            const welcomeScreen = document.getElementById('welcomeScreen');
+            const preparationPhase = document.getElementById('preparationPhase');
+            
+            if (welcomeScreen) welcomeScreen.classList.add('hidden');
+            if (preparationPhase) preparationPhase.classList.remove('hidden');
+            
+            // Generate and display topics immediately
+            displayTopicOptions();
+            startPreparationTimer();
+        }
+
+        function startPreparationTimer() {
+            preparationTimer = setInterval(() => {
+                preparationTimeLeft--;
+                updateTimerDisplay();
+                
+                if (preparationTimeLeft <= 0) {
+                    clearInterval(preparationTimer);
+                    skipToExam();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(preparationTimeLeft / 60);
+            const seconds = preparationTimeLeft % 60;
+            const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            document.getElementById('timerDisplay').textContent = timeString;
+            
+            // Update circle progress
+            const totalTime = 1800;
+            const progress = ((totalTime - preparationTimeLeft) / totalTime) * 360;
+            document.getElementById('timerCircle').style.background = 
+                `conic-gradient(#ef4444 ${progress}deg, #f3f4f6 ${progress}deg)`;
+        }
+
+        function skipToExam() {
+            console.log('skipToExam() aufgerufen');
+            
+            // Check if topic is selected
+            if (!selectedTopicText) {
+                alert('Bitte wählen Sie zunächst ein Thema aus!');
+                return;
+            }
+            
+            if (preparationTimer) {
+                clearInterval(preparationTimer);
+            }
+            
+            // Stop all audio before phase change
+            stopAllAudio();
+            
+            const preparationPhase = document.getElementById('preparationPhase');
+            const presentationPhase = document.getElementById('presentationPhase');
+            const phaseIndicator = document.getElementById('phaseIndicator');
+            
+            if (preparationPhase) preparationPhase.classList.add('hidden');
+            if (presentationPhase) presentationPhase.classList.remove('hidden');
+            if (phaseIndicator) phaseIndicator.textContent = 'Vortrag';
+            
+            // Auto-play presentation audio after a short delay
+            setTimeout(() => {
+                const presentationAudio = document.getElementById('presentationAudio');
+                if (presentationAudio) {
+                    presentationAudio.play().catch(e => console.log('Autoplay prevented:', e));
+                }
+            }, 500);
+        }
+
+        function setupExaminerGrid() {
+            const grid = document.getElementById('examinerGrid');
+            grid.innerHTML = '';
+            
+            examiners.forEach((examiner, index) => {
+                const examinerCard = document.createElement('div');
+                examinerCard.className = `text-center p-3 rounded-lg border-2 transition-colors ${
+                    index === currentExaminerIndex ? 'border-gray-200' : 'border-gray-200'
+                }`;
+                
+                if (index === currentExaminerIndex) {
+                    examinerCard.style.background = 'linear-gradient(180deg, rgba(111, 172, 255, 0.1), rgba(170, 207, 255, 0.1))';
+                    examinerCard.style.borderColor = '#6facff';
+                }
+                
+                let avatarContent = '';
+                if (examiner.image) {
+                    avatarContent = `
+                        <img src="${examiner.image}" alt="${examiner.name}" class="w-full h-full object-cover rounded-full" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-full flex items-center justify-center text-white text-sm font-bold rounded-full" style="background: linear-gradient(180deg, #6facff, #aacfff); display: none;">${examiner.avatar}</div>
+                    `;
+                } else {
+                    avatarContent = examiner.avatar;
+                }
+                
+                examinerCard.innerHTML = `
+                    <div class="examiner-avatar" style="width: 50px; height: 50px; font-size: 16px; margin: 0 auto 8px; overflow: hidden;">
+                        ${avatarContent}
+                    </div>
+                    <div class="text-sm font-medium text-gray-800">${examiner.name}</div>
+                    <div class="text-xs text-gray-600">${examiner.field}</div>
+                `;
+                
+                grid.appendChild(examinerCard);
+            });
+        }
+
+        function finishPresentation() {
+            // Store presentation response
+            examResponses.push({
+                examiner: 'Dr. Dumser',
+                question: 'Vortrag',
+                answer: 'Vortrag über Chat-Widget gehalten'
+            });
+            
+            // Stop all audio before phase change
+            stopAllAudio();
+            
+            // Move to transition phase
+            const presentationPhase = document.getElementById('presentationPhase');
+            const transitionPhase = document.getElementById('transitionPhase');
+            const phaseIndicator = document.getElementById('phaseIndicator');
+            
+            if (presentationPhase) presentationPhase.classList.add('hidden');
+            if (transitionPhase) transitionPhase.classList.remove('hidden');
+            if (phaseIndicator) phaseIndicator.textContent = 'Übergang';
+            
+            // Auto-play transition audio after a short delay
+            setTimeout(() => {
+                const transitionAudio = document.getElementById('transitionAudio');
+                if (transitionAudio) {
+                    transitionAudio.play().catch(e => console.log('Autoplay prevented:', e));
+                }
+            }, 500);
+        }
+
+        function startExamQuestions() {
+            // Stop all audio before phase change
+            stopAllAudio();
+            
+            // Move to exam phase
+            const transitionPhase = document.getElementById('transitionPhase');
+            const examPhase = document.getElementById('examPhase');
+            const phaseIndicator = document.getElementById('phaseIndicator');
+            
+            if (transitionPhase) transitionPhase.classList.add('hidden');
+            if (examPhase) examPhase.classList.remove('hidden');
+            if (phaseIndicator) phaseIndicator.textContent = 'Prüfungsgespräch';
+            
+            setupExaminerGrid();
+            displayCurrentQuestion();
+            
+            // Auto-play first question audio after a short delay
+            setTimeout(() => {
+                const drSchmidtAudio = document.getElementById('drSchmidtAudio');
+                if (drSchmidtAudio) {
+                    drSchmidtAudio.play().catch(e => console.log('Autoplay prevented:', e));
+                }
+            }, 500);
+        }
+
+        function displayCurrentQuestion() {
+            const examiner = examiners[currentExaminerIndex];
+            const questionData = examiner.questions[currentQuestionIndex];
+            const question = questionData.question;
+            const audioUrl = questionData.audio;
+            
+            // Update examiner info
+            const avatarElement = document.getElementById('currentExaminerAvatar');
+            if (examiner.image) {
+                avatarElement.innerHTML = `<img src="${examiner.image}" alt="${examiner.name}" class="w-full h-full object-cover rounded-full" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="w-full h-full flex items-center justify-center text-white text-2xl font-bold rounded-full" style="background: linear-gradient(180deg, #6facff, #aacfff); display: none;">${examiner.avatar}</div>`;
+            } else {
+                avatarElement.textContent = examiner.avatar;
+            }
+            
+            document.getElementById('currentExaminerName').textContent = examiner.name;
+            document.getElementById('currentExaminerField').textContent = `Fachbereich: ${examiner.field}`;
+            document.getElementById('examinerProgress').textContent = `${currentExaminerIndex + 1} / ${examiners.length}`;
+            
+            // Update question
+            document.getElementById('currentQuestion').textContent = question;
+            
+            // Update audio source and show player
+            const audioPlayer = document.getElementById('audioPlayer');
+            const drSchmidtAudio = document.getElementById('drSchmidtAudio');
+            
+            if (audioPlayer && drSchmidtAudio && audioUrl) {
+                drSchmidtAudio.src = audioUrl;
+                audioPlayer.classList.remove('hidden');
+                
+                // Auto-play the audio after a short delay
+                setTimeout(() => {
+                    drSchmidtAudio.play().catch(e => console.log('Autoplay prevented:', e));
+                }, 500);
+            }
+            
+            // Show appropriate response area
+            if (examiner.name === 'Dr. Baretti') {
+                document.getElementById('chatWidget').classList.remove('hidden');
+                document.getElementById('standardResponse').classList.add('hidden');
+            } else {
+                document.getElementById('chatWidget').classList.add('hidden');
+                document.getElementById('standardResponse').classList.remove('hidden');
+            }
+            
+            setupExaminerGrid();
+        }
+
+        function nextQuestion() {
+            // Store current response
+            let response = '';
+            if (examiners[currentExaminerIndex].name === 'Dr. Baretti') {
+                response = document.getElementById('barettiResponse').value || 'Keine Antwort eingegeben';
+            } else {
+                response = document.getElementById('currentResponse').value || 'Keine Antwort eingegeben';
+            }
+            
+            examResponses.push({
+                examiner: examiners[currentExaminerIndex].name,
+                question: examiners[currentExaminerIndex].questions[currentQuestionIndex].question,
+                answer: response
+            });
+            
+            // Stop current audio
+            stopAllAudio();
+            
+            // Show solution phase
+            showSolution();
+        }
+
+        function showSolution() {
+            const examiner = examiners[currentExaminerIndex];
+            const questionData = examiner.questions[currentQuestionIndex];
+            const lastResponse = examResponses[examResponses.length - 1];
+            
+            // Hide exam phase, show solution phase
+            document.getElementById('examPhase').classList.add('hidden');
+            document.getElementById('solutionPhase').classList.remove('hidden');
+            setPhase('Lösung');
+            
+            // Update solution examiner info
+            const solutionAvatarElement = document.getElementById('solutionExaminerAvatar');
+            if (examiner.image) {
+                solutionAvatarElement.innerHTML = `<img src="${examiner.image}" alt="${examiner.name}" class="w-full h-full object-cover rounded-full" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="w-full h-full flex items-center justify-center text-white text-2xl font-bold rounded-full" style="background: linear-gradient(180deg, #6facff, #aacfff); display: none;">${examiner.avatar}</div>`;
+            } else {
+                solutionAvatarElement.textContent = examiner.avatar;
+            }
+            
+            document.getElementById('solutionExaminerName').textContent = examiner.name;
+            document.getElementById('solutionExaminerField').textContent = `Fachbereich: ${examiner.field}`;
+            document.getElementById('solutionExaminerProgress').textContent = `${currentExaminerIndex + 1} / ${examiners.length}`;
+            
+            // Update solution content
+            document.getElementById('solutionQuestion').textContent = questionData.question;
+            document.getElementById('solutionYourAnswer').textContent = lastResponse.answer;
+            
+            // Format and display model solution
+            const solutionText = questionData.solution || 'Musterlösung wird geladen...';
+            const formattedSolution = formatSolution(solutionText);
+            document.getElementById('solutionModelAnswer').innerHTML = formattedSolution;
+            
+            // Setup solution examiner grid
+            setupSolutionExaminerGrid();
+        }
+
+        function formatSolution(solutionText) {
+            // Convert markdown-like formatting to HTML
+            let formatted = solutionText
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n• /g, '<li>')
+                .replace(/\n/g, '<br>');
+            
+            // Wrap list items in ul tags
+            if (formatted.includes('<li>')) {
+                formatted = formatted.replace(/(<li>.*?)(<br>|$)/g, '$1</li>');
+                formatted = formatted.replace(/(<li>.*?<\/li>)/g, '<ul class="list-disc list-inside space-y-2 mt-2">$1</ul>');
+                formatted = formatted.replace(/<\/ul><ul class="list-disc list-inside space-y-2 mt-2">/g, '');
+            }
+            
+            return formatted;
+        }
+
+        function setupSolutionExaminerGrid() {
+            const grid = document.getElementById('solutionExaminerGrid');
+            grid.innerHTML = '';
+            
+            examiners.forEach((examiner, index) => {
+                const examinerCard = document.createElement('div');
+                examinerCard.className = `text-center p-3 rounded-lg border-2 transition-colors ${
+                    index === currentExaminerIndex ? 'border-gray-200' : 'border-gray-200'
+                }`;
+                
+                if (index === currentExaminerIndex) {
+                    examinerCard.style.background = 'linear-gradient(180deg, rgba(111, 172, 255, 0.1), rgba(170, 207, 255, 0.1))';
+                    examinerCard.style.borderColor = '#6facff';
+                }
+                
+                let avatarContent = '';
+                if (examiner.image) {
+                    avatarContent = `
+                        <img src="${examiner.image}" alt="${examiner.name}" class="w-full h-full object-cover rounded-full" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-full flex items-center justify-center text-white text-sm font-bold rounded-full" style="background: linear-gradient(180deg, #6facff, #aacfff); display: none;">${examiner.avatar}</div>
+                    `;
+                } else {
+                    avatarContent = examiner.avatar;
+                }
+                
+                examinerCard.innerHTML = `
+                    <div class="examiner-avatar" style="width: 50px; height: 50px; font-size: 16px; margin: 0 auto 8px; overflow: hidden;">
+                        ${avatarContent}
+                    </div>
+                    <div class="text-sm font-medium text-gray-800">${examiner.name}</div>
+                    <div class="text-xs text-gray-600">${examiner.field}</div>
+                `;
+                
+                grid.appendChild(examinerCard);
+            });
+        }
+
+        function continueToNextQuestion() {
+            console.log('continueToNextQuestion aufgerufen');
+            console.log('Aktueller Prüfer:', currentExaminerIndex, 'Aktuelle Frage:', currentQuestionIndex);
+            
+            // Clear response fields
+            if (document.getElementById('barettiResponse')) {
+                document.getElementById('barettiResponse').value = '';
+            }
+            if (document.getElementById('currentResponse')) {
+                document.getElementById('currentResponse').value = '';
+            }
+            
+            // Move to next question or examiner
+            currentQuestionIndex++;
+            console.log('Nach Erhöhung - Frage:', currentQuestionIndex, 'von', examiners[currentExaminerIndex].questions.length);
+            
+            if (currentQuestionIndex >= examiners[currentExaminerIndex].questions.length) {
+                // Move to next examiner
+                currentExaminerIndex++;
+                currentQuestionIndex = 0;
+                console.log('Wechsel zu Prüfer:', currentExaminerIndex, 'von', examiners.length);
+                
+                if (currentExaminerIndex >= examiners.length) {
+                    // Exam finished
+                    console.log('Prüfung beendet');
+                    showResults();
+                    return;
+                }
+            }
+            
+            // Stop all audio before phase change
+            stopAllAudio();
+            
+            // Hide solution phase, show exam phase
+            document.getElementById('solutionPhase').classList.add('hidden');
+            document.getElementById('examPhase').classList.remove('hidden');
+            setPhase('Prüfungsgespräch');
+            
+            console.log('Zeige neue Frage an');
+            displayCurrentQuestion();
+        }
+
+        function backToQuestion() {
+            // Hide solution phase, show exam phase
+            document.getElementById('solutionPhase').classList.add('hidden');
+            document.getElementById('examPhase').classList.remove('hidden');
+            setPhase('Prüfungsgespräch');        }
+
+        function showResults() {
+            // Stop all audio
+            stopAllAudio();
+            
+            const solutionPhase = document.getElementById('solutionPhase');
+            const resultsPhase = document.getElementById('resultsPhase');
+            const phaseIndicator = document.getElementById('phaseIndicator');
+            
+            if (solutionPhase) solutionPhase.classList.add('hidden');
+            if (resultsPhase) resultsPhase.classList.remove('hidden');
+            if (phaseIndicator) phaseIndicator.textContent = 'Ergebnis';
+        }
+
+        function restartExam() {
+            // Reset all variables
+            currentExaminerIndex = 0;
+            currentQuestionIndex = 0;
+            selectedTopicText = '';
+            examResponses = [];
+            preparationTimeLeft = 1800;
+            presentationTimeElapsed = 0;
+            isPresentationTimerRunning = false;
+            
+            // Clear timers
+            if (preparationTimer) clearInterval(preparationTimer);
+            if (presentationTimer) clearInterval(presentationTimer);
+            
+            // Stop all audio
+            stopAllAudio();
+            
+            // Reinitialize examiners
+            initializeExaminers();
+            
+            // Show welcome screen
+            document.getElementById('welcomeScreen').classList.remove('hidden');
+            document.getElementById('preparationPhase').classList.add('hidden');
+            document.getElementById('presentationPhase').classList.add('hidden');
+            document.getElementById('transitionPhase').classList.add('hidden');
+            document.getElementById('examPhase').classList.add('hidden');
+            document.getElementById('solutionPhase').classList.add('hidden');
+            document.getElementById('resultsPhase').classList.add('hidden');
+            
+            // Reset phase indicator
+            setPhase('Vorbereitung');
+        }
+
+        function clearResponse() {
+            document.getElementById('currentResponse').value = '';
+        }
+
+        function clearBarettiResponse() {
+            document.getElementById('barettiResponse').value = '';
+        }
+
+        function showSampleSolution() {
+            // Get the appropriate solution (specific or general)
+            let solutionData = presentationSolutions.general;
+            
+            // Check if there's a specific solution for the selected topic
+            if (presentationSolutions.specific[selectedTopicText]) {
+                solutionData = presentationSolutions.specific[selectedTopicText];
+            }
+            
+            // Create modal overlay
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+            modalOverlay.onclick = (e) => {
+                if (e.target === modalOverlay) {
+                    document.body.removeChild(modalOverlay);
+                }
+            };
+            
+            // Create modal content
+            const modalContent = document.createElement('div');
+            modalContent.className = 'bg-white rounded-2xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto';
+            
+            // Generate HTML for solution sections
+            function generateSectionHTML(section) {
+                const pointsHTML = section.points.map(point => `<li>${point}</li>`).join('');
+                return `
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">${section.title}</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            ${pointsHTML}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            modalContent.innerHTML = `
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-gray-800">Musterlösung für Ihren Vortrag</h3>
+                        <button onclick="document.body.removeChild(this.closest('.fixed'))" class="text-gray-500 hover:text-gray-700 text-2xl font-bold">&times;</button>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                        <h4 class="text-lg font-semibold text-blue-800 mb-2">Gewähltes Thema:</h4>
+                        <p class="text-blue-700">"${selectedTopicText}"</p>
+                    </div>
+                    
+                    <div class="space-y-6">	
+${generateSectionHTML(solutionData.Gliederung)}
+                        ${generateSectionHTML(solutionData.introduction)}
+                        ${generateSectionHTML(solutionData.mainPart)}
+                        ${generateSectionHTML(solutionData.conclusion)}
+                    </div>
+                    
+                    <div class="mt-6 text-center">
+                        <button onclick="document.body.removeChild(this.closest('.fixed'))" class="text-white px-6 py-2 rounded-lg font-medium transition-all" style="background: linear-gradient(180deg, #6facff, #aacfff); box-shadow: 0 2px 4px rgba(111, 172, 255, 0.3);" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'">
+                            Schließen
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modalOverlay.appendChild(modalContent);
+            document.body.appendChild(modalOverlay);
+        }
+
+        // Presentation timer functions
+        function startPresentationTimer() {
+            if (!isPresentationTimerRunning) {
+                isPresentationTimerRunning = true;
+                presentationTimer = setInterval(() => {
+                    presentationTimeElapsed++;
+                    updatePresentationTimerDisplay();
+                }, 1000);
+                
+                document.getElementById('startTimerBtn').disabled = true;
+                document.getElementById('pauseTimerBtn').disabled = false;
+            }
+        }
+
+        function pausePresentationTimer() {
+            if (isPresentationTimerRunning) {
+                isPresentationTimerRunning = false;
+                clearInterval(presentationTimer);
+                
+                document.getElementById('startTimerBtn').disabled = false;
+                document.getElementById('pauseTimerBtn').disabled = true;
+            }
+        }
+
+        function resetPresentationTimer() {
+            isPresentationTimerRunning = false;
+            clearInterval(presentationTimer);
+            presentationTimeElapsed = 0;
+            updatePresentationTimerDisplay();
+            
+            document.getElementById('startTimerBtn').disabled = false;
+            document.getElementById('pauseTimerBtn').disabled = true;
+        }
+
+        function updatePresentationTimerDisplay() {
+            const minutes = Math.floor(presentationTimeElapsed / 60);
+            const seconds = presentationTimeElapsed % 60;
+            const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            document.getElementById('presentationTimer').textContent = timeString;
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeExaminers();
+            console.log('Seite geladen, Prüfer initialisiert');
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98553e7ab01d1dbb',t:'MTc1ODkxNTc0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+
+
