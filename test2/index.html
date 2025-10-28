@@ -612,7 +612,7 @@ specific: {
         introduction: {
             title: "Übersicht ",
             points: [
-" <p><strong>Gliederung</strong><br>Einleitung<br>Wirtschaftliche Bedeutung des Erwerbs eigener Anteile<br><strong>Hauptteil</strong><br>&bull;&nbsp;Handelsrechtliche Grundlagen<br>&bull;&nbsp;Steuerrechtliche Konsequenzen für die Gesellschaft<br>&bull;&nbsp;Steuerrechtliche Konsequenzen für den Gesellschafter<br><strong>Schluss</strong><br>Verzerrungen aufgrund fehlendem Direktzugriff auf steuerliches Einlagekonto</p>
+"ffffffffff“
 ]
         },
         mainPart: {
@@ -1474,18 +1474,24 @@ function displayTopicOptions() {
             modalContent.className = 'bg-white rounded-2xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto';
             
             // Generate HTML for solution sections
-            function generateSectionHTML(section) {
-                const pointsHTML = section.points.map(point => `<li>${point}</li>`).join('');
-                return `
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-3">${section.title}</h4>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            ${pointsHTML}
-                        </ul>
-                    </div>
-                `;
-            }
-            
+function generateSectionHTML(section) {
+  // Punkte/Zeilen aufsplitten und echte "•" entfernen
+  const lines = section.points
+    .flatMap(pt => String(pt).split(/\n+/))
+    .map(line => line.replace(/^\s*[•\-\*]\s*/, ''))
+    .filter(line => line.trim() !== '');
+
+  const body = lines
+    .map(line => `<p class="mb-2 text-gray-700">${line}</p>`)
+    .join('');
+
+  return `
+    <div class="bg-gray-50 rounded-lg p-4">
+      <h4 class="text-lg font-semibold text-gray-800 mb-3">${section.title}</h4>
+      <div>${body}</div>
+    </div>
+  `;
+}            
             modalContent.innerHTML = `
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-6">
