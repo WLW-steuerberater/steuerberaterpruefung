@@ -985,40 +985,45 @@ function setPhase(text) {
             }
         }
 
-        function displayTopicOptions() {
-            const topicOptions = document.getElementById('topicOptions');
-            if (!topicOptions) {
-                console.error('topicOptions Element nicht gefunden');
-                return;
-            }
-            
-            const randomTopics = generateRandomTopics();
-            console.log('Generierte Themen:', randomTopics);
-            
-            topicOptions.innerHTML = '';
-            
-            randomTopics.forEach((topicData, index) => {
-                const topicButton = document.createElement('div');
-                topicButton.className = 'topic-button p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all hover:border-blue-400';
-                topicButton.style.background = 'white';
-                topicButton.onclick = () => selectTopic(topicData, topicButton);
-                
-                topicButton.innerHTML = `
-                    <div class="flex items-start">
-                        <span class="w-8 h-8 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0" style="background: #6facff;">${index + 1}</span>
-                        <div class="flex-1">
-                            <div class="text-gray-800 font-medium mb-1">${topicData.topic}</div>
-                            <div class="text-xs px-2 py-1 rounded-full inline-block" style="background-color: rgba(111, 172, 255, 0.2); color: #6facff;">
-                                ${topicData.category}
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                topicOptions.appendChild(topicButton);
-            });
-        }
+function displayTopicOptions() {
+  const topicOptions = document.getElementById('topicOptions');
+  if (!topicOptions) {
+    console.error('topicOptions Element nicht gefunden');
+    return;
+  }
 
+  topicOptions.innerHTML = '';
+
+  // Alle Kategorien & Themen exakt so ausgeben, wie sie in topicsByCategory stehen
+  Object.entries(topicsByCategory).forEach(([rawCategory, topics]) => {
+    const category = (rawCategory || '').trim(); // toleranter Umgang mit Leerzeichen im Key
+
+    if (!Array.isArray(topics) || topics.length === 0) return;
+
+    topics.forEach((topic, index) => {
+      const topicButton = document.createElement('div');
+      topicButton.className = 'topic-button p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all hover:border-blue-400';
+      topicButton.style.background = 'white';
+      topicButton.onclick = () => selectTopic({ topic, category }, topicButton);
+
+      topicButton.innerHTML = `
+        <div class="flex items-start">
+          <span class="w-8 h-8 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0" style="background: #6facff;">
+            ${index + 1}
+          </span>
+          <div class="flex-1">
+            <div class="text-gray-800 font-medium mb-1">${topic}</div>
+            <div class="text-xs px-2 py-1 rounded-full inline-block" style="background-color: rgba(111, 172, 255, 0.2); color: #6facff;">
+              ${category}
+            </div>
+          </div>
+        </div>
+      `;
+
+      topicOptions.appendChild(topicButton);
+    });
+  });
+}
         function startExam() {
             console.log('startExam() aufgerufen');
             
