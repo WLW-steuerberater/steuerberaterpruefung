@@ -1,0 +1,1662 @@
+<!doctype html>
+<html lang="de">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>WLW Zufallsgenerator - Perfekte Vorbereitung auf die mündliche Prüfung</title>
+  <meta name="description" content="Der ultimative Zufallsgenerator für die Vorbereitung auf die mündliche WLW-Prüfung. Vortragsthemen und häufig gestellte Fragen aus allen Rechtsgebieten.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+        
+        * {
+            font-family: 'Fira Sans', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(180deg, #6facff, #aacfff);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Animationen nur auf größeren Bildschirmen */
+        @media (min-width: 768px) {
+            body {
+                background-size: 400% 400%;
+                animation: gradientShift 15s ease infinite;
+            }
+            
+            body::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: 
+                    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+                animation: floatingOrbs 20s ease-in-out infinite;
+                pointer-events: none;
+                z-index: 1;
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes floatingOrbs {
+            0%, 100% {
+                transform: translate(0px, 0px) rotate(0deg);
+                opacity: 1;
+            }
+            33% {
+                transform: translate(30px, -30px) rotate(120deg);
+                opacity: 0.8;
+            }
+            66% {
+                transform: translate(-20px, 20px) rotate(240deg);
+                opacity: 0.6;
+            }
+        }
+        
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+            height: 280px;
+        }
+        
+        @media (min-width: 768px) {
+            .flip-card {
+                height: 320px;
+            }
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            border: none;
+        }
+        
+        @media (min-width: 768px) {
+            .flip-card-front, .flip-card-back {
+                border-radius: 28px;
+                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            }
+        }
+        
+        .flip-card-front {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .flip-card-front {
+                padding: 32px;
+            }
+        }
+        
+        .flip-card-front {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+        
+        .flip-card-back {
+            background: rgba(248, 250, 252, 1);
+            backdrop-filter: blur(20px);
+            transform: rotateY(180deg);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(111, 172, 255, 0.3) transparent;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        @media (min-width: 768px) {
+            .flip-card-back {
+                padding: 24px;
+            }
+        }
+        
+        .flip-card-back::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .flip-card-back::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .flip-card-back::-webkit-scrollbar-thumb {
+            background: rgba(111, 172, 255, 0.3);
+            border-radius: 3px;
+        }
+        
+        .flip-card-back::-webkit-scrollbar-thumb:hover {
+            background: rgba(111, 172, 255, 0.5);
+        }
+        
+        .text-content {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 0;
+            margin: 0;
+            min-height: 0;
+        }
+        
+        .text-content p {
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        .progress-container {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            height: 12px;
+            position: relative;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #10b981, #34d399);
+            height: 100%;
+            transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        @media (min-width: 768px) {
+            .stat-card {
+                border-radius: 24px;
+                padding: 24px;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            }
+            
+            .stat-card:hover {
+                transform: translateY(-6px) scale(1.02);
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.15);
+            }
+        }
+        
+        .btn-primary {
+            background: #6facff;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 10px 30px rgba(111, 172, 255, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.4s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(111, 172, 255, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #34C759, #28A745);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 8px 25px rgba(52, 199, 89, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            border: none;
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(52, 199, 89, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #FF3B30, #D70015);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 8px 25px rgba(255, 59, 48, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            border: none;
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(255, 59, 48, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15);
+        }
+        
+        .module-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (min-width: 768px) {
+            .module-card {
+                border-radius: 32px;
+                box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.95); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
+        
+        .logo-container {
+            background: transparent;
+            border: none;
+            padding: 0;
+            box-shadow: none;
+        }
+        
+        .mode-selector {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 6px;
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mode-btn {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+        
+        .mode-btn.active {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1f2937;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+        
+        .mode-btn:not(.active) {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .mode-btn:not(.active):hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: scale(1.01);
+        }
+        
+        .subject-badge {
+            background: #6facff;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 16px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+            box-shadow: 0 4px 15px rgba(111, 172, 255, 0.3);
+        }
+        
+        .answer-badge {
+            background: linear-gradient(135deg, #34C759 0%, #28A745 100%);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 16px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+            box-shadow: 0 4px 15px rgba(52, 199, 89, 0.3);
+        }
+        
+
+
+        
+        /* Legal Pages Styles */
+        .legal-page {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            margin: 1rem 0;
+            padding: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .legal-page {
+                border-radius: 32px;
+                box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+                margin: 2rem 0;
+                padding: 3rem;
+            }
+        }
+        
+        .legal-content h2 {
+            color: #1f2937;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #6facff;
+        }
+        
+        .legal-content h3 {
+            color: #374151;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+        
+        @media (min-width: 768px) {
+            .legal-content h2 {
+                font-size: 1.875rem;
+                margin-bottom: 1.5rem;
+                padding-bottom: 0.75rem;
+            }
+            
+            .legal-content h3 {
+                font-size: 1.5rem;
+                margin: 2rem 0 1rem 0;
+            }
+        }
+        
+        .legal-content p {
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        
+        .legal-content ul {
+            color: #4b5563;
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .legal-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .legal-content a {
+            color: #6facff;
+            text-decoration: underline;
+        }
+        
+        .legal-content a:hover {
+            color: #4f46e5;
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="relative"><!-- Main Content -->
+  <main class="min-h-screen relative z-10"><!-- Home Page (Generator) -->
+   <div id="page-home" class="page-content p-6">
+    <div class="max-w-7xl mx-auto relative z-10"><!-- Header -->
+     <div class="text-center mb-6 md:mb-10">
+      <h1 class="text-3xl md:text-5xl font-bold text-white mb-3 md:mb-4 drop-shadow-lg tracking-tight">Zufallsgenerator</h1>
+      <p class="text-white/90 text-lg md:text-xl font-light px-4">Die perfekte Vorbereitung auf die mündliche StB-Prüfung</p>
+     </div><!-- Mode Selection -->
+     <div class="mode-selector max-w-2xl mx-auto mb-6 md:mb-10 mx-4">
+      <div class="flex"><button onclick="switchMode('topics')" id="topics-btn" class="mode-btn active flex-1 px-4 md:px-8 py-3 md:py-4 font-semibold text-base md:text-lg">
+        <div class="text-center">
+         <div>
+          Zufallsgenerator
+         </div>
+         <div class="text-xs font-normal opacity-80 mt-1">
+          Vortragsthemen
+         </div>
+        </div></button> <button onclick="window.open('https://wlw-steuerberaterprüfung.de/test/', '_blank', 'noopener,noreferrer')" id="faq-btn" class="mode-btn flex-1 px-4 md:px-8 py-3 md:py-4 font-semibold text-base md:text-lg relative">
+        <div class="absolute top-1 right-4 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold shadow-lg z-50">
+         NEU
+        </div>
+        <div class="text-center">
+         <div>
+          Online Prüfungssimulator
+         </div>
+         <div class="text-xs font-normal opacity-80 mt-1">
+          Realistische Prüfungssimulation
+         </div>
+        </div></button>
+      </div>
+     </div><!-- FAQ Module -->
+     <div id="faq-module" class="module-card p-4 md:p-10 mb-4 md:mb-8 mx-4" style="display: none;">
+      <div class="text-center mb-6 md:mb-8">
+       <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 md:mb-8 tracking-tight">Häufig gestellte Fragen</h2>
+       <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-6 md:mb-8">
+        <div class="stat-card text-center">
+         <div class="text-2xl md:text-3xl font-bold mb-1 md:mb-2" id="faq-total" style="color: #6facff;">
+          0
+         </div>
+         <div class="text-xs md:text-sm text-gray-600 font-medium">
+          Gestellt
+         </div>
+        </div>
+        <div class="stat-card text-center">
+         <div class="text-2xl md:text-3xl font-bold text-green-600 mb-1 md:mb-2" id="faq-correct">
+          0
+         </div>
+         <div class="text-xs md:text-sm text-gray-600 font-medium">
+          Gewusst
+         </div>
+        </div>
+        <div class="stat-card text-center">
+         <div class="text-2xl md:text-3xl font-bold text-red-600 mb-1 md:mb-2" id="faq-incorrect">
+          0
+         </div>
+         <div class="text-xs md:text-sm text-gray-600 font-medium">
+          Nicht gewusst
+         </div>
+        </div>
+        <div class="stat-card text-center">
+         <div class="text-2xl md:text-3xl font-bold text-purple-600 mb-1 md:mb-2" id="faq-progress">
+          0%
+         </div>
+         <div class="text-xs md:text-sm text-gray-600 font-medium">
+          Fortschritt
+         </div>
+        </div>
+       </div>
+       <div class="progress-container mb-8">
+        <div class="progress-fill" id="faq-progress-bar" style="width: 0%"></div>
+       </div><!-- FAQ Listen -->
+       <div id="faq-lists-container" class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8" style="display: none;"><!-- Gemerkte Fragen -->
+        <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl md:rounded-2xl p-4 md:p-6">
+         <h4 class="text-base md:text-lg font-bold text-gray-800 mb-3 md:mb-4 text-center">Gemerkte Fragen</h4>
+         <div id="bookmarked-faq-list" class="space-y-2 md:space-y-3 max-h-48 md:max-h-60 overflow-y-auto">
+          <div class="text-center text-gray-500 py-3 md:py-4">
+           <p class="text-xs md:text-sm">Noch keine Fragen gemerkt</p>
+          </div>
+         </div>
+        </div><!-- Gewusste Fragen -->
+        <div class="bg-green-50 border-2 border-green-200 rounded-xl md:rounded-2xl p-4 md:p-6">
+         <h4 class="text-base md:text-lg font-bold text-gray-800 mb-3 md:mb-4 text-center">Gewusste Fragen</h4>
+         <div id="known-faq-list" class="space-y-2 md:space-y-3 max-h-48 md:max-h-60 overflow-y-auto">
+          <div class="text-center text-gray-500 py-3 md:py-4">
+           <p class="text-xs md:text-sm">Noch keine Fragen gewusst</p>
+          </div>
+         </div>
+        </div><!-- Nicht gewusste Fragen -->
+        <div class="bg-red-50 border-2 border-red-200 rounded-xl md:rounded-2xl p-4 md:p-6">
+         <h4 class="text-base md:text-lg font-bold text-gray-800 mb-3 md:mb-4 text-center">Nicht gewusste Fragen</h4>
+         <div id="unknown-faq-list" class="space-y-2 md:space-y-3 max-h-48 md:max-h-60 overflow-y-auto">
+          <div class="text-center text-gray-500 py-3 md:py-4">
+           <p class="text-xs md:text-sm">Noch keine Fragen nicht gewusst</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="max-w-3xl mx-auto">
+       <div class="flip-card mx-auto mb-8" id="faq-card">
+        <div class="flip-card-inner">
+         <div class="flip-card-front">
+          <div class="subject-badge mb-6" id="faq-subject">
+           Fachgebiet
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800 leading-relaxed mb-6" id="faq-question">Hier erscheint Ihre Frage</h3>
+          <div class="text-gray-500 text-sm font-medium">
+           Klicken Sie auf die Karte für die Antwort
+          </div>
+         </div>
+         <div class="flip-card-back">
+          <div class="answer-badge mb-6">
+           Antwort
+          </div>
+          <div class="text-content">
+           <p class="text-lg text-gray-700 leading-relaxed" id="faq-answer">Hier erscheint die Antwort</p>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="flex flex-col md:flex-row gap-3 md:gap-4 justify-center"><button onclick="generateFAQ()" class="btn-primary text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-base md:text-lg"> Neue Frage </button> <button onclick="toggleBookmarkFAQ()" class="px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-white border-2 border-yellow-400 text-base md:text-lg" id="faq-bookmark-btn" style="display: none; background-color: #fbbf24;"> Merken </button> <button onclick="markFAQ(true)" class="btn-success text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-base md:text-lg" id="faq-correct-btn" style="display: none;"> Gewusst </button> <button onclick="markFAQ(false)" class="btn-danger text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-base md:text-lg" id="faq-incorrect-btn" style="display: none;"> Nicht gewusst </button>
+       </div>
+      </div>
+     </div><!-- Topics Module -->
+     <div id="topics-module" class="module-card p-4 md:p-10 mx-4">
+      <div class="text-center mb-6 md:mb-8">
+       <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 md:mb-8 tracking-tight">Vortragsthemen</h2>
+      </div>
+      <div class="mb-6 md:mb-8 text-center"><button onclick="generateTopics()" class="btn-primary text-white px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold text-base md:text-lg"> Neue Themen </button>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8" id="topics-container"><!-- Topics werden hier eingefügt -->
+      </div><!-- Gemerkte Themen -->
+      <div id="bookmarked-topics-section" class="mt-8 md:mt-12" style="display: none;">
+       <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6 text-center tracking-tight">Gemerkte Themen</h3>
+       <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl md:rounded-2xl p-4 md:p-6">
+        <div id="bookmarked-topics-list" class="space-y-3 md:space-y-4"><!-- Gemerkte Themen werden hier eingefügt -->
+        </div>
+       </div>
+      </div><!-- Timer Section -->
+      <div class="mt-12 text-center">
+       <h3 class="text-2xl font-bold text-gray-800 mb-6 tracking-tight">Vorbereitungszeit</h3>
+       <div class="max-w-md mx-auto">
+        <div class="stat-card p-8">
+         <div class="text-6xl font-bold mb-4" id="timer-display" style="color: #6facff;">
+          30:00
+         </div>
+         <div class="text-sm text-gray-600 font-medium mb-6">
+          Minuten verbleibend
+         </div>
+         <div class="flex gap-4 justify-center"><button onclick="startTimer()" id="start-btn" class="btn-success text-white px-6 py-3 rounded-xl font-semibold"> Start </button> <button onclick="pauseTimer()" id="pause-btn" class="btn-primary text-white px-6 py-3 rounded-xl font-semibold" style="display: none;"> Pause </button> <button onclick="resetTimer()" class="btn-danger text-white px-6 py-3 rounded-xl font-semibold"> Reset </button>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- About Page -->
+   <div id="page-about" class="page-content p-6 hidden">
+    <div class="max-w-4xl mx-auto">
+     <div class="legal-page">
+      <div class="legal-content">
+       <h2>Über den WLW Zufallsgenerator</h2>
+       <p>Willkommen beim ultimativen Zufallsgenerator für die Vorbereitung auf die mündliche WLW-Prüfung (Wirtschaftsprüfer/Steuerberater). Unser Tool wurde speziell entwickelt, um Ihnen eine optimale und strukturierte Vorbereitung zu ermöglichen.</p>
+       <h3>Was bietet der Generator?</h3>
+       <ul>
+        <li><strong>Vortragsthemen:</strong> Über 20 sorgfältig ausgewählte Themen aus allen relevanten Rechtsgebieten</li>
+        <li><strong>Häufig gestellte Fragen:</strong> Eine umfangreiche Sammlung typischer Prüfungsfragen mit detaillierten Antworten</li>
+        <li><strong>Intelligente Themenauswahl:</strong> Garantierte Abdeckung aller wichtigen Bereiche durch priorisierte Themenzuteilung</li>
+        <li><strong>Fortschrittsverfolgung:</strong> Behalten Sie den Überblick über Ihren Lernfortschritt</li>
+        <li><strong>Bookmark-Funktion:</strong> Merken Sie sich wichtige Themen und Fragen für die Wiederholung</li>
+        <li><strong>Integrierter Timer:</strong> 30-Minuten-Timer für realistische Prüfungssimulation</li>
+       </ul>
+       <h3>Fachgebiete</h3>
+       <p>Der Generator deckt alle prüfungsrelevanten Bereiche ab:</p>
+       <ul>
+        <li>Abgabenordnung &amp; Finanzgerichtsordnung</li>
+        <li>Einkommensteuer &amp; Körperschaftsteuer</li>
+        <li>Umsatzsteuer &amp; Gewerbesteuer</li>
+        <li>Bilanzsteuerrecht &amp; Bewertungsrecht</li>
+        <li>Erbschaftsteuer &amp; Schenkungsteuer</li>
+        <li>Umwandlungssteuerrecht</li>
+        <li>Internationales Steuerrecht</li>
+        <li>Grunderwerbsteuer &amp; Grundsteuer</li>
+        <li>Betriebswirtschaftslehre &amp; Volkswirtschaftslehre</li>
+        <li>Zivilrecht</li>
+       </ul>
+       <h3>Wie funktioniert es?</h3>
+       <p>Der Generator verwendet ein intelligentes System zur Themenauswahl:</p>
+       <ul>
+        <li><strong>1. Thema:</strong> Immer aus den Grundlagen (AO/FGO/Zivilrecht)</li>
+        <li><strong>2. Thema:</strong> Aus spezialisierten Bereichen (BilSt, ErbSt, BWL, VWL, etc.)</li>
+        <li><strong>3. Thema:</strong> Aus Hauptsteuerarten oder aktuellen Themen</li>
+       </ul>
+       <h3>Entwicklung &amp; Updates</h3>
+       <p>Der WLW Zufallsgenerator wird kontinuierlich weiterentwickelt und an aktuelle Prüfungsanforderungen angepasst. Version 27 bringt zahlreiche Verbesserungen in der Benutzerführung und erweiterte Funktionen.</p>
+       <h3>Für wen ist das Tool geeignet?</h3>
+       <ul>
+        <li>Kandidaten der Steuerberaterprüfung</li>
+        <li>Anwärter auf die Wirtschaftsprüferprüfung</li>
+        <li>Studierende der Rechtswissenschaften mit Schwerpunkt Steuerrecht</li>
+        <li>Praktiker zur Auffrischung und Weiterbildung</li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </div><!-- Contact Page -->
+   <div id="page-contact" class="page-content p-6 hidden">
+    <div class="max-w-4xl mx-auto">
+     <div class="legal-page">
+      <div class="legal-content">
+       <h2>Kontakt</h2>
+       <p>Haben Sie Fragen, Anregungen oder Feedback zum WLW Zufallsgenerator? Wir freuen uns über Ihre Nachricht!</p>
+       <h3>Kontaktmöglichkeiten</h3>
+       <p><strong>E-Mail:</strong> <a href="mailto:info@wlw-generator.de">info@wlw-generator.de</a></p>
+       <p><strong>Support:</strong> <a href="mailto:support@wlw-generator.de">support@wlw-generator.de</a></p>
+       <h3>Feedback &amp; Verbesserungsvorschläge</h3>
+       <p>Ihr Feedback ist uns wichtig! Teilen Sie uns mit:</p>
+       <ul>
+        <li>Welche Themen oder Fragen fehlen noch?</li>
+        <li>Welche Funktionen würden Sie sich wünschen?</li>
+        <li>Haben Sie Verbesserungsvorschläge für die Benutzerführung?</li>
+        <li>Sind Ihnen Fehler aufgefallen?</li>
+       </ul>
+       <h3>Technischer Support</h3>
+       <p>Bei technischen Problemen helfen wir gerne weiter. Bitte beschreiben Sie das Problem möglichst genau und geben Sie folgende Informationen an:</p>
+       <ul>
+        <li>Verwendeter Browser und Version</li>
+        <li>Betriebssystem</li>
+        <li>Beschreibung des Problems</li>
+        <li>Schritte zur Reproduktion des Fehlers</li>
+       </ul>
+       <h3>Kooperationen &amp; Partnerschaften</h3>
+       <p>Sie sind Bildungsträger, Dozent oder Anbieter von Prüfungsvorbereitungskursen? Sprechen Sie uns gerne für mögliche Kooperationen an.</p>
+       <h3>Antwortzeiten</h3>
+       <p>Wir bemühen uns, alle Anfragen innerhalb von 48 Stunden zu beantworten. In dringenden Fällen oder bei technischen Problemen oft auch schneller.</p>
+      </div>
+     </div>
+    </div>
+   </div><!-- Impressum Page -->
+   <div id="page-impressum" class="page-content p-6 hidden">
+    <div class="max-w-4xl mx-auto">
+     <div class="legal-page">
+      <div class="legal-content">
+       <h2>Impressum</h2>
+       <h3>Angaben gemäß § 5 TMG</h3>
+       <p>WLW Zufallsgenerator<br>
+         Max Mustermann<br>
+         Musterstraße 123<br>
+         12345 Musterstadt</p>
+       <h3>Kontakt</h3>
+       <p>Telefon: +49 (0) 123 456789<br>
+         E-Mail: <a href="mailto:info@wlw-generator.de">info@wlw-generator.de</a></p>
+       <h3>Umsatzsteuer-ID</h3>
+       <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+         DE123456789</p>
+       <h3>Redaktionell verantwortlich</h3>
+       <p>Max Mustermann<br>
+         Musterstraße 123<br>
+         12345 Musterstadt</p>
+       <h3>EU-Streitschlichtung</h3>
+       <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a><br>
+         Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+       <h3>Verbraucherstreitbeilegung/Universalschlichtungsstelle</h3>
+       <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+       <h3>Haftung für Inhalte</h3>
+       <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht unter der Verpflichtung, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+       <p>Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
+       <h3>Haftung für Links</h3>
+       <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.</p>
+       <p>Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
+       <h3>Urheberrecht</h3>
+       <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.</p>
+       <p>Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
+      </div>
+     </div>
+    </div>
+   </div><!-- Datenschutz Page -->
+   <div id="page-datenschutz" class="page-content p-6 hidden">
+    <div class="max-w-4xl mx-auto">
+     <div class="legal-page">
+      <div class="legal-content">
+       <h2>Datenschutzerklärung</h2>
+       <h3>1. Datenschutz auf einen Blick</h3>
+       <h4>Allgemeine Hinweise</h4>
+       <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.</p>
+       <h4>Datenerfassung auf dieser Website</h4>
+       <p><strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong></p>
+       <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Abschnitt „Hinweis zur Verantwortlichen Stelle" in dieser Datenschutzerklärung entnehmen.</p>
+       <p><strong>Wie erfassen wir Ihre Daten?</strong></p>
+       <p>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben.</p>
+       <p>Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese Website betreten.</p>
+       <p><strong>Wofür nutzen wir Ihre Daten?</strong></p>
+       <p>Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.</p>
+       <p><strong>Welche Rechte haben Sie bezüglich Ihrer Daten?</strong></p>
+       <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.</p>
+       <p>Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns wenden.</p>
+       <h3>2. Hosting</h3>
+       <p>Wir hosten die Inhalte unserer Website bei folgendem Anbieter:</p>
+       <h4>Externes Hosting</h4>
+       <p>Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters / der Hoster gespeichert. Hierbei kann es sich v. a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und sonstige Daten, die über eine Website generiert werden, handeln.</p>
+       <p>Das externe Hosting erfolgt zum Zwecke der Vertragserfüllung gegenüber unseren potenziellen und bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO). Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TTDSG, soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endgerät des Nutzers (z. B. Device-Fingerprinting) im Sinne des TTDSG umfasst. Die Einwilligung ist jederzeit widerrufbar.</p>
+       <h3>3. Allgemeine Hinweise und Pflichtinformationen</h3>
+       <h4>Datenschutz</h4>
+       <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzbestimmungen sowie dieser Datenschutzerklärung.</p>
+       <p>Wenn Sie diese Website benutzen, werden verschiedene personenbezogene Daten erhoben. Personenbezogene Daten sind Daten, mit denen Sie persönlich identifiziert werden können. Die vorliegende Datenschutzerklärung erläutert, welche Daten wir erheben und wofür wir sie nutzen. Sie erläutert auch, wie und zu welchem Zweck das geschieht.</p>
+       <p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z. B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
+       <h4>Hinweis zur verantwortlichen Stelle</h4>
+       <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
+       <p>Max Mustermann<br>
+         Musterstraße 123<br>
+         12345 Musterstadt<br><br>
+         Telefon: +49 (0) 123 456789<br>
+         E-Mail: <a href="mailto:info@wlw-generator.de">info@wlw-generator.de</a></p>
+       <p>Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-Adressen o. Ä.) entscheidet.</p>
+       <h4>Speicherdauer</h4>
+       <p>Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben (z. B. steuer- oder handelsrechtliche Aufbewahrungsfristen); im letztgenannten Fall erfolgt die Löschung nach Fortfall dieser Gründe.</p>
+       <h3>4. Datenerfassung auf dieser Website</h3>
+       <h4>Server-Log-Dateien</h4>
+       <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p>
+       <ul>
+        <li>Browsertyp und Browserversion</li>
+        <li>verwendetes Betriebssystem</li>
+        <li>Referrer URL</li>
+        <li>Hostname des zugreifenden Rechners</li>
+        <li>Uhrzeit der Serveranfrage</li>
+        <li>IP-Adresse</li>
+       </ul>
+       <p>Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen.</p>
+       <p>Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website – hierzu müssen die Server-Log-Files erfasst werden.</p>
+       <h4>Lokale Datenspeicherung</h4>
+       <p>Diese Website verwendet lokale Speicherfunktionen Ihres Browsers (Local Storage), um Ihren Lernfortschritt und Ihre Einstellungen zu speichern. Diese Daten werden ausschließlich lokal auf Ihrem Gerät gespeichert und nicht an unsere Server übertragen.</p>
+       <p>Sie können diese Daten jederzeit durch das Löschen der Browser-Daten entfernen. Die Rechtsgrundlage für diese Datenverarbeitung ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bereitstellung der Funktionalität).</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </main>
+  <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.classList.add('hidden'));
+            
+            // Show selected page
+            document.getElementById(`page-${pageId}`).classList.remove('hidden');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Datenstrukturen
+        const faqData = [
+            {
+                subject: "Abgabenordnung",
+                question: "Was versteht man unter dem Begriff 'Steuerpflichtiger' nach der AO?",
+                answer: "Ein Steuerpflichtiger ist jede natürliche oder juristische Person, die einer steuerlichen Pflicht unterliegt, sei es als Steuerschuldner, Entrichtungspflichtiger oder in anderer Weise."
+            },
+            {
+                subject: "Umsatzsteuergesetz",
+                question: "Wann liegt eine steuerbare Leistung vor?",
+                answer: "Eine steuerbare Leistung liegt vor bei Lieferungen und sonstigen Leistungen eines Unternehmers im Inland gegen Entgelt im Rahmen seines Unternehmens."
+            },
+            {
+                subject: "Einkommensteuergesetz",
+                question: "Welche Einkunftsarten gibt es nach dem EStG?",
+                answer: "Es gibt 7 Einkunftsarten: Einkünfte aus Land- und Forstwirtschaft, Gewerbebetrieb, selbständiger Arbeit, nichtselbständiger Arbeit, Kapitalvermögen, Vermietung und Verpachtung sowie sonstige Einkünfte."
+            },
+            {
+                subject: "Abgabenordnung",
+                question: "Was bedeutet das Prinzip der Gesetzmäßigkeit der Verwaltung?",
+                answer: "Die Finanzverwaltung ist an Recht und Gesetz gebunden und darf nur aufgrund und im Rahmen der Gesetze handeln (Art. 20 Abs. 3 GG)."
+            },
+            {
+                subject: "Umsatzsteuergesetz",
+                question: "Was ist die Kleinunternehmerregelung?",
+                answer: "Unternehmer mit einem Umsatz von nicht mehr als 22.000 € im Vorjahr und voraussichtlich nicht mehr als 50.000 € im laufenden Jahr können von der Umsatzsteuer befreit werden (§ 19 UStG)."
+            },
+            {
+                subject: "Einkommensteuergesetz",
+                question: "Was sind außergewöhnliche Belastungen?",
+                answer: "Außergewöhnliche Belastungen sind zwangsläufig erwachsene größere Aufwendungen, die einem Steuerpflichtigen außergewöhnlich sind und seine wirtschaftliche Leistungsfähigkeit wesentlich beeinträchtigen."
+            }
+        ];
+        
+        const topicsData = [
+            // AO/FGO/Zivilrecht (für garantierte Abdeckung)
+            {
+                subject: "Abgabenordnung",
+                topic: "Bestandskraft und Änderung von Steuerbescheiden",
+                details: "Formelle und materielle Bestandskraft, Änderungsvorschriften nach §§ 172-177 AO, Aufhebung und Änderung von Steuerbescheiden, Korrekturvorschriften, Vertrauensschutz und Rückwirkung steuerlicher Änderungen. Die Bestandskraft von Steuerbescheiden ist ein zentrales Element der Rechtssicherheit im Steuerrecht. Sie gewährleistet, dass einmal ergangene Bescheide nicht beliebig geändert werden können und schafft damit Planungssicherheit für die Steuerpflichtigen. Die formelle Bestandskraft tritt ein, wenn gegen einen Steuerbescheid kein Rechtsmittel mehr eingelegt werden kann, während die materielle Bestandskraft bedeutet, dass der Bescheid inhaltlich nicht mehr angegriffen werden kann. Dennoch sieht die AO verschiedene Korrekturmöglichkeiten vor, die eine nachträgliche Änderung unter bestimmten Voraussetzungen ermöglichen.",
+                priority: "procedural"
+            },
+            {
+                subject: "Abgabenordnung",
+                topic: "Steuerliche Nebenleistungen und Vollstreckung",
+                details: "Zinsen nach § 233a AO, Säumniszuschläge, Zwangsgelder, Vollstreckungsverfahren, Sicherheitsleistungen, Stundung und Erlass von Steuerschulden sowie deren praktische Anwendung. Steuerliche Nebenleistungen sind Geldleistungen, die neben der eigentlichen Steuer zu entrichten sind. Hierzu gehören insbesondere Zinsen, die bei verspäteter Zahlung oder Nachzahlungen anfallen, sowie Säumniszuschläge bei nicht rechtzeitiger Entrichtung fälliger Steuern. Das Vollstreckungsverfahren kommt zur Anwendung, wenn Steuerschulden trotz Mahnung nicht beglichen werden. Die Finanzverwaltung kann dann verschiedene Vollstreckungsmaßnahmen ergreifen, von der Pfändung bis hin zur Zwangsversteigerung.",
+                priority: "procedural"
+            },
+            {
+                subject: "Finanzgerichtsordnung",
+                topic: "Vorläufiger Rechtsschutz im Steuerrecht",
+                details: "Aussetzung der Vollziehung nach § 69 FGO, Anordnung der sofortigen Vollziehung, einstweilige Anordnungen, Voraussetzungen und Rechtsfolgen des vorläufigen Rechtsschutzes im Steuerverfahren. Der vorläufige Rechtsschutz dient dazu, irreversible Nachteile für den Steuerpflichtigen zu vermeiden, die durch die Vollziehung eines möglicherweise rechtswidrigen Verwaltungsakts entstehen könnten. Die Aussetzung der Vollziehung ist das wichtigste Instrument des vorläufigen Rechtsschutzes und kann sowohl von der Finanzbehörde als auch vom Finanzgericht angeordnet werden. Voraussetzung ist, dass ernstliche Zweifel an der Rechtmäßigkeit des Verwaltungsakts bestehen oder die Vollziehung für den Betroffenen eine unbillige, nicht durch überwiegende öffentliche Interessen gebotene Härte zur Folge hätte.",
+                priority: "procedural"
+            },
+            {
+                subject: "Finanzgerichtsordnung",
+                topic: "Klageverfahren vor den Finanzgerichten",
+                details: "Klagearten im Finanzgerichtsverfahren, Anfechtungsklage, Verpflichtungsklage, Feststellungsklage, Klagefrist, Begründetheit und Zulässigkeit von Klagen sowie Verfahrensbesonderheiten. Das finanzgerichtliche Verfahren ist ein spezielles Verwaltungsgerichtsverfahren, das sich in wesentlichen Punkten von anderen Gerichtsverfahren unterscheidet. Die Anfechtungsklage ist die häufigste Klageart und richtet sich gegen belastende Verwaltungsakte wie Steuerbescheide. Die Verpflichtungsklage zielt darauf ab, die Finanzbehörde zur Vornahme einer bestimmten Handlung zu verpflichten, während die Feststellungsklage der Klärung von Rechtsverhältnissen dient. Besondere Bedeutung kommt der Einhaltung der Klagefrist zu, die grundsätzlich einen Monat nach Bekanntgabe des Verwaltungsakts beträgt.",
+                priority: "procedural"
+            },
+            {
+                subject: "Zivilrecht",
+                topic: "Gesellschaftsrecht und steuerliche Auswirkungen",
+                details: "Gesellschaftsformen im Zivilrecht, Personengesellschaften vs. Kapitalgesellschaften, Haftungsverhältnisse, Geschäftsführung, Gewinnverteilung und deren steuerliche Konsequenzen für die Gesellschafter. Das Gesellschaftsrecht bildet die zivilrechtliche Grundlage für die steuerliche Behandlung von Unternehmen und deren Gesellschaftern. Die Wahl der Gesellschaftsform hat erhebliche Auswirkungen auf die Besteuerung, da zwischen Personengesellschaften und Kapitalgesellschaften grundlegend unterschiedliche Besteuerungsprinzipien gelten. Bei Personengesellschaften erfolgt die Besteuerung nach dem Transparenzprinzip, während Kapitalgesellschaften einer eigenständigen Besteuerung unterliegen. Die Haftungsverhältnisse, die Geschäftsführungsbefugnis und die Gewinnverteilung sind weitere wichtige Aspekte, die sowohl zivilrechtlich als auch steuerlich von Bedeutung sind.",
+                priority: "procedural"
+            },
+            {
+                subject: "Zivilrecht",
+                topic: "Schuldrecht und steuerliche Behandlung",
+                details: "Vertragsarten im Schuldrecht, Kaufverträge, Dienstverträge, Werkverträge, Leasing, Factoring, deren zivilrechtliche Einordnung und steuerliche Behandlung bei den Vertragsparteien. Das Schuldrecht regelt die rechtlichen Beziehungen zwischen Gläubigern und Schuldnern und bildet damit die Grundlage für die meisten Geschäftstransaktionen. Die zivilrechtliche Qualifikation von Verträgen ist entscheidend für deren steuerliche Behandlung. So führt beispielsweise die Abgrenzung zwischen Kauf- und Werkvertrag zu unterschiedlichen umsatzsteuerlichen Konsequenzen. Beim Leasing ist die Unterscheidung zwischen Operating- und Finance-Leasing sowohl zivilrechtlich als auch steuerlich von großer Bedeutung. Factoring-Verträge werfen komplexe Fragen der Risikoübertragung und der steuerlichen Zuordnung auf.",
+                priority: "procedural"
+            },
+            // Hauptsteuerarten (für erstes Thema priorisiert)
+            {
+                subject: "Körperschaftsteuer",
+                topic: "Organschaft im Körperschaftsteuerrecht",
+                details: "Voraussetzungen der körperschaftsteuerlichen Organschaft, finanzielle Eingliederung, wirtschaftliche Eingliederung, Gewinnabführungsvertrag, steuerliche Auswirkungen und Haftungsrisiken bei der Organträgerschaft. Die körperschaftsteuerliche Organschaft ermöglicht es, mehrere rechtlich selbständige Kapitalgesellschaften steuerlich als Einheit zu behandeln. Voraussetzung ist eine finanzielle Eingliederung durch Mehrheitsbeteiligung sowie eine wirtschaftliche Eingliederung durch einen Gewinnabführungsvertrag. Die Organschaft führt zu einer Durchbrechung des Trennungsprinzips und ermöglicht einen steuerlichen Verlustausgleich zwischen Organträger und Organgesellschaften. Gleichzeitig entstehen aber auch Haftungsrisiken, da der Organträger für die Steuerschulden der Organgesellschaften haftet.",
+                priority: "first"
+            },
+            {
+                subject: "Einkommensteuer",
+                topic: "Progressionsvorbehalt bei ausländischen Einkünften",
+                details: "Anwendung des Progressionsvorbehalts nach DBA, Berechnung des Steuersatzes, steuerfreie ausländische Einkünfte, Methoden zur Vermeidung der Doppelbesteuerung und praktische Anwendungsfälle. Der Progressionsvorbehalt ist ein wichtiges Instrument zur Vermeidung der Doppelbesteuerung bei grenzüberschreitenden Sachverhalten. Während bestimmte ausländische Einkünfte aufgrund von Doppelbesteuerungsabkommen in Deutschland steuerfrei sind, werden sie dennoch bei der Ermittlung des Steuersatzes für die übrigen Einkünfte berücksichtigt. Dies führt dazu, dass der Steuerpflichtige zwar keine deutsche Steuer auf die ausländischen Einkünfte zahlt, aber einen höheren Steuersatz auf seine inländischen Einkünfte anwenden muss. Die praktische Berechnung erfolgt durch Ermittlung des Steuersatzes auf das Gesamteinkommen und Anwendung dieses Satzes auf die steuerpflichtigen Einkünfte.",
+                priority: "first"
+            },
+            {
+                subject: "Umsatzsteuer",
+                topic: "Reverse-Charge-Verfahren",
+                details: "Anwendungsfälle des Reverse-Charge-Verfahrens, Bauleistungen, Metalllieferungen, CO2-Zertifikate, Telekommunikationsdienstleistungen, Übergang der Steuerschuldnerschaft und praktische Umsetzung. Das Reverse-Charge-Verfahren stellt eine Ausnahme vom Grundsatz dar, dass der leistende Unternehmer die Umsatzsteuer schuldet. Stattdessen geht die Steuerschuldnerschaft auf den Leistungsempfänger über. Dies dient der Betrugsbekämpfung und der Vereinfachung grenzüberschreitender Geschäfte. Wichtige Anwendungsbereiche sind Bauleistungen, Lieferungen bestimmter Metalle, Handel mit CO2-Zertifikaten und elektronische Dienstleistungen. Der Leistungsempfänger muss die Steuer sowohl als Umsatzsteuer schulden als auch als Vorsteuer geltend machen, was bei ordnungsgemäßer Buchführung zu einem Nullsummenspiel führt.",
+                priority: "first"
+            },
+            {
+                subject: "Internationales Steuerrecht",
+                topic: "Hinzurechnungsbesteuerung (CFC-Rules)",
+                details: "Anwendung der Hinzurechnungsbesteuerung bei ausländischen Zwischengesellschaften, passive Einkünfte, Niedrigbesteuerung, Durchgriffstatbestände und Gestaltungsmissbrauch im internationalen Steuerrecht. Die Hinzurechnungsbesteuerung nach dem Außensteuergesetz soll verhindern, dass deutsche Steuerpflichtige durch die Zwischenschaltung ausländischer Gesellschaften in Niedrigsteuerländern ihre Steuerlast reduzieren. Erfasst werden passive Einkünfte wie Zinsen, Dividenden und Lizenzgebühren, die bei einer ausländischen Gesellschaft anfallen, an der der deutsche Steuerpflichtige wesentlich beteiligt ist. Voraussetzung ist eine Niedrigbesteuerung der ausländischen Gesellschaft. Die Hinzurechnungsbesteuerung führt dazu, dass die Einkünfte der ausländischen Gesellschaft dem deutschen Gesellschafter zugerechnet und der deutschen Besteuerung unterworfen werden.",
+                priority: "first"
+            },
+            {
+                subject: "Gewerbesteuer",
+                topic: "Gewerbesteuerliche Hinzurechnungen und Kürzungen",
+                details: "Hinzurechnungstatbestände nach § 8 GewStG, Kürzungen nach § 9 GewStG, Dauerschulden, Mieten und Pachten, Lizenzgebühren, Gewinnausschüttungen und deren gewerbesteuerliche Behandlung. Die Gewerbesteuer knüpft zwar grundsätzlich an den Gewinn aus Gewerbebetrieb an, modifiziert diesen aber durch verschiedene Hinzurechnungen und Kürzungen. Hinzurechnungen erfolgen insbesondere für Dauerschuldzinsen, Mieten und Pachten für bewegliche Wirtschaftsgüter, Lizenzgebühren und andere Entgelte für die Überlassung von Rechten. Diese Hinzurechnungen sollen verhindern, dass die Gewerbesteuer durch entsprechende Gestaltungen ausgehöhlt wird. Kürzungen erfolgen dagegen für Gewinnanteile aus anderen Gewerbebetrieben und für ausländische Betriebsstättenergebnisse, um eine Doppelbelastung zu vermeiden.",
+                priority: "first"
+            },
+            // Spezialisierte Bereiche (für zweites Thema priorisiert)
+            {
+                subject: "Bilanzsteuerrecht",
+                topic: "Maßgeblichkeitsprinzip und umgekehrte Maßgeblichkeit",
+                details: "Verhältnis zwischen Handels- und Steuerbilanz, Durchbrechungen des Maßgeblichkeitsprinzips, eigenständige steuerliche Bewertungsvorschriften, BilMoG-Auswirkungen und praktische Anwendung bei der Bilanzierung. Das Maßgeblichkeitsprinzip besagt, dass die handelsrechtlichen Grundsätze ordnungsmäßiger Buchführung auch für die Steuerbilanz gelten. Dieses Prinzip wurde jedoch durch das Bilanzrechtsmodernisierungsgesetz (BilMoG) erheblich eingeschränkt. Während früher das Prinzip der umgekehrten Maßgeblichkeit galt, wonach steuerliche Wahlrechte nur ausgeübt werden konnten, wenn sie auch in der Handelsbilanz ausgeübt wurden, ist dies heute nicht mehr der Fall. Stattdessen gibt es zunehmend eigenständige steuerliche Bewertungsvorschriften, die zu Unterschieden zwischen Handels- und Steuerbilanz führen. Dies erfordert oft die Führung separater Bilanzen oder zumindest detaillierte Überleitungsrechnungen.",
+                priority: "second"
+            },
+            {
+                subject: "Bewertungsrecht",
+                topic: "Bewertung von Betriebsvermögen nach dem BewG",
+                details: "Bewertungsverfahren für Betriebsvermögen, vereinfachtes Ertragswertverfahren, Substanzwertverfahren, Bewertung von Anteilen an Kapitalgesellschaften und deren Auswirkungen auf die Erbschaft- und Schenkungsteuer. Die Bewertung von Betriebsvermögen nach dem Bewertungsgesetz ist insbesondere für die Erbschaft- und Schenkungsteuer sowie für die Grundsteuer von Bedeutung. Das Gesetz sieht verschiedene Bewertungsverfahren vor, wobei grundsätzlich das vereinfachte Ertragswertverfahren anzuwenden ist. Dieses basiert auf dem nachhaltig erzielbaren Jahresertrag, der mit einem Kapitalisierungsfaktor multipliziert wird. Alternativ kann das Substanzwertverfahren angewendet werden, wenn das Ertragswertverfahren nicht sachgerecht ist. Bei Anteilen an Kapitalgesellschaften erfolgt die Bewertung nach besonderen Regeln, die sowohl den Substanzwert als auch den Ertragswert berücksichtigen.",
+                priority: "second"
+            },
+            {
+                subject: "Erbschaftsteuer und Schenkungsteuer",
+                topic: "Verschonungsregelungen für Betriebsvermögen",
+                details: "Voraussetzungen der Verschonungsabschläge, Regelverschonung vs. Optionsverschonung, Lohnsummenregelung, Behaltensfrist, Verwaltungsvermögen und praktische Gestaltungsmöglichkeiten bei Unternehmensübertragungen. Die Verschonungsregelungen für Betriebsvermögen sollen sicherstellen, dass Unternehmen bei einer Übertragung durch Erbschaft oder Schenkung nicht durch die Steuerlast gefährdet werden. Es gibt zwei Varianten: die Regelverschonung mit 85% Verschonungsabschlag und fünfjähriger Behaltensfrist sowie die Optionsverschonung mit 100% Verschonungsabschlag und siebenjähriger Behaltensfrist. Beide Varianten sind mit einer Lohnsummenregelung verbunden, die sicherstellen soll, dass Arbeitsplätze erhalten bleiben. Problematisch ist die Behandlung von Verwaltungsvermögen, das nicht begünstigt ist und daher den Verschonungsabschlag mindert.",
+                priority: "second"
+            },
+            {
+                subject: "Betriebswirtschaftslehre",
+                topic: "Investitionsrechnung und Finanzierungsentscheidungen",
+                details: "Statische und dynamische Investitionsrechenverfahren, Kapitalwertmethode, interner Zinsfuß, Finanzierungsformen, Kapitalstrukturoptimierung und deren Auswirkungen auf steuerliche Gestaltungen. Die Investitionsrechnung ist ein zentrales Instrument der Unternehmensführung und hat auch erhebliche steuerliche Auswirkungen. Statische Verfahren wie die Kostenvergleichsrechnung oder die Gewinnvergleichsrechnung sind einfach anzuwenden, berücksichtigen aber nicht den zeitlichen Anfall von Zahlungen. Dynamische Verfahren wie die Kapitalwertmethode oder die Methode des internen Zinsfußes sind aussagekräftiger, da sie den Zeitwert des Geldes berücksichtigen. Bei Finanzierungsentscheidungen spielen steuerliche Aspekte eine wichtige Rolle, da Fremdkapitalzinsen steuerlich abzugsfähig sind, während Eigenkapitalkosten nicht abzugsfähig sind. Dies führt zu einem steuerlichen Vorteil der Fremdfinanzierung (Tax Shield).",
+                priority: "second"
+            },
+            {
+                subject: "Volkswirtschaftslehre",
+                topic: "Steuerwirkungslehre und Steuerinzidenz",
+                details: "Ökonomische Wirkungen von Steuern, formelle vs. materielle Steuerinzidenz, Excess Burden, Steuerüberwälzung, Wohlfahrtseffekte und die Rolle der Besteuerung in der Wirtschaftspolitik. Die Steuerwirkungslehre untersucht die ökonomischen Auswirkungen von Steuern auf das Verhalten der Wirtschaftssubjekte und die gesamtwirtschaftliche Wohlfahrt. Ein zentraler Begriff ist die Steuerinzidenz, die zwischen formeller und materieller Steuerlast unterscheidet. Während die formelle Inzidenz angibt, wer rechtlich zur Steuerzahlung verpflichtet ist, zeigt die materielle Inzidenz, wer die Steuerlast tatsächlich trägt. Durch Steuerüberwälzung kann die materielle Steuerlast von der formellen abweichen. Steuern verursachen in der Regel Wohlfahrtsverluste (Excess Burden), da sie zu Verzerrungen im Marktgeschehen führen. Die Höhe dieser Verluste hängt von der Elastizität von Angebot und Nachfrage ab.",
+                priority: "second"
+            },
+            {
+                subject: "Umwandlungssteuerrecht",
+                topic: "Verschmelzung von Kapitalgesellschaften",
+                details: "Steuerliche Behandlung von Verschmelzungen nach UmwStG, Buchwertfortführung, Sperrfristen, verdeckte Gewinnausschüttungen, Anteilstausch und die Auswirkungen auf Gesellschafter und Gesellschaft. Das Umwandlungssteuergesetz regelt die steuerlichen Folgen von Umstrukturierungen und ermöglicht unter bestimmten Voraussetzungen eine steuerneutrale Durchführung. Bei der Verschmelzung von Kapitalgesellschaften können die Wirtschaftsgüter zu Buchwerten übertragen werden, wodurch stille Reserven nicht aufgedeckt werden. Dies ist jedoch mit verschiedenen Sperrfristen verbunden, die eine spätere Realisierung der stillen Reserven zu einem erhöhten Steuersatz vorsehen. Problematisch können verdeckte Gewinnausschüttungen sein, die entstehen, wenn das Umtauschverhältnis nicht dem gemeinen Wert entspricht. Der Anteilstausch bei den Gesellschaftern kann ebenfalls steuerneutral erfolgen, ist aber an strenge Voraussetzungen geknüpft.",
+                priority: "second"
+            },
+            {
+                subject: "Grunderwerbsteuer",
+                topic: "Anteilsveräußerungen und Share Deals",
+                details: "Grunderwerbsteuerliche Behandlung von Share Deals, 90%-Grenze nach § 1 Abs. 2a GrEStG, Entstehung der Steuer bei Anteilsveräußerungen, Gestaltungsmöglichkeiten und aktuelle Rechtsprechung. Die Grunderwerbsteuer erfasst nicht nur den direkten Erwerb von Grundstücken, sondern auch mittelbare Erwerbsvorgänge durch Anteilsveräußerungen an grundbesitzenden Gesellschaften. Nach § 1 Abs. 2a GrEStG entsteht die Steuerpflicht, wenn Anteile an einer Gesellschaft übertragen werden und dadurch mindestens 90% der Anteile auf neue Gesellschafter übergehen. Diese Regelung soll verhindern, dass die Grunderwerbsteuer durch die Zwischenschaltung von Gesellschaften umgangen wird. In der Praxis führt dies zu komplexen Gestaltungsüberlegungen, insbesondere bei größeren Immobilientransaktionen. Die Rechtsprechung hat die Anwendung dieser Vorschriften in den letzten Jahren verschärft und auch wirtschaftlich vergleichbare Sachverhalte erfasst.",
+                priority: "second"
+            },
+            {
+                subject: "Grundsteuer",
+                topic: "Grundsteuerreform und neue Bewertungsverfahren",
+                details: "Bundesmodell vs. Länderöffnungsklauseln, Bewertung nach dem neuen Sachwertverfahren, Bodenrichtwerte, Gebäudewerte, Grundsteuermessbetrag und die praktischen Auswirkungen der Reform ab 2025. Die Grundsteuerreform ist eine der größten Steuerreformen der letzten Jahrzehnte und betrifft alle Grundstückseigentümer in Deutschland. Das neue Bewertungsverfahren basiert auf aktuellen Werten statt auf den veralteten Einheitswerten von 1964/1935. Das Bundesmodell sieht ein wertabhängiges Verfahren vor, bei dem der Grundsteuerwert aus Bodenwert und Gebäudewert ermittelt wird. Viele Bundesländer haben jedoch von der Länderöffnungsklausel Gebrauch gemacht und eigene Modelle entwickelt, die teilweise auf Flächenmodelle setzen. Die praktische Umsetzung erfordert eine flächendeckende Neubewertung aller Grundstücke und führt zu erheblichen Verwaltungsaufwand bei Eigentümern und Behörden.",
+                priority: "second"
+            },
+            // Weitere Themen (allgemein)
+            {
+                subject: "Steuerrecht",
+                topic: "Digitalisierung und Steuerverwaltung",
+                details: "Auswirkungen der Digitalisierung auf die Steuerverwaltung, elektronische Steuererklärung, automatisierte Risikoprüfungen, digitale Betriebsprüfungen und die Herausforderungen bei der Umsetzung neuer Technologien.",
+                priority: "general"
+            },
+            {
+                subject: "Umsatzsteuer",
+                topic: "E-Commerce und Plattformgeschäfte",
+                details: "Umsatzsteuerliche Behandlung von Online-Marktplätzen, Plattformhaftung, OSS-Verfahren, digitale Dienstleistungen, grenzüberschreitende Online-Verkäufe und die Herausforderungen bei der Besteuerung digitaler Geschäftsmodelle.",
+                priority: "general"
+            },
+            {
+                subject: "Einkommensteuer",
+                topic: "Homeoffice und mobile Arbeit",
+                details: "Steuerliche Behandlung von Homeoffice-Kosten, Abgrenzung zwischen häuslichem Arbeitszimmer und Homeoffice-Pauschale, Werbungskosten bei mobiler Arbeit, doppelte Haushaltsführung und zukünftige Entwicklungen.",
+                priority: "general"
+            },
+            {
+                subject: "Steuerrecht",
+                topic: "Nachhaltigkeit und ESG-Kriterien",
+                details: "Steuerliche Anreize für nachhaltige Investitionen, CO2-Bepreisung, ökologische Steuerreform, steuerliche Behandlung von ESG-Investments, Green Bonds und die Rolle der Steuerpolitik beim Klimaschutz.",
+                priority: "general"
+            }
+        ];
+        
+        // Zustandsvariablen
+        let currentMode = 'topics';
+        let faqStats = { total: 0, correct: 0, incorrect: 0 };
+        let currentFAQ = null;
+        let currentTopics = [];
+        let availableFAQs = [...faqData];
+        let availableTopics = [...topicsData];
+        let correctQuestions = [];
+        let incorrectQuestions = [];
+        let bookmarkedItems = [];
+        let currentBookmarkFilter = 'all';
+        
+        // Timer-Variablen
+        let timerInterval = null;
+        let timeRemaining = 30 * 60; // 30 Minuten in Sekunden
+        let isTimerRunning = false;
+        
+
+        
+        // Modul-Wechsel
+        function switchMode(mode) {
+            currentMode = mode;
+            
+            // Button-Styling
+            const faqBtn = document.getElementById('faq-btn');
+            const topicsBtn = document.getElementById('topics-btn');
+            
+            if (mode === 'faq') {
+                faqBtn.className = 'mode-btn active flex-1 px-8 py-4 font-semibold text-lg';
+                topicsBtn.className = 'mode-btn flex-1 px-8 py-4 font-semibold text-lg';
+            } else {
+                faqBtn.className = 'mode-btn flex-1 px-8 py-4 font-semibold text-lg';
+                topicsBtn.className = 'mode-btn active flex-1 px-8 py-4 font-semibold text-lg';
+            }
+            
+            // Module anzeigen/verstecken
+            const faqModule = document.getElementById('faq-module');
+            const topicsModule = document.getElementById('topics-module');
+            
+            if (mode === 'faq') {
+                faqModule.style.display = 'block';
+                topicsModule.style.display = 'none';
+            } else {
+                faqModule.style.display = 'none';
+                topicsModule.style.display = 'block';
+                
+                // Topics generieren falls noch nicht vorhanden
+                if (currentTopics.length === 0) {
+                    generateTopics();
+                }
+                
+                // Gemerkte Themen anzeigen
+                updateBookmarkedTopicsList();
+            }
+        }
+        
+        // FAQ-Funktionen
+        function generateFAQ() {
+            if (availableFAQs.length === 0) {
+                availableFAQs = [...faqData];
+            }
+            
+            const randomIndex = Math.floor(Math.random() * availableFAQs.length);
+            currentFAQ = availableFAQs[randomIndex];
+            
+            document.getElementById('faq-subject').textContent = currentFAQ.subject;
+            document.getElementById('faq-question').textContent = currentFAQ.question;
+            document.getElementById('faq-answer').textContent = currentFAQ.answer;
+            
+            // Karte zurücksetzen
+            document.getElementById('faq-card').classList.remove('flipped');
+            
+            // Buttons anzeigen
+            document.getElementById('faq-bookmark-btn').style.display = 'inline-block';
+            document.getElementById('faq-correct-btn').style.display = 'inline-block';
+            document.getElementById('faq-incorrect-btn').style.display = 'inline-block';
+            
+            // Bookmark-Status aktualisieren
+            updateFAQBookmarkButton();
+            
+            faqStats.total++;
+            updateFAQStats();
+        }
+        
+        function markFAQ(correct) {
+            if (!currentFAQ) return;
+            
+            // FAQ-Listen beim ersten Button-Klick anzeigen
+            document.getElementById('faq-lists-container').style.display = 'grid';
+            
+            if (correct) {
+                // Frage aus nicht gewusst entfernen falls vorhanden
+                incorrectQuestions = incorrectQuestions.filter(q => q !== currentFAQ);
+                // Zu gewusst hinzufügen falls noch nicht vorhanden
+                if (!correctQuestions.includes(currentFAQ)) {
+                    correctQuestions.push(currentFAQ);
+                }
+                // Frage aus verfügbaren entfernen
+                availableFAQs = availableFAQs.filter(faq => faq !== currentFAQ);
+            } else {
+                // Zu nicht gewusst hinzufügen falls noch nicht vorhanden
+                if (!incorrectQuestions.includes(currentFAQ)) {
+                    incorrectQuestions.push(currentFAQ);
+                }
+                // Frage bleibt im Pool für erneute Abfrage
+            }
+            
+            updateFAQStats();
+            
+            // Buttons verstecken
+            document.getElementById('faq-bookmark-btn').style.display = 'none';
+            document.getElementById('faq-correct-btn').style.display = 'none';
+            document.getElementById('faq-incorrect-btn').style.display = 'none';
+            
+            currentFAQ = null;
+        }
+        
+        function updateFAQStats() {
+            document.getElementById('faq-total').textContent = faqStats.total;
+            document.getElementById('faq-correct').textContent = correctQuestions.length;
+            document.getElementById('faq-incorrect').textContent = incorrectQuestions.length;
+            
+            const totalAnswered = correctQuestions.length + incorrectQuestions.length;
+            const progress = totalAnswered > 0 ? Math.round((correctQuestions.length / totalAnswered) * 100) : 0;
+            document.getElementById('faq-progress').textContent = progress + '%';
+            document.getElementById('faq-progress-bar').style.width = progress + '%';
+            
+            // FAQ-Listen aktualisieren
+            updateFAQLists();
+        }
+        
+        // Topics-Funktionen
+        function generateTopics() {
+            if (availableTopics.length < 3) {
+                availableTopics = [...topicsData];
+            }
+            
+            currentTopics = [];
+            const container = document.getElementById('topics-container');
+            container.innerHTML = '';
+            
+            // Container-Layout für 3 Spalten zurücksetzen
+            container.className = 'grid lg:grid-cols-3 gap-8';
+            
+            // Themen nach Prioritäten filtern
+            const proceduralTopics = availableTopics.filter(topic => topic.priority === "procedural");
+            const firstPriorityTopics = availableTopics.filter(topic => topic.priority === "first");
+            const secondPriorityTopics = availableTopics.filter(topic => topic.priority === "second");
+            const generalTopics = availableTopics.filter(topic => topic.priority === "general");
+            
+            // Erstes Thema: Immer aus AO/FGO/Zivilrecht
+            if (proceduralTopics.length > 0) {
+                const randomProceduralIndex = Math.floor(Math.random() * proceduralTopics.length);
+                const proceduralTopic = proceduralTopics[randomProceduralIndex];
+                currentTopics.push(proceduralTopic);
+                
+                // Aus verfügbaren Topics entfernen
+                const indexInAvailable = availableTopics.findIndex(topic => topic === proceduralTopic);
+                if (indexInAvailable >= 0) {
+                    availableTopics.splice(indexInAvailable, 1);
+                }
+            }
+            
+            // Zweites Thema: Immer aus spezialisierten Bereichen (BilSt, BR, ErbSt, BWL, VWL, UmwSt, GrdESt, GrdSt)
+            const remainingSecondPriorityTopics = availableTopics.filter(topic => topic.priority === "second");
+            if (remainingSecondPriorityTopics.length > 0) {
+                const randomSecondIndex = Math.floor(Math.random() * remainingSecondPriorityTopics.length);
+                const secondTopic = remainingSecondPriorityTopics[randomSecondIndex];
+                currentTopics.push(secondTopic);
+                
+                // Aus verfügbaren Topics entfernen
+                const indexInAvailable = availableTopics.findIndex(topic => topic === secondTopic);
+                if (indexInAvailable >= 0) {
+                    availableTopics.splice(indexInAvailable, 1);
+                }
+            }
+            
+            // Drittes Thema: Aus Hauptsteuerarten oder allgemeinen Themen
+            const remainingTopicsForThird = availableTopics.filter(topic => 
+                topic.priority === "first" || topic.priority === "general"
+            );
+            if (remainingTopicsForThird.length > 0) {
+                const randomIndex = Math.floor(Math.random() * remainingTopicsForThird.length);
+                const thirdTopic = remainingTopicsForThird[randomIndex];
+                currentTopics.push(thirdTopic);
+                
+                // Aus verfügbaren Topics entfernen
+                const indexInAvailable = availableTopics.findIndex(topic => topic === thirdTopic);
+                if (indexInAvailable >= 0) {
+                    availableTopics.splice(indexInAvailable, 1);
+                }
+            }
+            
+            // Topics-Karten erstellen
+            currentTopics.forEach((topic, i) => {
+                const topicCard = document.createElement('div');
+                topicCard.className = 'fade-in relative';
+                topicCard.innerHTML = `
+                    <div class="flip-card" data-index="${i}">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <button onclick="toggleBookmarkTopic(${i})" class="absolute top-3 right-3 text-lg hover:scale-110 transition-all duration-300 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 flex items-center justify-center shadow-sm hover:shadow-md" id="topic-bookmark-${i}" style="color: #fbbf24;">
+                                    ☆
+                                </button>
+                                <div class="subject-badge mb-6">
+                                    ${topic.subject}
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-800 leading-relaxed mb-6">
+                                    ${topic.topic}
+                                </h3>
+                                <div class="text-gray-500 text-sm font-medium">Klicken Sie für Details</div>
+                            </div>
+                            <div class="flip-card-back">
+                                <button onclick="toggleBookmarkTopic(${i})" class="absolute top-3 right-3 text-lg hover:scale-110 transition-all duration-300 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 flex items-center justify-center shadow-sm hover:shadow-md" id="topic-bookmark-back-${i}" style="color: #fbbf24;">
+                                    ☆
+                                </button>
+                                <div class="answer-badge mb-6">
+                                    Ausarbeitung
+                                </div>
+                                <div class="text-content">
+                                    <p class="text-sm text-gray-700 leading-relaxed">
+                                        ${topic.details}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(topicCard);
+            });
+            
+            // Event Listener für Flip-Karten
+            document.querySelectorAll('#topics-container .flip-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Nicht flippen wenn Bookmark-Button oder Toggle-Button geklickt wurde
+                    if (e.target.closest('button')) return;
+                    this.classList.toggle('flipped');
+                });
+            });
+            
+            // Bookmark-Status für Topics aktualisieren
+            updateTopicBookmarkButtons();
+        }
+        
+        // Bookmark-Funktionen
+        function toggleBookmarkFAQ() {
+            if (!currentFAQ) return;
+            
+            // FAQ-Listen beim ersten Button-Klick anzeigen
+            document.getElementById('faq-lists-container').style.display = 'grid';
+            
+            const existingIndex = bookmarkedItems.findIndex(item => 
+                item.type === 'faq' && 
+                item.question === currentFAQ.question
+            );
+            
+            if (existingIndex >= 0) {
+                bookmarkedItems.splice(existingIndex, 1);
+            } else {
+                bookmarkedItems.push({
+                    type: 'faq',
+                    subject: currentFAQ.subject,
+                    question: currentFAQ.question,
+                    answer: currentFAQ.answer,
+                    status: 'bookmarked',
+                    timestamp: new Date()
+                });
+            }
+            
+            updateFAQBookmarkButton();
+        }
+        
+        function toggleBookmarkTopic(index) {
+            const topic = currentTopics[index];
+            if (!topic) return;
+            
+            const existingIndex = bookmarkedItems.findIndex(item => 
+                item.type === 'topic' && 
+                item.topic === topic.topic
+            );
+            
+            if (existingIndex >= 0) {
+                bookmarkedItems.splice(existingIndex, 1);
+            } else {
+                bookmarkedItems.push({
+                    type: 'topic',
+                    subject: topic.subject,
+                    topic: topic.topic,
+                    details: topic.details,
+                    status: 'bookmarked',
+                    timestamp: new Date()
+                });
+            }
+            
+            updateTopicBookmarkButtons();
+            updateBookmarkedTopicsList();
+        }
+        
+        function updateFAQBookmarkButton() {
+            if (!currentFAQ) return;
+            
+            const isBookmarked = bookmarkedItems.some(item => 
+                item.type === 'faq' && 
+                item.question === currentFAQ.question
+            );
+            
+            const button = document.getElementById('faq-bookmark-btn');
+            
+            if (isBookmarked) {
+                button.className = 'px-8 py-4 rounded-xl font-semibold text-yellow-600 border-2 border-yellow-400';
+                button.style.backgroundColor = 'transparent';
+                button.innerHTML = 'Gemerkt';
+            } else {
+                button.className = 'px-8 py-4 rounded-xl font-semibold text-white border-2 border-yellow-400';
+                button.style.backgroundColor = '#fbbf24';
+                button.innerHTML = 'Merken';
+            }
+            
+            // FAQ-Listen aktualisieren
+            updateFAQLists();
+        }
+        
+        function updateFAQLists() {
+            // Gemerkte Fragen
+            const bookmarkedFAQs = bookmarkedItems.filter(item => item.type === 'faq');
+            const bookmarkedList = document.getElementById('bookmarked-faq-list');
+            
+            if (bookmarkedFAQs.length === 0) {
+                bookmarkedList.innerHTML = `
+                    <div class="text-center text-gray-500 py-4">
+                        <p class="text-sm">Noch keine Fragen gemerkt</p>
+                    </div>
+                `;
+            } else {
+                bookmarkedList.innerHTML = bookmarkedFAQs.map((item, index) => `
+                    <div class="bg-white rounded-lg p-4 border border-yellow-200 hover:border-yellow-300 cursor-pointer transition-all duration-200 hover:shadow-md mb-3" onclick="showFAQFromList('bookmarked', ${index})">
+                        <div class="flex items-start gap-3">
+                            <div class="flex-1 min-w-0">
+                                <div class="text-xs text-amber-600 font-bold mb-2 uppercase tracking-wide">${item.subject}</div>
+                                <div class="text-sm text-gray-800 font-medium leading-relaxed">${item.question.substring(0, 70)}...</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            // Gewusste Fragen
+            const knownList = document.getElementById('known-faq-list');
+            
+            if (correctQuestions.length === 0) {
+                knownList.innerHTML = `
+                    <div class="text-center text-gray-500 py-4">
+                        <p class="text-sm">Noch keine Fragen gewusst</p>
+                    </div>
+                `;
+            } else {
+                knownList.innerHTML = correctQuestions.map((item, index) => `
+                    <div class="bg-white rounded-lg p-4 border border-green-200 hover:border-green-300 cursor-pointer transition-all duration-200 hover:shadow-md mb-3" onclick="showFAQFromList('known', ${index})">
+                        <div class="flex items-start gap-3">
+                            <div class="flex-1 min-w-0">
+                                <div class="text-xs text-emerald-600 font-bold mb-2 uppercase tracking-wide">${item.subject}</div>
+                                <div class="text-sm text-gray-800 font-medium leading-relaxed">${item.question.substring(0, 70)}...</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            // Nicht gewusste Fragen
+            const unknownList = document.getElementById('unknown-faq-list');
+            
+            if (incorrectQuestions.length === 0) {
+                unknownList.innerHTML = `
+                    <div class="text-center text-gray-500 py-4">
+                        <p class="text-sm">Noch keine Fragen nicht gewusst</p>
+                    </div>
+                `;
+            } else {
+                unknownList.innerHTML = incorrectQuestions.map((item, index) => `
+                    <div class="bg-white rounded-lg p-4 border border-red-200 hover:border-red-300 cursor-pointer transition-all duration-200 hover:shadow-md mb-3" onclick="showFAQFromList('unknown', ${index})">
+                        <div class="flex items-start gap-3">
+                            <div class="flex-1 min-w-0">
+                                <div class="text-xs text-rose-600 font-bold mb-2 uppercase tracking-wide">${item.subject}</div>
+                                <div class="text-sm text-gray-800 font-medium leading-relaxed">${item.question.substring(0, 70)}...</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        function showFAQFromList(type, index) {
+            let faq;
+            
+            if (type === 'bookmarked') {
+                const bookmarkedFAQs = bookmarkedItems.filter(item => item.type === 'faq');
+                faq = bookmarkedFAQs[index];
+            } else if (type === 'known') {
+                faq = correctQuestions[index];
+            } else if (type === 'unknown') {
+                faq = incorrectQuestions[index];
+            }
+            
+            if (faq) {
+                currentFAQ = {
+                    subject: faq.subject,
+                    question: faq.question,
+                    answer: faq.answer
+                };
+                
+                document.getElementById('faq-subject').textContent = currentFAQ.subject;
+                document.getElementById('faq-question').textContent = currentFAQ.question;
+                document.getElementById('faq-answer').textContent = currentFAQ.answer;
+                
+                // Karte zurücksetzen
+                document.getElementById('faq-card').classList.remove('flipped');
+                
+                // Buttons anzeigen
+                document.getElementById('faq-bookmark-btn').style.display = 'inline-block';
+                document.getElementById('faq-correct-btn').style.display = 'inline-block';
+                document.getElementById('faq-incorrect-btn').style.display = 'inline-block';
+                
+                updateFAQBookmarkButton();
+                
+                // Zur Karte scrollen
+                document.getElementById('faq-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+        
+        function updateTopicBookmarkButtons() {
+            currentTopics.forEach((topic, index) => {
+                const isBookmarked = bookmarkedItems.some(item => 
+                    item.type === 'topic' && 
+                    item.topic === topic.topic
+                );
+                
+                const frontBtn = document.getElementById(`topic-bookmark-${index}`);
+                const backBtn = document.getElementById(`topic-bookmark-back-${index}`);
+                
+                if (frontBtn && backBtn) {
+                    if (isBookmarked) {
+                        frontBtn.textContent = '★';
+                        backBtn.textContent = '★';
+                        frontBtn.style.color = '#fbbf24';
+                        backBtn.style.color = '#fbbf24';
+                        frontBtn.style.backgroundColor = 'rgba(254, 243, 199, 0.9)';
+                        backBtn.style.backgroundColor = 'rgba(254, 243, 199, 0.9)';
+                        frontBtn.style.borderColor = 'rgba(251, 191, 36, 0.3)';
+                        backBtn.style.borderColor = 'rgba(251, 191, 36, 0.3)';
+                    } else {
+                        frontBtn.textContent = '☆';
+                        backBtn.textContent = '☆';
+                        frontBtn.style.color = '#9ca3af';
+                        backBtn.style.color = '#9ca3af';
+                        frontBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+                        backBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+                        frontBtn.style.borderColor = 'rgba(156, 163, 175, 0.5)';
+                        backBtn.style.borderColor = 'rgba(156, 163, 175, 0.5)';
+                    }
+                }
+            });
+        }
+        
+        function updateBookmarkedTopicsList() {
+            const bookmarkedTopics = bookmarkedItems.filter(item => item.type === 'topic');
+            const section = document.getElementById('bookmarked-topics-section');
+            const list = document.getElementById('bookmarked-topics-list');
+            
+            if (bookmarkedTopics.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+            
+            section.style.display = 'block';
+            
+            list.innerHTML = bookmarkedTopics.map((item, index) => `
+                <div class="bg-white rounded-xl p-6 border-2 border-yellow-200 hover:border-yellow-300 cursor-pointer transition-all duration-200 hover:shadow-lg mb-6" onclick="showBookmarkedTopic(${index})">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="subject-badge">${item.subject}</div>
+                        <button onclick="event.stopPropagation(); removeBookmarkedTopic(${index})" class="w-8 h-8 bg-red-100 hover:bg-red-200 text-red-500 hover:text-red-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <span class="text-sm">✕</span>
+                        </button>
+                    </div>
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="flex-1">
+                            <h4 class="text-xl font-bold text-gray-800 mb-3 leading-tight">${item.topic}</h4>
+                            <p class="text-gray-600 text-sm font-medium">Klicken um als Themenvorschlag zu verwenden</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function removeBookmarkedTopic(index) {
+            const bookmarkedTopics = bookmarkedItems.filter(item => item.type === 'topic');
+            const topicToRemove = bookmarkedTopics[index];
+            
+            // Aus bookmarkedItems entfernen
+            bookmarkedItems = bookmarkedItems.filter(item => 
+                !(item.type === 'topic' && item.topic === topicToRemove.topic)
+            );
+            
+            // Listen und Buttons aktualisieren
+            updateBookmarkedTopicsList();
+            updateTopicBookmarkButtons();
+        }
+        
+        function showBookmarkedTopic(index) {
+            const bookmarkedTopics = bookmarkedItems.filter(item => item.type === 'topic');
+            const topic = bookmarkedTopics[index];
+            
+            // Thema als einzelnen Vorschlag verwenden
+            currentTopics = [topic];
+            const container = document.getElementById('topics-container');
+            container.innerHTML = '';
+            
+            // Container auf Grid mit 1 Spalte setzen für zentrierte Anzeige
+            container.className = 'max-w-2xl mx-auto';
+            
+            const topicCard = document.createElement('div');
+            topicCard.className = 'fade-in relative w-full';
+            topicCard.innerHTML = `
+                <div class="flip-card mx-auto" data-index="0" style="height: 320px;">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <button onclick="toggleBookmarkTopic(0)" class="absolute top-3 right-3 text-lg hover:scale-110 transition-all duration-300 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 flex items-center justify-center shadow-sm hover:shadow-md" id="topic-bookmark-0" style="color: #fbbf24;">
+                                ★
+                            </button>
+                            <div class="subject-badge mb-6">
+                                ${topic.subject}
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-800 leading-relaxed mb-6">
+                                ${topic.topic}
+                            </h3>
+                            <div class="text-gray-500 text-sm font-medium">Klicken Sie für Details</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <button onclick="toggleBookmarkTopic(0)" class="absolute top-3 right-3 text-lg hover:scale-110 transition-all duration-300 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 flex items-center justify-center shadow-sm hover:shadow-md" id="topic-bookmark-back-0" style="color: #fbbf24;">
+                                ★
+                            </button>
+                            <div class="answer-badge mb-6">
+                                Ausarbeitung
+                            </div>
+                            <div class="text-content">
+                                <p class="text-sm text-gray-700 leading-relaxed">
+                                    ${topic.details}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(topicCard);
+            
+            // Event Listener für Flip-Karte
+            const card = container.querySelector('.flip-card');
+            card.addEventListener('click', function(e) {
+                // Nicht flippen wenn Bookmark-Button oder Toggle-Button geklickt wurde
+                if (e.target.closest('button')) return;
+                this.classList.toggle('flipped');
+            });
+            
+            // Bookmark-Status für Topic aktualisieren (bereits gemerkt, also Stern gefüllt)
+            const frontBtn = document.getElementById('topic-bookmark-0');
+            const backBtn = document.getElementById('topic-bookmark-back-0');
+            if (frontBtn && backBtn) {
+                frontBtn.style.backgroundColor = 'rgba(254, 243, 199, 0.9)';
+                backBtn.style.backgroundColor = 'rgba(254, 243, 199, 0.9)';
+                frontBtn.style.borderColor = 'rgba(251, 191, 36, 0.3)';
+                backBtn.style.borderColor = 'rgba(251, 191, 36, 0.3)';
+            }
+            
+            // Zur Hauptansicht scrollen
+            document.getElementById('topics-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Timer-Funktionen
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+        
+        function updateTimerDisplay() {
+            document.getElementById('timer-display').textContent = formatTime(timeRemaining);
+            
+            // Farbe ändern wenn wenig Zeit übrig
+            const display = document.getElementById('timer-display');
+            if (timeRemaining <= 300) { // 5 Minuten
+                display.style.color = '#FF3B30';
+            } else if (timeRemaining <= 600) { // 10 Minuten
+                display.style.color = '#FF9500';
+            } else {
+                display.style.color = '#6facff';
+            }
+        }
+        
+        function startTimer() {
+            if (!isTimerRunning) {
+                isTimerRunning = true;
+                document.getElementById('start-btn').style.display = 'none';
+                document.getElementById('pause-btn').style.display = 'inline-block';
+                
+                timerInterval = setInterval(() => {
+                    timeRemaining--;
+                    updateTimerDisplay();
+                    
+                    if (timeRemaining <= 0) {
+                        clearInterval(timerInterval);
+                        isTimerRunning = false;
+                        document.getElementById('start-btn').style.display = 'inline-block';
+                        document.getElementById('pause-btn').style.display = 'none';
+                        alert('Zeit abgelaufen! Die 30 Minuten Vorbereitungszeit sind vorbei.');
+                    }
+                }, 1000);
+            }
+        }
+        
+        function pauseTimer() {
+            if (isTimerRunning) {
+                clearInterval(timerInterval);
+                isTimerRunning = false;
+                document.getElementById('start-btn').style.display = 'inline-block';
+                document.getElementById('pause-btn').style.display = 'none';
+            }
+        }
+        
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isTimerRunning = false;
+            timeRemaining = 30 * 60;
+            updateTimerDisplay();
+            document.getElementById('start-btn').style.display = 'inline-block';
+            document.getElementById('pause-btn').style.display = 'none';
+        }
+        
+        // Event Listener für FAQ-Karte
+        document.getElementById('faq-card').addEventListener('click', function(e) {
+            if (e.target.closest('button')) return;
+            this.classList.toggle('flipped');
+        });
+        
+        // Initialisierung
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTimerDisplay();
+            updateFAQStats();
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99592ad3f03194d7',t:'MTc2MTY0MTIzNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
