@@ -95,7 +95,7 @@
                         <!-- Welcome Audio direkt unter Dr. Dumser -->
                         <div class="mt-4">
                             <audio id="welcomeAudio" controls class="w-full" preload="metadata" autoplay>
-                                <source src="https://www.dropbox.com/scl/fi/vsm0a689s3njcc906jpt8/Begr-ung.mp3?rlkey=gcvs86w1n8jwnvt2kzj9jnxj7&st=2vjbux4a&raw=1" type="audio/mpeg">
+                                <source src="https://www.dropbox.com/scl/fi/96bz0m47ena4y1teeb8bj/Begr-ung.mp3?rlkey=a5qrkbc8wi7572gjinsxn7dnl&st=1w64td4v&raw=1" type="audio/mpeg">
                                 Ihr Browser unterstützt das Audio-Element nicht.
                             </audio>
                         </div>
@@ -326,14 +326,14 @@ Ich hoffe Sie konnten die Vorbereitungszeit gut nutzen. Beginnen wir jetzt mit I
                 <div class="question-bubble rounded-lg p-6 mb-6">
                     <div class="mb-3">
                         <p class="text-lg text-gray-800">
-                            Vielen Dank für Ihren Vortrag. Wir starten nun mit dem Prüfungsgespräch. Die Prüfer werden Ihnen in ihren jeweiligen Fachgebieten Fragen stellen. Bitte beantworten Sie diese.
+                            Vielen Dank für Ihren Vortrag. Wir starten nun mit dem Prüfungsgespräch. Die Prüfer werden Ihnen in ihren jeweiligen Fachgebieten Fragen stellen. Bitte beantworten Sie diese. Den Anfang macht Frau Reinwald in Einkommensteuer.
                         </p>
                     </div>
                     
                     <!-- Audio Player for Transition -->
                     <div class="mt-4">
                         <audio id="transitionAudio" controls class="w-full" preload="metadata">
-                            <source src="https://www.dropbox.com/scl/fi/tam9erb3h0twz8e1yll2s/ElevenLabs_2025-10-28T12_16_07_Felix-Serenitas_pvc_sp97_s48_sb69_v3.mp3?rlkey=gwgq3heh1ivorfnphsihgfev0&st=fozqv7p9&raw=1" type="audio/mpeg">
+                            <source src="https://www.dropbox.com/scl/fi/n9sr1838ofcgy423mucns/Fragerunde.mp3?rlkey=mdcqz50ab825yor017u6mew9m&st=0nwgatl5&raw=1" type="audio/mpeg">
                             Ihr Browser unterstützt das Audio-Element nicht.
                         </audio>
                     </div>
@@ -554,11 +554,11 @@ Ich hoffe Sie konnten die Vorbereitungszeit gut nutzen. Beginnen wir jetzt mit I
         const topicsByCategory = {
             // Gruppe 1: ESt, BilSt, etc
             "Bilanzsteuer": [
-                "Die Kapitalkonten einer GmbH & Co. KG "
+                "Steuerrechtliche Behandlung des Erwerbs und der Veräußerung eigener Anteile einer GmbH"
             ],
             // Gruppe 2: AO, BGB, etc
-            " Abgabenordnung ": [
-                "Modernisierung der Außenprüfung nach DAC 7"
+            "Abgabenordnung": [
+                "Zwangsmittel im Steuerrecht"
             ],
             
             // Gruppe 3: Spezialgebiete
@@ -608,13 +608,16 @@ Ich hoffe Sie konnten die Vorbereitungszeit gut nutzen. Beginnen wir jetzt mit I
 // Spezifische Musterlösungen für einzelne Themen (optional)
 specific: {
     // Beispiel für ein spezifisches Thema:
-    "Modernisierung der Außenprüfung nach DAC 7": {
+    " Steuerrechtliche Behandlung des Erwerbs und der Veräußerung eigener Anteile einer GmbH": {
         introduction: {
-            title: "1. Einlddddddddddddeitung - Kleinddddddddddduntedddddddddddddrnehmerregelung",
+            title: "Übersicht ",
             points: [
-                "<strong>Begrüßung und Thema:</strong> Die Kleinunternehmerregelung nach § 19 UStG",
-                "<strong>Bedeutung:</strong> Vereinfachung für kleine Unternehmen",
-                "<strong>Gliederung:</strong> Voraussetzungen, Vor-/Nachteile, Verzichtsmöglichkeit"
+                " <ul>
+  <li><strong>Gliederung:</strong> Einleitung, Hauptteil, Schluss</li>
+  <li><strong>Einleitung:</strong> Wirtschaftliche Bedeutung des Erwerbs eigener Anteile</li>
+  <li><strong>Hauptteil:</strong> Handelsrechtliche Grundlagen; Steuerrechtliche Konsequenzen für die Gesellschaft; Steuerrechtliche Konsequenzen für den Gesellschafter</li>
+  <li><strong>Schluss:</strong> Verzerrungen aufgrund fehlendem Direktzugriff auf steuerliches Einlagekonto</li>
+</ul>"
             ]
         },
         mainPart: {
@@ -691,127 +694,7 @@ function setPhase(text) {
 
         // Exam data with solutions
         const examinerData = [
-                       {
-                name: "Dr. Dumser",
-                field: "BGB, HGB, InsO, EuropaR",
-                avatar: "DD",
-                image: "https://s1.directupload.eu/images/250829/f5677mip.jpg",
-                rounds: [
-                    [
-                        {
-                            question: "Starten wir ganz allgemein: Welche großen Rechtsgebiete gibt es im deutschen Recht? Und worin unterscheiden sich diese Bereiche voneinander?",
-                            audio: "https://www.dropbox.com/scl/fi/ajzr8jbucgurv67wr7p8q/ElevenLabs_2025-10-26T10_22_01_Felix-Serenitas_pvc_sp97_s48_sb69_v3.mp3?rlkey=fe1hcpz1lvoogl54ji7wh61d9&st=smgtro2s&raw=1",
-                            solution: "Das **deutsche Recht** kann unterteilt werden in das **öffentliche Recht** und das **Privat- bzw. Zivilrecht**.\n\nDas **öffentliche Recht** ist geprägt von einem **Über-Unterordnungsverhältnis zwischen Staat und Bürger**, wie z. B. im **Baurecht**, **Kommunalrecht**, **Immissionsschutzrecht** oder **Steuerrecht**.\n\nDemgegenüber regelt das **Zivilrecht** die **Rechtsbeziehungen der Menschen untereinander**, also von **Individuen auf gleicher Stufe**.\nZum Zivilrecht zählen insbesondere das **Vertragsrecht**, das **Sachenrecht** und das **Erbrecht**."
-                        },
-                        {
-                            question: "Daran anschließend: Welche Gerichtsbarkeiten unterscheidet man in Deutschland?",
-                            audio: "https://www.dropbox.com/scl/fi/jqgdd8c5qc9a5iqyq3pfb/ElevenLabs_2025-10-26T10_22_34_Felix-Serenitas_pvc_sp97_s48_sb69_v3.mp3?rlkey=zgcs0jutmhskigjd5nvho3g97&st=kouikh6c&raw=1",
-                            solution: "Für **Streitigkeiten auf dem Gebiet des Privatrechts** sind die sog. **ordentlichen Gerichte** zuständig.\n**Streitigkeiten auf dem Gebiet des öffentlichen Rechts** werden vor den **Verwaltungsgerichten**, den **Sozialgerichten** oder den **Finanzgerichten** ausgetragen."
-                        },
-                        {
-                            question: "Bei einem Zivilprozess können alle rechtsfähigen Personen Kläger oder Beklagter sein. Man spricht von der sogenannten Parteifähigkeit. Auch juristische Personen können rechtsfähig sein Können Sie mir bitte Beispiele für juristische Personen des Privatrechts nennen und erklären, wie diese ihre Rechtsfähigkeit erlangen? Nennen Sie mir außerdem die Grundform der juristischen Person des privaten Rechts im BGB.",
-                            audio: "https://www.dropbox.com/scl/fi/m8h0zp41h0dvhzg3bhe3r/ElevenLabs_2025-10-26T10_23_03_Felix-Serenitas_pvc_sp97_s48_sb69_v3.mp3?rlkey=372a18jxdyt0dr32fxvsetv2x&st=thcnjz9x&raw=1",
-                            solution: "**Juristische Personen des Privatrechts** sind z. B. **SE**, **AG**, **GmbH**, **KGaA**, **eingetragene Genossenschaften**, **rechtsfähige Vereine**, **rechtsfähige Stiftungen** usw.\nSie erlangen ihre **Rechtsfähigkeit durch Eintragung** in ein bei einem Gericht geführtes **Register** (z. B. **Handelsregister**, **Vereinsregister**).\nGrundform der juristischen Person des privaten Rechts ist der **eingetragene Verein (e. V.)**. Er findet sich in den **§§ 21 ff. BGB**."
-                        },
-                        {
-                            question: "Juristische Personen können also rechtsfähig sein. Wie ist das bei den Personengesellschaften – sind diese ebenfalls rechtsfähig?",
-                            audio: "https://www.dropbox.com/scl/fi/p1lk1h8wwgpqntp3dbm0q/ElevenLabs_2025-10-26T10_24_36_Felix-Serenitas_pvc_sp97_s48_sb69_v3.mp3?rlkey=faoca2ms0kt0rmy9ibr2gli2x&st=7m14nzr4&raw=1",
-                            solution: "Diese Frage ist **aus heutiger Sicht zu bejahen**.\nVor dem **01.01.2024** waren **Personengesellschaften** nur als **(teil-)rechtsfähig** anerkannt, vgl. **§ 124 HGB a.F.** Dies galt v. a. für die **OHG**, **KG**, **PartG**, **PartG mbB** und die **(Außen-)GbR**.\n\nDurch das zum **01.01.2024** in Kraft getretene **Personengesellschaftsrechtsmodernisierungsgesetz (MoPeG)** kam es insoweit zu einer **einschneidenden Veränderung**: In **§ 705 Abs. 2 BGB n.F.** wird die **Rechtsfähigkeit der GbR anerkannt** und eine entsprechende **Definition der rechtsfähigen Gesellschaft** aufgenommen.\nNach **§ 705 Abs. 2 BGB n.F.** kann eine **GbR** als solche „**selber Rechte erwerben und Verbindlichkeiten eingehen, wenn sie nach dem gemeinsamen Willen der Gesellschafter am Rechtsverkehr teilnehmen soll**“.\n\nGleiches gilt ab dem Beginn des Jahres 2024 auch für die **OHG**.\nIn **§ 105 Abs. 2 HGB n.F.** heißt es hierzu nun: „**Die offene Handelsgesellschaft kann Rechte erwerben und Verbindlichkeiten eingehen.**“ Dies gilt über **§ 161 Abs. 2 HGB** sodann auch für die **KG**."
-                        }
-                    ]
-                ]
-            },           
-{
-                name: "Scherf",
-                field: "Umsatzsteuer",
-                avatar: "W",
-                image: "https://s1.directupload.eu/images/250829/8q6up3ep.jpg",
-                rounds: [
-                    [
-                        {
-                            question: "Kommen wir nun zur Umsatzsteuer. Zunächst eine Einordnungsfrage: Wie kann die Umsatzsteuer im Steuersystem eingeordnet werden? Und um was für eine Steuer handelt es sich dabei genau? Bitte erläutern Sie mir kurz die einzelnen Begriffe, die dabei eine Rolle spielen.",
-                            audio: "https://www.dropbox.com/scl/fi/6y16rzjday1yyb5zs6b39/1.d.1.mp3?rlkey=q5r0vs4d8o4qvbfjlpd935u87&st=0rwyhy78&raw=1",
-                            solution: "Die **Umsatzsteuer** ist eine **indirekte Steuer**, da **Steuerschuldner** in der Regel der **leistende Unternehmer** ist und **Steuerträger** der **Endverbraucher**.\nDaneben ist die Umsatzsteuer eine **Gemeinschaftsteuer**, da das Steueraufkommen **Bund, Ländern und Gemeinden** zusteht.\nAußerdem ist die Umsatzsteuer eine **Objektsteuer**, da **persönliche Verhältnisse keine Rolle spielen**.\nAuch eine **Verkehrsteuer** ist die Umsatzsteuer, da sie **an den wirtschaftlichen Verkehr** bzw. **an Rechtsgeschäfte** anknüpft.\nDie Umsatzsteuer, insbesondere die **Einfuhrumsatzsteuer**, hat **Verbrauchsteuercharakter**, da sie den **Endverbrauch besteuert**.\nUnter **Verbrauchsteuern** werden üblicherweise Steuern auf den **Aufwand für den Verbrauch oder Gebrauch eines Gegenstandes** oder die **Inanspruchnahme von Dienstleistungen** verstanden."
-                        },
-                        {
-                            question: " Jetzt ein etwas aktuelleres Thema: Unterliegen „Donations“ von Streamern der Umsatzsteuer? Wie würden Sie das umsatzsteuerlich beurteilen?",
-                            audio: "https://www.dropbox.com/scl/fi/9tf3bvp17e581c69aa5dl/1.d.2.mp3?rlkey=zl8o15h8r3aa2ag2a7ak5o240&st=ku9rsee1&raw=1",
-                            solution: "Ein **Streamer**, der mit einem **eigenen Kanal auf einer Streamingplattform** als Teilnehmer an **Computer-/Videorollenspielen** agiert und dabei **freiwillige Geldzuwendungen (sog. Donations)** von Zuschauern vereinnahmt, erbringt **steuerbare und steuerpflichtige sonstige Leistungen** gem. **§ 3 Abs. 9 S. 1 UStG**.\nDas **FG Düsseldorf** hat das mit **Urteil vom 04.03.2022** festgestellt.\nDamit unterliegen derartige, **freiwillige Geldzuwendungen für die Unterhaltungsleistung des Streamers** der **Umsatzsteuer**."                    
-                        },
-                        {
-                            question: " Nochmal ein Themenwechsel: Vielleicht nennen Sie mir mal drei Fälle, in denen das Halten einer Beteiligung dem unternehmerischen Bereich zugeordnet werden kann.",
-                            audio: "https://www.dropbox.com/scl/fi/pregoos6f9qampdp5ze2t/1.d.3.mp3?rlkey=sca6bjv9z3rwqh66g647di5dv&st=s2lhcez5&raw=1",
-                            solution: "Das **Erwerben, Halten und Veräußern einer gesellschaftsrechtlichen Beteiligung** stellt gem. **Abschnitt 2.3 Abs. 3 S. 5 Umsatzsteuer-Anwendungserlass** nur dann eine **unternehmerische Tätigkeit** dar,\n• soweit **Beteiligungen im Sinne eines gewerblichen Wertpapierhandels** gewerbsmäßig erworben und veräußert werden und dadurch eine **nachhaltige, auf Einnahmeerzielungsabsicht gerichtete Tätigkeit** entfaltet wird, oder\n• wenn die **Beteiligung nicht um ihrer selbst willen gehalten** wird, sondern der **Förderung einer bestehenden oder beabsichtigten unternehmerischen Tätigkeit** (z. B. **Sicherung günstiger Einkaufskonditionen**, **Verschaffung von Einfluss bei potenziellen Konkurrenten**, **Sicherung günstiger Absatzkonditionen**) dient, oder\n• wenn **unmittelbar in die Verwaltung der Gesellschaften**, an denen die Beteiligung besteht, **eingegriffen** wird. Die Eingriffe müssen dabei zwingend durch **unternehmerische Leistungen** erfolgen, z. B. durch das **entgeltliche Erbringen von administrativen, finanziellen, kaufmännischen und technischen Dienstleistungen** an die jeweilige Beteiligungsgesellschaft."
-                        },
-                        {
-                            question: " Ich habe gehört es gibt irgendeine elektronische Schnittstelle. Was hat es umsatzsteuerlich mit dieser elektronischen Schnittstelle auf sich?",
-                            audio: "https://www.dropbox.com/scl/fi/19sq40p64uc68vdmfwq85/1.d.4.mp3?rlkey=cdv9ih6ft1u3sixvnomvjk1ht&st=jrpn6mop&raw=1",
-                            solution: "Hintergrund ist folgendes: Ein **Unternehmer**, der mittels seiner **elektronischen Schnittstelle** die **Lieferung eines Gegenstands**, dessen **Beförderung oder Versendung im Gemeinschaftsgebiet beginnt und endet**, durch einen **nicht im Gemeinschaftsgebiet ansässigen Unternehmer** an einen **Empfänger nach § 3a Abs. 5 S. 1 UStG** unterstützt, wird nach **§ 3 Abs. 3a S. 1 UStG** so behandelt, als ob er diesen Gegenstand für sein Unternehmen **selbst erhalten und geliefert** hätte.\nDamit wird eine **elektronische Schnittstelle** (z. B. der **Betreiber eines Online-Marktplatzes**) bei diesen Lieferungen fiktiv so gestellt, als ob der Betreiber die Lieferung des auf seinem Marktplatz tätigen Versandhändlers selbst erhalten und als ob er diese Lieferung selbst an den Kunden des Versandhändlers ausgeführt hat.\nEs wird also ein **Reihengeschäft fingiert**.\n\nEine **elektronische Schnittstelle im Sinne von § 3 Abs. 3a S. 1 und 2 UStG** ist ein **elektronischer Marktplatz**, eine **elektronische Plattform**, ein **elektronisches Portal** oder **Ähnliches**.\nDer Begriff der elektronischen Schnittstelle ist **sehr weit gefasst**, sodass in den Anwendungsbereich der Vorschriften nicht nur elektronische Marktplätze, Plattformen oder Portale fallen, sondern auch **alle anderen vergleichbaren elektronischen Handelsplätze**."
-                        }
-                    ]
-                ]
-            },
-{
-                name: "Priller",
-                field: " BilSt, UmwSt",
-                avatar: "P",
-                image: "https://s1.directupload.eu/images/250926/mw5zoero.jpg",
-                rounds: [
-                    [
-                        {
-                            question: "Wir starten in das Bilanzsteuerrecht mit folgendem Fall: Ein Mandant kommt in Ihre Kanzlei. Für das Geschäftsjahr 01 wurde ein hoher Gewinn erzielt, und der Steuerbescheid ist bereits wirksam bekannt gegeben worden. Mandant war einverstanden in 01. In 02 wurde unerwartet ein schlechtes Ergebnis erzielt. Mandant möchte nun 01 noch ändern, um das Ergebnis zu senken, z. B. in Form einer Bildung einer Rückstellung. Ist das möglich?",
-                            audio: "https://www.dropbox.com/scl/fi/mrdhyzcsvopey2wteocie/1.h.1.mp3?rlkey=myeeb5g9nce7yqe58kh4swg4t&st=4li4s1hr&raw=1",
-                            solution: "Eine **Bilanzberichtigung in 01** gem. **§ 4 Abs. 2 S. 1 EStG** ist nur möglich, wenn im Fehlerjahr 01 die **Veranlagung nach den Änderungsvorschriften der Abgabenordnung** noch korrigiert werden kann (**H 4.4 „Berichtigung einer Bilanz ...“ Sps. 1 EStH**).\nWenn verfahrensrechtlich keine Korrektur mehr möglich ist, erfolgt eine **erfolgswirksame Bilanzberichtigung in der ersten offenen Veranlagung** (**R 4.4 Abs. 1 S. 9 EStR**).\n\nNeben einer **Bilanzberichtigung (fehlerhafter Bilanzansatz)** können **Bewertungswahlrechte im Rahmen einer Bilanzänderung** neu ausgeübt werden (**§ 4 Abs. 2 S. 2 EStG**).\nVoraussetzung für eine **Bilanzänderung** ist dabei jedoch, dass ein **enger sachlicher und zeitlicher Zusammenhang** zu einer **Bilanzberichtigung gem. § 4 Abs. 2 S. 1 EStG** besteht.\nAußerdem ist die **Bilanzänderung der Höhe nach begrenzt** auf die **Gewinnauswirkung der Bilanzberichtigung**.\n\nUngeachtet der Bestimmungen zur Bilanzänderung können **steuerliche Wahlrechte außerhalb der Bilanz** ausgeübt werden, sofern die **Veranlagung noch nach den Vorschriften der AO korrigiert werden kann**.\nHierunter würde z. B. die **Vornahme eines außerbilanziellen Abzugs eines IAB** gem. **§ 7g Abs. 1 EStG** fallen, sofern das **begünstigte Wirtschaftsgut** noch **nicht angeschafft** wurde (**§ 7g Abs. 2 S. 2 EStG**)."
-                        },
-                        {
-                            question: "Gut passt. Sagen Sie mir mal: Was ist eine atypisch/typisch stille Beteiligung und wie wird diese bilanziert?",
-                            audio: "https://www.dropbox.com/scl/fi/clrn39zf3jl6x589534md/1.h.2.mp3?rlkey=1qvwfo20fl8isex71fv7hx1ue&st=oyvrq5i9&raw=1",
-                            solution: "Als **stille Gesellschaft** bezeichnet man eine Gesellschaft, bei der sich jemand am **Handelsgewerbe eines anderen** in der Weise beteiligt, dass er in das **Vermögen des Inhabers des Handelsgeschäfts** – der **Einzelkaufmann**, aber auch eine **Personen- oder Kapitalgesellschaft** sein kann – eine **Einlage leistet** (**§ 230 HGB**).\n\n**Einkommensteuerlich** ist die **Unterscheidung zwischen typisch und atypisch stiller Gesellschaft** von erheblicher Bedeutung.\nWährend der **typisch Stille** im Wesentlichen wie ein **Darlehensgeber** behandelt wird, ist die **atypisch stille Gesellschaft** als **Mitunternehmerschaft** zu qualifizieren.\nEine atypisch stille Gesellschaft liegt vor, wenn der stille Gesellschafter **Mitunternehmerinitiative entfalten** kann und **Mitunternehmerrisiko trägt**.\n\nEntscheidend ist insbesondere die **Beteiligung an den stillen Reserven** einschließlich eines etwaigen **Geschäfts-/Firmenwerts**.\nIn der **Handelsbilanz** ist die **Einlage des stillen Gesellschafters** grundsätzlich als **Fremdkapital** auszuweisen.\n**Steuerlich** stellen die **Vergütungen an den stillen Gesellschafter** **Betriebsausgaben des Geschäftsherrn** dar.\n\nBei einer **atypisch stillen Gesellschaft** mindert der **Gewinnanteil des atypisch stillen Gesellschafters** nicht den Gewinn der Mitunternehmerschaft.\nEs ist vielmehr eine **Gewinnverteilung zwischen dem Geschäftsherrn und dem atypisch stillen Gesellschafter** vorzunehmen (**einheitlich und gesonderte Gewinnfeststellung** gem. **§§ 179, 180 Abs. 1 S. 1 Nr. 2 Buchst. a AO**)."
-                        },
-                        {
-                            question: "Anderes Thema: Wie kann ein Zuschuss zu einer Maschine behandelt werden?",
-                            audio: "https://www.dropbox.com/scl/fi/sz60zyh6ohg3gztietfpb/1.h.3.mp3?rlkey=wxuzo0x1ciqu14fuoudgqsc46&st=wdz3c07g&raw=1",
-                            solution: "**Handelsrechtlich** ist die **bilanzielle Behandlung eines Investitionszuschusses** nicht geregelt.\nEs bestehen insgesamt **drei Möglichkeiten des Ausweises**:\n• **Minderung der Anschaffungs- bzw. Herstellungskosten** des Vermögensgegenstands um den Betrag des Zuschusses (**sog. direkte Methode**), oder\n• **Ansatz eines passiven Sonderpostens** in Höhe des Zuschusses (**sog. indirekte Methode**), oder\n• **Ausweis als Ertrag**.\n\nHandelsrechtlich ist **umstritten**, ob und welche dieser drei Möglichkeiten zulässig ist.\n\n**Steuerrechtlich** besteht ein **Wahlrecht** zwischen **erfolgsneutraler Behandlung** (Verrechnung des Zuschusses mit AK/HK) und **erfolgswirksamer Behandlung** (Behandlung als Ertrag, ohne Verrechnung mit den AK/HK) des Zuschusses (**R 6.5 Abs. 2 EStR**)."
-                        },
-                        {
-                            question: "Daran anknüpfend sprechen wir mal über das Thema latente Steuern: Ergeben sich latente Steuern bei einem Zuschuss? Wie schauts bei einer § 6b-Rücklage und bei § 7g EStG aus?",
-                            audio: "https://www.dropbox.com/scl/fi/x86kihru5w71gt0f8s6mo/1.h.4.mp3?rlkey=ealnei4eda4qli8aifdoki3wd&st=ckahca80&raw=1",
-                            solution: "Wird der **Zuschuss in der Handelsbilanz erfolgsneutral** (Kürzung der AK), in der **Steuerbilanz jedoch erfolgswirksam** behandelt, kann für die **künftige Steuerentlastung eine aktive latente Steuer** abgegrenzt werden (**§ 274 Abs. 1 S. 2 HGB**).\nIm umgekehrten Fall, d. h. bei **erfolgswirksamer Behandlung in der Handelsbilanz** und **erfolgsneutraler Behandlung in der Steuerbilanz**, ist eine **passive latente Steuer** zu bilanzieren.\n\nDie **Bildung einer § 6b-Rücklage** in der Steuerbilanz führt zu **passiven latenten Steuern** gem. **§ 274 Abs. 1 HGB**, da eine Rücklage seit **BilMoG** in der Handelsbilanz **nicht mehr gebildet werden kann**.\n\nDie **Vornahme eines IAB** erfolgt zwar **außerhalb der Bilanz**, nach **herrschender Meinung (h. M.)** ist hierfür jedoch dennoch eine **passive latente Steuerabgrenzung** gem. **§ 274 Abs. 1 S. 1 HGB** vorzunehmen."
-                        }
-                    ]
-                ]
-            },
-{
-                name: "Dr. Baretti",
-                field: " Berufsrecht, VWL, BWL",
-                avatar: "B",
-                image: "https://s1.directupload.eu/images/250829/zzdffhky.jpg",
-                rounds: [
-                    [
-                        {
-                            question: " Kommen wir nun zum Berufsrecht der Steuerberater. Zunächst eine Frage, die in den letzten Jahren immer wichtiger geworden ist: Was versteht man unter einem Syndikus-Steuerberater?",
-                            audio: "https://www.dropbox.com/scl/fi/dv9lmpclub0polx8vnzs7/1.c.1.mp3?rlkey=z9d91ma9bxqt47iisj6dadfig&st=8mlt7yvp&raw=1",
-                            solution: "Gemäß **§ 58 Nr. 5a Steuerberatungsgesetz (StBerG)** ist die **Bestellung als Syndikus-Steuerberater** möglich.\nDies ermöglicht **Angestellten in Industrieunternehmen und Wirtschaftsverbänden**, neben ihrer **Angestelltentätigkeit als Steuerberater** tätig zu werden.\n\nVoraussetzung ist:\n• dass der Angestellte **Tätigkeiten i. S. d. § 33 Steuerberatungsgesetz** wahrnimmt,\n• der Angestellte **nicht in seiner Eigenschaft als Steuerberater für den eigenen Arbeitgeber tätig** wird; er kann ihn aber **steuerlich beraten und gegenüber dem Finanzamt vertreten**, \n• der **Arbeitgeber mit der Tätigkeit als Steuerberater einverstanden** ist und\n• der Steuerberater durch seine **Angestelltentätigkeit nicht gehindert** ist, seinen **Pflichten als Steuerberater** nachzukommen.\n\nDie **Berufsbezeichnung** eines Syndikus-Steuerberaters lautet **„Steuerberater“**; eine **Pflicht zur Bezeichnung als Syndikus-Steuerberater** besteht **nicht**."
-                        },
-                        {
-                            question: "Und direkt daran anschließend: Welcher Vorteil ergibt sich denn daraus, wenn man sich als Syndikus-Steuerberater bestellen lässt?",
-                            audio: "https://www.dropbox.com/scl/fi/fl2th17jxgpoj9r1ux0ok/1.c.2.mp3?rlkey=ipj1fuy1dn2a0jvf20148x7tz&st=xlepr4x0&raw=1",
-                            solution: "**Vorteile** ergeben sich insbesondere durch die Möglichkeit der **Befreiung von der Beitragspflicht in der gesetzlichen Rentenversicherung** zugunsten einer in der Regel **besseren Altersversorgung durch das Versorgungswerk der Steuerberater**.\nAußerdem kann mit der **Bestellung** dokumentiert werden, dass die **Steuerberaterprüfung bestanden** wurde."
-                        },
-                        {
-                            question: " Nun allgemein zur Berufsausübung: Welche Möglichkeiten haben Sie, den Beruf des Steuerberaters auszuüben? Und welche Vor- und Nachteile ergeben sich aus den verschiedenen Möglichkeiten Ihrer Einschätzung nach?",
-                            audio: "https://www.dropbox.com/scl/fi/wgr307e0fm8kwet0ss1xn/1.c.3.mp3?rlkey=ucwt4z0cx8f65pnsu32v3czdw&st=10sptiuo&raw=1",
-                            solution: "**Steuerberater** können sich zur **gemeinsamen Berufsausübung zu Berufsausübungsgesellschaften** verbinden.\nDiesbezüglich stehen **alle inländischen sowie EU/EWR-Rechtsformen** zur Verfügung.\nIn der Praxis sind insbesondere folgende **Konstellationen** vorzufinden:\n\n• **Die Einzelpraxis:** Eine Einzelpraxis kann nach eigenen Vorstellungen aufgebaut und geführt werden; die **Haftung erfolgt mit dem Privatvermögen**. Der Steuerberater ist **auf sich allein gestellt**, insbesondere angesichts einer sich ständig ändernden Rechtslage und Rechtsprechung. Auch die **Fixkosten** sind vom Steuerberater allein zu tragen.\n\n• **Die Bürogemeinschaft:** Bürogemeinschaften dienen **nicht einer gemeinschaftlichen Berufsausübung**, sondern einer **gemeinsamen Nutzung der Betriebsmittel**, indem Kosten, z. B. Räume oder Büroinfrastruktur, geteilt werden. Eine **gemeinsame Vertretung nach außen** oder eine **gemeinsame Annahme von Mandanten** erfolgt nicht. Bürogemeinschaften dürfen grundsätzlich **mit allen Personen gebildet** werden, auch mit **Gewerbetreibenden**, solange die **Berufspflichten als Steuerberater** gewahrt bleiben. Ausgeschlossen sind nur Personen, mit denen eine Verbindung mit dem steuerberatenden Beruf **unvereinbar** ist (**§ 55h Abs. 2 Steuerberatungsgesetz**), z. B. **Maklern**.\n\n• **Die Sozietät in Form einer GbR:** Die **GbR** tritt im Gegensatz zur Bürogemeinschaft **nach außen in Erscheinung**. Aus dem Mandat sind **alle Gesellschafter berechtigt und verpflichtet**. Die Gesellschafter **haften für die Verbindlichkeiten der Gesellschaft** mit dem gesamten **Privat- und Betriebsvermögen**.\n\n• **Die Berufsausübungsgesellschaft:** Der Begriff **Berufsausübungsgesellschaft** ist der **Oberbegriff für Zusammenschlüsse von Steuerberatern** mit anderen Steuerberatern und/oder **Angehörigen weiterer Freier Berufe**. Neben den klassischen Zusammenschlüssen zwischen **Steuerberatern, Wirtschaftsprüfern und Rechtsanwälten** gibt es zunehmend auch **Zusammenschlüsse mit weiteren Professionen**, z. B. **beratenden Betriebswirten**."
-                        },
-                        {
-                            question: "Zum Abschluss noch eine kleine Frage aus der Betriebswirtschaftslehre, die oft an das Berufsrecht anknüpft: Können Sie mir bitte kurz den Unterschied zwischen einem Share Deal und einem Asset Deal erklären?",
-                            audio: "https://www.dropbox.com/scl/fi/kckahtkgkbsixzerpl8vm/1.c.4.mp3?rlkey=dq7t550vnofeipqofvcnwmnfb&st=alwxc0g2&raw=1",
-                            solution: "Unter einem **Share Deal** versteht man eine spezifische Art des **Unternehmenskaufs**, bei der der Käufer **die Anteile des Unternehmens** vom Verkäufer erwirbt.\nDer Begriff **Asset Deal** meint eine spezifische Art des **Unternehmenskaufs**, bei der der Käufer **sämtliche Wirtschaftsgüter des Unternehmens** vom Verkäufer **einzeln erwirbt**."
-                        }
-                    ]
-                ]
-            },
- {
+            {
                 name: "Reinwald",
                 field: " ESt, IStR, KöSt, GewSt", 
                 avatar: "R",
@@ -819,27 +702,152 @@ function setPhase(text) {
                 rounds: [
                     [
                         {
-                            question: "Welche konkreten Vorteile sehen Sie in der Digitalisierung für Unternehmen?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Hauptvorteile der Digitalisierung für Unternehmen:**\n• **Effizienzsteigerung:** Automatisierung wiederkehrender Prozesse reduziert Arbeitsaufwand und Fehlerquoten\n• **Kostensenkung:** Langfristige Einsparungen durch optimierte Abläufe und reduzierte Personalkosten\n• **Verbesserte Datenanalyse:** Bessere Entscheidungsgrundlagen durch datengetriebene Insights\n• **Erhöhte Flexibilität:** Schnellere Anpassung an Marktveränderungen und Kundenbedürfnisse\n• **Neue Geschäftsmodelle:** Erschließung digitaler Märkte und Services\n• **Verbesserte Kundenerfahrung:** 24/7 Verfügbarkeit und personalisierte Services"
+                            question: "Wir starten mit der Einkommensteuer: Stellen wir uns mal folgendes vor: Ihr Mandant ist ein Prominenter und begibt sich nach Australien und ist Teilnehmer am „Dschungelcamp“. Er erhält hierfür eine Gage und verpflichtet sich zur Weisungsgebundenheit und der Leistung von Aufgaben. Er hat dabei die Rechte am Filmmaterial an den Sender abgetreten. Welche Einkünfte erzielt der prominente Mandant mit seiner Gage?",
+                            audio: "https://www.dropbox.com/scl/fi/iv9ou1l5vbuouxy61bk9p/k.r.1.mp3?rlkey=qqahd59z9kobr61ujzgbyuu00&st=l9aab1mx&raw=1",
+                            solution: "Vorweg ist anzumerken, dass **keine gewerblichen Einkünfte i. S. d. § 15 EStG** vorliegen.\nDie **Voraussetzungen des § 15 Abs. 2 EStG** sind **nicht alle erfüllt** – insbesondere fehlt es an der **Nachhaltigkeit**.\n\nDarüber hinaus liegen auch **keine selbständigen Einkünfte i. S. d. § 18 EStG** vor, da insoweit **kein Katalogberuf** vorliegt.\n\nAuch die **Einkünfte aus nichtselbständiger Arbeit** können ausgeschlossen werden, weil **kein abhängiges Arbeitsverhältnis i. S. d. § 19 EStG** besteht.\n\nDerartige **Gagen sind daher gem. § 22 Nr. 3 EStG zu versteuern**, weil diese **Leistungen um des Entgelts willen erbracht** werden.\nEntscheidendes Kriterium für die Steuerbarkeit ist, dass der **Auftritt des Kandidaten** und das **gewonnene Preisgeld** in einem **gegenseitigen Leistungsverhältnis** stehen.\n\nAls Anhaltspunkt für ein derartiges Leistungsverhältnis gilt z. B., dass dem Kandidaten von Seiten des Produzenten ein **bestimmtes Verhaltensmuster oder Ähnliches vorgegeben** wird oder dass er **neben der Gewinnchance** und dem damit verbundenen **Preisgeld** noch ein **erfolgsunabhängiges Antritts- oder Tagegeld** erhält (**BMF v. 30.05.2008, Beck’sche StErlasse 1 § 22/3**)."
                         },
                         {
-                            question: "Wie bewerten Sie die Risiken des digitalen Wandels für Arbeitnehmer?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Risiken der Digitalisierung für Arbeitnehmer:**\n• **Arbeitsplatzunsicherheit:** Automatisierung kann bestimmte Jobs überflüssig machen\n• **Qualifikationslücken:** Neue Technologien erfordern kontinuierliche Weiterbildung\n• **Digitaler Stress:** Ständige Erreichbarkeit und Informationsüberflutung\n• **Soziale Isolation:** Weniger persönliche Interaktion durch Remote Work\n• **Überwachung:** Digitale Tools ermöglichen verstärkte Leistungskontrolle\n• **Work-Life-Balance:** Verschwimmende Grenzen zwischen Arbeit und Freizeit"
+                            question: "Jetzt sind wir ja schon beim Thema der Abgrenzung der Einkunftsarten. Dann können Sie mir bestimmt folgendes beantworten: Wie ist die Tätigkeit beziehungsweise Einkunftsart eines selbständigen Handelsvertreters mit Einkünften nach § 15 EStG zu einem angestellten Handelsvertreter mit Einkünften nach § 19 EStG abzugrenzen?",
+                            audio: "https://www.dropbox.com/scl/fi/b232lergyu52dg8ee82gg/k.r.2.mp3?rlkey=ht4iwt8g3qg5y6bhywh9teety&st=fe9e5i0j&raw=1",
+                            solution: "Für die **Selbständigkeit eines Handelsvertreters** sprechen:\n**Unternehmerrisiko**, **Unternehmerinitiative**, **Selbständigkeit in Organisation und Durchführung** der eigenen Tätigkeit, **eigene Kostentragung**, **Beschäftigung eigener Arbeitnehmer**, **Unterhalt eines eigenen Büros**, **geschäftlicher Kontakt zu mehreren Auftraggebern**, **freie Erledigung des Auftrags**, **Fehlen einer Urlaubsregelung und einer festen Arbeitszeit**, sowie **keine Eingliederung in den Betrieb des Auftraggebers**.\nAuch die **Vergütungsart** kann von Bedeutung sein. Für die Selbständigkeit spricht insbesondere eine **Vergütung nach dem Erfolg**.\nEine festgestellte Selbständigkeit führt zu **gewerblichen Einkünften nach § 15 Abs. 1 S. 1 Nr. 1 EStG**.\n\nFür die **Arbeitnehmereigenschaft eines Handelsvertreters** sprechen:\n**Kein Unternehmerrisiko**, **keine Unternehmerinitiative**, **persönliche Abhängigkeit vom Auftraggeber**, **Weisungsgebundenheit** insbesondere im Hinblick auf **Ort, Zeit und Inhalt der Tätigkeit**, **Eingliederung in den Betrieb**, **feste Bezüge**, **fehlender Kapitaleinsatz**, **keine Pflicht zur Beschaffung von Arbeitsmitteln**, **Schulden der Arbeitskraft und nicht des Arbeitserfolgs**, **Ausführung einfacher Tätigkeiten** mit typischer **Weisungsabhängigkeit**, **feste Arbeitszeit**, **Tätigkeit an einem gleichbleibenden Ort**, **Urlaubsanspruch**, **Fortzahlung von Bezügen im Krankheitsfall**, **Anspruch auf Sozialleistungen** und **Überstundenvergütung**.\nEine festgestellte **Arbeitnehmereigenschaft** führt zu **Einkünften aus nichtselbständiger Arbeit i. S. d. § 19 Abs. 1 S. 1 Nr. 1 EStG**."
                         },
                         {
-                            question: "Welche Rolle spielt die Automatisierung in der modernen Wirtschaft?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Rolle der Automatisierung:**\n• **Produktivitätssteigerung:** Maschinen arbeiten schneller und präziser als Menschen\n• **Qualitätsverbesserung:** Reduzierung menschlicher Fehler in Produktionsprozessen\n• **Kostensenkung:** Langfristige Einsparungen bei Personalkosten\n• **Wettbewerbsvorteil:** Unternehmen können effizienter produzieren\n• **Neue Arbeitsplätze:** Entstehung von Jobs in Wartung, Programmierung und Überwachung\n• **24/7 Betrieb:** Kontinuierliche Produktion ohne Pausen möglich"
+                            question: "In Ordnung. Kommen wir zu einem anderen Thema. Was verstehen Sie unter dem Begriff „horizontaler“ und „vertikaler“ Verlustausgleich?",
+                            audio: "https://www.dropbox.com/scl/fi/9nuy33jfx9rtb3nxedqyw/k.r.3.mp3?rlkey=53wuimwunl980szgmdrjrzrfq&st=ofi2ovld&raw=1",
+                            solution: "**Horizontaler Verlustausgleich** ist der **Ausgleich von Verlusten mit positiven Einkünften derselben Einkunftsart**.\n**Vertikaler Verlustausgleich** ist die **Verrechnung von Verlusten mit positiven Einkünften einer anderen Einkunftsart** (**§ 2 Abs. 3 EStG**)."
                         },
                         {
-                            question: "Wie können Unternehmen ihre Wettbewerbsfähigkeit durch Digitalisierung steigern?",
-                            audio: "https://www.dropbox.com/scl/fi/jq9xlnehbcna73rvyyvej/ElevenLabs_2025-09-24T09_36_17_Liam_pre_sp100_s50_sb75_v3.mp3?rlkey=r7vgyfxqeqrmszlvbcqpe2kxw&raw=1",
-                            solution: "**Wettbewerbsvorteile durch Digitalisierung:**\n• **Schnellere Markteinführung:** Agile Entwicklungsprozesse verkürzen Time-to-Market\n• **Personalisierung:** Individuelle Kundenansprache durch Datenanalyse\n• **Skalierbarkeit:** Digitale Lösungen wachsen mit dem Unternehmen mit\n• **Innovation:** Neue Technologien ermöglichen disruptive Geschäftsmodelle\n• **Kostenführerschaft:** Effizientere Prozesse senken die Gesamtkosten\n• **Kundenbindung:** Digitale Services erhöhen die Kundenzufriedenheit"
+                            question: "Den Themenbereich Körperschaftsteuer möchte ich auch noch abprüfen. Betrachten wir mal die Gründungsstadien einer GmbH bezüglich der Körperschaftsteuerpflicht: Wann liegt was vor? Welche Rechtsformen sind gegeben? Wer muss welche Steuererklärung abgeben? Was passiert mit Vorgesellschaft, die doch nicht zustande kommt?",
+                            audio: "https://www.dropbox.com/scl/fi/01ihmwqwhmyva1r725j4u/k.r.4.mp3?rlkey=o5wi1xnqsyvv6gbh8qjfjfpa7&st=uz4trhwh&raw=1",
+                            solution: "**Phasen der Gründung einer GmbH:**\n\n**1. Vorgründungsgesellschaft:** entsteht mit der (formlosen) **Vereinbarung über die Absicht zur Gründung einer GmbH**.\nSofern diese bereits (vor Abschluss des notariellen Gesellschaftsvertrages) eine Tätigkeit entfaltet, liegt eine **oHG oder GbR** vor (bei **Einmann-GmbH:** Einzelunternehmen), die **nicht mit der später zu gründenden GmbH identisch** ist.\n**Steuerlich** ist eine **gesonderte und einheitliche Gewinnfeststellung** durchzuführen.\nDie **Einkünfte sind den beteiligten Gründungsgesellschaftern zuzurechnen** und von diesen **anteilig zu versteuern**.\n\n**2. Vorgesellschaft (= GmbH in Gründung):** entsteht mit dem **Abschluss des notariellen Gesellschaftsvertrages**.\nSofern diese bereits tätig wird, **beginnt die Körperschaftsteuerpflicht vor Eintragung der GmbH** in das Handelsregister.\nDies gilt jedoch nur, wenn die GmbH auch **tatsächlich in das HR eingetragen** wird.\nUnterbleibt die Eintragung ins HR, z. B. weil die erforderlichen Unterlagen nicht vorgelegt werden, wird die sog. **unechte Vorgesellschaft steuerlich wie eine Vorgründungsgesellschaft behandelt**.\nDas bedeutet: **keine Körperschaftsteuerpflicht**, die **Einkünfte werden den Gründungsgesellschaftern zugerechnet**.\nDie **Gewerbesteuerpflicht** beginnt, wenn die Vorgesellschaft **nicht nur Vorbereitungshandlungen** im Rahmen der Unternehmensgründung vornimmt (**BFH v. 24.01.2017, I R 81/15, BStBl. 2017 II S. 1071**).\n\n**3. GmbH:** entsteht **zivilrechtlich mit der Eintragung in das Handelsregister (HR)**.\nSpätestens zu diesem Zeitpunkt **beginnt die Körperschaftsteuerpflicht (KSt-Pflicht)**."
                         }
                     ]
               ]
+            },
+            {
+                name: "Dr. Baretti",
+                field: " Berufsrecht, VWL, BWL",
+                avatar: "B",
+                image: "https://s1.directupload.eu/images/250829/zzdffhky.jpg",
+                rounds: [
+                    [
+                        {
+                            question: "Können Sie mir zunächst sagen, wo das Berufsrecht der Steuerberater geregelt ist? In welchen Gesetzen oder Verordnungen finden wir die wesentlichen Vorschriften?",
+                            audio: "https://www.dropbox.com/scl/fi/mwbxn2li96043tzfpjp02/K.c.1.mp3?rlkey=ncje8ud4u29hzp4s9p6q8u589&st=a7pdl6sb&raw=1",
+                            solution: "Gesetzliche Grundlagen der Steuerberatung:\n• **Im Steuerberatungsgesetz** sowie\n• **In der Durchführungsverordnung zum Steuerberatungsgesetz:** Diese ist formal kein Gesetz, sondern eine Rechtsverordnung.\n• **Daneben in der Berufsordnung der Bundessteuerberaterkammer,** die ebenfalls kein Gesetz darstellt.\n• **Des Weiteren in der Steuerberatervergütungsverordnung,** die formal kein Gesetz, sondern eine Rechtsverordnung ist."
+                        },
+                        {
+                            question: " Was braucht man denn alles, um zur Steuerberaterin bzw. zum Steuerberater bestellt zu werden? Welche Voraussetzungen müssen dafür erfüllt sein?",
+                            audio: "https://www.dropbox.com/scl/fi/hhecquyxqqmq4bhcgpseq/K.c.2.mp3?rlkey=syqdw36i9n1eo5s96786llgn2&st=0o7djh9f&raw=1",
+                            solution: "Für die Bestellung ist nach § 40 Steuerberatungsgesetz folgendes erforderlich:\n• **Die bestandene Prüfung**\n• **Keine Ausübung einer mit dem Beraterberuf unvereinbaren Tätigkeit**\n• **Eine Deckungszusage der Berufshaftpflichtversicherung**\n• **Geordnete wirtschaftliche Verhältnisse**\n• **Keine gesundheitlichen Gründe,** welche der Berufsausübung dauerhaft entgegenstehen\n• **Eine berufliche Niederlassung**\n• **Ein Führungszeugnis** zur Vorlage bei einer Behörde"
+                        },
+                        {
+                            question: " Dann noch eine Frage zu den amtlichen Fachberatertiteln: Welche Fachberatertitel gibt es derzeit, die von der Steuerberaterkammer offiziell verliehen werden können?",
+                            audio: "https://www.dropbox.com/scl/fi/tgytqdhuhxsrvk439gxlw/K.c.3.mp3?rlkey=0jaz9p0dq1667rzxa9r9gm9kc&st=z1pcwcm5&raw=1",
+                            solution: " Gemäß der Fachberaterordnung gibt es derzeit:\n• **Den Fachberater für Internationales Steuerrecht**\n• **Den Fachberater für Zölle und Verbrauchsteuern**"
+                        },
+                        {
+                            question: " Und darf man den Titel „Fachberater für Unternehmensnachfolge“ eigentlich zusammen mit dem Steuerberatertitel führen, oder gibt es da Beschränkungen?",
+                            audio: "https://www.dropbox.com/scl/fi/k2t6wo1jqsa4dus9hilgs/K.c.4.mp3?rlkey=vmjhg5fymoa2lxc46ney7arns&st=u482py5b&raw=1",
+                            solution: " **Bei der genannten Bezeichnung handelt es sich um einen vom Deutschen Steuerberaterverband vergebenen, nicht amtlichen Fachberatertitel.**\nDie **Fachbezeichnungen des Deutschen Steuerberaterverbands** dürfen von Steuerberatern **werbend verwendet werden**, sofern dies **nicht im unmittelbaren räumlichen Zusammenhang mit der Berufsbezeichnung „Steuerberater“** geschieht.\nDas bedeutet, dass die **Fachberaterbezeichnungen des Deutschen Steuerberaterverbands nicht als Zusatz zur Berufsbezeichnung**, also **nicht in unmittelbarer räumlicher Nähe zum Steuerberatertitel**, geführt werden dürfen.\n**Nicht amtliche Fachberaterbezeichnungen** müssen außerdem **klarstellend die Angabe der verleihenden Institution enthalten** (z. B. „Fachberater für Unternehmensnachfolge“ (**Deutscher Steuerberaterverband e.V.**)."
+                        }
+                    ]
+                ]
+            },
+            {
+                name: "Scherf",
+                field: "Umsatzsteuer",
+                avatar: "S",
+                image: "https://s1.directupload.eu/images/250829/8q6up3ep.jpg",
+                rounds: [
+                    [
+                        {
+                            question: "Beginnen wir mit etwas Grundlegendem: Können Sie mir erklären, was eine Umsatzsteuer-Identifikationsnummer ist? Wissen Sie auch, wo diese gesetzlich geregelt ist und wer sie vergibt?",
+                            audio: "https://www.dropbox.com/scl/fi/r3xja24bgobb3hrp3aez1/K.d.1.mp3?rlkey=et5wh9ao43mnezfcp2hrqfgr4&st=y7aa9uzj&raw=1",
+                            solution: " Die **USt-IdNr.** ist eine eindeutige Kennzeichnung eines Unternehmers innerhalb der **EU** im umsatzsteuerlichen Sinne.\nSie dient innerhalb der EU zur Abwicklung des **innergemeinschaftlichen Waren- und Dienstleistungsverkehrs** für Umsatzsteuerzwecke. Die USt-IdNr. wird daher von jedem Unternehmer benötigt, der innerhalb des Gebiets der EU am Waren- und Dienstleistungsverkehr zwischen den Mitgliedsstaaten teilnimmt.\nDie gesetzliche Fundstelle ist **§ 27a UStG**; dort ist geregelt, dass das **Bundeszentralamt für Steuern (BZSt)** Unternehmern i. S. d. § 2 UStG auf Antrag eine USt-IdNr. erteilt.\nDer Antrag auf Erteilung einer **USt-IdNr.** ist **schriftlich** zu stellen; in dem Antrag sind **Name, Anschrift und Steuernummer** anzugeben."
+                        },
+                        {
+                            question: " Ich hätte dazu außerdem einen kleinen Fall für Sie: Das in Wien ansässige Unternehmen A liefert ein Swimming Pool-Reinigungsgerät für 4.000 € an den in Deutschland wohnhaften Sportarzt S, der es zu privaten Zwecken nutzt. Im Vorjahr hat A noch keine Umsätze ausgeführt. Im laufenden Jahr hat er nur diesen Umsatz. Was würden Sie sagen – was liegt hier vor?",
+                            audio: " https://www.dropbox.com/scl/fi/h4b28knfgxp20vs2vsv6l/k.d.2.mp3?rlkey=91fly07c432dry23jnfese6nt&st=gkvf8o1k&raw=1",
+                            solution: "Es handelt sich um eine **Lieferung nach § 3 Abs. 1 UStG**, Ort **§ 3 Abs. 6 UStG** bei Beginn in **Wien**.\nDa das Reinigungsgerät für den **privaten Bereich** erworben wird, liegt **kein innergemeinschaftlicher Erwerb nach § 1a UStG** vor."
+                        },
+                        {
+                            question: "Welcher Steuersatz findet Anwendung – der deutsche oder der österreichische? Und unter welchen Umständen könnte der österreichische Unternehmer trotzdem deutsche Umsatzsteuer ausweisen?",
+                            audio: "https://www.dropbox.com/scl/fi/ser10le1lrz29rqjeaehm/K.d.3.mp3?rlkey=dyuna3ufk6ifo5zxppmj8tzq8&st=518viem2&raw=1",
+                            solution: "Der **österreichische Steuersatz**, da der **Ort in Österreich** liegt.\nWenn der **österreichische Unternehmer** das Reinigungsgerät zu einer **deutschen Betriebsstätte** bringt und von dort verschickt."
+                        },
+                        {
+                            question: "Was heißt es dann für den österreichischen Unternehmer, wenn er das Reinigungsgerät aus Österreich zu seiner deutschen Betriebsstätte verschickt?",
+                            audio: " https://www.dropbox.com/scl/fi/cca0cbx0wawz912gi7x1w/k.d.4.mp3?rlkey=917lz8b2zzvsejfwjkistnxqk&st=zkdfw6jp&raw=1",
+                            solution: "Er hat einen **innergemeinschaftlichen Erwerb** in Form eines **innergemeinschaftlichen Verbringens nach § 1a Absatz 2 UStG** in **Deutschland**."
+                        },
+{
+                            question: "Liegt hier nicht ggf. ein § 3c UStG vor, wenn das Reinigungsgerät aus Österreich geliefert wird?",
+                            audio: "https://www.dropbox.com/scl/fi/a2jy3ry3wbgzhzfyrtrdx/k.d.5.mp3?rlkey=zjwzugdb0l7kfpemkkg2embd3&st=j72nd82w&raw=1",
+                            solution: "Nein, der **Fernverkauf nach § 3c UStG** ist **nicht anwendbar**, weil das Reinigungsgerät lediglich **4.000 €** gekostet hat.\nDie **Umsatzschwelle von 10.000 €** nach § 3c Abs. 4 UStG wurde **im Vorjahr** nicht überschritten und wird **im laufenden Jahr** nicht überschritten."
+                        }
+                    ]
+                ]
+            },
+            {
+                name: "Priller",
+                field: " BilSt, UmwSt",
+                avatar: "P",
+                image: "https://s1.directupload.eu/images/250926/mw5zoero.jpg",
+                rounds: [
+                    [
+                        {
+                            question: "Wir kommen zu den wichtigen Dingen des Lebens, der Bilanzsteuer. Jetzt höchste Konzentration bitte! Was sind denn die Bestandteile eines Jahresabschlusses?",
+                            audio: "https://www.dropbox.com/scl/fi/b1ccc0gmb44tdfd2b4lte/k.h.1.mp3?rlkey=x0vdhrdqje8kgt3iltevj18bi&st=v0i83akt&raw=1",
+                            solution: "Einzelabschluss- und Konzernabschluss setzen sich zusammen aus:\n• **Bilanz**\n• **GuV-Rechnung**\n• **Anhang**\n\nDer **Konzernabschluss** wird ergänzt um:\n• **Die Kapitalflussrechnung**\n• **Die Segmentberichterstattung**\n• **Den Eigenkapitalspiegel**\n\nNicht zum Jahresabschluss zählt hingegen der **Lagebericht**."
+                        },
+                        {
+                            question: "Was verstehen Sie unter Kleinstkapitalgesellschaften? Wo sind diese geregelt? Welche Erleichterungen gibt es bei Kleinstkapitalgesellschaften?",
+                            audio: "https://www.dropbox.com/scl/fi/hqn27fmkgac7o9a48g5nx/k.h.2.mp3?rlkey=kd5i17lh0479xbq9oraejvb9u&st=c7r0pkyv&raw=1",
+                            solution: "Die **Definition einer Kleinstkapitalgesellschaft** ist in **§ 267a HGB** geregelt.\nFolgende **wesentliche Erleichterungen** existieren gegenüber der Rechnungslegung kleiner Kapitalgesellschaften:\n• **Verzicht auf die Aufstellung eines Anhangs**, wenn einige wesentliche Angaben unter der Bilanz dargestellt werden (Haftungsverhältnisse, Darlehen an Mitglieder des Geschäftsführungsorgans, Bestand an eigenen Aktien der Gesellschaft),\n• **Verzicht auf die Bekanntmachung/Offenlegung der Rechnungslegungsunterlagen** im Falle der Hinterlegung der Bilanz sowie der Angaben unter der Bilanz,\n• **Verkürzte Darstellung von Bilanz** (nur Buchstabenpositionen) und **GuV** (8 Nummern)."
+                        },
+                        {
+                            question: "Gut, folgendes Gedankenspiel: Ein Mandant sucht Sie in Ihrer Praxis auf, hat einen handelsrechtlichen Jahresabschluss dabei und fragt Sie, wie er nun Steuern sparen kann. Es ging hauptsächlich um die inner- und außerbilanziellen Wahlrechte sowie um die Frage der Veranlagung. Was raten Sie ihm?",
+                            audio: "https://www.dropbox.com/scl/fi/t3h1rh8n7ps2hpmo8ikfb/k.h.3.mp3?rlkey=k835c8hkwo8v358nujrxvpwsp&st=auqm0zn7&raw=1",
+                            solution: "Als **steuerliche Wahlrechte innerhalb der Bilanz** kommen z. B. in Betracht:\n• **Bildung einer Rücklage** (§ 6b-Rücklage, RfE, Zuschussrücklage)\n• **Vornahme einer Teilwertabschreibung (TW-Abschreibung)** gem. **§ 6 Abs. 1 Nr. 1 S. 2 EStG**, **§ 6 Abs. 1 Nr. 2 S. 2 EStG**\n• **Degressive Abschreibung** für die Jahre **2020–2022**, zwischen **01.04.2024 und 31.12.2024** sowie zwischen **01.07.2025 und 31.12.2027**\n• **Neu ab 01.07.2025 (bis 31.12.2027): Degressive Abschreibung für Elektrofahrzeuge**, **§ 7 Abs. 2a EStG**\n• **Anwendung des LiFo-Verfahrens** gem. **§ 6 Abs. 1 Nr. 2a EStG**\n• **Bewertungsfreiheit für geringwertige Wirtschaftsgüter** gem. **§ 6 Abs. 2 EStG**, **Sammelposten** gem. **§ 6 Abs. 2a EStG**\n• **Vornahme einer Sonderabschreibung** gem. **§ 7g Abs. 5 EStG**, **AK-Kürzung innerhalb der Bilanz** gem. **§ 7g Abs. 2 S. 3 EStG**\n• **Sonderabschreibung für Mietwohnungsneubau** nach **§ 7b EStG**\n\n**Steuerliche Wahlrechte außerhalb der Bilanz:**\n• **Vornahme eines Investitionsabzugsbetrags** gem. **§ 7g Abs. 1 EStG**"
+                        },
+                        {
+                            question: "Da ich ja Umwandlungssteuerecht auch mit prüfe, noch eine Frage zu Umwandlung. Welche Umwandlungsarten nach dem Umwandlungsgesetz gibt es, und wo sind diese geregelt?",
+                            audio: "https://www.dropbox.com/scl/fi/4ecicrkw6eiahf498jsaw/k.h.4.mp3?rlkey=iowafzh71d800x32rnt7t43ma&st=vxurpzgc&raw=1",
+                            solution: "Es gibt insgesamt **vier Umwandlungsarten**, die in **§ 1 Abs. 1 UmwG** genannt sind.\nDemnach können **Rechtsträger mit Sitz im Inland** umgewandelt werden:\n**1. Durch Verschmelzung** (§§ 2 - 122 UmwG)\n**2. Durch Spaltung** (Aufspaltung, Abspaltung, Ausgliederung) (§§ 123 - 173 UmwG)\n**3. Durch Vermögensübertragung** (§§ 174 - 189 UmwG)\n**4. Durch Formwechsel** (§§ 190 - 304 UmwG)"
+                        }
+                    ]
+                ]
+            },
+            {
+                name: "Dr. Dumser",
+                field: "BGB, HGB, InsO, EuropaR",
+                avatar: "DD",
+                image: "https://s1.directupload.eu/images/250829/f5677mip.jpg",
+                rounds: [
+                    [
+                        {
+                            question: " Für meine erste Frage bitte ich Sie, nicht ins Gesetz zu schauen. Können Sie mir aus dem Gedächtnis sagen, wie das Bürgerliche Gesetzbuch aufgebaut ist?",
+                            audio: "https://www.dropbox.com/scl/fi/u2p3k8xjptqe39ltljgdp/K.k.1.mp3?rlkey=gye2p45k0d4a7ixkwqzb7xu2m&st=wxolzvxf&raw=1 ",
+                            solution: " Das **BGB** ist in **5 Bücher** unterteilt:\n**1. Buch: Allgemeiner Teil** (§§ 1 - 240 BGB)\n**2. Buch: Recht der Schuldverhältnisse (Schuldrecht)** (§§ 241 - 853 BGB)\n**3. Buch: Sachenrecht** (§§ 854 - 1296 BGB)\n**4. Buch: Familienrecht** (§§ 1297 - 1921 BGB)\n**5. Buch: Erbrecht** (§§ 1922 - 2385 BGB)\n\nSystematisch gesehen wurden die Regelungen des **Ersten Buchs des BGB „vor die Klammer gezogen“**. Es handelt sich also bei den §§ 1 - 240 BGB um **allgemeine Regelungen**, die auch im Rahmen der in den weiteren Büchern des BGB geregelten Rechtsgebiete Anwendung finden können."
+                        },
+                        {
+                            question: " Wenn wir über Personen im Zivilrecht sprechen, fallen oft Begriffe wie Rechtsfähigkeit oder Geschäftsfähigkeit. Können Sie mir erklären, was diese Begriffe bedeuten und wie sie sich voneinander unterscheiden?",
+                            audio: "https://www.dropbox.com/scl/fi/9qdtomo62qx23k0nsf16g/K.k.2.mp3?rlkey=jehn43xazfyerjng9vkrnrqfj&st=bbc90t59&raw=1",
+                            solution: " **Rechtsfähigkeit** bedeutet die Fähigkeit, **Träger von Rechten und Pflichten** zu sein. Rechtsfähig sind sowohl **natürliche Personen** (vgl. § 1 BGB) als auch **juristische Personen** (vgl. §§ 21, 22 BGB).\n\\n**Geschäftsfähigkeit** ist die Fähigkeit rechtsfähiger Personen, durch **eigene Willenserklärungen selbst wirksam Rechte und Pflichten zu begründen** und damit Rechtsgeschäfte abzuschließen."
+                        },
+                        {
+                            question: "Schauen wir uns den Begriff der Geschäftsfähigkeit genauer an. Wie kann man die Geschäftsfähigkeit unterteilen?",
+                            audio: "https://www.dropbox.com/scl/fi/swlkvjvervy7dzeydi7ol/K.k.3.mp3?rlkey=h9lz87ttn6665d2noi4nvnafd&st=y6fxt7i5&raw=1",
+                            solution: "Bei der **Geschäftsfähigkeit** ist wie folgt zu unterscheiden:\n• **Unbeschränkte bzw. volle Geschäftsfähigkeit:** Voll geschäftsfähig sind natürliche Personen, die das **18. Lebensjahr vollendet** haben, also volljährig sind (§ 2 BGB).\n• **Beschränkte Geschäftsfähigkeit (§§ 106 bis 113 BGB):** Minderjährige, die das **7. Lebensjahr** (aber noch nicht das **18. Lebensjahr**) vollendet haben, sind **beschränkt geschäftsfähig**, § 106 BGB. Die Beschränkung der Geschäftsfähigkeit besteht nach Maßgabe der §§ 107 - 113 BGB.\n• **Partielle Geschäftsfähigkeit (§§ 112, 113 BGB):** Soweit die **generelle Einwilligung des gesetzlichen Vertreters** im Rahmen der §§ 112 und 113 BGB reicht, also im Bereich des **selbständigen Betriebs eines Erwerbsgeschäfts** oder eines **Dienst- bzw. Arbeitsverhältnisses**, ist der Minderjährige **partiell geschäftsfähig**, also teilgeschäftsfähig. Das bedeutet, dass die gesetzlichen Vertreter für den Minderjährigen insoweit **kein Vertretungsrecht besitzen** und der Minderjährige **selbst wirksam rechtsgeschäftlich tätig werden** kann.\n• **Geschäftsunfähigkeit (§§ 104, 105 BGB):** Geschäftsunfähig sind gem. § 104 BGB natürliche Personen, die das **7. Lebensjahr noch nicht vollendet** haben und natürliche Personen, bei denen **nicht nur vorübergehend eine krankhafte Störung der Geistestätigkeit** vorliegt, welche die **freie Willensbestimmung ausschließt**."
+                        },
+                        {
+                            question: "Ich habe folgenden Fall mit zwei Varianten mitgebracht: \nEin Jugendlicher hat sich von seinem Taschengeld 300 Euro zusammengespart. Davon kauft er sich ohne Zustimmung seiner Eltern ein Fahrrad. Was meinen Sie – ist dieser Kaufvertrag wirksam? \n \nUnd jetzt stellen wir uns vor, das Fahrrad kostet 500 Euro. Der Minderjährige zahlt 300 Euro sofort aus seinem Ersparten und vereinbart, die restlichen 200 Euro in Raten zu je 50 Euro aus seinem Taschengeld zu zahlen. Wie wäre die rechtliche Beurteilung in diesem Fall – bleibt es beim vorherigen Ergebnis?",
+                            audio: "https://www.dropbox.com/scl/fi/2el575rjg2ezkhcw9gl2m/K.k.4.mp3?rlkey=rvgl9sj22nooogr08qbieq5fi&st=e4t0ojil&raw=1",
+                            solution: "Der von dem Minderjährigen geschlossene **Kaufvertrag i. S. d. § 433 BGB** ist **wirksam geschlossen** worden.\nDer Minderjährige ist zwar in seiner **Geschäftsfähigkeit beschränkt (§ 106 BGB)**. Durch den Kaufvertrag wurde der Minderjährige zur **Kaufpreiszahlung verpflichtet**, weshalb der Vertrag für ihn **nicht lediglich rechtlich vorteilhaft** ist (§ 107 BGB).\nZu seinen Gunsten greift jedoch der **„Taschengeldparagraph“ (§ 110 BGB)**. Ein von dem Minderjährigen **ohne Zustimmung seines gesetzlichen Vertreters** geschlossener Vertrag gilt nach **§ 110 BGB** ggf. **als von Anfang an wirksam**.\nDies setzt voraus, dass der Minderjährige die von ihm geschuldete Leistung **mit Mitteln bewirkt**, die ihm **zu diesem Zweck oder zu freier Verfügung** von dem Vertreter oder mit dessen Zustimmung von einem Dritten überlassen worden sind.\nHier hat der Minderjährige den **Kaufpreis vollständig aus seinem angesparten Taschengeld**, das ihm **zur freien Verfügung überlassen wurde**, bezahlt.\n**Folglich bedarf der Kaufvertrag zu seiner Wirksamkeit nicht mehr der Zustimmung der Eltern** des Minderjährigen nach **§ 108 Abs. 1 BGB**.\nZahlt der Minderjährige den Kaufpreis aber **nicht vollständig aus seinem angesparten Taschengeld**, greift **§ 110 BGB nicht**, d.h. der Vertrag gilt (zunächst) **nicht als von Anfang an wirksam**.\nIn der Fallvariante fehlten dem Minderjährigen **200 €** zur vollständigen Kaufpreiszahlung. Dementsprechend wurde der Kaufpreis **bis zur Zahlung der letzten Kaufpreisrate nicht mit Mitteln**, die dem Minderjährigen **zur freien Verfügung überlassen wurden**, bezahlt („… wenn der Minderjährige die vertragsmäßige Leistung mit Mitteln bewirkt …“).\n**Folglich ist § 110 BGB hier nicht zu Gunsten des Minderjährigen anzuwenden.**\nDer **Kaufvertrag über das Fahrrad** bedarf also in der Fallvariante **bis zur Zahlung der letzten Kaufpreisrate der Zustimmung der Eltern** des Minderjährigen nach **§ 108 Abs. 1 BGB**"
+                        }
+                    ]
+                ]
             },
      {
                 name: "Wirth",
@@ -1563,5 +1571,4 @@ function displayTopicOptions() {
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98553e7ab01d1dbb',t:'MTc1ODkxNTc0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
 
