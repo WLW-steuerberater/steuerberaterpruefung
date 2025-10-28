@@ -12,6 +12,21 @@
             font-family: 'Inter', sans-serif; 
             box-sizing: border-box;
         }
+/* Blocksatz + Silbentrennung für Musterlösungen */
+.musterloesung p,
+.musterloesung li,
+#solutionModelAnswer p,
+#solutionModelAnswer li {
+  text-align: justify;
+  text-justify: inter-word;   /* bessere Wortabstände */
+  hyphens: auto;              /* Silbentrennung (lang="de" ist schon gesetzt) */
+}
+
+/* optional: letzte Zeile nicht „gezogen“ lassen */
+.musterloesung p,
+#solutionModelAnswer p {
+  text-align-last: left;
+}
         
         .examiner-avatar {
             width: 80px;
@@ -1493,7 +1508,7 @@ function generateSectionHTML(section) {
   `;
 }            
             modalContent.innerHTML = `
-                <div class="p-6">
+                <div class="p-6 musterloesung">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-2xl font-bold text-gray-800">Musterlösung für Ihren Vortrag</h3>
                         <button onclick="document.body.removeChild(this.closest('.fixed'))" class="text-gray-500 hover:text-gray-700 text-2xl font-bold">&times;</button>
