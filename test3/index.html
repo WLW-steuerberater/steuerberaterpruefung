@@ -1491,16 +1491,16 @@ function displayTopicOptions() {
             
             // Generate HTML for solution sections
             function generateSectionHTML(section) {
-                const pointsHTML = section.points.map(point => `<li>${point}</li>`).join('');
-                return `
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-3">${section.title}</h4>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            ${pointsHTML}
-                        </ul>
-                    </div>
-                `;
-            }
+                // 🔧 NEUE VERSION
+const pointsHTML = section.points.join('<br><br>');
+return `
+  <div class="bg-gray-50 rounded-lg p-4">
+    <h4 class="text-lg font-semibold text-gray-800 mb-3">${section.title}</h4>
+    <div class="text-gray-700 leading-relaxed">
+      ${pointsHTML}
+    </div>
+  </div>
+`;            }
             
             modalContent.innerHTML = `
                 <div class="p-6">
