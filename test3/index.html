@@ -1527,27 +1527,6 @@ function displayTopicOptions() {
             document.getElementById('examPhase').classList.remove('hidden');
             setPhase('Prüfungsgespräch');        }
 
-        function showResults() {
-            // Stop all audio
-            stopAllAudio();
-            
-            const solutionPhase = document.getElementById('solutionPhase');
-            const resultsPhase = document.getElementById('resultsPhase');
-            const phaseIndicator = document.getElementById('phaseIndicator');
-            
-            if (solutionPhase) solutionPhase.classList.add('hidden');
-            if (resultsPhase) resultsPhase.classList.remove('hidden');
-            if (phaseIndicator) phaseIndicator.textContent = 'Ergebnis';
-        }
-function showResults() {
-  const solutionPhase = document.getElementById('solutionPhase');
-  const resultsPhase = document.getElementById('resultsPhase');
-  const phaseIndicator = document.getElementById('phaseIndicator');
-
-  if (solutionPhase) solutionPhase.classList.add('hidden');
-  if (resultsPhase) resultsPhase.classList.remove('hidden');
-  if (phaseIndicator) phaseIndicator.textContent = 'Ergebnis';
-}
         function restartExam() {
             // Reset all variables
             currentExaminerIndex = 0;
@@ -1758,23 +1737,28 @@ function initResultsUI() {
   }
 }
 
-// 👉 NEU: In showResults() (nicht in initResultsUI!)
 function showResults() {
-  const solutionPhase = document.getElementById('solutionPhase');
-  const resultsPhase = document.getElementById('resultsPhase');
+  // 1) Alles Audio sicher stoppen
+  stopAllAudio();
+
+  // 2) Sichtbarkeit umschalten
+  const solutionPhase  = document.getElementById('solutionPhase');
+  const resultsPhase   = document.getElementById('resultsPhase');
   const phaseIndicator = document.getElementById('phaseIndicator');
 
-  if (solutionPhase) solutionPhase.classList.add('hidden');
-  if (resultsPhase) resultsPhase.classList.remove('hidden');
+  if (solutionPhase)  solutionPhase.classList.add('hidden');
+  if (resultsPhase)   resultsPhase.classList.remove('hidden');
   if (phaseIndicator) phaseIndicator.textContent = 'Ergebnis';
 
-  // NEU: Initialisierung der Results-Phase
+  // 3) Results-UI (Slider) initialisieren
   initResultsUI();
+
+  // 4) Abschluss-Audio starten (falls Autoplay erlaubt)
   setTimeout(() => {
     const resultsAudio = document.getElementById('resultsAudio');
     if (resultsAudio) resultsAudio.play().catch(() => {});
   }, 500);
-}}
+}
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98553e7ab01d1dbb',t:'MTc1ODkxNTc0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
