@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="de" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kostenloser Infotag - Steuerberater werden</title>
+  <link rel="icon" type="image/png" href="https://www.dropbox.com/scl/fi/024t4unrvt67ciavuc05c/Design-ohne-Titel-20-1.png?rlkey=39g3udc4vmumqzwhayu7p0azp&amp;st=eetdt9us&amp;raw=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(180deg, #6facff 0%, #aacfff 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .fade-in-delay {
+            animation-delay: 0.3s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .pulse-button {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-sans text-gray-800"><!-- Navigation -->
+  <nav class="bg-white shadow-sm fixed w-full top-0 z-40">
+   <div class="max-w-6xl mx-auto px-4 py-3">
+    <div class="flex justify-between items-center">
+     <div class="flex items-center"><img src="https://www.dropbox.com/scl/fi/024t4unrvt67ciavuc05c/Design-ohne-Titel-20-1.png?rlkey=39g3udc4vmumqzwhayu7p0azp&amp;st=eetdt9us&amp;raw=1" alt="WLW Logo" class="h-10 md:h-12 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <div class="h-10 md:h-12 px-3 md:px-4 bg-gray-100 rounded flex items-center" style="display: none;"><span class="text-base md:text-lg font-semibold text-gray-700">WLW</span>
+      </div>
+     </div>
+     <div class="hidden md:flex items-center space-x-8"><a href="#programm" class="text-gray-700 hover:text-blue-600 transition-colors">Programm</a> <a href="#vorteile" class="text-gray-700 hover:text-blue-600 transition-colors">Vorteile</a> <a href="#faq" class="text-gray-700 hover:text-blue-600 transition-colors">FAQ</a> <button onclick="scrollToRegistration()" class="gradient-bg text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition-opacity"> Anmelden </button>
+     </div><button onclick="scrollToRegistration()" class="md:hidden gradient-bg text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"> Anmelden </button>
+    </div>
+   </div>
+  </nav><!-- Hero Section -->
+  <section class="gradient-bg min-h-full flex items-center justify-center px-4 py-16 pt-24 md:py-20 md:pt-28">
+   <div class="max-w-4xl mx-auto text-center text-white">
+    <div class="fade-in">
+     <h1 class="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-light mb-6 md:mb-6 leading-tight">Dein Weg zum<br><span class="font-semibold">Steuerberater</span></h1>
+     <p class="text-xl sm:text-xl md:text-2xl font-light mb-8 md:mb-8 opacity-90 px-2">Kostenloser Infotag | Persönliche Beratung | Alle Infos zur Ausbildung</p>
+     <div class="glass-effect rounded-2xl p-5 sm:p-6 md:p-8 mb-10 md:mb-10 inline-block w-full max-w-lg md:max-w-none">
+      <div class="flex flex-col md:flex-row items-center justify-center gap-5 md:gap-6 text-base sm:text-base md:text-lg">
+       <div class="flex items-center gap-2">
+        <svg class="w-6 h-6 md:w-6 md:h-6 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+        </svg><span class="font-medium">Samstag, 29.11.2025</span>
+       </div>
+       <div class="flex items-center gap-2">
+        <svg class="w-6 h-6 md:w-6 md:h-6 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+        </svg><span class="font-medium">10:00 - 14:00 Uhr</span>
+       </div>
+       <div class="flex items-center gap-2">
+        <svg class="w-6 h-6 md:w-6 md:h-6 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+        </svg><span class="font-medium">Online/Präsenz</span>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="fade-in fade-in-delay"><button onclick="scrollToRegistration()" class="pulse-button bg-white text-blue-600 px-10 sm:px-10 md:px-12 py-4 md:py-4 rounded-full text-xl md:text-xl font-semibold hover:bg-gray-50 transition-all duration-300 shadow-lg w-full sm:w-auto"> Jetzt kostenlos anmelden </button>
+     <p class="mt-5 text-lg md:text-lg opacity-80">Komplett kostenfrei</p>
+    </div>
+   </div>
+  </section><!-- Registration Section (Top) -->
+  <section class="py-12 md:py-20 px-4 bg-white">
+   <div class="max-w-2xl mx-auto text-center">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-light mb-6 md:mb-8 text-gray-800">Sichere dir jetzt deinen Platz</h2>
+    <p class="text-lg md:text-xl mb-8 md:mb-12 text-gray-600">Melde dich kostenlos an und starte deinen Weg zum Steuerberater</p>
+    <form class="bg-gray-50 rounded-2xl p-6 md:p-8 text-left shadow-lg" action="https://formspree.io/f/mnnlawdv" method="POST" onsubmit="handleRegistration(event)">
+     <div class="space-y-6">
+      <div><label for="name-top" class="block text-sm font-medium mb-2 text-gray-700">Name</label> <input type="text" id="name-top" name="name" required class="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
+      </div>
+      <div><label for="email-top" class="block text-sm font-medium mb-2 text-gray-700">E-Mail-Adresse</label> <input type="email" id="email-top" name="email" required class="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
+      </div>
+      <div><label for="teilnahme-top" class="block text-sm font-medium mb-2 text-gray-700">Teilnahme</label> <select id="teilnahme-top" name="teilnahme" required class="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"> <option value="">Bitte wählen...</option> <option value="online">Online</option> <option value="praesenz">Präsenz in Bamberg</option> </select>
+      </div><button type="submit" class="w-full gradient-bg text-white py-4 rounded-xl text-lg font-semibold hover:opacity-90 transition-all duration-300 shadow-lg"> Jetzt kostenlos anmelden </button>
+     </div>
+     <p class="text-xs md:text-sm text-gray-600 mt-6 text-center">Deine Daten werden vertraulich behandelt und nicht an Dritte weitergegeben.</p>
+    </form>
+   </div>
+  </section><!-- Programm Section -->
+  <section id="programm" class="py-16 md:py-20 px-4 bg-gray-50">
+   <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-10 md:mb-12">
+     <h2 class="text-3xl sm:text-3xl md:text-4xl font-light mb-4 md:mb-4">Dein Programm für den Tag</h2>
+     <p class="text-lg md:text-lg text-gray-600 px-2">Ein Tag mit wertvollen Informationen, persönlicher Beratung und Networking</p>
+    </div>
+    <div class="relative"><!-- Timeline Line -->
+     <div class="absolute left-6 md:left-16 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400 to-blue-200"></div>
+     <div class="space-y-5"><!-- 10:00 -->
+      <div class="relative pl-16 md:pl-32">
+       <div class="absolute left-2 md:left-8 w-8 h-8 gradient-bg rounded-full flex items-center justify-center shadow-lg">
+        <div class="w-3 h-3 bg-white rounded-full"></div>
+       </div>
+       <div class="absolute left-11 md:left-20 top-1 text-sm font-semibold text-gray-700 whitespace-nowrap">
+        10:00
+       </div>
+       <div class="bg-white rounded-xl p-5 shadow-sm">
+        <h3 class="font-semibold text-lg md:text-lg mb-2">Vorstellung WLW und Kurserläuterungen</h3>
+        <p class="text-gray-600 text-base leading-relaxed">Willkommen bei WLW! Kurskonzept und Ausbildungswege im Überblick.</p>
+       </div>
+      </div><!-- 10:45 - Carola Gmeiner -->
+      <div class="relative pl-16 md:pl-32">
+       <div class="absolute left-2 md:left-8 w-8 h-8 gradient-bg rounded-full flex items-center justify-center shadow-lg">
+        <div class="w-3 h-3 bg-white rounded-full"></div>
+       </div>
+       <div class="absolute left-11 md:left-20 top-1 text-sm font-semibold text-gray-700 whitespace-nowrap">
+        10:45
+       </div>
+       <div class="bg-white rounded-xl p-5 shadow-sm">
+        <div class="flex gap-3 items-start"><img src="https://www.dropbox.com/scl/fi/ao9ikvboea1ru9oogokcc/Foto-30.11.24-14-39-44.jpg?rlkey=dle57i4ycea55x1qxylo6tcwx&amp;st=41137ozl&amp;dl=1" alt="Carola Gmeiner" class="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover flex-shrink-0" onerror="this.style.display='none';">
+         <div class="flex-1 min-w-0">
+          <h3 class="font-semibold text-lg md:text-lg mb-1">Probeunterricht Bilanzsteuer</h3>
+          <p class="text-sm text-blue-600 font-medium mb-2">mit Carola Gmeiner</p>
+          <p class="text-gray-600 text-base leading-relaxed">Praxisnaher Einblick in unsere Lehrmethoden im Bilanzsteuerrecht.</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- 11:30 -->
+      <div class="relative pl-16 md:pl-32">
+       <div class="absolute left-2 md:left-8 w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center shadow-lg">
+        <div class="w-3 h-3 bg-white rounded-full"></div>
+       </div>
+       <div class="absolute left-11 md:left-20 top-1 text-sm font-semibold text-gray-700 whitespace-nowrap">
+        11:30
+       </div>
+       <div class="bg-gray-100 rounded-xl p-4 shadow-sm border-2 border-dashed border-gray-300">
+        <h3 class="font-semibold text-base text-gray-600">☕ Kurze Pause</h3>
+       </div>
+      </div><!-- 11:35 - Marcus Wirth -->
+      <div class="relative pl-16 md:pl-32">
+       <div class="absolute left-2 md:left-8 w-8 h-8 gradient-bg rounded-full flex items-center justify-center shadow-lg">
+        <div class="w-3 h-3 bg-white rounded-full"></div>
+       </div>
+       <div class="absolute left-11 md:left-20 top-1 text-sm font-semibold text-gray-700 whitespace-nowrap">
+        11:35
+       </div>
+       <div class="bg-white rounded-xl p-5 shadow-sm">
+        <div class="flex gap-3 items-start"><img src="https://www.dropbox.com/scl/fi/qt7bd0xzy8hg81ig2s6in/Foto-29.08.25-15-06-05.jpg?rlkey=1exgmnthbqj7brga2ionxxxaj&amp;st=1cje9btm&amp;dl=1" alt="Marcus Wirth" class="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover flex-shrink-0" onerror="this.style.display='none';">
+         <div class="flex-1 min-w-0">
+          <h3 class="font-semibold text-lg md:text-lg mb-1">Probeunterricht Umsatzsteuer</h3>
+          <p class="text-sm text-blue-600 font-medium mb-2">mit Marcus Wirth</p>
+          <p class="text-gray-600 text-base leading-relaxed">Komplexe Themen verständlich vermittelt - erlebe unseren interaktiven Stil.</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- 12:20 -->
+      <div class="relative pl-16 md:pl-32">
+       <div class="absolute left-2 md:left-8 w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center shadow-lg">
+        <div class="w-3 h-3 bg-white rounded-full"></div>
+       </div>
+       <div class="absolute left-11 md:left-20 top-1 text-sm font-semibold text-gray-700 whitespace-nowrap">
+        12:20
+       </div>
+       <div class="bg-gray-100 rounded-xl p-4 shadow-sm border-2 border-dashed border-gray-300">
+        <h3 class="font-semibold text-base text-gray-600">☕ Kurze Pause</h3>
+       </div>
+      </div><!-- 12:25 - Florian Frenzel -->
+      <div class="relative pl-16 md:pl-32">
+       <div class="absolute left-2 md:left-8 w-8 h-8 gradient-bg rounded-full flex items-center justify-center shadow-lg">
+        <div class="w-3 h-3 bg-white rounded-full"></div>
+       </div>
+       <div class="absolute left-11 md:left-20 top-1 text-sm font-semibold text-gray-700 whitespace-nowrap">
+        12:25
+       </div>
+       <div class="bg-white rounded-xl p-5 shadow-sm">
+        <div class="flex gap-3 items-start"><img src="https://www.dropbox.com/scl/fi/i9jg2zs0v4a75x7ot4bzr/Foto-30.11.24-14-30-46.jpg?rlkey=79o9to2mumxkdxz38os94n9m3&amp;st=h9avvw88&amp;dl=1" alt="Florian Frenzel" class="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover flex-shrink-0" onerror="this.style.display='none';">
+         <div class="flex-1 min-w-0">
+          <h3 class="font-semibold text-lg md:text-lg mb-1">Probeunterricht Einkommensteuer</h3>
+          <p class="text-sm text-blue-600 font-medium mb-2">mit Florian Frenzel</p>
+          <p class="text-gray-600 text-base leading-relaxed">Vorbereitung auf diesen wichtigen Prüfungsbereich im Einkommensteuerrecht.</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- 13:10 -->
+      <div class="relative pl-16 md:pl-32">
+       <div class="absolute left-2 md:left-8 w-8 h-8 gradient-bg rounded-full flex items-center justify-center shadow-lg">
+        <div class="w-3 h-3 bg-white rounded-full"></div>
+       </div>
+       <div class="absolute left-11 md:left-20 top-1 text-sm font-semibold text-gray-700 whitespace-nowrap">
+        13:10
+       </div>
+       <div class="bg-white rounded-xl p-5 shadow-sm">
+        <h3 class="font-semibold text-lg md:text-lg mb-2">Allgemeine Auskünfte</h3>
+        <p class="text-gray-600 text-base leading-relaxed">Stelle alle deine Fragen! Persönliche Beratung zu Finanzierung, Zeitplanung und individuellen Ausbildungswegen.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Vorteile Section -->
+  <section id="vorteile" class="py-16 md:py-20 px-4 bg-white">
+   <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 md:mb-16">
+     <h2 class="text-3xl sm:text-3xl md:text-4xl font-light mb-5 md:mb-6">Warum WLW?</h2>
+     <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-2">Seit 1997 bereiten wir erfolgreich auf die Steuerberaterprüfung vor</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+     <div class="card-hover bg-gray-50 rounded-2xl p-7 md:p-8 text-center">
+      <div class="w-16 h-16 md:w-16 md:h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-5 md:mb-6">
+       <svg class="w-8 h-8 md:w-8 md:h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+       </svg>
+      </div>
+      <h3 class="text-xl md:text-xl font-semibold mb-3 md:mb-4">Über 25 Jahre Erfahrung</h3>
+      <p class="text-gray-600 text-base md:text-base leading-relaxed">Bewährte Methoden und kontinuierliche Weiterentwicklung unserer Ausbildungskonzepte</p>
+     </div>
+     <div class="card-hover bg-gray-50 rounded-2xl p-7 md:p-8 text-center">
+      <div class="w-16 h-16 md:w-16 md:h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-5 md:mb-6">
+       <svg class="w-8 h-8 md:w-8 md:h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+       </svg>
+      </div>
+      <h3 class="text-xl md:text-xl font-semibold mb-3 md:mb-4">Persönliche Atmosphäre</h3>
+      <p class="text-gray-600 text-base md:text-base leading-relaxed">Intensive Betreuung und persönliche Atmosphäre für optimalen Lernerfolg</p>
+     </div>
+     <div class="card-hover bg-gray-50 rounded-2xl p-7 md:p-8 text-center">
+      <div class="w-16 h-16 md:w-16 md:h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-5 md:mb-6">
+       <svg class="w-8 h-8 md:w-8 md:h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+       </svg>
+      </div>
+      <h3 class="text-xl md:text-xl font-semibold mb-3 md:mb-4">Hohe Erfolgsquote</h3>
+      <p class="text-gray-600 text-base md:text-base leading-relaxed">Überdurchschnittliche Bestehensquote durch gezielte und strukturierte Vorbereitung</p>
+     </div>
+     <div class="card-hover bg-gray-50 rounded-2xl p-7 md:p-8 text-center">
+      <div class="w-16 h-16 md:w-16 md:h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-5 md:mb-6">
+       <svg class="w-8 h-8 md:w-8 md:h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"></path>
+       </svg>
+      </div>
+      <h3 class="text-xl md:text-xl font-semibold mb-3 md:mb-4">Prüfungsorientiert</h3>
+      <p class="text-gray-600 text-base md:text-base leading-relaxed">Realitätsnahe Fallbeispiele und Übungen für die optimale Prüfungsvorbereitung</p>
+     </div>
+     <div class="card-hover bg-gray-50 rounded-2xl p-7 md:p-8 text-center">
+      <div class="w-16 h-16 md:w-16 md:h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-5 md:mb-6">
+       <svg class="w-8 h-8 md:w-8 md:h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+       </svg>
+      </div>
+      <h3 class="text-xl md:text-xl font-semibold mb-3 md:mb-4">Umfassende Betreuung</h3>
+      <p class="text-gray-600 text-base md:text-base leading-relaxed">Von der Anmeldung bis zur Prüfung - wir begleiten dich auf jedem Schritt deines Weges</p>
+     </div>
+     <div class="card-hover bg-gray-50 rounded-2xl p-7 md:p-8 text-center">
+      <div class="w-16 h-16 md:w-16 md:h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-5 md:mb-6">
+       <svg class="w-8 h-8 md:w-8 md:h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+       </svg>
+      </div>
+      <h3 class="text-xl md:text-xl font-semibold mb-3 md:mb-4">Aktuelle Materialien</h3>
+      <p class="text-gray-600 text-base md:text-base leading-relaxed">Stets auf dem neuesten Stand der Gesetzgebung und Rechtsprechung</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- FAQ Section -->
+  <section id="faq" class="py-16 md:py-20 px-4 bg-white">
+   <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl sm:text-3xl md:text-4xl font-light text-center mb-10 md:mb-16">Häufige Fragen</h2>
+    <div class="space-y-5 md:space-y-6">
+     <div class="faq-item bg-gray-50 rounded-2xl p-6 md:p-8 shadow-sm cursor-pointer" onclick="toggleFaq(this)">
+      <div class="flex justify-between items-center gap-4">
+       <h3 class="text-xl md:text-xl font-semibold">Ist der Infotag wirklich kostenlos?</h3>
+       <svg class="w-6 h-6 md:w-6 md:h-6 text-gray-400 transform transition-transform faq-icon flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+       </svg>
+      </div>
+      <div class="faq-answer mt-5 text-gray-600 hidden">
+       <p class="text-base md:text-base leading-relaxed">Ja, der Infotag ist komplett kostenlos! Inklusive Verpflegung, Getränken und allen Materialien. Es gibt keine versteckten Kosten.</p>
+      </div>
+     </div>
+     <div class="faq-item bg-gray-50 rounded-2xl p-6 md:p-8 shadow-sm cursor-pointer" onclick="toggleFaq(this)">
+      <div class="flex justify-between items-center gap-4">
+       <h3 class="text-xl md:text-xl font-semibold">Wo findet der Infotag statt?</h3>
+       <svg class="w-6 h-6 md:w-6 md:h-6 text-gray-400 transform transition-transform faq-icon flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+       </svg>
+      </div>
+      <div class="faq-answer mt-5 text-gray-600 hidden">
+       <p class="text-base md:text-base leading-relaxed">Der Infotag findet online oder in Präsenz in Bamberg statt. Die genauen Zugangsdaten bzw. die Adresse erhältst du nach deiner Anmeldung per E-Mail.</p>
+      </div>
+     </div>
+     <div class="faq-item bg-gray-50 rounded-2xl p-6 md:p-8 shadow-sm cursor-pointer" onclick="toggleFaq(this)">
+      <div class="flex justify-between items-center gap-4">
+       <h3 class="text-xl md:text-xl font-semibold">Muss ich mich vorbereiten?</h3>
+       <svg class="w-6 h-6 md:w-6 md:h-6 text-gray-400 transform transition-transform faq-icon flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+       </svg>
+      </div>
+      <div class="faq-answer mt-5 text-gray-600 hidden">
+       <p class="text-base md:text-base leading-relaxed">Nein, du musst dich nicht vorbereiten. Komm einfach mit deinen Fragen und deiner Motivation. Wir informieren dich über alles Wichtige.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Registration Section -->
+  <section id="registration" class="gradient-bg py-12 md:py-20 px-4">
+   <div class="max-w-2xl mx-auto text-center text-white">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-light mb-6 md:mb-8">Sichere dir jetzt deinen Platz</h2>
+    <p class="text-lg md:text-xl mb-8 md:mb-12 opacity-90">Melde dich kostenlos an und starte deinen Weg zum Steuerberater</p>
+    <form class="glass-effect rounded-2xl p-6 md:p-8 text-left" action="https://formspree.io/f/mnnlawdv" method="POST" onsubmit="handleRegistration(event)">
+     <div class="space-y-6">
+      <div><label for="name" class="block text-sm font-medium mb-2">Name</label> <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 text-base">
+      </div>
+      <div><label for="email" class="block text-sm font-medium mb-2">E-Mail-Adresse</label> <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 text-base">
+      </div>
+      <div><label for="teilnahme" class="block text-sm font-medium mb-2">Teilnahme</label> <select id="teilnahme" name="teilnahme" required class="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-white/50 text-base"> <option value="" class="text-gray-800">Bitte wählen...</option> <option value="online" class="text-gray-800">Online</option> <option value="praesenz" class="text-gray-800">Präsenz in Bamberg</option> </select>
+      </div><button type="submit" class="w-full bg-white text-blue-600 py-4 rounded-xl text-lg font-semibold hover:bg-gray-50 transition-all duration-300 shadow-lg"> Jetzt kostenlos anmelden </button>
+     </div>
+     <p class="text-xs md:text-sm opacity-80 mt-6 text-center">Deine Daten werden vertraulich behandelt und nicht an Dritte weitergegeben.</p>
+    </form>
+   </div>
+  </section><!-- Success Message -->
+  <div id="successMessage" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden p-4">
+   <div class="bg-white rounded-2xl p-6 md:p-8 max-w-md w-full text-center">
+    <div class="w-14 h-14 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+     <svg class="w-7 h-7 md:w-8 md:h-8 text-green-600" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+     </svg>
+    </div>
+    <h3 class="text-xl md:text-2xl font-semibold mb-4">Anmeldung erfolgreich!</h3>
+    <p class="text-gray-600 mb-6 text-sm md:text-base">Vielen Dank für deine Anmeldung zum Infotag. Du erhältst vor dem Infotag eine Mail mit allen wichtigen Informationen. Wir freuen uns auf dich!</p><button onclick="closeSuccessMessage()" class="gradient-bg text-white px-6 md:px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity w-full sm:w-auto"> Verstanden </button>
+   </div>
+  </div><!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8 md:py-12 px-4">
+   <div class="max-w-4xl mx-auto text-center">
+    <div class="mb-6 md:mb-8">
+     <h3 class="text-xl md:text-2xl font-light mb-2 md:mb-4">WLW</h3>
+     <p class="text-gray-300 text-sm md:text-base">Erfolgreiche Steuerberater-Vorbereitung seit 1997</p>
+    </div>
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-6 md:gap-8 mb-6 md:mb-8"><a href="https://wlw-steuern.de/impressum" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300 underline text-sm md:text-base"> Impressum </a> <a href="https://wlw-steuern.de/datenschutz" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300 underline text-sm md:text-base"> Datenschutz </a>
+    </div>
+    <div class="border-t border-gray-700 pt-6 md:pt-8">
+     <p class="text-gray-400 text-xs md:text-sm">© 2025 WLW. Alle Rechte vorbehalten.</p>
+    </div>
+   </div>
+  </footer>
+  <script>
+        function scrollToRegistration() {
+            document.getElementById('registration').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        function toggleFaq(element) {
+            const answer = element.querySelector('.faq-answer');
+            const icon = element.querySelector('.faq-icon');
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+        
+        function handleRegistration(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    document.getElementById('successMessage').classList.remove('hidden');
+                    form.reset();
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwnProperty.call(data, 'errors')) {
+                            alert('Es gab ein Problem bei der Anmeldung. Bitte versuche es erneut.');
+                        } else {
+                            document.getElementById('successMessage').classList.remove('hidden');
+                            form.reset();
+                        }
+                    });
+                }
+            }).catch(error => {
+                alert('Es gab ein Problem bei der Anmeldung. Bitte versuche es erneut.');
+            });
+        }
+        
+        function closeSuccessMessage() {
+            document.getElementById('successMessage').classList.add('hidden');
+        }
+        
+        document.getElementById('successMessage').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeSuccessMessage();
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99c61a54f4339286',t:'MTc2Mjc4MzUwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
