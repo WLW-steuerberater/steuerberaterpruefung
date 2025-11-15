@@ -1240,7 +1240,7 @@
             left: 0;
             right: 0;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
             height: 120px;
         }
 
@@ -2877,7 +2877,16 @@
       </div>
       <h3>Steuer-Tetris bereit!</h3>
       <p>Ordnen Sie 10 Steuerbegriffe den richtigen Kategorien zu</p>
-      <p><strong>Steuerung:</strong> ← → Pfeiltasten zum Steuern, ↓ schneller fallen</p><button class="btn btn-primary" onclick="startTetris()">Spiel starten</button>
+      <p><strong>Steuerung:</strong> <span class="desktop-start-controls">← → Pfeiltasten zum Steuern, ↓ schneller fallen</span> <span class="mobile-start-controls" style="display: none;">Wischbewegungen zum Steuern: ← → ↓</span></p>
+      <script>
+                        // Zeige passende Steuerungsanleitung im Startbildschirm
+                        if ('ontouchstart' in window) {
+                            const desktopStartControls = document.querySelector('.desktop-start-controls');
+                            const mobileStartControls = document.querySelector('.mobile-start-controls');
+                            if (desktopStartControls) desktopStartControls.style.display = 'none';
+                            if (mobileStartControls) mobileStartControls.style.display = 'inline';
+                        }
+                    </script><button class="btn btn-primary" onclick="startTetris()">Spiel starten</button>
      </div><!-- Game Screen -->
      <div class="tetris-game" id="tetris-game" style="display: none;">
       <div class="tetris-header">
@@ -2905,19 +2914,23 @@
         </div>
         <div class="tetris-zone" data-category="nicht-abziehbar" id="zone-nicht-abziehbar">
          <h4>Nicht abziehbar</h4>
-         <p>Nicht steuerlich absetzbar</p>
-         <div class="zone-indicator"></div>
-        </div>
-        <div class="tetris-zone" data-category="privat" id="zone-privat">
-         <h4>Privat</h4>
-         <p>Private Ausgaben</p>
+         <p>Private oder nicht absetzbare Ausgaben</p>
          <div class="zone-indicator"></div>
         </div>
        </div>
       </div>
       <div class="tetris-instructions">
-       <p>💡 <strong>Steuerung:</strong> ← → Pfeiltasten zum Steuern, ↓ für schnelleres Fallen</p>
+       <p>💡 <strong>Steuerung:</strong> <span class="desktop-controls">← → Pfeiltasten zum Steuern, ↓ für schnelleres Fallen</span> <span class="mobile-controls" style="display: none;">Wischen Sie ← → zum Steuern, ↓ für schnelleres Fallen</span></p>
       </div>
+      <script>
+                        // Zeige passende Steuerungsanleitung basierend auf Gerät
+                        if ('ontouchstart' in window) {
+                            const desktopControls = document.querySelector('.desktop-controls');
+                            const mobileControls = document.querySelector('.mobile-controls');
+                            if (desktopControls) desktopControls.style.display = 'none';
+                            if (mobileControls) mobileControls.style.display = 'inline';
+                        }
+                    </script>
      </div><!-- Results Screen -->
      <div class="tetris-results" id="tetris-results" style="display: none;">
       <div class="results-icon" id="tetris-results-icon">
@@ -4555,7 +4568,7 @@
             },
             {
                 term: "Privatreise",
-                category: "privat",
+                category: "nicht-abziehbar",
                 explanation: "Privatreisen sind private Ausgaben und nicht absetzbar"
             },
             {
@@ -4575,8 +4588,8 @@
             },
             {
                 term: "Urlaubsreise",
-                category: "privat",
-                explanation: "Urlaubsreisen sind private Ausgaben"
+                category: "nicht-abziehbar",
+                explanation: "Urlaubsreisen sind private Ausgaben und nicht absetzbar"
             },
             {
                 term: "Bestechungsgelder",
@@ -4590,8 +4603,8 @@
             },
             {
                 term: "Hobbykurse",
-                category: "privat",
-                explanation: "Hobbykurse sind private Ausgaben"
+                category: "nicht-abziehbar",
+                explanation: "Hobbykurse sind private Ausgaben und nicht absetzbar"
             },
             {
                 term: "Bewirtungskosten",
@@ -4609,7 +4622,7 @@
             tetrisLives = 3;
             tetrisCorrectAnswers = 0;
             tetrisGameActive = true;
-            tetrisCurrentPosition = 1;
+            tetrisCurrentPosition = 0;
             tetrisFallSpeed = 6000; // Langsamere Geschwindigkeit: 6 Sekunden
             
             document.getElementById('total-terms').textContent = tetrisGameTerms.length;
@@ -4620,7 +4633,11 @@
             tetrisKeyHandler = handleTetrisKeyPress;
             document.addEventListener('keydown', tetrisKeyHandler);
             
-            // Touch events entfernt - nur Desktop-Steuerung
+            // Touch events für mobile Steuerung
+            const gameArea = document.getElementById('tetris-game-area');
+            gameArea.addEventListener('touchstart', handleTetrisTouchStart, { passive: false });
+            gameArea.addEventListener('touchmove', handleTetrisTouchMove, { passive: false });
+            gameArea.addEventListener('touchend', handleTetrisTouchEnd, { passive: false });
             
             showNextTetrisTerm();
         }
@@ -4637,7 +4654,7 @@
             document.getElementById('term-content').textContent = term.term;
             
             // Reset position and zones
-            tetrisCurrentPosition = 1;
+            tetrisCurrentPosition = 0;
             updateTetrisPosition();
             resetTetrisZones();
             
@@ -4684,7 +4701,7 @@
                     break;
                 case 'ArrowRight':
                     e.preventDefault();
-                    if (tetrisCurrentPosition < 2) {
+                    if (tetrisCurrentPosition < 1) {
                         tetrisCurrentPosition++;
                         updateTetrisPosition();
                     }
@@ -4696,11 +4713,90 @@
             }
         }
 
-        // Touch-Steuerung entfernt - nur Desktop-Steuerung mit Pfeiltasten
+        // Touch-Steuerung für mobile Geräte
+        function handleTetrisTouchStart(e) {
+            if (!tetrisGameActive) return;
+            
+            e.preventDefault();
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+        }
+
+        function handleTetrisTouchMove(e) {
+            if (!tetrisGameActive) return;
+            e.preventDefault(); // Verhindert Scrollen
+        }
+
+        function handleTetrisTouchEnd(e) {
+            if (!tetrisGameActive) return;
+            
+            e.preventDefault();
+            const touch = e.changedTouches[0];
+            touchEndX = touch.clientX;
+            touchEndY = touch.clientY;
+            
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+            
+            // Mindestdistanz für Wischbewegung
+            if (Math.abs(deltaX) < minSwipeDistance && Math.abs(deltaY) < minSwipeDistance) {
+                return;
+            }
+            
+            // Bestimme Richtung der Wischbewegung
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                // Horizontale Wischbewegung
+                if (deltaX > 0 && tetrisCurrentPosition < 1) {
+                    // Wisch nach rechts
+                    tetrisCurrentPosition++;
+                    updateTetrisPosition();
+                    showSwipeIndicator('→');
+                } else if (deltaX < 0 && tetrisCurrentPosition > 0) {
+                    // Wisch nach links
+                    tetrisCurrentPosition--;
+                    updateTetrisPosition();
+                    showSwipeIndicator('←');
+                }
+            } else {
+                // Vertikale Wischbewegung
+                if (deltaY > 0) {
+                    // Wisch nach unten - schneller fallen lassen
+                    dropTetrisTerm();
+                    showSwipeIndicator('↓');
+                }
+            }
+        }
+
+        function showSwipeIndicator(direction) {
+            const gameArea = document.querySelector('.tetris-game-area');
+            const indicator = document.createElement('div');
+            indicator.textContent = direction;
+            indicator.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 3rem;
+                color: rgba(0, 122, 255, 0.8);
+                z-index: 25;
+                pointer-events: none;
+                animation: swipeIndicatorPop 0.6s ease-out;
+                text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            `;
+            
+            gameArea.appendChild(indicator);
+            
+            setTimeout(() => {
+                if (indicator.parentNode) {
+                    indicator.remove();
+                }
+            }, 600);
+        }
 
         function updateTetrisPosition() {
             const fallingTerm = document.getElementById('falling-term');
-            const positions = ['16.67%', '50%', '83.33%']; // Links, Mitte, Rechts
+            const positions = ['25%', '75%']; // Links, Rechts
             fallingTerm.style.left = positions[tetrisCurrentPosition];
             
             // Update zone highlighting
@@ -4799,7 +4895,13 @@
                 tetrisKeyHandler = null;
             }
             
-            // Touch event listeners entfernt - nur Desktop-Steuerung
+            // Touch event listeners entfernen
+            const gameArea = document.getElementById('tetris-game-area');
+            if (gameArea) {
+                gameArea.removeEventListener('touchstart', handleTetrisTouchStart);
+                gameArea.removeEventListener('touchmove', handleTetrisTouchMove);
+                gameArea.removeEventListener('touchend', handleTetrisTouchEnd);
+            }
             
             clearTimeout(tetrisFallInterval);
             
@@ -6148,5 +6250,5 @@
             resetEscapeGame();
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99efdf5f90f34e42',t:'MTc2MzIyMTQ5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99efebf604369240',t:'MTc2MzIyMjAwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
