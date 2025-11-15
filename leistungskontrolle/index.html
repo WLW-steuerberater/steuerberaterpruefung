@@ -2650,7 +2650,16 @@
     </div>
     <div class="task-question">
      Ziehen Sie die Steuerarten in die entsprechenden Kategorien:
-    </div><!-- Kategorien oben -->
+    </div>
+    <div class="desktop-only-notice" style="background: rgba(255, 193, 7, 0.1); border: 2px solid rgba(255, 193, 7, 0.3); border-radius: 12px; padding: 15px; margin: 20px 0; text-align: center; display: none;">
+     <p style="margin: 0; color: #856404; font-weight: 500;">⚠️ <strong>Hinweis:</strong> Diese Aufgabe funktioniert nur auf Desktop-Geräten mit Maus. Auf mobilen Geräten ist Drag &amp; Drop nicht verfügbar.</p>
+    </div>
+    <script>
+                // Zeige Warnung nur auf Touch-Geräten
+                if ('ontouchstart' in window) {
+                    document.querySelector('.desktop-only-notice').style.display = 'block';
+                }
+            </script><!-- Kategorien oben -->
     <div class="category-container">
      <div class="drop-zone" data-category="direkt" id="zone-direkt">
       <h4>Direkte Steuern</h4>
@@ -3387,7 +3396,55 @@
             initializeConnections();
             initializeReasoning();
             initializeEscapeGame();
+            setupKeyboardNavigation();
+            setupButtonHandlers(); // Button-Handler initialisieren
+            updateNavigationButtons(); // Navigation-Buttons initialisieren
         });
+
+        // Separate Funktion für Keyboard Navigation
+        function setupKeyboardNavigation() {
+            // Enter-Taste Navigation für Lückentext
+            const gaps = ['gap-1', 'gap-2', 'gap-3'];
+            
+            gaps.forEach((gapId, index) => {
+                const gapElement = document.getElementById(gapId);
+                if (gapElement) {
+                    gapElement.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            
+                            if (index < gaps.length - 1) {
+                                // Zur nächsten Lücke springen
+                                const nextGap = document.getElementById(gaps[index + 1]);
+                                if (nextGap) {
+                                    nextGap.focus();
+                                    // Cursor ans Ende setzen
+                                    const range = document.createRange();
+                                    const selection = window.getSelection();
+                                    range.selectNodeContents(nextGap);
+                                    range.collapse(false);
+                                    selection.removeAllRanges();
+                                    selection.addRange(range);
+                                }
+                            } else {
+                                // Bei der letzten Lücke: Antwort prüfen
+                                checkTask1();
+                            }
+                        }
+                    });
+                }
+            });
+            
+            // Rätsel-Input Navigation
+            const riddleInput = document.getElementById('riddle-answer');
+            if (riddleInput) {
+                riddleInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && riddleGameActive) {
+                        checkRiddleAnswer();
+                    }
+                });
+            }
+        }
 
         // Sortierungslogik - nur Desktop
         function initializeSortable() {
@@ -3538,16 +3595,30 @@
             // Zurück-Button: Sichtbar ab Aufgabe 2
             if (prevBtn) {
                 prevBtn.style.display = currentTask > 1 ? 'inline-block' : 'none';
+                // Event Listener neu setzen
+                prevBtn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    previousTask();
+                };
             }
             
             // Weiter-Button: Immer sichtbar
             if (nextBtn) {
                 if (currentTask === totalTasks) {
                     nextBtn.textContent = 'Abschließen';
-                    nextBtn.onclick = () => showCompletionScreen();
+                    nextBtn.onclick = function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showCompletionScreen();
+                    };
                 } else {
                     nextBtn.textContent = 'Nächste Aufgabe';
-                    nextBtn.onclick = () => nextTask();
+                    nextBtn.onclick = function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        nextTask();
+                    };
                 }
                 nextBtn.style.display = 'inline-block';
             }
@@ -3590,6 +3661,89 @@
             
             showFeedback(1, isCorrect, feedbackMessage);
             saveTaskResult(1, `${gap1}|${gap2}|${gap3}`, isCorrect);
+        }
+        
+        // Sicherstelle dass alle Button-Event-Handler korrekt gesetzt sind
+        function setupButtonHandlers() {
+            // Aufgabe 1 Button
+            const task1Btn = document.querySelector('#task-1 .btn-primary');
+            if (task1Btn) {
+                task1Btn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    checkTask1();
+                };
+            }
+            
+            // Aufgabe 2 Button
+            const task2Btn = document.querySelector('#task-2 .btn-primary');
+            if (task2Btn) {
+                task2Btn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    checkTask2();
+                };
+            }
+            
+            // Aufgabe 3 Button
+            const task3Btn = document.querySelector('#task-3 .btn-primary');
+            if (task3Btn) {
+                task3Btn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    checkTask3();
+                };
+            }
+            
+            // Aufgabe 4 Button
+            const task4Btn = document.querySelector('#task-4 .btn-primary');
+            if (task4Btn) {
+                task4Btn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    checkTask4();
+                };
+            }
+            
+            // Aufgabe 5 Button
+            const task5Btn = document.querySelector('#task-5 .btn-primary');
+            if (task5Btn) {
+                task5Btn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    checkTask5();
+                };
+            }
+            
+            // Aufgabe 6 Button
+            const task6Btn = document.querySelector('#task-6 .btn-primary');
+            if (task6Btn) {
+                task6Btn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    checkTask6();
+                };
+            }
+            
+            // Aufgabe 7 Button
+            const task7Btn = document.querySelector('#task-7 .btn-primary');
+            if (task7Btn) {
+                task7Btn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    checkTask7();
+                };
+            }
+            
+            // Aufgabe 11 Button
+            const task11Btn = document.querySelector('#task-11 .btn-primary');
+            if (task11Btn) {
+                task11Btn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    checkTask11();
+                };
+            }
         }
 
         // Aufgabe 2: Multiple Choice
@@ -3746,14 +3900,14 @@
             clonedTerm.draggable = true; // Wieder draggable machen
             clonedTerm.setAttribute('data-original-id', termId);
             
-            // Event Listener für das geklonte Element hinzufügen
+            // Event Listener für das geklonte Element hinzufügen - nur Desktop
             clonedTerm.addEventListener('dragstart', handleDroppedTermDragStart);
             clonedTerm.addEventListener('dragend', handleDroppedTermDragEnd);
             
             // Doppelklick zum Entfernen hinzufügen
             clonedTerm.addEventListener('dblclick', () => removeDroppedTerm(clonedTerm, termId));
             clonedTerm.style.cursor = 'grab';
-            clonedTerm.title = 'Doppelklick zum Entfernen oder ziehen zum Verschieben';
+            clonedTerm.title = 'Doppelklick zum Entfernen oder ziehen zum Verschieben (nur Desktop)';
             
             // Original-Element ausblenden
             draggedTerm.style.display = 'none';
@@ -3802,302 +3956,11 @@
             }
         }
 
-        // Touch Events für mobile Drag & Drop
+        // Touch Events für mobile Drag & Drop - DEAKTIVIERT
         function initializeTouchDragDrop() {
-            const terms = document.querySelectorAll('.draggable-term');
-            const dropZones = document.querySelectorAll('.drop-zone');
-            
-            // Touch Events für Begriffe - mobile Unterstützung
-            terms.forEach(term => {
-                term.addEventListener('touchstart', handleTermTouchStart, { passive: false });
-                term.addEventListener('touchmove', handleTermTouchMove, { passive: false });
-                term.addEventListener('touchend', handleTermTouchEnd, { passive: false });
-            });
-            
-            // Touch Events für Drop-Zonen
-            dropZones.forEach(zone => {
-                zone.addEventListener('touchstart', handleZoneTouchStart, { passive: false });
-            });
-        }
-
-        let touchDraggedTerm = null;
-        let touchStartX = 0;
-        let touchStartY = 0;
-        let isDragging = false;
-        let dragClone = null;
-
-        function handleTermTouchStart(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            touchStartX = touch.clientX;
-            touchStartY = touch.clientY;
-            touchDraggedTerm = this;
-            isDragging = false;
-            
-            // Visuelles Feedback
-            this.style.transform = 'scale(1.05)';
-            this.style.zIndex = '1000';
-        }
-
-        function handleTermTouchMove(e) {
-            e.preventDefault();
-            if (!touchDraggedTerm) return;
-            
-            const touch = e.touches[0];
-            const deltaX = Math.abs(touch.clientX - touchStartX);
-            const deltaY = Math.abs(touch.clientY - touchStartY);
-            
-            // Beginne Drag erst nach minimaler Bewegung
-            if (!isDragging && (deltaX > 10 || deltaY > 10)) {
-                isDragging = true;
-                
-                // Erstelle Drag-Clone
-                dragClone = touchDraggedTerm.cloneNode(true);
-                dragClone.style.cssText = `
-                    position: fixed;
-                    top: ${touch.clientY - 30}px;
-                    left: ${touch.clientX - 100}px;
-                    z-index: 2000;
-                    pointer-events: none;
-                    opacity: 0.8;
-                    transform: scale(1.1) rotate(5deg);
-                    transition: none;
-                    width: 200px;
-                `;
-                document.body.appendChild(dragClone);
-                
-                // Original-Element ausblenden
-                touchDraggedTerm.style.opacity = '0.3';
-            }
-            
-            if (isDragging && dragClone) {
-                // Bewege Clone mit Finger
-                dragClone.style.top = (touch.clientY - 30) + 'px';
-                dragClone.style.left = (touch.clientX - 100) + 'px';
-                
-                // Highlight Drop-Zonen
-                const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-                const dropZone = elementBelow ? elementBelow.closest('.drop-zone') : null;
-                
-                // Entferne alle Highlights
-                document.querySelectorAll('.drop-zone').forEach(zone => {
-                    zone.classList.remove('drag-over');
-                });
-                
-                // Highlight aktuelle Zone
-                if (dropZone) {
-                    dropZone.classList.add('drag-over');
-                }
-            }
-        }
-
-        function handleTermTouchEnd(e) {
-            e.preventDefault();
-            if (!touchDraggedTerm) return;
-            
-            // Reset visueller Zustand
-            touchDraggedTerm.style.transform = '';
-            touchDraggedTerm.style.zIndex = '';
-            touchDraggedTerm.style.opacity = '';
-            
-            if (isDragging && dragClone) {
-                const touch = e.changedTouches[0];
-                const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-                const dropZone = elementBelow ? elementBelow.closest('.drop-zone') : null;
-                
-                if (dropZone) {
-                    // Simuliere Drop-Event
-                    handleTouchDrop(dropZone, touchDraggedTerm);
-                }
-                
-                // Cleanup
-                dragClone.remove();
-                dragClone = null;
-            }
-            
-            // Entferne alle Highlights
-            document.querySelectorAll('.drop-zone').forEach(zone => {
-                zone.classList.remove('drag-over');
-            });
-            
-            touchDraggedTerm = null;
-            isDragging = false;
-        }
-
-        function handleZoneTouchStart(e) {
-            // Verhindere Scroll beim Berühren der Drop-Zonen
-            e.preventDefault();
-        }
-
-        function handleTouchDrop(dropZone, draggedTerm) {
-            const dropZoneCategory = dropZone.getAttribute('data-category');
-            const droppedItemsContainer = dropZone.querySelector('.dropped-items');
-            const termId = draggedTerm.id;
-            
-            // Prüfen ob Begriff bereits woanders zugeordnet ist
-            Object.keys(droppedTerms).forEach(category => {
-                const index = droppedTerms[category].indexOf(termId);
-                if (index > -1) {
-                    // Entferne aus alter Kategorie
-                    droppedTerms[category].splice(index, 1);
-                    // Entferne visuell aus alter Drop-Zone
-                    const oldDroppedItem = document.querySelector(`[data-original-id="${termId}"]`);
-                    if (oldDroppedItem) {
-                        oldDroppedItem.remove();
-                    }
-                }
-            });
-            
-            // Erstelle neuen Begriff in der Drop-Zone
-            const clonedTerm = draggedTerm.cloneNode(true);
-            clonedTerm.classList.add('dropped');
-            clonedTerm.classList.remove('dragging');
-            clonedTerm.draggable = false; // Kein Drag auf Mobile für geklonte Elemente
-            clonedTerm.setAttribute('data-original-id', termId);
-            
-            // Touch Events für das geklonte Element hinzufügen
-            clonedTerm.addEventListener('touchstart', handleDroppedTermTouchStart, { passive: false });
-            clonedTerm.addEventListener('touchmove', handleDroppedTermTouchMove, { passive: false });
-            clonedTerm.addEventListener('touchend', handleDroppedTermTouchEnd, { passive: false });
-            
-            // Doppeltipp zum Entfernen hinzufügen
-            let tapCount = 0;
-            clonedTerm.addEventListener('touchstart', (e) => {
-                tapCount++;
-                setTimeout(() => {
-                    if (tapCount === 1) {
-                        // Einzeltipp - nichts tun
-                    } else if (tapCount === 2) {
-                        // Doppeltipp - entfernen
-                        removeDroppedTerm(clonedTerm, termId);
-                    }
-                    tapCount = 0;
-                }, 300);
-            });
-            
-            clonedTerm.style.cursor = 'pointer';
-            clonedTerm.title = 'Doppeltipp zum Entfernen oder ziehen zum Verschieben';
-            
-            // Original-Element ausblenden
-            draggedTerm.style.display = 'none';
-            
-            // Füge zur neuen Drop-Zone hinzu
-            droppedItemsContainer.appendChild(clonedTerm);
-            droppedTerms[dropZoneCategory].push(termId);
-            
-            // Sanfte Drop-Animation
-            setTimeout(() => {
-                clonedTerm.classList.add('dropped');
-            }, 100);
-        }
-
-        // Touch-Handler für bereits zugeordnete Begriffe
-        function handleDroppedTermTouchStart(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            touchStartX = touch.clientX;
-            touchStartY = touch.clientY;
-            touchDraggedTerm = this;
-            isDragging = false;
-            
-            // Visuelles Feedback
-            this.style.transform = 'scale(1.05)';
-            this.style.zIndex = '1000';
-        }
-
-        function handleDroppedTermTouchMove(e) {
-            e.preventDefault();
-            if (!touchDraggedTerm) return;
-            
-            const touch = e.touches[0];
-            const deltaX = Math.abs(touch.clientX - touchStartX);
-            const deltaY = Math.abs(touch.clientY - touchStartY);
-            
-            // Beginne Drag erst nach minimaler Bewegung
-            if (!isDragging && (deltaX > 10 || deltaY > 10)) {
-                isDragging = true;
-                
-                // Erstelle Drag-Clone
-                dragClone = touchDraggedTerm.cloneNode(true);
-                dragClone.style.cssText = `
-                    position: fixed;
-                    top: ${touch.clientY - 30}px;
-                    left: ${touch.clientX - 100}px;
-                    z-index: 2000;
-                    pointer-events: none;
-                    opacity: 0.8;
-                    transform: scale(1.1) rotate(5deg);
-                    transition: none;
-                    width: 200px;
-                `;
-                document.body.appendChild(dragClone);
-                
-                // Original-Element ausblenden
-                touchDraggedTerm.style.opacity = '0.3';
-            }
-            
-            if (isDragging && dragClone) {
-                // Bewege Clone mit Finger
-                dragClone.style.top = (touch.clientY - 30) + 'px';
-                dragClone.style.left = (touch.clientX - 100) + 'px';
-                
-                // Highlight Drop-Zonen
-                const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-                const dropZone = elementBelow ? elementBelow.closest('.drop-zone') : null;
-                
-                // Entferne alle Highlights
-                document.querySelectorAll('.drop-zone').forEach(zone => {
-                    zone.classList.remove('drag-over');
-                });
-                
-                // Highlight aktuelle Zone
-                if (dropZone) {
-                    dropZone.classList.add('drag-over');
-                }
-            }
-        }
-
-        function handleDroppedTermTouchEnd(e) {
-            e.preventDefault();
-            if (!touchDraggedTerm) return;
-            
-            // Reset visueller Zustand
-            touchDraggedTerm.style.transform = '';
-            touchDraggedTerm.style.zIndex = '';
-            touchDraggedTerm.style.opacity = '';
-            
-            if (isDragging && dragClone) {
-                const touch = e.changedTouches[0];
-                const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-                const dropZone = elementBelow ? elementBelow.closest('.drop-zone') : null;
-                
-                if (dropZone) {
-                    // Simuliere Drop-Event für bereits zugeordnete Begriffe
-                    const termId = touchDraggedTerm.getAttribute('data-original-id');
-                    
-                    // Entferne aus aktueller Position
-                    removeDroppedTerm(touchDraggedTerm, termId);
-                    
-                    // Füge zu neuer Position hinzu
-                    const originalTerm = document.getElementById(termId);
-                    if (originalTerm) {
-                        originalTerm.style.display = 'flex';
-                        handleTouchDrop(dropZone, originalTerm);
-                    }
-                }
-                
-                // Cleanup
-                dragClone.remove();
-                dragClone = null;
-            }
-            
-            // Entferne alle Highlights
-            document.querySelectorAll('.drop-zone').forEach(zone => {
-                zone.classList.remove('drag-over');
-            });
-            
-            touchDraggedTerm = null;
-            isDragging = false;
+            // Mobile Touch-Steuerung für Zuordnungsaufgabe deaktiviert
+            // Nur Desktop-Drag&Drop verfügbar
+            return;
         }
 
         function checkTask4() {
@@ -5144,50 +5007,7 @@
             }), wasCorrect);
         }
 
-        // Enter-Taste Navigation für Lückentext und Rätsel
-        document.addEventListener('DOMContentLoaded', function() {
-            // Lückentext Navigation
-            const gaps = ['gap-1', 'gap-2', 'gap-3'];
-            
-            gaps.forEach((gapId, index) => {
-                const gapElement = document.getElementById(gapId);
-                if (gapElement) {
-                    gapElement.addEventListener('keypress', function(e) {
-                        if (e.key === 'Enter') {
-                            e.preventDefault();
-                            
-                            if (index < gaps.length - 1) {
-                                // Zur nächsten Lücke springen
-                                const nextGap = document.getElementById(gaps[index + 1]);
-                                if (nextGap) {
-                                    nextGap.focus();
-                                    // Cursor ans Ende setzen
-                                    const range = document.createRange();
-                                    const selection = window.getSelection();
-                                    range.selectNodeContents(nextGap);
-                                    range.collapse(false);
-                                    selection.removeAllRanges();
-                                    selection.addRange(range);
-                                }
-                            } else {
-                                // Bei der letzten Lücke: Antwort prüfen
-                                checkTask1();
-                            }
-                        }
-                    });
-                }
-            });
-            
-            // Rätsel-Input Navigation
-            const riddleInput = document.getElementById('riddle-answer');
-            if (riddleInput) {
-                riddleInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter' && riddleGameActive) {
-                        checkRiddleAnswer();
-                    }
-                });
-            }
-        });
+
 
         // Aufgabe 11: Begründung bauen - Funktionen
         function initializeReasoning() {
@@ -6328,5 +6148,5 @@
             resetEscapeGame();
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99efd395838a4e42',t:'MTc2MzIyMTAxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99efdf5f90f34e42',t:'MTc2MzIyMTQ5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
