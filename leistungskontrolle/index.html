@@ -186,33 +186,52 @@
         }
 
         .sortable-container {
-            background: #f5f5f7;
-            border: 2px dashed #e5e5e7;
-            border-radius: 12px;
-            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #f0f2f5);
+            border: 3px dashed #d1d5db;
+            border-radius: 16px;
+            padding: 24px;
             margin-bottom: 25px;
-            min-height: 250px;
+            min-height: 280px;
             position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .sortable-container.drag-over {
             border-color: #007aff;
-            background: rgba(0, 122, 255, 0.05);
+            border-style: solid;
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.08), rgba(0, 122, 255, 0.04));
+            transform: scale(1.01);
+            box-shadow: inset 0 2px 8px rgba(0, 122, 255, 0.1), 0 8px 25px rgba(0, 122, 255, 0.15);
+            animation: containerPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes containerPulse {
+            0% { 
+                box-shadow: inset 0 2px 8px rgba(0, 122, 255, 0.1), 0 8px 25px rgba(0, 122, 255, 0.15);
+            }
+            100% { 
+                box-shadow: inset 0 2px 8px rgba(0, 122, 255, 0.15), 0 12px 35px rgba(0, 122, 255, 0.25);
+            }
         }
 
         .sortable-item {
-            background: white;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
             border: 2px solid #e5e5e7;
-            border-radius: 10px;
-            padding: 15px 20px;
+            border-radius: 12px;
+            padding: 18px 24px;
             margin-bottom: 12px;
             cursor: grab;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
             user-select: none;
             position: relative;
             transform: translateZ(0);
             will-change: transform, box-shadow, opacity;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border-left: 4px solid transparent;
         }
 
         .sortable-item:last-child {
@@ -220,55 +239,115 @@
         }
 
         .sortable-item:hover {
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 12px 32px rgba(0, 122, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-6px) scale(1.02);
+            border-color: rgba(0, 122, 255, 0.3);
+            border-left-color: #007aff;
+            background: linear-gradient(135deg, #ffffff, #f0f8ff);
         }
 
         .sortable-item:active {
             cursor: grabbing;
+            transform: translateY(-2px) scale(1.01);
         }
 
         .sortable-item.dragging {
-            opacity: 0.85;
-            transform: rotate(2deg) scale(1.05) translateZ(0);
+            opacity: 0.9;
+            transform: scale(1.08) translateZ(0);
             z-index: 1000;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
-            transition: opacity 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 20px 50px rgba(0, 122, 255, 0.3), 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-color: #007aff;
+            border-left-color: #007aff;
+            background: linear-gradient(135deg, #ffffff, #e6f3ff);
+            animation: dragPulse 1.5s ease-in-out infinite alternate;
         }
 
         .sortable-item.drag-preview {
-            animation: dragFloat 0.6s ease-in-out infinite alternate;
+            animation: dragFloat 0.8s ease-in-out infinite alternate;
         }
 
         .sortable-item.drag-over-top {
-            border-top: 3px solid #007aff;
-            transform: translateY(-2px);
-            transition: all 0.2s ease;
+            border-top: 4px solid #007aff;
+            transform: translateY(-8px) scale(1.02);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.2);
+            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
         }
 
         .sortable-item.drag-over-bottom {
-            border-bottom: 3px solid #007aff;
-            transform: translateY(2px);
-            transition: all 0.2s ease;
+            border-bottom: 4px solid #007aff;
+            transform: translateY(8px) scale(1.02);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.2);
+            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
         }
 
         .sortable-item.inserting {
-            animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .sortable-item.drop-success {
+            animation: dropSuccess 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes dragFloat {
-            0% { transform: rotate(2deg) scale(1.05) translateY(0px); }
-            100% { transform: rotate(2deg) scale(1.05) translateY(-4px); }
+            0% { 
+                transform: scale(1.08) translateY(0px);
+                box-shadow: 0 20px 50px rgba(0, 122, 255, 0.3), 0 8px 20px rgba(0, 0, 0, 0.2);
+            }
+            100% { 
+                transform: scale(1.08) translateY(-8px);
+                box-shadow: 0 25px 60px rgba(0, 122, 255, 0.4), 0 12px 25px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+        @keyframes dragPulse {
+            0% { 
+                box-shadow: 0 20px 50px rgba(0, 122, 255, 0.3), 0 8px 20px rgba(0, 0, 0, 0.2);
+            }
+            100% { 
+                box-shadow: 0 25px 60px rgba(0, 122, 255, 0.5), 0 12px 30px rgba(0, 0, 0, 0.3);
+            }
         }
 
         @keyframes slideIn {
             0% { 
-                opacity: 0.5;
-                transform: translateX(-10px) scale(0.95);
+                opacity: 0.3;
+                transform: translateX(-20px) scale(0.9);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateX(5px) scale(1.05);
+                box-shadow: 0 8px 20px rgba(0, 122, 255, 0.2);
             }
             100% { 
                 opacity: 1;
                 transform: translateX(0) scale(1);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+            }
+        }
+
+        @keyframes dropSuccess {
+            0% { 
+                transform: scale(1);
+                background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            }
+            25% { 
+                transform: scale(1.05);
+                background: linear-gradient(135deg, #e6ffe6, #f0fff0);
+                border-color: #30d158;
+                box-shadow: 0 8px 25px rgba(48, 209, 88, 0.3);
+            }
+            50% { 
+                transform: scale(1.02);
+                background: linear-gradient(135deg, #e6ffe6, #f0fff0);
+            }
+            100% { 
+                transform: scale(1);
+                background: linear-gradient(135deg, #ffffff, #f8f9fa);
+                border-color: #e5e5e7;
             }
         }
 
@@ -411,8 +490,6 @@
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
-
-
 
         /* Responsive Anpassungen für Zuordnung */
         @media (max-width: 768px) {
@@ -2791,7 +2868,7 @@
       </div>
       <h3>Steuer-Tetris bereit!</h3>
       <p>Ordnen Sie 10 Steuerbegriffe den richtigen Kategorien zu</p>
-      <p><strong>Steuerung:</strong> ← → Pfeiltasten oder Wischbewegungen, ↓ schneller fallen</p><button class="btn btn-primary" onclick="startTetris()">Spiel starten</button>
+      <p><strong>Steuerung:</strong> ← → Pfeiltasten zum Steuern, ↓ schneller fallen</p><button class="btn btn-primary" onclick="startTetris()">Spiel starten</button>
      </div><!-- Game Screen -->
      <div class="tetris-game" id="tetris-game" style="display: none;">
       <div class="tetris-header">
@@ -2830,8 +2907,7 @@
        </div>
       </div>
       <div class="tetris-instructions">
-       <p>💡 <strong>Desktop:</strong> ← → Pfeiltasten zum Steuern, ↓ für schnelleres Fallen<br>
-         📱 <strong>Mobile:</strong> Wischen Sie ← → zum Steuern, ↓ zum schnelleren Fallen</p>
+       <p>💡 <strong>Steuerung:</strong> ← → Pfeiltasten zum Steuern, ↓ für schnelleres Fallen</p>
       </div>
      </div><!-- Results Screen -->
      <div class="tetris-results" id="tetris-results" style="display: none;">
@@ -3307,232 +3383,111 @@
             updateProgress();
             initializeSortable();
             initializeDragDrop();
+            initializeTouchDragDrop(); // Touch-Unterstützung für mobile Geräte
             initializeConnections();
             initializeReasoning();
             initializeEscapeGame();
         });
 
-        // NEUE SORTIERUNGSLOGIK - Komplett überarbeitet
+        // Sortierungslogik - nur Desktop
         function initializeSortable() {
             const container = document.getElementById('sortable-container');
+            if (!container) return;
+            
             const items = container.querySelectorAll('.sortable-item');
             
             items.forEach((item, index) => {
-                // Touch und Mouse Events
-                item.addEventListener('mousedown', handleMouseDown);
-                item.addEventListener('touchstart', handleTouchStart, { passive: false });
-                
-                // Drag Events als Fallback
                 item.draggable = true;
-                item.addEventListener('dragstart', handleDragStart);
-                item.addEventListener('dragend', handleDragEnd);
+                item.addEventListener('dragstart', handleSortableDragStart);
+                item.addEventListener('dragend', handleSortableDragEnd);
             });
             
-            // Container Events
-            container.addEventListener('dragover', handleDragOver);
-            container.addEventListener('drop', handleDrop);
-            container.addEventListener('mousemove', handleMouseMove);
-            container.addEventListener('mouseup', handleMouseUp);
-            container.addEventListener('touchmove', handleTouchMove, { passive: false });
-            container.addEventListener('touchend', handleTouchEnd);
+            container.addEventListener('dragover', handleSortableDragOver);
+            container.addEventListener('drop', handleSortableDrop);
         }
 
-        // Mouse Events für präzise Kontrolle
-        function handleMouseDown(e) {
-            if (e.button !== 0) return; // Nur linke Maustaste
-            
-            draggedElement = this;
-            draggedIndex = Array.from(this.parentNode.children).indexOf(this);
-            
-            // Sanfter Übergang zum Drag-Zustand
-            setTimeout(() => {
-                if (draggedElement) {
-                    draggedElement.classList.add('dragging', 'drag-preview');
-                }
-            }, 50);
-            
-            // Verhindere Textauswahl
-            e.preventDefault();
-            document.body.style.userSelect = 'none';
-        }
-
-        function handleMouseMove(e) {
-            if (!draggedElement) return;
-            
-            const container = document.getElementById('sortable-container');
-            const afterElement = getDragAfterElement(container, e.clientY);
-            const currentIndex = Array.from(container.children).indexOf(draggedElement);
-            
-            // Sanfte Positionsänderung mit Animation
-            if (afterElement == null) {
-                if (container.lastElementChild !== draggedElement) {
-                    container.appendChild(draggedElement);
-                    addInsertAnimation(draggedElement);
-                }
-            } else {
-                const afterIndex = Array.from(container.children).indexOf(afterElement);
-                if (currentIndex !== afterIndex && currentIndex !== afterIndex - 1) {
-                    container.insertBefore(draggedElement, afterElement);
-                    addInsertAnimation(draggedElement);
-                }
-            }
-            
-            // Visuelles Feedback für Drop-Zonen
-            updateDropIndicators(container, e.clientY);
-        }
-
-        function handleMouseUp(e) {
-            if (draggedElement) {
-                // Sanfter Übergang zurück
-                draggedElement.classList.remove('dragging', 'drag-preview');
-                draggedElement.classList.add('inserting');
-                
-                setTimeout(() => {
-                    if (draggedElement) {
-                        draggedElement.classList.remove('inserting');
-                    }
-                }, 300);
-                
-                draggedElement = null;
-                draggedIndex = -1;
-                document.body.style.userSelect = '';
-                
-                // Alle Hover-Effekte entfernen
-                clearDragEffects();
-            }
-        }
-
-        // Hilfsfunktionen für smoothere Animationen
-        function addInsertAnimation(element) {
-            element.classList.remove('inserting');
-            setTimeout(() => {
-                element.classList.add('inserting');
-                setTimeout(() => {
-                    element.classList.remove('inserting');
-                }, 300);
-            }, 10);
-        }
-
-        function updateDropIndicators(container, mouseY) {
-            const items = container.querySelectorAll('.sortable-item:not(.dragging)');
-            
-            items.forEach(item => {
-                item.classList.remove('drag-over-top', 'drag-over-bottom');
-                
-                const rect = item.getBoundingClientRect();
-                const itemCenter = rect.top + rect.height / 2;
-                
-                if (Math.abs(mouseY - itemCenter) < rect.height / 2) {
-                    if (mouseY < itemCenter) {
-                        item.classList.add('drag-over-top');
-                    } else {
-                        item.classList.add('drag-over-bottom');
-                    }
-                }
-            });
-        }
-
-        // Touch Events für mobile Geräte
-        function handleTouchStart(e) {
-            draggedElement = this;
-            draggedIndex = Array.from(this.parentNode.children).indexOf(this);
-            
-            // Sanfter Übergang für Touch
-            setTimeout(() => {
-                if (draggedElement) {
-                    draggedElement.classList.add('dragging', 'drag-preview');
-                }
-            }, 30);
-            
-            e.preventDefault();
-        }
-
-        function handleTouchMove(e) {
-            if (!draggedElement) return;
-            e.preventDefault();
-            
-            const touch = e.touches[0];
-            const container = document.getElementById('sortable-container');
-            const afterElement = getDragAfterElement(container, touch.clientY);
-            const currentIndex = Array.from(container.children).indexOf(draggedElement);
-            
-            // Sanfte Positionsänderung mit Animation
-            if (afterElement == null) {
-                if (container.lastElementChild !== draggedElement) {
-                    container.appendChild(draggedElement);
-                    addInsertAnimation(draggedElement);
-                }
-            } else {
-                const afterIndex = Array.from(container.children).indexOf(afterElement);
-                if (currentIndex !== afterIndex && currentIndex !== afterIndex - 1) {
-                    container.insertBefore(draggedElement, afterElement);
-                    addInsertAnimation(draggedElement);
-                }
-            }
-            
-            // Visuelles Feedback für Touch
-            updateDropIndicators(container, touch.clientY);
-        }
-
-        function handleTouchEnd(e) {
-            if (draggedElement) {
-                // Sanfter Übergang zurück
-                draggedElement.classList.remove('dragging', 'drag-preview');
-                draggedElement.classList.add('inserting');
-                
-                setTimeout(() => {
-                    if (draggedElement) {
-                        draggedElement.classList.remove('inserting');
-                    }
-                }, 300);
-                
-                draggedElement = null;
-                draggedIndex = -1;
-                clearDragEffects();
-            }
-        }
-
-        // Drag Events als Fallback
-        function handleDragStart(e) {
+        function handleSortableDragStart(e) {
             draggedElement = this;
             draggedIndex = Array.from(this.parentNode.children).indexOf(this);
             this.classList.add('dragging');
             e.dataTransfer.effectAllowed = 'move';
             e.dataTransfer.setData('text/html', '');
+            
+            // Smooth start animation
+            setTimeout(() => {
+                if (this.classList.contains('dragging')) {
+                    this.classList.add('drag-preview');
+                }
+            }, 100);
         }
 
-        function handleDragEnd(e) {
+        function handleSortableDragEnd(e) {
             if (this.classList.contains('dragging')) {
-                this.classList.remove('dragging');
+                this.classList.remove('dragging', 'drag-preview');
+                
+                // Success animation when dropped
+                this.classList.add('drop-success');
+                setTimeout(() => {
+                    this.classList.remove('drop-success');
+                }, 600);
             }
             draggedElement = null;
             draggedIndex = -1;
-            clearDragEffects();
+            clearSortableDragEffects();
         }
 
-        function handleDragOver(e) {
+        function handleSortableDragOver(e) {
             e.preventDefault();
             e.dataTransfer.dropEffect = 'move';
             
             if (!draggedElement) return;
             
             const container = document.getElementById('sortable-container');
-            const afterElement = getDragAfterElement(container, e.clientY);
+            container.classList.add('drag-over');
             
+            const afterElement = getSortableDragAfterElement(container, e.clientY);
+            
+            // Clear previous drag indicators
+            clearSortableDragEffects();
+            
+            // Add smooth insertion animation
             if (afterElement == null) {
                 container.appendChild(draggedElement);
             } else {
                 container.insertBefore(draggedElement, afterElement);
+                // Add insertion indicator to the element we're inserting before
+                afterElement.classList.add('drag-over-top');
             }
+            
+            // Add subtle animation to other elements
+            const allItems = container.querySelectorAll('.sortable-item:not(.dragging)');
+            allItems.forEach((item, index) => {
+                item.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                item.style.transitionDelay = `${index * 0.02}s`;
+            });
         }
 
-        function handleDrop(e) {
+        function handleSortableDrop(e) {
             e.preventDefault();
-            clearDragEffects();
+            const container = document.getElementById('sortable-container');
+            container.classList.remove('drag-over');
+            clearSortableDragEffects();
+            
+            // Gentle settle animation for all items
+            const allItems = container.querySelectorAll('.sortable-item');
+            allItems.forEach((item, index) => {
+                item.style.transition = 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
+                item.style.transitionDelay = `${index * 0.02}s`;
+                
+                // Reset after animation
+                setTimeout(() => {
+                    item.style.transitionDelay = '';
+                }, 250 + (index * 20));
+            });
         }
 
         // Hilfsfunktion: Bestimme Element nach dem eingefügt werden soll
-        function getDragAfterElement(container, y) {
+        function getSortableDragAfterElement(container, y) {
             const draggableElements = [...container.querySelectorAll('.sortable-item:not(.dragging)')];
             
             return draggableElements.reduce((closest, child) => {
@@ -3548,11 +3503,16 @@
         }
 
         // Hilfsfunktion: Alle Drag-Effekte entfernen
-        function clearDragEffects() {
+        function clearSortableDragEffects() {
             document.querySelectorAll('.sortable-item').forEach(item => {
                 item.classList.remove('drag-over-top', 'drag-over-bottom');
+                // Reset transition delays
+                item.style.transitionDelay = '';
             });
-            document.getElementById('sortable-container').classList.remove('drag-over');
+            const container = document.getElementById('sortable-container');
+            if (container) {
+                container.classList.remove('drag-over');
+            }
         }
 
         function updateProgress() {
@@ -3706,12 +3666,12 @@
         let connections = [];
         let isConnecting = false;
 
-        // Initialisierung der Drag & Drop Funktionalität
+        // Initialisierung der Drag & Drop Funktionalität - nur Desktop
         function initializeDragDrop() {
             const terms = document.querySelectorAll('.draggable-term');
             const dropZones = document.querySelectorAll('.drop-zone');
             
-            // Drag Events für Begriffe
+            // Drag Events für Begriffe - nur Desktop
             terms.forEach(term => {
                 term.addEventListener('dragstart', handleTermDragStart);
                 term.addEventListener('dragend', handleTermDragEnd);
@@ -3763,24 +3723,381 @@
             
             const dropZoneCategory = this.getAttribute('data-category');
             const droppedItemsContainer = this.querySelector('.dropped-items');
+            const termId = draggedTerm.id;
             
-            // Immer erlauben - kein direktes Feedback
+            // Prüfen ob Begriff bereits woanders zugeordnet ist
+            Object.keys(droppedTerms).forEach(category => {
+                const index = droppedTerms[category].indexOf(termId);
+                if (index > -1) {
+                    // Entferne aus alter Kategorie
+                    droppedTerms[category].splice(index, 1);
+                    // Entferne visuell aus alter Drop-Zone
+                    const oldDroppedItem = document.querySelector(`[data-original-id="${termId}"]`);
+                    if (oldDroppedItem) {
+                        oldDroppedItem.remove();
+                    }
+                }
+            });
+            
+            // Erstelle neuen Begriff in der Drop-Zone
             const clonedTerm = draggedTerm.cloneNode(true);
             clonedTerm.classList.add('dropped');
             clonedTerm.classList.remove('dragging');
-            clonedTerm.draggable = false;
+            clonedTerm.draggable = true; // Wieder draggable machen
+            clonedTerm.setAttribute('data-original-id', termId);
             
-            // Entferne Original-Element
+            // Event Listener für das geklonte Element hinzufügen
+            clonedTerm.addEventListener('dragstart', handleDroppedTermDragStart);
+            clonedTerm.addEventListener('dragend', handleDroppedTermDragEnd);
+            
+            // Doppelklick zum Entfernen hinzufügen
+            clonedTerm.addEventListener('dblclick', () => removeDroppedTerm(clonedTerm, termId));
+            clonedTerm.style.cursor = 'grab';
+            clonedTerm.title = 'Doppelklick zum Entfernen oder ziehen zum Verschieben';
+            
+            // Original-Element ausblenden
             draggedTerm.style.display = 'none';
             
-            // Füge zur Drop-Zone hinzu
+            // Füge zur neuen Drop-Zone hinzu
             droppedItemsContainer.appendChild(clonedTerm);
-            droppedTerms[dropZoneCategory].push(draggedTerm.id);
+            droppedTerms[dropZoneCategory].push(termId);
             
-            // Sanfte Drop-Animation ohne Feedback
+            // Sanfte Drop-Animation
             setTimeout(() => {
                 clonedTerm.classList.add('dropped');
             }, 100);
+        }
+
+        // Drag-Handler für bereits zugeordnete Begriffe
+        function handleDroppedTermDragStart(e) {
+            draggedTerm = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.outerHTML);
+        }
+
+        function handleDroppedTermDragEnd(e) {
+            this.classList.remove('dragging');
+            draggedTerm = null;
+        }
+
+        // Funktion zum Entfernen eines zugeordneten Begriffs
+        function removeDroppedTerm(droppedElement, termId) {
+            // Entferne aus Datenstruktur
+            Object.keys(droppedTerms).forEach(category => {
+                const index = droppedTerms[category].indexOf(termId);
+                if (index > -1) {
+                    droppedTerms[category].splice(index, 1);
+                }
+            });
+            
+            // Entferne visuell
+            droppedElement.remove();
+            
+            // Zeige Original-Element wieder an
+            const originalTerm = document.getElementById(termId);
+            if (originalTerm) {
+                originalTerm.style.display = 'flex';
+                originalTerm.classList.remove('dropped');
+            }
+        }
+
+        // Touch Events für mobile Drag & Drop
+        function initializeTouchDragDrop() {
+            const terms = document.querySelectorAll('.draggable-term');
+            const dropZones = document.querySelectorAll('.drop-zone');
+            
+            // Touch Events für Begriffe - mobile Unterstützung
+            terms.forEach(term => {
+                term.addEventListener('touchstart', handleTermTouchStart, { passive: false });
+                term.addEventListener('touchmove', handleTermTouchMove, { passive: false });
+                term.addEventListener('touchend', handleTermTouchEnd, { passive: false });
+            });
+            
+            // Touch Events für Drop-Zonen
+            dropZones.forEach(zone => {
+                zone.addEventListener('touchstart', handleZoneTouchStart, { passive: false });
+            });
+        }
+
+        let touchDraggedTerm = null;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let isDragging = false;
+        let dragClone = null;
+
+        function handleTermTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            touchDraggedTerm = this;
+            isDragging = false;
+            
+            // Visuelles Feedback
+            this.style.transform = 'scale(1.05)';
+            this.style.zIndex = '1000';
+        }
+
+        function handleTermTouchMove(e) {
+            e.preventDefault();
+            if (!touchDraggedTerm) return;
+            
+            const touch = e.touches[0];
+            const deltaX = Math.abs(touch.clientX - touchStartX);
+            const deltaY = Math.abs(touch.clientY - touchStartY);
+            
+            // Beginne Drag erst nach minimaler Bewegung
+            if (!isDragging && (deltaX > 10 || deltaY > 10)) {
+                isDragging = true;
+                
+                // Erstelle Drag-Clone
+                dragClone = touchDraggedTerm.cloneNode(true);
+                dragClone.style.cssText = `
+                    position: fixed;
+                    top: ${touch.clientY - 30}px;
+                    left: ${touch.clientX - 100}px;
+                    z-index: 2000;
+                    pointer-events: none;
+                    opacity: 0.8;
+                    transform: scale(1.1) rotate(5deg);
+                    transition: none;
+                    width: 200px;
+                `;
+                document.body.appendChild(dragClone);
+                
+                // Original-Element ausblenden
+                touchDraggedTerm.style.opacity = '0.3';
+            }
+            
+            if (isDragging && dragClone) {
+                // Bewege Clone mit Finger
+                dragClone.style.top = (touch.clientY - 30) + 'px';
+                dragClone.style.left = (touch.clientX - 100) + 'px';
+                
+                // Highlight Drop-Zonen
+                const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+                const dropZone = elementBelow ? elementBelow.closest('.drop-zone') : null;
+                
+                // Entferne alle Highlights
+                document.querySelectorAll('.drop-zone').forEach(zone => {
+                    zone.classList.remove('drag-over');
+                });
+                
+                // Highlight aktuelle Zone
+                if (dropZone) {
+                    dropZone.classList.add('drag-over');
+                }
+            }
+        }
+
+        function handleTermTouchEnd(e) {
+            e.preventDefault();
+            if (!touchDraggedTerm) return;
+            
+            // Reset visueller Zustand
+            touchDraggedTerm.style.transform = '';
+            touchDraggedTerm.style.zIndex = '';
+            touchDraggedTerm.style.opacity = '';
+            
+            if (isDragging && dragClone) {
+                const touch = e.changedTouches[0];
+                const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+                const dropZone = elementBelow ? elementBelow.closest('.drop-zone') : null;
+                
+                if (dropZone) {
+                    // Simuliere Drop-Event
+                    handleTouchDrop(dropZone, touchDraggedTerm);
+                }
+                
+                // Cleanup
+                dragClone.remove();
+                dragClone = null;
+            }
+            
+            // Entferne alle Highlights
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                zone.classList.remove('drag-over');
+            });
+            
+            touchDraggedTerm = null;
+            isDragging = false;
+        }
+
+        function handleZoneTouchStart(e) {
+            // Verhindere Scroll beim Berühren der Drop-Zonen
+            e.preventDefault();
+        }
+
+        function handleTouchDrop(dropZone, draggedTerm) {
+            const dropZoneCategory = dropZone.getAttribute('data-category');
+            const droppedItemsContainer = dropZone.querySelector('.dropped-items');
+            const termId = draggedTerm.id;
+            
+            // Prüfen ob Begriff bereits woanders zugeordnet ist
+            Object.keys(droppedTerms).forEach(category => {
+                const index = droppedTerms[category].indexOf(termId);
+                if (index > -1) {
+                    // Entferne aus alter Kategorie
+                    droppedTerms[category].splice(index, 1);
+                    // Entferne visuell aus alter Drop-Zone
+                    const oldDroppedItem = document.querySelector(`[data-original-id="${termId}"]`);
+                    if (oldDroppedItem) {
+                        oldDroppedItem.remove();
+                    }
+                }
+            });
+            
+            // Erstelle neuen Begriff in der Drop-Zone
+            const clonedTerm = draggedTerm.cloneNode(true);
+            clonedTerm.classList.add('dropped');
+            clonedTerm.classList.remove('dragging');
+            clonedTerm.draggable = false; // Kein Drag auf Mobile für geklonte Elemente
+            clonedTerm.setAttribute('data-original-id', termId);
+            
+            // Touch Events für das geklonte Element hinzufügen
+            clonedTerm.addEventListener('touchstart', handleDroppedTermTouchStart, { passive: false });
+            clonedTerm.addEventListener('touchmove', handleDroppedTermTouchMove, { passive: false });
+            clonedTerm.addEventListener('touchend', handleDroppedTermTouchEnd, { passive: false });
+            
+            // Doppeltipp zum Entfernen hinzufügen
+            let tapCount = 0;
+            clonedTerm.addEventListener('touchstart', (e) => {
+                tapCount++;
+                setTimeout(() => {
+                    if (tapCount === 1) {
+                        // Einzeltipp - nichts tun
+                    } else if (tapCount === 2) {
+                        // Doppeltipp - entfernen
+                        removeDroppedTerm(clonedTerm, termId);
+                    }
+                    tapCount = 0;
+                }, 300);
+            });
+            
+            clonedTerm.style.cursor = 'pointer';
+            clonedTerm.title = 'Doppeltipp zum Entfernen oder ziehen zum Verschieben';
+            
+            // Original-Element ausblenden
+            draggedTerm.style.display = 'none';
+            
+            // Füge zur neuen Drop-Zone hinzu
+            droppedItemsContainer.appendChild(clonedTerm);
+            droppedTerms[dropZoneCategory].push(termId);
+            
+            // Sanfte Drop-Animation
+            setTimeout(() => {
+                clonedTerm.classList.add('dropped');
+            }, 100);
+        }
+
+        // Touch-Handler für bereits zugeordnete Begriffe
+        function handleDroppedTermTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            touchDraggedTerm = this;
+            isDragging = false;
+            
+            // Visuelles Feedback
+            this.style.transform = 'scale(1.05)';
+            this.style.zIndex = '1000';
+        }
+
+        function handleDroppedTermTouchMove(e) {
+            e.preventDefault();
+            if (!touchDraggedTerm) return;
+            
+            const touch = e.touches[0];
+            const deltaX = Math.abs(touch.clientX - touchStartX);
+            const deltaY = Math.abs(touch.clientY - touchStartY);
+            
+            // Beginne Drag erst nach minimaler Bewegung
+            if (!isDragging && (deltaX > 10 || deltaY > 10)) {
+                isDragging = true;
+                
+                // Erstelle Drag-Clone
+                dragClone = touchDraggedTerm.cloneNode(true);
+                dragClone.style.cssText = `
+                    position: fixed;
+                    top: ${touch.clientY - 30}px;
+                    left: ${touch.clientX - 100}px;
+                    z-index: 2000;
+                    pointer-events: none;
+                    opacity: 0.8;
+                    transform: scale(1.1) rotate(5deg);
+                    transition: none;
+                    width: 200px;
+                `;
+                document.body.appendChild(dragClone);
+                
+                // Original-Element ausblenden
+                touchDraggedTerm.style.opacity = '0.3';
+            }
+            
+            if (isDragging && dragClone) {
+                // Bewege Clone mit Finger
+                dragClone.style.top = (touch.clientY - 30) + 'px';
+                dragClone.style.left = (touch.clientX - 100) + 'px';
+                
+                // Highlight Drop-Zonen
+                const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+                const dropZone = elementBelow ? elementBelow.closest('.drop-zone') : null;
+                
+                // Entferne alle Highlights
+                document.querySelectorAll('.drop-zone').forEach(zone => {
+                    zone.classList.remove('drag-over');
+                });
+                
+                // Highlight aktuelle Zone
+                if (dropZone) {
+                    dropZone.classList.add('drag-over');
+                }
+            }
+        }
+
+        function handleDroppedTermTouchEnd(e) {
+            e.preventDefault();
+            if (!touchDraggedTerm) return;
+            
+            // Reset visueller Zustand
+            touchDraggedTerm.style.transform = '';
+            touchDraggedTerm.style.zIndex = '';
+            touchDraggedTerm.style.opacity = '';
+            
+            if (isDragging && dragClone) {
+                const touch = e.changedTouches[0];
+                const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+                const dropZone = elementBelow ? elementBelow.closest('.drop-zone') : null;
+                
+                if (dropZone) {
+                    // Simuliere Drop-Event für bereits zugeordnete Begriffe
+                    const termId = touchDraggedTerm.getAttribute('data-original-id');
+                    
+                    // Entferne aus aktueller Position
+                    removeDroppedTerm(touchDraggedTerm, termId);
+                    
+                    // Füge zu neuer Position hinzu
+                    const originalTerm = document.getElementById(termId);
+                    if (originalTerm) {
+                        originalTerm.style.display = 'flex';
+                        handleTouchDrop(dropZone, originalTerm);
+                    }
+                }
+                
+                // Cleanup
+                dragClone.remove();
+                dragClone = null;
+            }
+            
+            // Entferne alle Highlights
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                zone.classList.remove('drag-over');
+            });
+            
+            touchDraggedTerm = null;
+            isDragging = false;
         }
 
         function checkTask4() {
@@ -3818,6 +4135,8 @@
                 term.style.display = 'flex';
                 term.classList.remove('dropped', 'incorrect-drop');
                 term.draggable = true;
+                term.style.cursor = 'grab';
+                term.title = '';
             });
             
             // Leere alle Drop-Zonen
@@ -4428,6 +4747,7 @@
             tetrisCorrectAnswers = 0;
             tetrisGameActive = true;
             tetrisCurrentPosition = 1;
+            tetrisFallSpeed = 6000; // Langsamere Geschwindigkeit: 6 Sekunden
             
             document.getElementById('total-terms').textContent = tetrisGameTerms.length;
             document.getElementById('tetris-score').textContent = tetrisScore;
@@ -4437,10 +4757,7 @@
             tetrisKeyHandler = handleTetrisKeyPress;
             document.addEventListener('keydown', tetrisKeyHandler);
             
-            // Touch event listeners für mobile Steuerung
-            const gameArea = document.querySelector('.tetris-game-area');
-            gameArea.addEventListener('touchstart', handleTetrisTouchStart, { passive: false });
-            gameArea.addEventListener('touchend', handleTetrisTouchEnd, { passive: false });
+            // Touch events entfernt - nur Desktop-Steuerung
             
             showNextTetrisTerm();
         }
@@ -4475,7 +4792,7 @@
             // Force reflow um sicherzustellen dass der Reset angewendet wird
             fallingTerm.offsetHeight;
             
-            // Transition wieder aktivieren
+            // Transition wieder aktivieren - jetzt 6 Sekunden
             fallingTerm.style.transition = `top ${tetrisFallSpeed}ms linear`;
             
             // Start falling nach kurzer Verzögerung
@@ -4483,12 +4800,12 @@
                 fallingTerm.style.top = '280px'; // Just above the zones
             }, 50);
             
-            // Auto-drop when reaching bottom
+            // Auto-drop when reaching bottom - angepasst für langsamere Geschwindigkeit
             tetrisFallInterval = setTimeout(() => {
                 if (tetrisGameActive) {
                     dropTetrisTerm();
                 }
-            }, tetrisFallSpeed + 200);
+            }, tetrisFallSpeed + 500); // 6,5 Sekunden total
         }
 
         function handleTetrisKeyPress(e) {
@@ -4516,94 +4833,7 @@
             }
         }
 
-        // Touch-Steuerung für mobile Geräte
-        function handleTetrisTouchStart(e) {
-            if (!tetrisGameActive) return;
-            
-            e.preventDefault();
-            const touch = e.touches[0];
-            touchStartX = touch.clientX;
-            touchStartY = touch.clientY;
-        }
-
-        function handleTetrisTouchEnd(e) {
-            if (!tetrisGameActive) return;
-            
-            e.preventDefault();
-            const touch = e.changedTouches[0];
-            touchEndX = touch.clientX;
-            touchEndY = touch.clientY;
-            
-            handleTetrisSwipe();
-        }
-
-        function handleTetrisSwipe() {
-            const deltaX = touchEndX - touchStartX;
-            const deltaY = touchEndY - touchStartY;
-            const absDeltaX = Math.abs(deltaX);
-            const absDeltaY = Math.abs(deltaY);
-            
-            // Prüfe ob es eine gültige Wischbewegung ist
-            if (Math.max(absDeltaX, absDeltaY) < minSwipeDistance) {
-                return; // Zu kurze Bewegung
-            }
-            
-            // Bestimme Richtung basierend auf der stärksten Bewegung
-            if (absDeltaX > absDeltaY) {
-                // Horizontale Bewegung
-                if (deltaX > 0) {
-                    // Wisch nach rechts
-                    if (tetrisCurrentPosition < 2) {
-                        tetrisCurrentPosition++;
-                        updateTetrisPosition();
-                        showTetrisSwipeIndicator('→');
-                    }
-                } else {
-                    // Wisch nach links
-                    if (tetrisCurrentPosition > 0) {
-                        tetrisCurrentPosition--;
-                        updateTetrisPosition();
-                        showTetrisSwipeIndicator('←');
-                    }
-                }
-            } else {
-                // Vertikale Bewegung
-                if (deltaY > 0) {
-                    // Wisch nach unten
-                    dropTetrisTerm();
-                    showTetrisSwipeIndicator('↓');
-                }
-            }
-        }
-
-        function showTetrisSwipeIndicator(direction) {
-            const gameArea = document.querySelector('.tetris-game-area');
-            const indicator = document.createElement('div');
-            indicator.className = 'swipe-indicator';
-            indicator.style.cssText = `
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                background: rgba(0, 122, 255, 0.9);
-                color: white;
-                padding: 8px 12px;
-                border-radius: 20px;
-                font-size: 1.2rem;
-                font-weight: bold;
-                z-index: 30;
-                animation: swipeIndicatorPop 0.6s ease-out;
-                pointer-events: none;
-            `;
-            indicator.textContent = direction;
-            
-            gameArea.appendChild(indicator);
-            
-            setTimeout(() => {
-                if (indicator.parentNode) {
-                    indicator.parentNode.removeChild(indicator);
-                }
-            }, 600);
-        }
+        // Touch-Steuerung entfernt - nur Desktop-Steuerung mit Pfeiltasten
 
         function updateTetrisPosition() {
             const fallingTerm = document.getElementById('falling-term');
@@ -4706,12 +4936,7 @@
                 tetrisKeyHandler = null;
             }
             
-            // Touch event listeners entfernen
-            const gameArea = document.querySelector('.tetris-game-area');
-            if (gameArea) {
-                gameArea.removeEventListener('touchstart', handleTetrisTouchStart);
-                gameArea.removeEventListener('touchend', handleTetrisTouchEnd);
-            }
+            // Touch event listeners entfernt - nur Desktop-Steuerung
             
             clearTimeout(tetrisFallInterval);
             
@@ -4919,8 +5144,41 @@
             }), wasCorrect);
         }
 
-        // Enter-Taste für Rätsel-Input
+        // Enter-Taste Navigation für Lückentext und Rätsel
         document.addEventListener('DOMContentLoaded', function() {
+            // Lückentext Navigation
+            const gaps = ['gap-1', 'gap-2', 'gap-3'];
+            
+            gaps.forEach((gapId, index) => {
+                const gapElement = document.getElementById(gapId);
+                if (gapElement) {
+                    gapElement.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            
+                            if (index < gaps.length - 1) {
+                                // Zur nächsten Lücke springen
+                                const nextGap = document.getElementById(gaps[index + 1]);
+                                if (nextGap) {
+                                    nextGap.focus();
+                                    // Cursor ans Ende setzen
+                                    const range = document.createRange();
+                                    const selection = window.getSelection();
+                                    range.selectNodeContents(nextGap);
+                                    range.collapse(false);
+                                    selection.removeAllRanges();
+                                    selection.addRange(range);
+                                }
+                            } else {
+                                // Bei der letzten Lücke: Antwort prüfen
+                                checkTask1();
+                            }
+                        }
+                    });
+                }
+            });
+            
+            // Rätsel-Input Navigation
             const riddleInput = document.getElementById('riddle-answer');
             if (riddleInput) {
                 riddleInput.addEventListener('keypress', function(e) {
@@ -4936,7 +5194,7 @@
             const blocks = document.querySelectorAll('.reasoning-block');
             const slots = document.querySelectorAll('.reasoning-slot');
             
-            // Drag Events für Bausteine
+            // Drag Events für Bausteine - nur Desktop
             blocks.forEach(block => {
                 block.addEventListener('dragstart', handleReasoningDragStart);
                 block.addEventListener('dragend', handleReasoningDragEnd);
@@ -5094,7 +5352,7 @@
                 top: ${startY}px;
                 cursor: pointer;
                 z-index: 15;
-                transition: left 4000ms linear;
+                transition: left 8000ms linear;
                 pointer-events: auto;
             `;
             
@@ -5123,7 +5381,7 @@
                 }
             }, 100);
             
-            // Entferne Paragraphen nach Flugzeit automatisch
+            // Entferne Paragraphen nach Flugzeit automatisch - angepasst für langsamere Geschwindigkeit
             setTimeout(() => {
                 if (paragraph.parentNode && !paragraphInfo.clicked) {
                     paragraph.classList.add('missed');
@@ -5139,7 +5397,7 @@
                         shootingFlyingParagraphs.splice(index, 1);
                     }
                 }
-            }, 4500);
+            }, 8500); // 8,5 Sekunden für langsamere Paragraphen
         }
 
         function handleParagraphClick(paragraphElement, paragraphText) {
@@ -5673,6 +5931,8 @@
             updateReasoningPreview();
         }
 
+        // Touch Events für Begründung bauen entfernt - nur Desktop-Unterstützung
+
         function updateReasoningPreview() {
             const preview = document.getElementById('reasoning-preview');
             const previewText = document.getElementById('preview-text');
@@ -6068,5 +6328,5 @@
             resetEscapeGame();
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ef8fa5c5d99240',t:'MTc2MzIxODIyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99efd395838a4e42',t:'MTc2MzIyMTAxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
