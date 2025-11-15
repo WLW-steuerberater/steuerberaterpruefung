@@ -4629,15 +4629,28 @@
             document.getElementById('tetris-score').textContent = tetrisScore;
             updateTetrisLives();
             
+            // Entferne alte Event Listener falls vorhanden
+            if (tetrisKeyHandler) {
+                document.removeEventListener('keydown', tetrisKeyHandler);
+            }
+            
             // Keyboard event listener
             tetrisKeyHandler = handleTetrisKeyPress;
             document.addEventListener('keydown', tetrisKeyHandler);
             
             // Touch events für mobile Steuerung
             const gameArea = document.getElementById('tetris-game-area');
-            gameArea.addEventListener('touchstart', handleTetrisTouchStart, { passive: false });
-            gameArea.addEventListener('touchmove', handleTetrisTouchMove, { passive: false });
-            gameArea.addEventListener('touchend', handleTetrisTouchEnd, { passive: false });
+            if (gameArea) {
+                // Entferne alte Touch-Listener
+                gameArea.removeEventListener('touchstart', handleTetrisTouchStart);
+                gameArea.removeEventListener('touchmove', handleTetrisTouchMove);
+                gameArea.removeEventListener('touchend', handleTetrisTouchEnd);
+                
+                // Füge neue Touch-Listener hinzu
+                gameArea.addEventListener('touchstart', handleTetrisTouchStart, { passive: false });
+                gameArea.addEventListener('touchmove', handleTetrisTouchMove, { passive: false });
+                gameArea.addEventListener('touchend', handleTetrisTouchEnd, { passive: false });
+            }
             
             showNextTetrisTerm();
         }
@@ -6250,5 +6263,5 @@
             resetEscapeGame();
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99efebf604369240',t:'MTc2MzIyMjAwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99eff06f04cf4e42',t:'MTc2MzIyMjE5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
