@@ -4558,7 +4558,7 @@
         let touchStartY = 0;
         let touchEndX = 0;
         let touchEndY = 0;
-        let minSwipeDistance = 50;
+        let minSwipeDistance = 30;
 
         const tetrisGameTerms = [
             {
@@ -4623,7 +4623,7 @@
             tetrisCorrectAnswers = 0;
             tetrisGameActive = true;
             tetrisCurrentPosition = 0;
-            tetrisFallSpeed = 6000; // Langsamere Geschwindigkeit: 6 Sekunden
+            tetrisFallSpeed = 5500; // Leicht schnellere Geschwindigkeit: 5,5 Sekunden
             
             document.getElementById('total-terms').textContent = tetrisGameTerms.length;
             document.getElementById('tetris-score').textContent = tetrisScore;
@@ -4638,18 +4638,20 @@
             tetrisKeyHandler = handleTetrisKeyPress;
             document.addEventListener('keydown', tetrisKeyHandler);
             
-            // Touch events für mobile Steuerung
-            const gameArea = document.getElementById('tetris-game-area');
-            if (gameArea) {
+            // Touch events für mobile Steuerung - auf das gesamte Spiel-Element anwenden
+            const tetrisGame = document.getElementById('tetris-game');
+            if (tetrisGame) {
                 // Entferne alte Touch-Listener
-                gameArea.removeEventListener('touchstart', handleTetrisTouchStart);
-                gameArea.removeEventListener('touchmove', handleTetrisTouchMove);
-                gameArea.removeEventListener('touchend', handleTetrisTouchEnd);
+                tetrisGame.removeEventListener('touchstart', handleTetrisTouchStart);
+                tetrisGame.removeEventListener('touchmove', handleTetrisTouchMove);
+                tetrisGame.removeEventListener('touchend', handleTetrisTouchEnd);
                 
                 // Füge neue Touch-Listener hinzu
-                gameArea.addEventListener('touchstart', handleTetrisTouchStart, { passive: false });
-                gameArea.addEventListener('touchmove', handleTetrisTouchMove, { passive: false });
-                gameArea.addEventListener('touchend', handleTetrisTouchEnd, { passive: false });
+                tetrisGame.addEventListener('touchstart', handleTetrisTouchStart, { passive: false });
+                tetrisGame.addEventListener('touchmove', handleTetrisTouchMove, { passive: false });
+                tetrisGame.addEventListener('touchend', handleTetrisTouchEnd, { passive: false });
+                
+                console.log('Touch events registered for Tetris'); // Debug
             }
             
             showNextTetrisTerm();
@@ -4693,12 +4695,12 @@
                 fallingTerm.style.top = '280px'; // Just above the zones
             }, 50);
             
-            // Auto-drop when reaching bottom - angepasst für langsamere Geschwindigkeit
+            // Auto-drop when reaching bottom - angepasst für leicht schnellere Geschwindigkeit
             tetrisFallInterval = setTimeout(() => {
                 if (tetrisGameActive) {
                     dropTetrisTerm();
                 }
-            }, tetrisFallSpeed + 500); // 6,5 Sekunden total
+            }, tetrisFallSpeed + 500); // 6 Sekunden total
         }
 
         function handleTetrisKeyPress(e) {
@@ -4734,49 +4736,68 @@
             const touch = e.touches[0];
             touchStartX = touch.clientX;
             touchStartY = touch.clientY;
+            touchEndX = touchStartX; // Initialisiere auch touchEnd
+            touchEndY = touchStartY;
         }
 
         function handleTetrisTouchMove(e) {
             if (!tetrisGameActive) return;
             e.preventDefault(); // Verhindert Scrollen
+            
+            // Aktualisiere kontinuierlich die End-Position während der Bewegung
+            const touch = e.touches[0];
+            touchEndX = touch.clientX;
+            touchEndY = touch.clientY;
         }
 
         function handleTetrisTouchEnd(e) {
             if (!tetrisGameActive) return;
             
             e.preventDefault();
-            const touch = e.changedTouches[0];
-            touchEndX = touch.clientX;
-            touchEndY = touch.clientY;
+            
+            // Falls touchEnd nicht durch touchMove gesetzt wurde, verwende changedTouches
+            if (e.changedTouches && e.changedTouches.length > 0) {
+                const touch = e.changedTouches[0];
+                touchEndX = touch.clientX;
+                touchEndY = touch.clientY;
+            }
             
             const deltaX = touchEndX - touchStartX;
             const deltaY = touchEndY - touchStartY;
             
+            console.log('Touch Delta:', deltaX, deltaY, 'Min Distance:', minSwipeDistance); // Debug
+            
             // Mindestdistanz für Wischbewegung
             if (Math.abs(deltaX) < minSwipeDistance && Math.abs(deltaY) < minSwipeDistance) {
+                console.log('Swipe too short'); // Debug
                 return;
             }
             
             // Bestimme Richtung der Wischbewegung
             if (Math.abs(deltaX) > Math.abs(deltaY)) {
                 // Horizontale Wischbewegung
+                console.log('Horizontal swipe:', deltaX, 'Current pos:', tetrisCurrentPosition); // Debug
                 if (deltaX > 0 && tetrisCurrentPosition < 1) {
                     // Wisch nach rechts
                     tetrisCurrentPosition++;
                     updateTetrisPosition();
                     showSwipeIndicator('→');
+                    console.log('Moved right to position:', tetrisCurrentPosition); // Debug
                 } else if (deltaX < 0 && tetrisCurrentPosition > 0) {
                     // Wisch nach links
                     tetrisCurrentPosition--;
                     updateTetrisPosition();
                     showSwipeIndicator('←');
+                    console.log('Moved left to position:', tetrisCurrentPosition); // Debug
                 }
             } else {
                 // Vertikale Wischbewegung
+                console.log('Vertical swipe:', deltaY); // Debug
                 if (deltaY > 0) {
                     // Wisch nach unten - schneller fallen lassen
                     dropTetrisTerm();
                     showSwipeIndicator('↓');
+                    console.log('Dropped term'); // Debug
                 }
             }
         }
@@ -4909,11 +4930,11 @@
             }
             
             // Touch event listeners entfernen
-            const gameArea = document.getElementById('tetris-game-area');
-            if (gameArea) {
-                gameArea.removeEventListener('touchstart', handleTetrisTouchStart);
-                gameArea.removeEventListener('touchmove', handleTetrisTouchMove);
-                gameArea.removeEventListener('touchend', handleTetrisTouchEnd);
+            const tetrisGame = document.getElementById('tetris-game');
+            if (tetrisGame) {
+                tetrisGame.removeEventListener('touchstart', handleTetrisTouchStart);
+                tetrisGame.removeEventListener('touchmove', handleTetrisTouchMove);
+                tetrisGame.removeEventListener('touchend', handleTetrisTouchEnd);
             }
             
             clearTimeout(tetrisFallInterval);
@@ -5316,7 +5337,7 @@
                 }
             }, 100);
             
-            // Entferne Paragraphen nach Flugzeit automatisch - angepasst für langsamere Geschwindigkeit
+            // Entferne Paragraphen nach Flugzeit automatisch - angepasst für leicht schnellere Geschwindigkeit
             setTimeout(() => {
                 if (paragraph.parentNode && !paragraphInfo.clicked) {
                     paragraph.classList.add('missed');
@@ -5332,7 +5353,7 @@
                         shootingFlyingParagraphs.splice(index, 1);
                     }
                 }
-            }, 8500); // 8,5 Sekunden für langsamere Paragraphen
+            }, 8000); // 8 Sekunden für leicht schnellere Paragraphen
         }
 
         function handleParagraphClick(paragraphElement, paragraphText) {
@@ -6263,5 +6284,5 @@
             resetEscapeGame();
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99eff06f04cf4e42',t:'MTc2MzIyMjE5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f77b8a11149240',t:'MTc2MzMwMTI5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
