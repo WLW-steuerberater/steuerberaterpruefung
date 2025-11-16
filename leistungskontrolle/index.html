@@ -1403,36 +1403,189 @@
 
         /* Responsive Anpassungen für Tetris */
         @media (max-width: 768px) {
+            .tetris-container {
+                padding: 20px 15px;
+                margin: 15px 0;
+            }
+            
+            .tetris-start {
+                padding: 15px;
+            }
+            
+            .tetris-icon {
+                font-size: 3rem;
+                margin-bottom: 15px;
+            }
+            
+            .tetris-start h3 {
+                font-size: 1.5rem;
+                margin-bottom: 12px;
+            }
+            
+            .tetris-start p {
+                font-size: 1rem;
+                margin: 8px 0;
+            }
+            
             .tetris-header {
                 grid-template-columns: 1fr;
-                gap: 10px;
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+            
+            .tetris-score, .tetris-progress, .tetris-lives {
+                font-size: 1rem;
+                padding: 8px 12px;
             }
             
             .tetris-game-area {
-                height: 350px;
+                height: 320px;
+                margin: 15px 0;
+                border-radius: 12px;
             }
             
             .tetris-zones {
-                height: 100px;
+                height: 90px;
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .tetris-zone {
+                padding: 8px 6px;
+                border-radius: 0;
+            }
+            
+            .tetris-zone:first-child {
+                border-bottom-left-radius: 12px;
+            }
+            
+            .tetris-zone:last-child {
+                border-bottom-right-radius: 12px;
             }
             
             .tetris-zone h4 {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+                margin: 0 0 3px 0;
+                line-height: 1.2;
             }
             
             .tetris-zone p {
-                font-size: 0.7rem;
+                font-size: 0.65rem;
+                line-height: 1.1;
+                margin: 0;
+            }
+            
+            .falling-term {
+                top: -50px;
             }
             
             .term-content {
-                font-size: 1rem;
-                padding: 12px 20px;
-                min-width: 150px;
+                font-size: 0.9rem;
+                padding: 10px 16px;
+                min-width: 130px;
+                max-width: 160px;
+                line-height: 1.2;
+                word-wrap: break-word;
+                text-align: center;
+            }
+            
+            .tetris-instructions {
+                padding: 12px;
+                margin: 15px 0;
+                border-radius: 10px;
+            }
+            
+            .tetris-instructions p {
+                font-size: 0.85rem;
+                margin: 0;
+            }
+            
+            .tetris-results {
+                padding: 20px 15px;
             }
             
             .tetris-stats {
                 grid-template-columns: 1fr;
-                gap: 15px;
+                gap: 12px;
+                margin: 20px 0;
+            }
+            
+            .tetris-stat {
+                padding: 15px;
+            }
+            
+            .tetris-results-message {
+                font-size: 1rem;
+                margin-top: 15px;
+            }
+            
+            /* Mobile Touch-Feedback Verbesserungen */
+            .tetris-zone.active {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 20px rgba(0, 122, 255, 0.25);
+            }
+            
+            /* Bessere Sichtbarkeit der fallenden Begriffe auf kleinen Bildschirmen */
+            @keyframes termGlow {
+                0% { 
+                    box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
+                    transform: scale(1);
+                }
+                100% { 
+                    box-shadow: 0 8px 25px rgba(0, 122, 255, 0.6);
+                    transform: scale(1.02);
+                }
+            }
+            
+            /* Verbesserte Swipe-Indikatoren für mobile Geräte */
+            .swipe-indicator {
+                font-size: 2.5rem !important;
+                text-shadow: 0 2px 8px rgba(0,0,0,0.4) !important;
+            }
+        }
+        
+        /* Sehr kleine Bildschirme (unter 480px) */
+        @media (max-width: 480px) {
+            .tetris-container {
+                padding: 15px 10px;
+            }
+            
+            .tetris-game-area {
+                height: 280px;
+                margin: 12px 0;
+            }
+            
+            .tetris-zones {
+                height: 80px;
+            }
+            
+            .tetris-zone {
+                padding: 6px 4px;
+            }
+            
+            .tetris-zone h4 {
+                font-size: 0.75rem;
+                margin: 0 0 2px 0;
+            }
+            
+            .tetris-zone p {
+                font-size: 0.6rem;
+                line-height: 1;
+            }
+            
+            .term-content {
+                font-size: 0.8rem;
+                padding: 8px 12px;
+                min-width: 110px;
+                max-width: 140px;
+            }
+            
+            .tetris-header {
+                gap: 6px;
+            }
+            
+            .tetris-score, .tetris-progress, .tetris-lives {
+                font-size: 0.9rem;
+                padding: 6px 10px;
             }
         }
 
@@ -6284,5 +6437,5 @@
             resetEscapeGame();
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f77b8a11149240',t:'MTc2MzMwMTI5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f7838d03939240',t:'MTc2MzMwMTYxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
