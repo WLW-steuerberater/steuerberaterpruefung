@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Steuerrecht Lernkontrolle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <script src="/_sdk/element_sdk.js"></script>
   <script src="/_sdk/data_sdk.js"></script>
   <style>
@@ -11,8 +12,8 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Fira Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: transparent;
             min-height: 100%;
             color: #1d1d1f;
         }
@@ -38,7 +39,7 @@
             font-size: 2.5rem;
             font-weight: 700;
             margin: 0 0 10px 0;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #0055B8, #003d87);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -104,7 +105,7 @@
         }
 
         .task-number {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #0055B8, #003d87);
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
@@ -138,9 +139,9 @@
 
         .input-field:focus {
             outline: none;
-            border-color: #007aff;
+            border-color: #0055B8;
             background: white;
-            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
+            box-shadow: 0 0 0 4px rgba(0, 85, 184, 0.1);
         }
 
         .gap-text {
@@ -175,13 +176,13 @@
         }
 
         .option-button:hover {
-            border-color: #007aff;
-            background: rgba(0, 122, 255, 0.05);
+            border-color: #0055B8;
+            background: rgba(0, 85, 184, 0.05);
         }
 
         .option-button.selected {
-            border-color: #007aff;
-            background: #007aff;
+            border-color: #0055B8;
+            background: #0055B8;
             color: white;
         }
 
@@ -199,20 +200,20 @@
         }
 
         .sortable-container.drag-over {
-            border-color: #007aff;
+            border-color: #0055B8;
             border-style: solid;
-            background: linear-gradient(135deg, rgba(0, 122, 255, 0.08), rgba(0, 122, 255, 0.04));
+            background: linear-gradient(135deg, rgba(0, 85, 184, 0.08), rgba(0, 85, 184, 0.04));
             transform: scale(1.01);
-            box-shadow: inset 0 2px 8px rgba(0, 122, 255, 0.1), 0 8px 25px rgba(0, 122, 255, 0.15);
+            box-shadow: inset 0 2px 8px rgba(0, 85, 184, 0.1), 0 8px 25px rgba(0, 85, 184, 0.15);
             animation: containerPulse 2s ease-in-out infinite alternate;
         }
 
         @keyframes containerPulse {
             0% { 
-                box-shadow: inset 0 2px 8px rgba(0, 122, 255, 0.1), 0 8px 25px rgba(0, 122, 255, 0.15);
+                box-shadow: inset 0 2px 8px rgba(0, 85, 184, 0.1), 0 8px 25px rgba(0, 85, 184, 0.15);
             }
             100% { 
-                box-shadow: inset 0 2px 8px rgba(0, 122, 255, 0.15), 0 12px 35px rgba(0, 122, 255, 0.25);
+                box-shadow: inset 0 2px 8px rgba(0, 85, 184, 0.15), 0 12px 35px rgba(0, 85, 184, 0.25);
             }
         }
 
@@ -244,11 +245,11 @@
         }
 
         .sortable-item:hover {
-            box-shadow: 0 12px 32px rgba(0, 122, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 12px 32px rgba(0, 85, 184, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
             transform: translateY(-6px) scale(1.02);
-            border-color: rgba(0, 122, 255, 0.3);
-            border-left-color: #007aff;
-            background: linear-gradient(135deg, #ffffff, #f0f8ff);
+            border-color: rgba(0, 85, 184, 0.3);
+            border-left-color: #0055B8;
+            background: linear-gradient(135deg, #ffffff, #f0f6ff);
         }
 
         .sortable-item:active {
@@ -260,11 +261,11 @@
             opacity: 0.9;
             transform: scale(1.08) translateZ(0);
             z-index: 1000;
-            box-shadow: 0 20px 50px rgba(0, 122, 255, 0.3), 0 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 85, 184, 0.3), 0 8px 20px rgba(0, 0, 0, 0.2);
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border-color: #007aff;
-            border-left-color: #007aff;
-            background: linear-gradient(135deg, #ffffff, #e6f3ff);
+            border-color: #0055B8;
+            border-left-color: #0055B8;
+            background: linear-gradient(135deg, #ffffff, #e6f1ff);
             animation: dragPulse 1.5s ease-in-out infinite alternate;
         }
 
@@ -273,19 +274,19 @@
         }
 
         .sortable-item.drag-over-top {
-            border-top: 4px solid #007aff;
+            border-top: 4px solid #0055B8;
             transform: translateY(-8px) scale(1.02);
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.2);
-            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
+            box-shadow: 0 8px 25px rgba(0, 85, 184, 0.2);
+            background: linear-gradient(135deg, #f0f6ff, #e6f1ff);
         }
 
         .sortable-item.drag-over-bottom {
-            border-bottom: 4px solid #007aff;
+            border-bottom: 4px solid #0055B8;
             transform: translateY(8px) scale(1.02);
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.2);
-            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
+            box-shadow: 0 8px 25px rgba(0, 85, 184, 0.2);
+            background: linear-gradient(135deg, #f0f6ff, #e6f1ff);
         }
 
         .sortable-item.inserting {
@@ -309,10 +310,10 @@
 
         @keyframes dragPulse {
             0% { 
-                box-shadow: 0 20px 50px rgba(0, 122, 255, 0.3), 0 8px 20px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 20px 50px rgba(0, 85, 184, 0.3), 0 8px 20px rgba(0, 0, 0, 0.2);
             }
             100% { 
-                box-shadow: 0 25px 60px rgba(0, 122, 255, 0.5), 0 12px 30px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 25px 60px rgba(0, 85, 184, 0.5), 0 12px 30px rgba(0, 0, 0, 0.3);
             }
         }
 
@@ -393,10 +394,10 @@
         }
 
         .drop-zone.drag-over {
-            border-color: #007aff;
-            background: linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(0, 122, 255, 0.05));
+            border-color: #0055B8;
+            background: linear-gradient(135deg, rgba(0, 85, 184, 0.1), rgba(0, 85, 184, 0.05));
             transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 85, 184, 0.2);
         }
 
         .drop-zone h4 {
@@ -465,9 +466,9 @@
         }
 
         .draggable-term:hover {
-            border-color: #007aff;
+            border-color: #0055B8;
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 85, 184, 0.15);
         }
 
         .draggable-term:active {
@@ -561,14 +562,14 @@
         }
 
         .connection-item:hover {
-            border-color: #007aff;
+            border-color: #0055B8;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 85, 184, 0.15);
         }
 
         .connection-item.selected {
-            border-color: #007aff;
-            background: rgba(0, 122, 255, 0.1);
+            border-color: #0055B8;
+            background: rgba(0, 85, 184, 0.1);
             transform: scale(1.02);
         }
 
@@ -614,15 +615,15 @@
         }
 
         .connection-dot:hover {
-            background: #007aff;
+            background: #0055B8;
             transform: scale(1.3);
-            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.2);
+            box-shadow: 0 0 0 4px rgba(0, 85, 184, 0.2);
         }
 
         .connection-dot.active {
-            background: #007aff;
+            background: #0055B8;
             transform: scale(1.2);
-            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.3);
+            box-shadow: 0 0 0 4px rgba(0, 85, 184, 0.3);
             animation: pulse 1.5s infinite;
         }
 
@@ -632,9 +633,9 @@
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.3); }
-            50% { box-shadow: 0 0 0 8px rgba(0, 122, 255, 0.1); }
-            100% { box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.3); }
+            0% { box-shadow: 0 0 0 4px rgba(0, 85, 184, 0.3); }
+            50% { box-shadow: 0 0 0 8px rgba(0, 85, 184, 0.1); }
+            100% { box-shadow: 0 0 0 4px rgba(0, 85, 184, 0.3); }
         }
 
         .connection-lines {
@@ -786,14 +787,14 @@
         }
 
         .btn-primary {
-            background: #007aff;
+            background: #0055B8;
             color: white;
         }
 
         .btn-primary:hover {
-            background: #0056cc;
+            background: #003d87;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 85, 184, 0.3);
         }
 
         .btn-secondary {
@@ -1226,13 +1227,13 @@
         }
 
         .term-content {
-            background: linear-gradient(135deg, #007aff, #0056cc);
+            background: linear-gradient(135deg, #0055B8, #003d87);
             color: white;
             padding: 15px 25px;
             border-radius: 12px;
             font-weight: 600;
             font-size: 1.1rem;
-            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 85, 184, 0.3);
             border: 3px solid rgba(255, 255, 255, 0.3);
             min-width: 180px;
             text-align: center;
@@ -1246,8 +1247,8 @@
         }
 
         @keyframes termGlow {
-            0% { box-shadow: 0 8px 25px rgba(0, 122, 255, 0.3); }
-            100% { box-shadow: 0 12px 35px rgba(0, 122, 255, 0.5); }
+            0% { box-shadow: 0 8px 25px rgba(0, 85, 184, 0.3); }
+            100% { box-shadow: 0 12px 35px rgba(0, 85, 184, 0.5); }
         }
 
         .tetris-zones {
@@ -3167,32 +3168,294 @@
         /* Responsive Anpassungen für Relevanz-Scanner */
         @media (max-width: 768px) {
             .scanner-container {
-                padding: 20px 15px;
-                margin: 15px 0;
+                padding: 15px 10px;
+                margin: 10px 0;
+            }
+            
+            .scanner-instructions {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .scanner-instructions h4 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+            
+            .scanner-instructions p {
+                font-size: 0.9rem;
+                margin: 6px 0;
+            }
+            
+            .categories-legend {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .categories-legend h4 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
             }
             
             .legend-items {
                 grid-template-columns: 1fr;
-                gap: 10px;
+                gap: 8px;
+            }
+            
+            .legend-item {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .category-color {
+                width: 14px;
+                height: 14px;
+                margin-right: 8px;
+            }
+            
+            .case-study {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+            
+            .case-study h4 {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+            
+            .case-text {
+                font-size: 0.95rem;
+                line-height: 1.7;
+                word-spacing: 0.1em;
+            }
+            
+            .text-segment {
+                padding: 4px 6px;
+                margin: 1px 2px;
+                border-radius: 6px;
+                display: inline-block;
+                min-height: 24px;
+                line-height: 1.3;
+                word-break: break-word;
+                -webkit-tap-highlight-color: rgba(0, 122, 255, 0.2);
+            }
+            
+            .text-segment:hover {
+                transform: none; /* Entferne Hover-Effekte auf Mobile */
+            }
+            
+            .text-segment:active {
+                background: rgba(0, 122, 255, 0.2) !important;
+                transform: scale(0.98);
+            }
+            
+            .marking-panel {
+                padding: 20px 15px;
+                margin: 20px 0;
+                position: sticky;
+                top: 10px;
+                z-index: 100;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            }
+            
+            .marking-panel h4 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+            
+            .selected-text {
+                padding: 12px 15px;
+                margin: 12px 0 20px 0;
+                font-size: 1rem;
+                line-height: 1.4;
+                word-break: break-word;
             }
             
             .category-buttons {
                 grid-template-columns: 1fr;
-                gap: 10px;
+                gap: 12px;
+                margin-bottom: 15px;
+            }
+            
+            .category-btn {
+                padding: 16px 20px;
+                font-size: 0.95rem;
+                text-align: center;
+                min-height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 12px;
+            }
+            
+            .cancel-btn {
+                padding: 14px 25px;
+                font-size: 0.95rem;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .analysis-overview {
+                padding: 15px;
+                margin: 20px 0;
+            }
+            
+            .analysis-overview h4 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+            
+            .marked-item {
+                padding: 12px 15px;
+                margin-bottom: 8px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .marked-text {
+                font-size: 0.95rem;
+                line-height: 1.4;
+                word-break: break-word;
+                width: 100%;
+            }
+            
+            .marked-item > div {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .marked-category {
+                font-size: 0.85rem;
+                padding: 6px 10px;
+                white-space: nowrap;
+            }
+            
+            .remove-marking {
+                font-size: 1.4rem;
+                padding: 6px 8px;
+                margin-left: 8px;
+            }
+            
+            .results-panel {
+                padding: 20px 15px;
+                margin: 20px 0;
+            }
+            
+            .results-panel h4 {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
             }
             
             .score-summary {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
+                gap: 12px;
+                margin-bottom: 25px;
+            }
+            
+            .score-item {
+                padding: 15px 10px;
+            }
+            
+            .score-number {
+                font-size: 1.6rem;
+                margin-bottom: 4px;
+            }
+            
+            .score-label {
+                font-size: 0.8rem;
+                line-height: 1.2;
+            }
+            
+            .key-insights {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .key-insights h5 {
+                font-size: 1rem;
+                margin-bottom: 12px;
+            }
+            
+            .insight-item {
+                padding: 10px 12px;
+                margin-bottom: 8px;
+            }
+            
+            .insight-icon {
+                font-size: 1.1rem;
+                margin-right: 8px;
+            }
+            
+            .insight-text {
+                font-size: 0.9rem;
+                line-height: 1.3;
+            }
+            
+            .detailed-feedback {
+                padding: 15px;
+            }
+            
+            .detailed-feedback h5 {
+                font-size: 1rem;
+                margin-bottom: 12px;
+            }
+            
+            .feedback-item {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+            
+            .feedback-text {
+                font-size: 0.9rem;
+                margin-bottom: 6px;
+                word-break: break-word;
+            }
+            
+            .feedback-explanation {
+                font-size: 0.85rem;
+                line-height: 1.3;
+            }
+        }
+        
+        /* Sehr kleine Bildschirme für Relevanz-Scanner */
+        @media (max-width: 480px) {
+            .scanner-container {
+                padding: 10px 8px;
             }
             
             .case-text {
-                font-size: 1rem;
-                line-height: 1.6;
+                font-size: 0.9rem;
+                line-height: 1.8;
             }
             
             .text-segment {
                 padding: 3px 5px;
+                margin: 1px;
+                font-size: 0.9rem;
+                min-height: 22px;
+            }
+            
+            .marking-panel {
+                padding: 15px 12px;
+                margin: 15px 0;
+            }
+            
+            .category-btn {
+                padding: 14px 16px;
+                font-size: 0.9rem;
+                min-height: 55px;
+            }
+            
+            .score-summary {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .score-item {
+                padding: 12px 8px;
             }
         }
 
@@ -3673,28 +3936,305 @@
         /* Responsive Anpassungen für Gesetzesanker */
         @media (max-width: 768px) {
             .anchor-container {
+                padding: 15px 10px;
+                margin: 10px 0;
+            }
+            
+            .anchor-instructions {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .anchor-instructions h4 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+            
+            .anchor-instructions p {
+                font-size: 0.9rem;
+                margin: 6px 0;
+            }
+            
+            .case-study {
                 padding: 20px 15px;
-                margin: 15px 0;
+                margin-bottom: 20px;
+            }
+            
+            .case-study h4 {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+            
+            .case-text {
+                font-size: 0.95rem;
+                line-height: 1.7;
+                word-spacing: 0.1em;
+            }
+            
+            .anchor-segment {
+                padding: 4px 7px;
+                margin: 1px 2px;
+                border-radius: 6px;
+                display: inline-block;
+                min-height: 24px;
+                line-height: 1.3;
+                word-break: break-word;
+                -webkit-tap-highlight-color: rgba(0, 122, 255, 0.2);
+            }
+            
+            .anchor-segment:hover {
+                transform: none; /* Entferne Hover-Effekte auf Mobile */
+            }
+            
+            .anchor-segment:active {
+                background: rgba(0, 122, 255, 0.2) !important;
+                transform: scale(0.98);
+            }
+            
+            .available-laws {
+                padding: 20px 15px;
+                margin: 20px 0;
+            }
+            
+            .available-laws h4 {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
             }
             
             .laws-grid {
                 grid-template-columns: 1fr;
-                gap: 10px;
+                gap: 12px;
+            }
+            
+            .law-item {
+                padding: 15px 18px;
+            }
+            
+            .law-title {
+                font-size: 1rem;
+                margin-bottom: 6px;
+            }
+            
+            .law-description {
+                font-size: 0.85rem;
+                line-height: 1.2;
+            }
+            
+            .anchor-assignment-panel {
+                padding: 20px 15px;
+                margin: 20px 0;
+                position: sticky;
+                top: 10px;
+                z-index: 100;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            }
+            
+            .anchor-assignment-panel h4 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+            
+            .selected-text-display {
+                padding: 12px 15px;
+                margin: 12px 0 20px 0;
+                font-size: 1rem;
+                line-height: 1.4;
+                word-break: break-word;
+            }
+            
+            .law-selection p {
+                font-size: 0.95rem;
+                margin: 0 0 12px 0;
             }
             
             .law-buttons {
                 grid-template-columns: 1fr;
+                gap: 12px;
+                margin-bottom: 15px;
+            }
+            
+            .law-btn {
+                padding: 15px 18px;
+                text-align: center;
+            }
+            
+            .law-btn .law-title {
+                font-size: 0.95rem;
+                margin-bottom: 6px;
+            }
+            
+            .law-btn .law-description {
+                font-size: 0.8rem;
+                line-height: 1.2;
+            }
+            
+            .assignment-actions {
+                justify-content: center;
+                gap: 12px;
+            }
+            
+            .assignment-actions .btn {
+                width: 100%;
+                max-width: 200px;
+                padding: 12px 20px;
+                font-size: 0.95rem;
+            }
+            
+            .anchors-overview {
+                padding: 15px;
+                margin: 20px 0;
+            }
+            
+            .anchors-overview h4 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+            
+            .anchor-item {
+                padding: 15px 18px;
+                margin-bottom: 10px;
+                flex-direction: column;
+                align-items: flex-start;
                 gap: 10px;
+            }
+            
+            .anchor-content {
+                width: 100%;
+                gap: 6px;
+            }
+            
+            .anchor-text {
+                font-size: 0.95rem;
+                line-height: 1.4;
+                word-break: break-word;
+                margin-bottom: 6px;
+            }
+            
+            .anchor-law {
+                font-size: 0.85rem;
+                padding: 6px 10px;
+                align-self: flex-start;
+            }
+            
+            .remove-anchor {
+                font-size: 1.4rem;
+                padding: 6px 8px;
+                align-self: flex-end;
+                margin-top: -30px;
+            }
+            
+            .anchor-results-panel {
+                padding: 20px 15px;
+                margin: 20px 0;
+            }
+            
+            .anchor-results-panel h4 {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
             }
             
             .anchor-score-summary {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
+                gap: 12px;
+                margin-bottom: 25px;
+            }
+            
+            .anchor-score-item {
+                padding: 15px 10px;
+            }
+            
+            .anchor-score-item .score-number {
+                font-size: 1.6rem;
+                margin-bottom: 4px;
+            }
+            
+            .anchor-score-item .score-label {
+                font-size: 0.8rem;
+                line-height: 1.2;
+            }
+            
+            .anchor-detailed-feedback {
+                padding: 15px;
+            }
+            
+            .anchor-detailed-feedback h5 {
+                font-size: 1rem;
+                margin-bottom: 12px;
+            }
+            
+            .anchor-feedback-item {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+            
+            .anchor-feedback-text {
+                font-size: 0.9rem;
+                margin-bottom: 6px;
+                word-break: break-word;
+            }
+            
+            .anchor-feedback-law {
+                font-size: 0.85rem;
+                margin-bottom: 6px;
+            }
+            
+            .anchor-feedback-explanation {
+                font-size: 0.85rem;
+                line-height: 1.3;
+            }
+        }
+        
+        /* Sehr kleine Bildschirme für Gesetzesanker */
+        @media (max-width: 480px) {
+            .anchor-container {
+                padding: 10px 8px;
+            }
+            
+            .case-text {
+                font-size: 0.9rem;
+                line-height: 1.8;
             }
             
             .anchor-segment {
-                padding: 4px 6px;
+                padding: 3px 6px;
                 margin: 1px;
+                font-size: 0.9rem;
+                min-height: 22px;
+            }
+            
+            .anchor-assignment-panel {
+                padding: 15px 12px;
+                margin: 15px 0;
+            }
+            
+            .law-btn {
+                padding: 12px 15px;
+            }
+            
+            .law-btn .law-title {
+                font-size: 0.9rem;
+            }
+            
+            .law-btn .law-description {
+                font-size: 0.75rem;
+            }
+            
+            .anchor-score-summary {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .anchor-score-item {
+                padding: 12px 8px;
+            }
+            
+            .anchor-item {
+                padding: 12px 15px;
+            }
+            
+            .remove-anchor {
+                margin-top: -25px;
+                font-size: 1.3rem;
             }
         }
 
@@ -4141,10 +4681,6 @@
  </head>
  <body>
   <div class="container">
-   <div class="header">
-    <h1 id="platform-title">Steuerrecht Lernkontrolle</h1>
-    <p id="welcome-text">Willkommen zur interaktiven Lernkontrolle</p>
-   </div>
    <div class="progress-container">
     <div class="progress-bar">
      <div class="progress-fill" id="progress-fill"></div>
@@ -6649,10 +7185,10 @@
             
             // Start falling nach kurzer Verzögerung
             setTimeout(() => {
-                fallingTerm.style.top = '280px'; // Just above the zones
+                fallingTerm.style.top = '230px'; // Erreicht den oberen Rand der Zonen (350px - 120px = 230px)
             }, 50);
             
-            // Auto-drop when reaching bottom - angepasst für leicht schnellere Geschwindigkeit
+            // Auto-drop when reaching zones - angepasst für leicht schnellere Geschwindigkeit
             tetrisFallInterval = setTimeout(() => {
                 if (tetrisGameActive) {
                     dropTetrisTerm();
@@ -7257,37 +7793,49 @@
             
             // Berechne verfügbare Positionen ohne Überlappung
             const gameAreaHeight = gameArea.offsetHeight || 350;
-            const paragraphHeight = 50; // Geschätzte Höhe eines Paragraphen
-            const minSpacing = 20; // Mindestabstand zwischen Paragraphen
+            const isMobile = window.innerWidth <= 768;
+            const paragraphHeight = isMobile ? 60 : 50; // Größere Höhe für mobile
+            const minSpacing = isMobile ? 35 : 25; // Mehr Abstand auf mobilen Geräten
             const totalParagraphSpace = paragraphHeight + minSpacing;
-            const availableHeight = gameAreaHeight - 120; // Abstand zu Rändern
+            const topMargin = isMobile ? 30 : 40;
+            const bottomMargin = isMobile ? 30 : 40;
+            const availableHeight = gameAreaHeight - topMargin - bottomMargin;
             const maxParagraphs = Math.floor(availableHeight / totalParagraphSpace);
             
-            // Finde freie Position
-            let startY;
-            let attempts = 0;
-            const maxAttempts = 20;
+            // Erstelle feste Grid-Positionen für bessere Verteilung
+            const gridPositions = [];
+            for (let i = 0; i < maxParagraphs; i++) {
+                gridPositions.push(topMargin + (i * totalParagraphSpace));
+            }
             
-            do {
-                startY = Math.random() * availableHeight + 40;
-                attempts++;
-            } while (isPositionOccupied(startY, paragraphHeight + minSpacing) && attempts < maxAttempts);
-            
-            // Falls keine freie Position gefunden, verwende Raster-System
-            if (attempts >= maxAttempts) {
-                const gridPositions = [];
-                for (let i = 0; i < maxParagraphs; i++) {
-                    gridPositions.push(40 + (i * totalParagraphSpace));
+            // Finde erste freie Grid-Position
+            let startY = null;
+            for (const position of gridPositions) {
+                if (!isPositionOccupied(position, minSpacing)) {
+                    startY = position;
+                    break;
                 }
+            }
+            
+            // Falls alle Grid-Positionen belegt sind, verwende zufällige Position mit mehr Versuchen
+            if (startY === null) {
+                let attempts = 0;
+                const maxAttempts = 50;
                 
-                // Finde erste freie Grid-Position
-                const freePosition = gridPositions.find(pos => !isPositionOccupied(pos, paragraphHeight + minSpacing));
-                startY = freePosition || (40 + Math.random() * 100); // Fallback
+                do {
+                    startY = topMargin + Math.random() * availableHeight;
+                    attempts++;
+                } while (isPositionOccupied(startY, minSpacing) && attempts < maxAttempts);
+                
+                // Letzter Fallback: Verwende sichere Position am Ende
+                if (attempts >= maxAttempts) {
+                    startY = Math.max(topMargin, gameAreaHeight - bottomMargin - paragraphHeight);
+                }
             }
             
             paragraph.style.cssText = `
                 position: absolute;
-                left: -250px;
+                left: -280px;
                 top: ${startY}px;
                 cursor: pointer;
                 z-index: 15;
@@ -7295,6 +7843,11 @@
                 pointer-events: auto;
                 white-space: nowrap;
                 overflow: visible;
+                min-height: ${paragraphHeight}px;
+                display: flex;
+                align-items: center;
+                padding: ${isMobile ? '8px 12px' : '6px 10px'};
+                box-sizing: border-box;
             `;
             
             // Click Handler
@@ -7306,12 +7859,14 @@
             
             gameArea.appendChild(paragraph);
             
-            // Speichere Paragraphen-Info mit Position
+            // Speichere Paragraphen-Info mit Position und Höhe
             const paragraphInfo = {
                 element: paragraph,
                 text: paragraphText,
                 clicked: false,
-                startY: startY
+                startY: startY,
+                height: paragraphHeight,
+                spawnTime: Date.now()
             };
             shootingFlyingParagraphs.push(paragraphInfo);
             
@@ -7319,11 +7874,11 @@
             setTimeout(() => {
                 if (paragraph.parentNode && shootingGameActive) {
                     const gameAreaWidth = gameArea.offsetWidth || 800;
-                    paragraph.style.left = (gameAreaWidth + 100) + 'px';
+                    paragraph.style.left = (gameAreaWidth + 150) + 'px';
                 }
             }, 100);
             
-            // Entferne Paragraphen nach Flugzeit automatisch - angepasst für leicht schnellere Geschwindigkeit
+            // Entferne Paragraphen nach Flugzeit automatisch
             setTimeout(() => {
                 if (paragraph.parentNode && !paragraphInfo.clicked) {
                     paragraph.classList.add('missed');
@@ -7339,17 +7894,35 @@
                         shootingFlyingParagraphs.splice(index, 1);
                     }
                 }
-            }, 8000); // 8 Sekunden für leicht schnellere Paragraphen
+            }, 8000);
         }
 
-        // Hilfsfunktion: Prüft ob Position bereits von anderem Paragraphen belegt ist
+        // Verbesserte Hilfsfunktion: Prüft ob Position bereits von anderem Paragraphen belegt ist
         function isPositionOccupied(testY, spacing) {
+            const currentTime = Date.now();
+            
             return shootingFlyingParagraphs.some(paragraphInfo => {
-                if (!paragraphInfo.element || !paragraphInfo.element.parentNode || paragraphInfo.clicked) return false;
+                // Ignoriere geklickte oder sehr alte Paragraphen
+                if (!paragraphInfo.element || 
+                    !paragraphInfo.element.parentNode || 
+                    paragraphInfo.clicked ||
+                    (currentTime - paragraphInfo.spawnTime) > 7000) {
+                    return false;
+                }
                 
-                const existingY = paragraphInfo.startY || parseInt(paragraphInfo.element.style.top) || 0;
-                const distance = Math.abs(testY - existingY);
-                return distance < spacing;
+                const existingY = paragraphInfo.startY;
+                const existingHeight = paragraphInfo.height || 50;
+                
+                // Prüfe Überlappung mit erweiterten Bereichen
+                const testTop = testY;
+                const testBottom = testY + (paragraphInfo.height || 50);
+                const existingTop = existingY;
+                const existingBottom = existingY + existingHeight;
+                
+                // Überlappung prüfen mit zusätzlichem Sicherheitsabstand
+                const hasOverlap = !(testBottom + spacing < existingTop || testTop > existingBottom + spacing);
+                
+                return hasOverlap;
             });
         }
 
@@ -9089,5 +9662,5 @@
             resetEscapeGame();
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f7c6b5b63a9240',t:'MTc2MzMwNDM2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f7ee0c606e4e42',t:'MTc2MzMwNTk4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
