@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             min-height: 100%;
@@ -4238,6 +4238,110 @@
             }
         }
 
+        /* Maskottchen Animation Styles */
+        .mascot-celebration {
+            position: fixed;
+            top: 20%;
+            right: 5%;
+            transform: translateY(-50%);
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mascot-celebration.show {
+            opacity: 1;
+        }
+
+        .mascot-gif {
+            width: 120px;
+            height: 120px;
+            border-radius: 12px;
+            animation: mascotFly 3s ease-in-out;
+            border: none;
+            background: transparent;
+            padding: 0;
+            outline: none;
+            display: block;
+            object-fit: contain;
+        }
+
+        @keyframes mascotFly {
+            0% { 
+                transform: scale(0.5) rotate(0deg) translateY(100px);
+            }
+            15% { 
+                transform: scale(1.2) rotate(15deg) translateY(-20px);
+            }
+            30% { 
+                transform: scale(1) rotate(-10deg) translateY(-40px) translateX(30px);
+            }
+            45% { 
+                transform: scale(1.1) rotate(8deg) translateY(-30px) translateX(-25px);
+            }
+            60% { 
+                transform: scale(0.95) rotate(-5deg) translateY(-35px) translateX(20px);
+            }
+            75% { 
+                transform: scale(1.05) rotate(3deg) translateY(-25px) translateX(-15px);
+            }
+            90% { 
+                transform: scale(1) rotate(-2deg) translateY(-10px);
+            }
+            100% { 
+                transform: scale(0.8) rotate(0deg) translateY(80px);
+                opacity: 0;
+            }
+        }
+
+        /* Konfetti-Effekt für das Maskottchen */
+        .mascot-confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #30d158;
+            border-radius: 50%;
+            animation: confettiFall 2s ease-out forwards;
+        }
+
+        .mascot-confetti:nth-child(2) { background: #007aff; animation-delay: 0.1s; }
+        .mascot-confetti:nth-child(3) { background: #ff9500; animation-delay: 0.2s; }
+        .mascot-confetti:nth-child(4) { background: #ff3b30; animation-delay: 0.3s; }
+        .mascot-confetti:nth-child(5) { background: #af52de; animation-delay: 0.4s; }
+
+        @keyframes confettiFall {
+            0% { 
+                transform: translateY(-20px) rotate(0deg);
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(200px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Zusätzliche Glitzer-Effekte */
+        .mascot-sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: sparkle 1.5s ease-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% { 
+                transform: scale(1) rotate(180deg);
+                opacity: 1;
+            }
+        }
+
         /* Escape Game Styles */
         .escape-container {
             background: rgba(255, 255, 255, 0.8);
@@ -4680,7 +4784,18 @@
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body>
-  <div class="container">
+  <div class="container"><!-- Maskottchen Celebration Animation -->
+   <div class="mascot-celebration" id="mascot-celebration"><img src="https://s1.directupload.eu/images/251116/tpe4ozu7.gif" alt="Maskottchen" class="mascot-gif" id="mascot-gif"> <!-- Konfetti-Partikel -->
+    <div class="mascot-confetti" style="top: 20px; left: 30px;"></div>
+    <div class="mascot-confetti" style="top: 25px; right: 35px;"></div>
+    <div class="mascot-confetti" style="top: 15px; left: 60px;"></div>
+    <div class="mascot-confetti" style="top: 30px; right: 20px;"></div>
+    <div class="mascot-confetti" style="top: 10px; left: 90px;"></div><!-- Glitzer-Effekte -->
+    <div class="mascot-sparkle" style="top: 40px; left: 20px; animation-delay: 0.2s;"></div>
+    <div class="mascot-sparkle" style="top: 50px; right: 25px; animation-delay: 0.5s;"></div>
+    <div class="mascot-sparkle" style="top: 35px; left: 80px; animation-delay: 0.8s;"></div>
+    <div class="mascot-sparkle" style="top: 45px; right: 50px; animation-delay: 1.1s;"></div>
+   </div>
    <div class="progress-container">
     <div class="progress-bar">
      <div class="progress-fill" id="progress-fill"></div>
@@ -6982,6 +7097,8 @@
             const feedback = document.getElementById('speed-feedback');
             feedback.textContent = message;
             feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            
+            // Maskottchen wird nur am Ende des Speed-Quiz gezeigt, nicht bei jeder Antwort
         }
 
         function showSpeedQuizResults() {
@@ -7021,6 +7138,13 @@
             // Show completion feedback
             const isSuccess = successRate >= 60;
             showFeedback(8, isSuccess, `Speed-Quiz abgeschlossen! ${speedQuizCorrectAnswers} von ${speedQuizQuestions.length} Fragen richtig beantwortet.`);
+            
+            // Zeige Maskottchen am Ende des Speed-Quiz
+            if (isSuccess) {
+                setTimeout(() => {
+                    showMascotCelebration();
+                }, 800);
+            }
             
             // Show next button
             document.getElementById('task-8-buttons').style.display = 'flex';
@@ -7356,6 +7480,7 @@
                 tetrisScore += 10;
                 tetrisCorrectAnswers++;
                 showTetrisFeedback(true, `✅ Richtig! +10 Punkte`);
+                // Maskottchen wird nur am Ende des Tetris-Spiels gezeigt
             } else {
                 selectedZone.classList.add('incorrect');
                 tetrisLives--;
@@ -7468,6 +7593,13 @@
             const isSuccess = accuracy >= 60;
             showFeedback(9, isSuccess, `Steuer-Tetris abgeschlossen! ${tetrisCorrectAnswers} von ${tetrisGameTerms.length} Begriffen richtig zugeordnet.`);
             
+            // Zeige Maskottchen am Ende des Tetris-Spiels
+            if (isSuccess) {
+                setTimeout(() => {
+                    showMascotCelebration();
+                }, 800);
+            }
+            
             // Show next button
             document.getElementById('task-9-buttons').style.display = 'flex';
             
@@ -7547,6 +7679,10 @@
             
             if (isCorrect) {
                 riddlePointsEarned = riddleMaxHints - riddleCurrentHint + 1;
+                // Zeige Maskottchen bei richtigem Rätsel
+                setTimeout(() => {
+                    showMascotCelebration();
+                }, 300);
                 showRiddleResults(true);
             } else if (userAnswer.length < 2) {
                 // Zu kurze Antwort
@@ -7949,6 +8085,8 @@
                 shootingCorrectAnswers++;
                 showShootingFeedback(true, `✅ Richtig! +10 Punkte`);
                 
+                // Maskottchen wird nur am Ende des Paragraphen-Schießens gezeigt
+                
                 shootingStatementAnswered = true;
                 clearFlyingParagraphs();
                 
@@ -8088,6 +8226,13 @@
             // Show completion feedback
             const isSuccess = accuracy >= 60;
             showFeedback(12, isSuccess, `Paragraphen-Schießen abgeschlossen! ${shootingCorrectAnswers} von ${shootingStatements.length} Paragraphen richtig getroffen.`);
+            
+            // Zeige Maskottchen am Ende des Paragraphen-Schießens
+            if (isSuccess) {
+                setTimeout(() => {
+                    showMascotCelebration();
+                }, 800);
+            }
             
             // Save result
             saveTaskResult(12, JSON.stringify({
@@ -9046,6 +9191,11 @@
             puzzleBtn.disabled = true;
             puzzleBtn.textContent = 'Gelöst';
             
+            // Zeige Maskottchen bei gelöstem Rätsel
+            setTimeout(() => {
+                showMascotCelebration();
+            }, 400);
+            
             // Fortschritt aktualisieren
             document.getElementById('solved-puzzles').textContent = solvedPuzzles;
             
@@ -9332,12 +9482,129 @@
 
 
 
+        // Maskottchen Animation Funktionen
+        function showMascotCelebration() {
+            const mascotElement = document.getElementById('mascot-celebration');
+            const mascotGif = document.getElementById('mascot-gif');
+            
+            // Zeige das Maskottchen
+            mascotElement.classList.add('show');
+            
+            // Lade das Erfolgs-GIF
+            const successGifSrc = 'https://s1.directupload.eu/images/251116/tpe4ozu7.gif';
+            mascotGif.src = '';
+            setTimeout(() => {
+                mascotGif.src = successGifSrc;
+            }, 50);
+            
+            // Verstecke das Maskottchen nach der Animation
+            setTimeout(() => {
+                mascotElement.classList.remove('show');
+            }, 3000);
+            
+            // Zusätzliche Konfetti-Partikel dynamisch erstellen
+            createDynamicConfetti();
+        }
+
+        function showMascotSad() {
+            const mascotElement = document.getElementById('mascot-celebration');
+            const mascotGif = document.getElementById('mascot-gif');
+            
+            // Zeige das Maskottchen
+            mascotElement.classList.add('show');
+            
+            // Array mit verschiedenen traurigen/enttäuschten GIFs
+            const sadGifs = [
+                'https://s1.directupload.eu/images/251116/4b42bpyc.gif',
+                'https://s1.directupload.eu/images/251116/mglvlrxl.gif',
+                'https://s1.directupload.eu/images/251116/rw9yjivn.gif'
+            ];
+            
+            // Wähle zufällig eines der traurigen GIFs aus
+            const randomSadGif = sadGifs[Math.floor(Math.random() * sadGifs.length)];
+            
+            mascotGif.src = '';
+            setTimeout(() => {
+                mascotGif.src = randomSadGif;
+            }, 50);
+            
+            // Verstecke das Maskottchen nach der Animation
+            setTimeout(() => {
+                mascotElement.classList.remove('show');
+            }, 3000);
+            
+            // Keine Konfetti bei falschen Antworten
+        }
+
+
+
+        function createDynamicConfetti() {
+            const mascotElement = document.getElementById('mascot-celebration');
+            const colors = ['#30d158', '#007aff', '#ff9500', '#ff3b30', '#af52de', '#ffd700'];
+            
+            // Erstelle 15 zusätzliche Konfetti-Partikel
+            for (let i = 0; i < 15; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'mascot-confetti';
+                confetti.style.cssText = `
+                    position: absolute;
+                    top: ${Math.random() * 60 + 10}px;
+                    left: ${Math.random() * 100 + 10}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    animation-delay: ${Math.random() * 0.8}s;
+                    width: ${Math.random() * 6 + 4}px;
+                    height: ${Math.random() * 6 + 4}px;
+                `;
+                
+                mascotElement.appendChild(confetti);
+                
+                // Entferne Konfetti nach Animation
+                setTimeout(() => {
+                    if (confetti.parentNode) {
+                        confetti.remove();
+                    }
+                }, 2500);
+            }
+            
+            // Erstelle zusätzliche Glitzer-Effekte
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'mascot-sparkle';
+                sparkle.style.cssText = `
+                    position: absolute;
+                    top: ${Math.random() * 80 + 20}px;
+                    left: ${Math.random() * 120 + 20}px;
+                    animation-delay: ${Math.random() * 1.5}s;
+                `;
+                
+                mascotElement.appendChild(sparkle);
+                
+                // Entferne Glitzer nach Animation
+                setTimeout(() => {
+                    if (sparkle.parentNode) {
+                        sparkle.remove();
+                    }
+                }, 2000);
+            }
+        }
+
         // Hilfsfunktionen
         function showFeedback(taskNumber, isCorrect, message) {
             const feedback = document.getElementById(`feedback-${taskNumber}`);
             feedback.innerHTML = message;
             feedback.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
             feedback.style.display = 'block';
+            
+            // Zeige Maskottchen bei richtigen und falschen Antworten
+            if (isCorrect) {
+                setTimeout(() => {
+                    showMascotCelebration();
+                }, 500); // Kurze Verzögerung für besseren Effekt
+            } else {
+                setTimeout(() => {
+                    showMascotSad();
+                }, 500); // Zeige trauriges Maskottchen bei falschen Antworten
+            }
             
             if (isCorrect && !userAnswers[taskNumber]) {
                 completedTasks++;
@@ -9523,6 +9790,11 @@
             document.getElementById('success-rate').textContent = Math.round((correctAnswers / totalTasks) * 100) + '%';
             
             document.getElementById('completion-screen').classList.add('active');
+            
+            // Zeige Maskottchen beim Abschluss der Lernkontrolle
+            setTimeout(() => {
+                showMascotCelebration();
+            }, 800);
         }
 
         function updateStatsFromData(data) {
@@ -9662,5 +9934,5 @@
             resetEscapeGame();
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f7ee0c606e4e42',t:'MTc2MzMwNTk4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f9408fc55e4e42',t:'MTc2MzMxOTg0Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
