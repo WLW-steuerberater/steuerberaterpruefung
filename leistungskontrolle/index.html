@@ -226,12 +226,17 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
             user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
             position: relative;
             transform: translateZ(0);
             will-change: transform, box-shadow, opacity;
             font-weight: 500;
             backdrop-filter: blur(10px);
             border-left: 4px solid transparent;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .sortable-item:last-child {
@@ -452,6 +457,11 @@
             position: relative;
             transform: translateZ(0);
             user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .draggable-term:hover {
@@ -1227,6 +1237,12 @@
             min-width: 180px;
             text-align: center;
             animation: termGlow 2s ease-in-out infinite alternate;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         @keyframes termGlow {
@@ -1940,8 +1956,13 @@
             cursor: grab;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
             position: relative;
             transform: translateZ(0);
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .reasoning-block:hover {
@@ -2145,10 +2166,15 @@
             cursor: pointer;
             transition: all 0.2s ease;
             user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
             z-index: 10;
             box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
             border: 2px solid rgba(255, 255, 255, 0.3);
             animation: paragraphFloat 0.8s ease-in-out infinite alternate;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .flying-paragraph:hover {
@@ -2262,6 +2288,1413 @@
             .shooting-stats {
                 grid-template-columns: 1fr;
                 gap: 15px;
+            }
+        }
+
+        /* Prüfschema Styles */
+        .schema-container {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+
+        .schema-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e5e5e7;
+        }
+
+        .schema-header h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin: 0 0 10px 0;
+        }
+
+        .schema-description {
+            font-size: 1rem;
+            color: #6e6e73;
+            margin: 0;
+        }
+
+        .schema-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .schema-step {
+            display: flex;
+            align-items: flex-start;
+            background: white;
+            border: 2px solid #e5e5e7;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .schema-step.filled {
+            border-color: #30d158;
+            background: rgba(48, 209, 88, 0.05);
+        }
+
+        .schema-step.gap {
+            border: 3px dashed #c7c7cc;
+            background: linear-gradient(135deg, #f5f5f7, #e8e8ea);
+            min-height: 80px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .schema-step.gap.drag-over {
+            border-color: #007aff;
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(0, 122, 255, 0.05));
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.2);
+        }
+
+        .schema-step.gap.filled {
+            border-color: #007aff;
+            border-style: solid;
+            background: rgba(0, 122, 255, 0.05);
+        }
+
+        .step-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #007aff;
+            margin-right: 15px;
+            min-width: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 122, 255, 0.1);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            flex-shrink: 0;
+        }
+
+        .schema-step.filled .step-number {
+            background: rgba(48, 209, 88, 0.2);
+            color: #30d158;
+        }
+
+        .step-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-content strong {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .step-explanation {
+            font-size: 0.9rem;
+            color: #6e6e73;
+            font-style: italic;
+            line-height: 1.3;
+        }
+
+        .gap-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+        }
+
+        .gap-placeholder {
+            color: #6e6e73;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .available-steps {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .available-steps h4 {
+            margin: 0 0 20px 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            text-align: center;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .draggable-step {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 2px solid #e5e5e7;
+            border-radius: 12px;
+            padding: 18px 20px;
+            cursor: grab;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            position: relative;
+            transform: translateZ(0);
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .draggable-step:hover {
+            border-color: #007aff;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.15);
+        }
+
+        .draggable-step:active {
+            cursor: grabbing;
+        }
+
+        .draggable-step.dragging {
+            opacity: 0.8;
+            transform: rotate(2deg) scale(1.05);
+            z-index: 1000;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .draggable-step.used {
+            opacity: 0.5;
+            pointer-events: none;
+            background: #f5f5f7;
+            border-color: #c7c7cc;
+        }
+
+        .step-icon {
+            font-size: 1.4rem;
+            margin-right: 15px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            flex: 1;
+        }
+
+        .step-text strong {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            display: block;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .step-sub {
+            font-size: 0.85rem;
+            color: #6e6e73;
+            font-style: italic;
+            line-height: 1.2;
+        }
+
+        .schema-step.correct-placement {
+            animation: correctPlacement 0.6s ease-out;
+        }
+
+        .schema-step.incorrect-placement {
+            animation: incorrectPlacement 0.6s ease-out;
+        }
+
+        @keyframes correctPlacement {
+            0% { 
+                transform: scale(1);
+                border-color: #007aff;
+            }
+            50% { 
+                transform: scale(1.02);
+                border-color: #30d158;
+                background: rgba(48, 209, 88, 0.1);
+            }
+            100% { 
+                transform: scale(1);
+                border-color: #30d158;
+                background: rgba(48, 209, 88, 0.05);
+            }
+        }
+
+        @keyframes incorrectPlacement {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Responsive Anpassungen für Prüfschema */
+        @media (max-width: 768px) {
+            .schema-container {
+                padding: 20px 15px;
+                margin: 15px 0;
+            }
+            
+            .schema-step {
+                padding: 15px;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .draggable-step {
+                padding: 15px;
+            }
+            
+            .step-text strong {
+                font-size: 0.95rem;
+            }
+            
+            .step-sub {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Relevanz-Scanner Styles */
+        .scanner-container {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+
+        .scanner-instructions {
+            background: rgba(0, 122, 255, 0.05);
+            border: 2px solid rgba(0, 122, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .scanner-instructions h4 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        .scanner-instructions p {
+            margin: 8px 0;
+            font-size: 1rem;
+            color: #1d1d1f;
+            line-height: 1.4;
+        }
+
+        .categories-legend {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 2px solid #e5e5e7;
+        }
+
+        .categories-legend h4 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            border: 1px solid #e5e5e7;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .legend-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .category-color.tatbestand {
+            background: #007aff;
+        }
+
+        .category-color.ausnahme {
+            background: #30d158;
+        }
+
+        .category-color.rechtsfolge {
+            background: #ff9500;
+        }
+
+        .category-color.irrelevant {
+            background: #ff3b30;
+        }
+
+        .category-label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1d1d1f;
+        }
+
+        .case-study {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 249, 250, 0.95));
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px solid #e5e5e7;
+        }
+
+        .case-study h4 {
+            margin: 0 0 20px 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e5e7;
+        }
+
+        .case-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #1d1d1f;
+            user-select: none;
+        }
+
+        .text-segment {
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            position: relative;
+            display: inline;
+        }
+
+        .text-segment:hover {
+            background: rgba(0, 122, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .text-segment.selected {
+            background: rgba(0, 122, 255, 0.2);
+            border: 2px solid #007aff;
+            font-weight: 600;
+        }
+
+        .text-segment.marked {
+            font-weight: 600;
+            border-radius: 6px;
+            padding: 3px 6px;
+            margin: 0 1px;
+            position: relative;
+        }
+
+        .text-segment.marked.tatbestand {
+            background: rgba(0, 122, 255, 0.2);
+            border: 2px solid #007aff;
+            color: #0056cc;
+        }
+
+        .text-segment.marked.ausnahme {
+            background: rgba(48, 209, 88, 0.2);
+            border: 2px solid #30d158;
+            color: #1d8348;
+        }
+
+        .text-segment.marked.rechtsfolge {
+            background: rgba(255, 149, 0, 0.2);
+            border: 2px solid #ff9500;
+            color: #cc7700;
+        }
+
+        .text-segment.marked.irrelevant {
+            background: rgba(255, 59, 48, 0.2);
+            border: 2px solid #ff3b30;
+            color: #cc2e24;
+        }
+
+        .text-segment.correct-highlight {
+            animation: correctPulse 0.8s ease-out;
+        }
+
+        .text-segment.missed-highlight {
+            animation: missedPulse 0.8s ease-out;
+            background: rgba(255, 193, 7, 0.3);
+            border: 2px dashed #ffc107;
+        }
+
+        .text-segment.wrong-highlight {
+            animation: wrongPulse 0.8s ease-out;
+        }
+
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); background: rgba(48, 209, 88, 0.4); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes missedPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes wrongPulse {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.02) translateX(-2px); }
+            75% { transform: scale(1.02) translateX(2px); }
+            100% { transform: scale(1); }
+        }
+
+        .marking-panel {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(0, 122, 255, 0.05));
+            border: 2px solid rgba(0, 122, 255, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+            animation: panelSlideIn 0.3s ease-out;
+        }
+
+        .marking-panel h4 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        .selected-text {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 15px 0 25px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            border: 2px solid #e5e5e7;
+        }
+
+        .category-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .category-btn {
+            padding: 15px 20px;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: white;
+        }
+
+        .category-btn.tatbestand {
+            background: linear-gradient(135deg, #007aff, #0056cc);
+        }
+
+        .category-btn.ausnahme {
+            background: linear-gradient(135deg, #30d158, #28a745);
+        }
+
+        .category-btn.rechtsfolge {
+            background: linear-gradient(135deg, #ff9500, #cc7700);
+        }
+
+        .category-btn.irrelevant {
+            background: linear-gradient(135deg, #ff3b30, #cc2e24);
+        }
+
+        .category-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .cancel-btn {
+            padding: 12px 25px;
+            background: #f5f5f7;
+            border: 2px solid #e5e5e7;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1d1d1f;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cancel-btn:hover {
+            background: #e5e5e7;
+            transform: translateY(-2px);
+        }
+
+        .analysis-overview {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 2px solid #e5e5e7;
+        }
+
+        .analysis-overview h4 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        .marked-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .no-markings {
+            color: #6e6e73;
+            font-style: italic;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .marked-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            border-left: 4px solid;
+            transition: all 0.2s ease;
+        }
+
+        .marked-item.tatbestand {
+            border-left-color: #007aff;
+            background: rgba(0, 122, 255, 0.05);
+        }
+
+        .marked-item.ausnahme {
+            border-left-color: #30d158;
+            background: rgba(48, 209, 88, 0.05);
+        }
+
+        .marked-item.rechtsfolge {
+            border-left-color: #ff9500;
+            background: rgba(255, 149, 0, 0.05);
+        }
+
+        .marked-item.irrelevant {
+            border-left-color: #ff3b30;
+            background: rgba(255, 59, 48, 0.05);
+        }
+
+        .marked-text {
+            font-weight: 500;
+            color: #1d1d1f;
+        }
+
+        .marked-category {
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 12px;
+            color: white;
+        }
+
+        .marked-category.tatbestand {
+            background: #007aff;
+        }
+
+        .marked-category.ausnahme {
+            background: #30d158;
+        }
+
+        .marked-category.rechtsfolge {
+            background: #ff9500;
+        }
+
+        .marked-category.irrelevant {
+            background: #ff3b30;
+        }
+
+        .remove-marking {
+            background: none;
+            border: none;
+            color: #ff3b30;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .remove-marking:hover {
+            background: rgba(255, 59, 48, 0.1);
+            transform: scale(1.2);
+        }
+
+        .results-panel {
+            background: linear-gradient(135deg, rgba(48, 209, 88, 0.1), rgba(48, 209, 88, 0.05));
+            border: 2px solid rgba(48, 209, 88, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 25px 0;
+            animation: resultsSlideIn 0.5s ease-out;
+        }
+
+        .results-panel h4 {
+            margin: 0 0 20px 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            text-align: center;
+        }
+
+        .score-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .score-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid;
+            transition: all 0.3s ease;
+        }
+
+        .score-item.correct {
+            border-color: #30d158;
+        }
+
+        .score-item.missed {
+            border-color: #ffc107;
+        }
+
+        .score-item.wrong {
+            border-color: #ff3b30;
+        }
+
+        .score-item.irrelevant-marked {
+            border-color: #6c757d;
+        }
+
+        .score-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .score-item.correct .score-number {
+            color: #30d158;
+        }
+
+        .score-item.missed .score-number {
+            color: #ffc107;
+        }
+
+        .score-item.wrong .score-number {
+            color: #ff3b30;
+        }
+
+        .score-item.irrelevant-marked .score-number {
+            color: #6c757d;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #6e6e73;
+        }
+
+        .key-insights {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 2px solid #e5e5e7;
+        }
+
+        .key-insights h5 {
+            margin: 0 0 15px 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        .insights-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .insight-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 15px;
+            background: rgba(0, 122, 255, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid #007aff;
+        }
+
+        .insight-icon {
+            font-size: 1.2rem;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .insight-text {
+            font-size: 1rem;
+            color: #1d1d1f;
+            line-height: 1.4;
+        }
+
+        .detailed-feedback {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #e5e5e7;
+        }
+
+        .detailed-feedback h5 {
+            margin: 0 0 15px 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        .feedback-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .feedback-item {
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+
+        .feedback-item.correct {
+            background: rgba(48, 209, 88, 0.1);
+            border-left-color: #30d158;
+        }
+
+        .feedback-item.missed {
+            background: rgba(255, 193, 7, 0.1);
+            border-left-color: #ffc107;
+        }
+
+        .feedback-item.wrong {
+            background: rgba(255, 59, 48, 0.1);
+            border-left-color: #ff3b30;
+        }
+
+        .feedback-text {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #1d1d1f;
+        }
+
+        .feedback-explanation {
+            font-size: 0.95rem;
+            color: #6e6e73;
+            line-height: 1.4;
+        }
+
+        @keyframes panelSlideIn {
+            0% { 
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes resultsSlideIn {
+            0% { 
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Responsive Anpassungen für Relevanz-Scanner */
+        @media (max-width: 768px) {
+            .scanner-container {
+                padding: 20px 15px;
+                margin: 15px 0;
+            }
+            
+            .legend-items {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .category-buttons {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .score-summary {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .case-text {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .text-segment {
+                padding: 3px 5px;
+            }
+        }
+
+        /* Gesetzesanker Styles */
+        .anchor-container {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+
+        .anchor-instructions {
+            background: rgba(0, 122, 255, 0.05);
+            border: 2px solid rgba(0, 122, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .anchor-instructions h4 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        .anchor-instructions p {
+            margin: 8px 0;
+            font-size: 1rem;
+            color: #1d1d1f;
+            line-height: 1.4;
+        }
+
+        .anchor-segment {
+            cursor: pointer;
+            padding: 3px 6px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            position: relative;
+            display: inline;
+            margin: 0 1px;
+        }
+
+        .anchor-segment:hover {
+            background: rgba(0, 122, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .anchor-segment.selected {
+            background: rgba(0, 122, 255, 0.2);
+            border: 2px solid #007aff;
+            font-weight: 600;
+        }
+
+        .anchor-segment.anchored {
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 4px 8px;
+            margin: 0 2px;
+            position: relative;
+            background: rgba(48, 209, 88, 0.15);
+            border: 2px solid #30d158;
+            color: #1d8348;
+        }
+
+        .anchor-segment.anchored.correct-anchor {
+            animation: correctAnchor 0.8s ease-out;
+        }
+
+        .anchor-segment.anchored.wrong-anchor {
+            background: rgba(255, 59, 48, 0.15);
+            border: 2px solid #ff3b30;
+            color: #cc2e24;
+            animation: wrongAnchor 0.8s ease-out;
+        }
+
+        .anchor-segment.missed-anchor {
+            animation: missedAnchor 0.8s ease-out;
+            background: rgba(255, 193, 7, 0.2);
+            border: 2px dashed #ffc107;
+            color: #856404;
+        }
+
+        @keyframes correctAnchor {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); background: rgba(48, 209, 88, 0.3); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes wrongAnchor {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.02) translateX(-2px); }
+            75% { transform: scale(1.02) translateX(2px); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes missedAnchor {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        .available-laws {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 2px solid #e5e5e7;
+        }
+
+        .available-laws h4 {
+            margin: 0 0 20px 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        .laws-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .law-item {
+            background: white;
+            border: 2px solid #e5e5e7;
+            border-radius: 12px;
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            position: relative;
+            transform: translateZ(0);
+        }
+
+        .law-item:hover {
+            border-color: #007aff;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.15);
+        }
+
+        .law-item.selected {
+            border-color: #007aff;
+            background: rgba(0, 122, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .law-item.used {
+            opacity: 0.6;
+            background: #f5f5f7;
+            border-color: #c7c7cc;
+            cursor: default;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .law-item.used:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .law-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+        }
+
+        .law-description {
+            font-size: 0.9rem;
+            color: #6e6e73;
+            line-height: 1.3;
+        }
+
+        .anchor-assignment-panel {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(0, 122, 255, 0.05));
+            border: 2px solid rgba(0, 122, 255, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+            animation: panelSlideIn 0.3s ease-out;
+        }
+
+        .anchor-assignment-panel h4 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        .selected-text-display {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 15px 0 25px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            border: 2px solid #e5e5e7;
+        }
+
+        .law-selection p {
+            margin: 0 0 15px 0;
+            font-size: 1rem;
+            color: #1d1d1f;
+        }
+
+        .law-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .law-btn {
+            padding: 15px 20px;
+            border: 2px solid #e5e5e7;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .law-btn:hover {
+            border-color: #007aff;
+            background: rgba(0, 122, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .law-btn .law-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 5px;
+        }
+
+        .law-btn .law-description {
+            font-size: 0.85rem;
+            color: #6e6e73;
+        }
+
+        .assignment-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .anchors-overview {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 2px solid #e5e5e7;
+        }
+
+        .anchors-overview h4 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        .anchors-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .no-anchors {
+            color: #6e6e73;
+            font-style: italic;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .anchor-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            border: 2px solid #30d158;
+            border-left: 6px solid #30d158;
+            transition: all 0.2s ease;
+        }
+
+        .anchor-item.wrong-assignment {
+            border-color: #ff3b30;
+            border-left-color: #ff3b30;
+            background: rgba(255, 59, 48, 0.05);
+        }
+
+        .anchor-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .anchor-text {
+            font-weight: 600;
+            color: #1d1d1f;
+            font-size: 1rem;
+        }
+
+        .anchor-law {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #007aff;
+            background: rgba(0, 122, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .anchor-law.wrong {
+            color: #ff3b30;
+            background: rgba(255, 59, 48, 0.1);
+        }
+
+        .remove-anchor {
+            background: none;
+            border: none;
+            color: #ff3b30;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .remove-anchor:hover {
+            background: rgba(255, 59, 48, 0.1);
+            transform: scale(1.2);
+        }
+
+        .anchor-results-panel {
+            background: linear-gradient(135deg, rgba(48, 209, 88, 0.1), rgba(48, 209, 88, 0.05));
+            border: 2px solid rgba(48, 209, 88, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 25px 0;
+            animation: resultsSlideIn 0.5s ease-out;
+        }
+
+        .anchor-results-panel h4 {
+            margin: 0 0 20px 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            text-align: center;
+        }
+
+        .anchor-score-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .anchor-score-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid;
+            transition: all 0.3s ease;
+        }
+
+        .anchor-score-item.correct {
+            border-color: #30d158;
+        }
+
+        .anchor-score-item.missed {
+            border-color: #ffc107;
+        }
+
+        .anchor-score-item.wrong {
+            border-color: #ff3b30;
+        }
+
+        .anchor-score-item.irrelevant-marked {
+            border-color: #6c757d;
+        }
+
+        .anchor-score-item .score-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .anchor-score-item.correct .score-number {
+            color: #30d158;
+        }
+
+        .anchor-score-item.missed .score-number {
+            color: #ffc107;
+        }
+
+        .anchor-score-item.wrong .score-number {
+            color: #ff3b30;
+        }
+
+        .anchor-score-item.irrelevant-marked .score-number {
+            color: #6c757d;
+        }
+
+        .anchor-score-item .score-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #6e6e73;
+        }
+
+        .anchor-detailed-feedback {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #e5e5e7;
+        }
+
+        .anchor-detailed-feedback h5 {
+            margin: 0 0 15px 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        .anchor-feedback-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .anchor-feedback-item {
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+
+        .anchor-feedback-item.correct {
+            background: rgba(48, 209, 88, 0.1);
+            border-left-color: #30d158;
+        }
+
+        .anchor-feedback-item.missed {
+            background: rgba(255, 193, 7, 0.1);
+            border-left-color: #ffc107;
+        }
+
+        .anchor-feedback-item.wrong {
+            background: rgba(255, 59, 48, 0.1);
+            border-left-color: #ff3b30;
+        }
+
+        .anchor-feedback-text {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1d1d1f;
+        }
+
+        .anchor-feedback-law {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #007aff;
+            margin-bottom: 8px;
+        }
+
+        .anchor-feedback-explanation {
+            font-size: 0.95rem;
+            color: #6e6e73;
+            line-height: 1.4;
+        }
+
+        /* Responsive Anpassungen für Gesetzesanker */
+        @media (max-width: 768px) {
+            .anchor-container {
+                padding: 20px 15px;
+                margin: 15px 0;
+            }
+            
+            .laws-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .law-buttons {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .anchor-score-summary {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .anchor-segment {
+                padding: 4px 6px;
+                margin: 1px;
             }
         }
 
@@ -2487,6 +3920,11 @@
             text-align: center;
             font-weight: 500;
             user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .mini-item:hover {
@@ -2803,16 +4241,7 @@
     </div>
     <div class="task-question">
      Ziehen Sie die Steuerarten in die entsprechenden Kategorien:
-    </div>
-    <div class="desktop-only-notice" style="background: rgba(255, 193, 7, 0.1); border: 2px solid rgba(255, 193, 7, 0.3); border-radius: 12px; padding: 15px; margin: 20px 0; text-align: center; display: none;">
-     <p style="margin: 0; color: #856404; font-weight: 500;">⚠️ <strong>Hinweis:</strong> Diese Aufgabe funktioniert nur auf Desktop-Geräten mit Maus. Auf mobilen Geräten ist Drag &amp; Drop nicht verfügbar.</p>
-    </div>
-    <script>
-                // Zeige Warnung nur auf Touch-Geräten
-                if ('ontouchstart' in window) {
-                    document.querySelector('.desktop-only-notice').style.display = 'block';
-                }
-            </script><!-- Kategorien oben -->
+    </div><!-- Kategorien oben -->
     <div class="category-container">
      <div class="drop-zone" data-category="direkt" id="zone-direkt">
       <h4>Direkte Steuern</h4>
@@ -2929,7 +4358,7 @@
      </div>
     </div>
     <div class="connection-instructions">
-     <p>💡 <strong>Anleitung:</strong> Klicken Sie auf einen Punkt links, dann auf den passenden Punkt rechts, um eine Verbindung zu erstellen.</p>
+     <p>💡 <strong>Anleitung:</strong> Klicken Sie auf einen Kasten links, dann auf den passenden Kasten rechts, um eine Verbindung zu erstellen.</p>
     </div>
     <div class="feedback" id="feedback-7"></div>
     <div class="action-buttons"><button class="btn btn-secondary" onclick="resetConnections()">Zurücksetzen</button> <button class="btn btn-primary" onclick="checkTask7()">Antwort prüfen</button>
@@ -3353,11 +4782,330 @@
      </div>
     </div>
     <div class="feedback" id="feedback-12"></div>
-   </div><!-- Aufgabe 13: Das Schloss öffnen (Escape Game) -->
+   </div><!-- Aufgabe 13: Was fehlt im Prüfschema? -->
    <div class="task-card" id="task-13">
     <div class="task-header">
      <div class="task-number">
       Aufgabe 13
+     </div>
+     <div class="task-type">
+      Was fehlt im Prüfschema?
+     </div>
+    </div>
+    <div class="task-question">
+     Vervollständigen Sie das Prüfschema für die Umsatzsteuer-Leistungsortbestimmung! Drei Schritte fehlen.
+    </div><!-- Prüfschema Container -->
+    <div class="schema-container" id="schema-container">
+     <div class="schema-header">
+      <h4>🔍 Prüfschema: Leistungsort bei Umsatzsteuer</h4>
+      <p class="schema-description">Ziehen Sie die fehlenden Schritte in die richtige Reihenfolge</p>
+     </div><!-- Prüfschema mit Lücken -->
+     <div class="schema-steps" id="schema-steps">
+      <div class="schema-step filled">
+       <div class="step-number">
+        1.
+       </div>
+       <div class="step-content"><strong>Liegt eine Lieferung oder sonstige Leistung vor?</strong>
+        <div class="step-explanation">
+         Grundlegende Einordnung der Leistung
+        </div>
+       </div>
+      </div>
+      <div class="schema-step gap" data-position="2">
+       <div class="step-number">
+        2.
+       </div>
+       <div class="step-content gap-content">
+        <div class="gap-placeholder">
+         Fehlender Schritt hier einfügen...
+        </div>
+       </div>
+      </div>
+      <div class="schema-step filled">
+       <div class="step-number">
+        3.
+       </div>
+       <div class="step-content"><strong>Handelt es sich um eine Lieferung?</strong>
+        <div class="step-explanation">
+         Unterscheidung zwischen Lieferung und sonstiger Leistung
+        </div>
+       </div>
+      </div>
+      <div class="schema-step gap" data-position="4">
+       <div class="step-number">
+        4.
+       </div>
+       <div class="step-content gap-content">
+        <div class="gap-placeholder">
+         Fehlender Schritt hier einfügen...
+        </div>
+       </div>
+      </div>
+      <div class="schema-step filled">
+       <div class="step-number">
+        5.
+       </div>
+       <div class="step-content"><strong>Anwendung der Leistungsortregeln</strong>
+        <div class="step-explanation">
+         Je nach Leistungsart gelten unterschiedliche Regeln
+        </div>
+       </div>
+      </div>
+      <div class="schema-step gap" data-position="6">
+       <div class="step-number">
+        6.
+       </div>
+       <div class="step-content gap-content">
+        <div class="gap-placeholder">
+         Fehlender Schritt hier einfügen...
+        </div>
+       </div>
+      </div>
+      <div class="schema-step filled">
+       <div class="step-number">
+        7.
+       </div>
+       <div class="step-content"><strong>Bestimmung der Steuerpflicht</strong>
+        <div class="step-explanation">
+         Endgültige Feststellung der umsatzsteuerlichen Behandlung
+        </div>
+       </div>
+      </div>
+     </div><!-- Verfügbare Schritte -->
+     <div class="available-steps" id="available-steps">
+      <h4>📋 Verfügbare Schritte (ziehen Sie diese in die Lücken)</h4>
+      <div class="steps-container">
+       <div class="draggable-step" data-correct-position="4" draggable="true" id="step-a">
+        <div class="step-icon">
+         🏢
+        </div>
+        <div class="step-text"><strong>Ist der Leistungsempfänger Unternehmer?</strong>
+         <div class="step-sub">
+          Prüfung der Unternehmereigenschaft
+         </div>
+        </div>
+       </div>
+       <div class="draggable-step" data-correct-position="6" draggable="true" id="step-b">
+        <div class="step-icon">
+         🌍
+        </div>
+        <div class="step-text"><strong>Liegt der Leistungsort im Inland?</strong>
+         <div class="step-sub">
+          Territoriale Zuordnung der Besteuerung
+         </div>
+        </div>
+       </div>
+       <div class="draggable-step" data-correct-position="2" draggable="true" id="step-c">
+        <div class="step-icon">
+         💼
+        </div>
+        <div class="step-text"><strong>Liegt ein Umsatz i.S.d. § 1 UStG vor?</strong>
+         <div class="step-sub">
+          Prüfung der Umsatzsteuerpflicht
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="feedback" id="feedback-16"></div>
+    <div class="action-buttons"><button class="btn btn-secondary" onclick="resetSchema()">Zurücksetzen</button> <button class="btn btn-primary" onclick="checkTask13()">Antwort prüfen</button>
+    </div>
+   </div><!-- Aufgabe 14: Relevanz-Scanner -->
+   <div class="task-card" id="task-14">
+    <div class="task-header">
+     <div class="task-number">
+      Aufgabe 14
+     </div>
+     <div class="task-type">
+      Relevanz-Scanner
+     </div>
+    </div>
+    <div class="task-question">
+     Markieren Sie alle relevanten Informationen im Sachverhalt und ordnen Sie diese den richtigen Kategorien zu!
+    </div><!-- Relevanz-Scanner Container -->
+    <div class="scanner-container" id="scanner-container"><!-- Anleitung -->
+     <div class="scanner-instructions">
+      <h4>📋 Anleitung:</h4>
+      <p><strong>1. Markieren:</strong> Klicken Sie auf relevante Wörter, Sätze oder Zahlen im Text</p>
+      <p><strong>2. Kategorisieren:</strong> Ordnen Sie jede Markierung einer Kategorie zu</p>
+      <p><strong>3. Bewerten:</strong> Lassen Sie Ihre Analyse überprüfen</p>
+     </div><!-- Kategorien-Legende -->
+     <div class="categories-legend">
+      <h4>🎯 Relevanz-Kategorien:</h4>
+      <div class="legend-items">
+       <div class="legend-item" data-category="tatbestand"><span class="category-color tatbestand"></span> <span class="category-label">🔵 Tatbestandsmerkmal</span>
+       </div>
+       <div class="legend-item" data-category="ausnahme"><span class="category-color ausnahme"></span> <span class="category-label">🟢 Ausnahme/Sonderregel</span>
+       </div>
+       <div class="legend-item" data-category="rechtsfolge"><span class="category-color rechtsfolge"></span> <span class="category-label">🟡 Rechtsfolge</span>
+       </div>
+       <div class="legend-item" data-category="irrelevant"><span class="category-color irrelevant"></span> <span class="category-label">🔴 Irrelevante Information</span>
+       </div>
+      </div>
+     </div><!-- Sachverhalt -->
+     <div class="case-study">
+      <h4>📄 Sachverhalt: Umsatzsteuer bei Heilbehandlungen</h4>
+      <div class="case-text" id="case-text"><span class="text-segment" data-id="1" data-correct-category="tatbestand" data-explanation="Dr. Müller ist Arzt - entscheidend für die Anwendung der Heilbehandlungsbefreiung">Dr. Müller</span> <span class="text-segment" data-id="2" data-correct-category="irrelevant" data-explanation="Das Geburtsdatum ist für die umsatzsteuerliche Beurteilung nicht relevant">, geboren am 15.03.1975,</span> <span class="text-segment" data-id="3" data-correct-category="tatbestand" data-explanation="Die Tätigkeit als Arzt ist das zentrale Tatbestandsmerkmal für § 4 Nr. 14 UStG">ist als Arzt tätig</span> <span class="text-segment" data-id="4" data-correct-category="irrelevant" data-explanation="Die Praxisadresse ist für die steuerliche Beurteilung nicht entscheidend">und betreibt seine Praxis in der Hauptstraße 42 in München</span>. <span class="text-segment" data-id="5" data-correct-category="tatbestand" data-explanation="Medizinische Behandlungen sind der Kern der Heilbehandlungsbefreiung">Er führt medizinische Behandlungen</span> <span class="text-segment" data-id="6" data-correct-category="tatbestand" data-explanation="Privatpatienten zeigen, dass es sich um entgeltliche Leistungen handelt">an Privatpatienten</span> <span class="text-segment" data-id="7" data-correct-category="irrelevant" data-explanation="Die Behandlungszeiten sind für die Umsatzsteuerbefreiung nicht relevant">zwischen 8:00 und 18:00 Uhr</span> <span class="text-segment" data-id="8" data-correct-category="tatbestand" data-explanation="Das Entgelt ist entscheidend für die Umsatzsteuerpflicht">gegen Entgelt</span> <span class="text-segment" data-id="9" data-correct-category="irrelevant" data-explanation="Die Zahlungsweise beeinflusst nicht die Steuerbefreiung">durch. Die Patienten zahlen bar oder per Überweisung</span>. <span class="text-segment" data-id="10" data-correct-category="tatbestand" data-explanation="Humanmedizin ist die Voraussetzung für die Steuerbefreiung nach § 4 Nr. 14 UStG">Die Behandlungen erfolgen im Bereich der Humanmedizin</span> <span class="text-segment" data-id="11" data-correct-category="irrelevant" data-explanation="Die Praxisausstattung ist für die Umsatzsteuerbefreiung nicht relevant">und umfassen Untersuchungen mit modernen Geräten im Wert von 50.000 Euro</span>. <span class="text-segment" data-id="12" data-correct-category="rechtsfolge" data-explanation="Die Umsatzsteuerbefreiung ist die direkte Rechtsfolge von § 4 Nr. 14 UStG">Sind diese Leistungen von der Umsatzsteuer befreit</span>? <span class="text-segment" data-id="13" data-correct-category="ausnahme" data-explanation="§ 4 Nr. 14 UStG ist die spezielle Befreiungsvorschrift für Heilbehandlungen">Nach § 4 Nr. 14 UStG sind Heilbehandlungen im Bereich der Humanmedizin steuerfrei</span>, <span class="text-segment" data-id="14" data-correct-category="ausnahme" data-explanation="Dies ist eine wichtige Einschränkung der Steuerbefreiung">sofern sie von Ärzten erbracht werden</span>.
+      </div>
+     </div><!-- Markierungs-Panel -->
+     <div class="marking-panel" id="marking-panel" style="display: none;">
+      <h4>🎯 Markierung kategorisieren:</h4>
+      <div class="selected-text" id="selected-text"></div>
+      <div class="category-buttons"><button class="category-btn tatbestand" onclick="categorizeSelection('tatbestand')"> 🔵 Tatbestandsmerkmal </button> <button class="category-btn ausnahme" onclick="categorizeSelection('ausnahme')"> 🟢 Ausnahme/Sonderregel </button> <button class="category-btn rechtsfolge" onclick="categorizeSelection('rechtsfolge')"> 🟡 Rechtsfolge </button> <button class="category-btn irrelevant" onclick="categorizeSelection('irrelevant')"> 🔴 Irrelevante Information </button>
+      </div><button class="cancel-btn" onclick="cancelSelection()">Abbrechen</button>
+     </div><!-- Analyse-Übersicht -->
+     <div class="analysis-overview" id="analysis-overview">
+      <h4>📊 Ihre Analyse:</h4>
+      <div class="marked-items" id="marked-items">
+       <p class="no-markings">Noch keine Markierungen vorgenommen</p>
+      </div>
+     </div><!-- Ergebnis-Panel -->
+     <div class="results-panel" id="results-panel" style="display: none;">
+      <h4>🎯 Analyse-Ergebnis:</h4>
+      <div class="score-summary">
+       <div class="score-item correct"><span class="score-number" id="correct-markings">0</span> <span class="score-label">Richtig markiert</span>
+       </div>
+       <div class="score-item missed"><span class="score-number" id="missed-markings">0</span> <span class="score-label">Übersehen</span>
+       </div>
+       <div class="score-item wrong"><span class="score-number" id="wrong-markings">0</span> <span class="score-label">Falsch kategorisiert</span>
+       </div>
+       <div class="score-item irrelevant-marked"><span class="score-number" id="irrelevant-markings">0</span> <span class="score-label">Irrelevant markiert</span>
+       </div>
+      </div>
+      <div class="key-insights" id="key-insights">
+       <h5>⭐ Schlüssel-Erkenntnisse:</h5>
+       <div class="insights-list" id="insights-list"></div>
+      </div>
+      <div class="detailed-feedback" id="detailed-feedback">
+       <h5>📝 Detailliertes Feedback:</h5>
+       <div class="feedback-list" id="feedback-list"></div>
+      </div>
+     </div>
+    </div>
+    <div class="feedback" id="feedback-14"></div>
+    <div class="action-buttons"><button class="btn btn-secondary" onclick="resetScanner()">Zurücksetzen</button> <button class="btn btn-primary" onclick="analyzeMarkings()">Analyse starten</button>
+    </div>
+   </div><!-- Aufgabe 15: Gesetzesanker setzen -->
+   <div class="task-card" id="task-15">
+    <div class="task-header">
+     <div class="task-number">
+      Aufgabe 15
+     </div>
+     <div class="task-type">
+      Gesetzesanker setzen
+     </div>
+    </div>
+    <div class="task-question">
+     Markieren Sie relevante Stellen im Sachverhalt und ordnen Sie diese den passenden Paragraphen zu!
+    </div><!-- Gesetzesanker Container -->
+    <div class="anchor-container" id="anchor-container"><!-- Anleitung -->
+     <div class="anchor-instructions">
+      <h4>📋 Anleitung:</h4>
+      <p><strong>1. Markieren:</strong> Klicken Sie auf relevante Textstellen im Sachverhalt</p>
+      <p><strong>2. Zuordnen:</strong> Wählen Sie den passenden Paragraphen aus der Liste</p>
+      <p><strong>3. Verknüpfen:</strong> Erstellen Sie die Verbindung zwischen Sachverhalt und Gesetz</p>
+     </div><!-- Sachverhalt -->
+     <div class="case-study">
+      <h4>📄 Sachverhalt: Firmenwagen-Überlassung</h4>
+      <div class="case-text" id="anchor-case-text"><span class="anchor-segment" data-id="1" data-correct-law="§ 8 Abs. 2 Satz 1 EStG" data-explanation="Die unentgeltliche oder verbilligte Überlassung eines Kraftfahrzeugs ist ein geldwerter Vorteil">Die Firma ABC GmbH überlässt ihrem Geschäftsführer Herrn Schmidt</span> <span class="anchor-segment" data-id="2" data-correct-law="§ 6 Abs. 1 Nr. 4 Satz 2 EStG" data-explanation="Ein Kraftfahrzeug ist ein Wirtschaftsgut des Betriebsvermögens">einen betrieblichen Pkw</span> <span class="anchor-segment" data-id="3" data-correct-law="§ 8 Abs. 2 Satz 1 EStG" data-explanation="Die private Nutzung ist ein geldwerter Vorteil, der zu versteuern ist">zur privaten Nutzung</span>. <span class="anchor-segment" data-id="4" data-correct-law="§ 8 Abs. 2 Satz 2 EStG" data-explanation="Die 1%-Regelung ist eine Bewertungsmethode für die private Pkw-Nutzung">Der geldwerte Vorteil wird mit 1% des Bruttolistenpreises pro Monat bewertet</span>. <span class="anchor-segment" data-id="5" data-correct-law="§ 8 Abs. 2 Satz 3 EStG" data-explanation="Fahrten zwischen Wohnung und Arbeitsstätte werden zusätzlich mit 0,03% bewertet">Zusätzlich nutzt Herr Schmidt den Wagen für Fahrten zwischen seiner Wohnung und der Arbeitsstätte</span>. <span class="anchor-segment" data-id="6" data-correct-law="irrelevant" data-explanation="Die Farbe des Fahrzeugs ist steuerlich nicht relevant">Der silberne BMW</span> <span class="anchor-segment" data-id="7" data-correct-law="§ 8 Abs. 2 Satz 2 EStG" data-explanation="Der Bruttolistenpreis ist die Bewertungsgrundlage für die 1%-Regelung">hat einen Bruttolistenpreis von 45.000 Euro</span>. <span class="anchor-segment" data-id="8" data-correct-law="irrelevant" data-explanation="Das Baujahr ist für die steuerliche Bewertung nicht entscheidend">und wurde 2022 angeschafft</span>.
+      </div>
+     </div><!-- Verfügbare Paragraphen -->
+     <div class="available-laws">
+      <h4>⚖️ Verfügbare Paragraphen:</h4>
+      <div class="laws-grid" id="laws-grid">
+       <div class="law-item" data-law="§ 8 Abs. 2 Satz 1 EStG">
+        <div class="law-title">
+         § 8 Abs. 2 Satz 1 EStG
+        </div>
+        <div class="law-description">
+         Geldwerter Vorteil bei Überlassung
+        </div>
+       </div>
+       <div class="law-item" data-law="§ 8 Abs. 2 Satz 2 EStG">
+        <div class="law-title">
+         § 8 Abs. 2 Satz 2 EStG
+        </div>
+        <div class="law-description">
+         1%-Regelung Bewertung
+        </div>
+       </div>
+       <div class="law-item" data-law="§ 8 Abs. 2 Satz 3 EStG">
+        <div class="law-title">
+         § 8 Abs. 2 Satz 3 EStG
+        </div>
+        <div class="law-description">
+         Wohnung-Arbeitsstätte 0,03%
+        </div>
+       </div>
+       <div class="law-item" data-law="§ 6 Abs. 1 Nr. 4 Satz 2 EStG">
+        <div class="law-title">
+         § 6 Abs. 1 Nr. 4 Satz 2 EStG
+        </div>
+        <div class="law-description">
+         Kraftfahrzeug Betriebsvermögen
+        </div>
+       </div>
+       <div class="law-item" data-law="§ 19 Abs. 1 Satz 1 EStG">
+        <div class="law-title">
+         § 19 Abs. 1 Satz 1 EStG
+        </div>
+        <div class="law-description">
+         Einkünfte aus nichtselbständiger Arbeit
+        </div>
+       </div>
+       <div class="law-item" data-law="§ 3 Nr. 15 EStG">
+        <div class="law-title">
+         § 3 Nr. 15 EStG
+        </div>
+        <div class="law-description">
+         Steuerfreie Einnahmen
+        </div>
+       </div>
+      </div>
+     </div><!-- Zuordnungs-Panel -->
+     <div class="anchor-assignment-panel" id="anchor-assignment-panel" style="display: none;">
+      <h4>🔗 Gesetzesanker setzen:</h4>
+      <div class="selected-text-display" id="selected-text-display"></div>
+      <div class="law-selection" id="law-selection">
+       <p>Wählen Sie den passenden Paragraphen:</p>
+       <div class="law-buttons" id="law-buttons"></div>
+      </div>
+      <div class="assignment-actions"><button class="btn btn-secondary" onclick="cancelAnchorAssignment()">Abbrechen</button>
+      </div>
+     </div><!-- Gesetzesanker Übersicht -->
+     <div class="anchors-overview">
+      <h4>🔗 Ihre Gesetzesanker:</h4>
+      <div class="anchors-list" id="anchors-list">
+       <p class="no-anchors">Noch keine Gesetzesanker gesetzt</p>
+      </div>
+     </div><!-- Ergebnis-Panel -->
+     <div class="anchor-results-panel" id="anchor-results-panel" style="display: none;">
+      <h4>🎯 Analyse-Ergebnis:</h4>
+      <div class="anchor-score-summary">
+       <div class="anchor-score-item correct"><span class="score-number" id="anchor-correct-count">0</span> <span class="score-label">Richtig zugeordnet</span>
+       </div>
+       <div class="anchor-score-item missed"><span class="score-number" id="anchor-missed-count">0</span> <span class="score-label">Übersehen</span>
+       </div>
+       <div class="anchor-score-item wrong"><span class="score-number" id="anchor-wrong-count">0</span> <span class="score-label">Falsch zugeordnet</span>
+       </div>
+       <div class="anchor-score-item irrelevant-marked"><span class="score-number" id="anchor-irrelevant-count">0</span> <span class="score-label">Irrelevant markiert</span>
+       </div>
+      </div>
+      <div class="anchor-detailed-feedback" id="anchor-detailed-feedback">
+       <h5>📝 Detailliertes Feedback:</h5>
+       <div class="anchor-feedback-list" id="anchor-feedback-list"></div>
+      </div>
+     </div>
+    </div>
+    <div class="feedback" id="feedback-15"></div>
+    <div class="action-buttons"><button class="btn btn-secondary" onclick="resetAnchors()">Zurücksetzen</button> <button class="btn btn-primary" onclick="analyzeAnchors()">Analyse starten</button>
+    </div>
+   </div><!-- Aufgabe 16: Das Schloss öffnen (Escape Game) -->
+   <div class="task-card" id="task-16">
+    <div class="task-header">
+     <div class="task-number">
+      Aufgabe 16
      </div>
      <div class="task-type">
       Das Schloss öffnen
@@ -3449,7 +5197,7 @@
       </div>
      </div>
     </div>
-    <div class="feedback" id="feedback-13"></div>
+    <div class="feedback" id="feedback-16"></div>
    </div><!-- Abschlussbildschirm -->
    <div class="completion-screen" id="completion-screen">
     <div class="completion-icon">
@@ -3493,7 +5241,7 @@
   </div>
   <script>
         let currentTask = 1;
-        const totalTasks = 13;
+        const totalTasks = 16;
         let completedTasks = 0;
         let userAnswers = {};
         let taskAttempts = {};
@@ -3561,6 +5309,9 @@
             initializeTouchDragDrop(); // Touch-Unterstützung für mobile Geräte
             initializeConnections();
             initializeReasoning();
+            initializeSchema();
+            initializeScanner();
+            initializeAnchors();
             initializeEscapeGame();
             setupKeyboardNavigation();
             setupButtonHandlers(); // Button-Handler initialisieren
@@ -3910,6 +5661,36 @@
                     checkTask11();
                 };
             }
+            
+            // Aufgabe 13 Button
+            const task13Btn = document.querySelector('#task-13 .btn-primary');
+            if (task13Btn) {
+                task13Btn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    checkTask13();
+                };
+            }
+            
+            // Aufgabe 14 Button
+            const task14Btn = document.querySelector('#task-14 .btn-primary');
+            if (task14Btn) {
+                task14Btn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    analyzeMarkings();
+                };
+            }
+            
+            // Aufgabe 15 Button
+            const task15Btn = document.querySelector('#task-15 .btn-primary');
+            if (task15Btn) {
+                task15Btn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    analyzeAnchors();
+                };
+            }
         }
 
         // Aufgabe 2: Multiple Choice
@@ -4244,9 +6025,32 @@
         // Aufgabe 7: Verbindungsaufgabe
         function initializeConnections() {
             const dots = document.querySelectorAll('.connection-dot');
+            const items = document.querySelectorAll('.connection-item');
+            
+            // Event Listener für Punkte
             dots.forEach(dot => {
                 dot.addEventListener('click', handleDotClick);
             });
+            
+            // Event Listener für gesamte Kästen
+            items.forEach(item => {
+                item.addEventListener('click', handleItemClick);
+            });
+        }
+
+        function handleItemClick(e) {
+            // Verhindere doppelte Ausführung wenn auf Punkt geklickt wurde
+            if (e.target.classList.contains('connection-dot')) {
+                return;
+            }
+            
+            const clickedItem = e.currentTarget;
+            const clickedDot = clickedItem.querySelector('.connection-dot');
+            
+            if (clickedDot) {
+                // Simuliere Klick auf den Punkt
+                handleDotClick({ target: clickedDot, stopPropagation: () => {} });
+            }
         }
 
         function handleDotClick(e) {
@@ -5418,7 +7222,7 @@
                     clearInterval(shootingSpawnInterval);
                     shootingSpawnInterval = null;
                 }
-            }, 800); // Alle 800ms einen neuen Paragraphen
+            }, 300); // Alle 300ms einen neuen Paragraphen
             
             // Timeout für die gesamte Aussage (10 Sekunden)
             shootingTimeoutId = setTimeout(() => {
@@ -5451,9 +7255,35 @@
             paragraph.className = 'flying-paragraph';
             paragraph.textContent = paragraphText;
             
-            // Zufällige Startposition (verschiedene Höhen)
+            // Berechne verfügbare Positionen ohne Überlappung
             const gameAreaHeight = gameArea.offsetHeight || 350;
-            const startY = Math.random() * (gameAreaHeight - 120) + 40; // Mehr Abstand zu den Rändern
+            const paragraphHeight = 50; // Geschätzte Höhe eines Paragraphen
+            const minSpacing = 20; // Mindestabstand zwischen Paragraphen
+            const totalParagraphSpace = paragraphHeight + minSpacing;
+            const availableHeight = gameAreaHeight - 120; // Abstand zu Rändern
+            const maxParagraphs = Math.floor(availableHeight / totalParagraphSpace);
+            
+            // Finde freie Position
+            let startY;
+            let attempts = 0;
+            const maxAttempts = 20;
+            
+            do {
+                startY = Math.random() * availableHeight + 40;
+                attempts++;
+            } while (isPositionOccupied(startY, paragraphHeight + minSpacing) && attempts < maxAttempts);
+            
+            // Falls keine freie Position gefunden, verwende Raster-System
+            if (attempts >= maxAttempts) {
+                const gridPositions = [];
+                for (let i = 0; i < maxParagraphs; i++) {
+                    gridPositions.push(40 + (i * totalParagraphSpace));
+                }
+                
+                // Finde erste freie Grid-Position
+                const freePosition = gridPositions.find(pos => !isPositionOccupied(pos, paragraphHeight + minSpacing));
+                startY = freePosition || (40 + Math.random() * 100); // Fallback
+            }
             
             paragraph.style.cssText = `
                 position: absolute;
@@ -5463,6 +7293,8 @@
                 z-index: 15;
                 transition: left 8000ms linear;
                 pointer-events: auto;
+                white-space: nowrap;
+                overflow: visible;
             `;
             
             // Click Handler
@@ -5474,11 +7306,12 @@
             
             gameArea.appendChild(paragraph);
             
-            // Speichere Paragraphen-Info
+            // Speichere Paragraphen-Info mit Position
             const paragraphInfo = {
                 element: paragraph,
                 text: paragraphText,
-                clicked: false
+                clicked: false,
+                startY: startY
             };
             shootingFlyingParagraphs.push(paragraphInfo);
             
@@ -5507,6 +7340,17 @@
                     }
                 }
             }, 8000); // 8 Sekunden für leicht schnellere Paragraphen
+        }
+
+        // Hilfsfunktion: Prüft ob Position bereits von anderem Paragraphen belegt ist
+        function isPositionOccupied(testY, spacing) {
+            return shootingFlyingParagraphs.some(paragraphInfo => {
+                if (!paragraphInfo.element || !paragraphInfo.element.parentNode || paragraphInfo.clicked) return false;
+                
+                const existingY = paragraphInfo.startY || parseInt(paragraphInfo.element.style.top) || 0;
+                const distance = Math.abs(testY - existingY);
+                return distance < spacing;
+            });
         }
 
         function handleParagraphClick(paragraphElement, paragraphText) {
@@ -5682,7 +7526,786 @@
             }), isSuccess);
         }
 
-        // Aufgabe 13: Das Schloss öffnen (Escape Game)
+        // Aufgabe 13: Prüfschema
+        let schemaSlots = { 2: null, 4: null, 6: null };
+        let schemaDraggedStep = null;
+
+        // Aufgabe 14: Relevanz-Scanner - Funktionen
+        function initializeScanner() {
+            const textSegments = document.querySelectorAll('.text-segment');
+            
+            textSegments.forEach(segment => {
+                segment.addEventListener('click', handleSegmentClick);
+            });
+        }
+
+        function handleSegmentClick(e) {
+            if (scannerAnalysisComplete) return;
+            
+            const segment = e.target;
+            const segmentId = segment.getAttribute('data-id');
+            
+            // Prüfen ob bereits markiert
+            if (userMarkings[segmentId]) {
+                // Markierung entfernen
+                removeMarking(segmentId);
+                return;
+            }
+            
+            // Segment für Kategorisierung auswählen
+            selectedSegment = segment;
+            
+            // Visuell als ausgewählt markieren
+            document.querySelectorAll('.text-segment').forEach(s => s.classList.remove('selected'));
+            segment.classList.add('selected');
+            
+            // Markierungs-Panel anzeigen
+            const markingPanel = document.getElementById('marking-panel');
+            const selectedText = document.getElementById('selected-text');
+            
+            selectedText.textContent = segment.textContent;
+            markingPanel.style.display = 'block';
+            
+            // Smooth scroll zum Panel
+            markingPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function categorizeSelection(category) {
+            if (!selectedSegment) return;
+            
+            const segmentId = selectedSegment.getAttribute('data-id');
+            const segmentText = selectedSegment.textContent;
+            
+            // Markierung speichern
+            userMarkings[segmentId] = {
+                text: segmentText,
+                category: category,
+                element: selectedSegment
+            };
+            
+            // Visuell markieren
+            selectedSegment.classList.remove('selected');
+            selectedSegment.classList.add('marked', category);
+            
+            // Panel verstecken
+            document.getElementById('marking-panel').style.display = 'none';
+            
+            // Analyse-Übersicht aktualisieren
+            updateAnalysisOverview();
+            
+            // Reset
+            selectedSegment = null;
+        }
+
+        function cancelSelection() {
+            if (selectedSegment) {
+                selectedSegment.classList.remove('selected');
+                selectedSegment = null;
+            }
+            
+            document.getElementById('marking-panel').style.display = 'none';
+        }
+
+        function removeMarking(segmentId) {
+            if (!userMarkings[segmentId]) return;
+            
+            const marking = userMarkings[segmentId];
+            const element = marking.element;
+            
+            // Visuell entfernen
+            element.classList.remove('marked', marking.category);
+            
+            // Aus Datenstruktur entfernen
+            delete userMarkings[segmentId];
+            
+            // Analyse-Übersicht aktualisieren
+            updateAnalysisOverview();
+        }
+
+        function updateAnalysisOverview() {
+            const markedItems = document.getElementById('marked-items');
+            const markings = Object.values(userMarkings);
+            
+            if (markings.length === 0) {
+                markedItems.innerHTML = '<p class="no-markings">Noch keine Markierungen vorgenommen</p>';
+                return;
+            }
+            
+            const categoryLabels = {
+                'tatbestand': '🔵 Tatbestandsmerkmal',
+                'ausnahme': '🟢 Ausnahme/Sonderregel',
+                'rechtsfolge': '🟡 Rechtsfolge',
+                'irrelevant': '🔴 Irrelevante Information'
+            };
+            
+            markedItems.innerHTML = markings.map(marking => `
+                <div class="marked-item ${marking.category}">
+                    <span class="marked-text">${marking.text}</span>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="marked-category ${marking.category}">${categoryLabels[marking.category]}</span>
+                        <button class="remove-marking" onclick="removeMarking('${Object.keys(userMarkings).find(key => userMarkings[key] === marking)}')" title="Markierung entfernen">×</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function analyzeMarkings() {
+            if (Object.keys(userMarkings).length === 0) {
+                showFeedback(14, false, 'Bitte markieren Sie mindestens eine Textstelle, bevor Sie die Analyse starten.');
+                return;
+            }
+            
+            scannerAnalysisComplete = true;
+            
+            // Alle Textsegmente analysieren
+            const allSegments = document.querySelectorAll('.text-segment');
+            let correctMarkings = 0;
+            let missedMarkings = 0;
+            let wrongMarkings = 0;
+            let irrelevantMarkings = 0;
+            
+            const feedbackItems = [];
+            const keyInsights = [];
+            
+            allSegments.forEach(segment => {
+                const segmentId = segment.getAttribute('data-id');
+                const correctCategory = segment.getAttribute('data-correct-category');
+                const explanation = segment.getAttribute('data-explanation');
+                const segmentText = segment.textContent;
+                const userMarking = userMarkings[segmentId];
+                
+                if (correctCategory === 'irrelevant') {
+                    // Irrelevante Segmente
+                    if (userMarking) {
+                        irrelevantMarkings++;
+                        segment.classList.add('wrong-highlight');
+                        feedbackItems.push({
+                            type: 'wrong',
+                            text: `"${segmentText}"`,
+                            explanation: `Irrelevant markiert: ${explanation}`
+                        });
+                    }
+                } else {
+                    // Relevante Segmente
+                    if (userMarking) {
+                        if (userMarking.category === correctCategory) {
+                            correctMarkings++;
+                            segment.classList.add('correct-highlight');
+                            feedbackItems.push({
+                                type: 'correct',
+                                text: `"${segmentText}"`,
+                                explanation: `✅ Richtig kategorisiert: ${explanation}`
+                            });
+                        } else {
+                            wrongMarkings++;
+                            segment.classList.add('wrong-highlight');
+                            feedbackItems.push({
+                                type: 'wrong',
+                                text: `"${segmentText}"`,
+                                explanation: `❌ Falsch kategorisiert: ${explanation}`
+                            });
+                        }
+                    } else {
+                        missedMarkings++;
+                        segment.classList.add('missed-highlight');
+                        feedbackItems.push({
+                            type: 'missed',
+                            text: `"${segmentText}"`,
+                            explanation: `⚠️ Übersehen: ${explanation}`
+                        });
+                    }
+                }
+            });
+            
+            // Schlüssel-Erkenntnisse generieren
+            if (correctMarkings >= 4) {
+                keyInsights.push({
+                    icon: '🎯',
+                    text: 'Exzellente Identifikation der Tatbestandsmerkmale! Sie erkennen die entscheidenden Elemente für § 4 Nr. 14 UStG.'
+                });
+            }
+            
+            if (missedMarkings <= 2) {
+                keyInsights.push({
+                    icon: '👁️',
+                    text: 'Gute Vollständigkeit! Sie haben die meisten relevanten Informationen erfasst.'
+                });
+            }
+            
+            if (irrelevantMarkings <= 1) {
+                keyInsights.push({
+                    icon: '🔍',
+                    text: 'Präzise Selektion! Sie lassen sich nicht von irrelevanten Details ablenken.'
+                });
+            }
+            
+            keyInsights.push({
+                icon: '⚖️',
+                text: 'Kernpunkt: § 4 Nr. 14 UStG befreit Heilbehandlungen von Ärzten im Bereich der Humanmedizin.'
+            });
+            
+            // Ergebnisse anzeigen
+            showScannerResults(correctMarkings, missedMarkings, wrongMarkings, irrelevantMarkings, feedbackItems, keyInsights);
+            
+            // Button-Text ändern
+            const analyzeBtn = document.querySelector('#task-14 .btn-primary');
+            analyzeBtn.textContent = 'Zurücksetzen';
+            analyzeBtn.onclick = resetScanner;
+            
+            // Hauptfeedback
+            const totalRelevant = allSegments.length - document.querySelectorAll('[data-correct-category="irrelevant"]').length;
+            const accuracy = Math.round((correctMarkings / totalRelevant) * 100);
+            const isSuccess = accuracy >= 70;
+            
+            showFeedback(14, isSuccess, `Relevanz-Scanner abgeschlossen! ${correctMarkings} von ${totalRelevant} relevanten Elementen richtig erkannt (${accuracy}% Genauigkeit).`);
+            
+            // Ergebnis speichern
+            saveTaskResult(14, JSON.stringify({
+                markings: userMarkings,
+                correct: correctMarkings,
+                missed: missedMarkings,
+                wrong: wrongMarkings,
+                irrelevant: irrelevantMarkings,
+                accuracy: accuracy
+            }), isSuccess);
+        }
+
+        function showScannerResults(correct, missed, wrong, irrelevant, feedbackItems, insights) {
+            // Statistiken aktualisieren
+            document.getElementById('correct-markings').textContent = correct;
+            document.getElementById('missed-markings').textContent = missed;
+            document.getElementById('wrong-markings').textContent = wrong;
+            document.getElementById('irrelevant-markings').textContent = irrelevant;
+            
+            // Schlüssel-Erkenntnisse
+            const insightsList = document.getElementById('insights-list');
+            insightsList.innerHTML = insights.map(insight => `
+                <div class="insight-item">
+                    <span class="insight-icon">${insight.icon}</span>
+                    <span class="insight-text">${insight.text}</span>
+                </div>
+            `).join('');
+            
+            // Detailliertes Feedback
+            const feedbackList = document.getElementById('feedback-list');
+            feedbackList.innerHTML = feedbackItems.map(item => `
+                <div class="feedback-item ${item.type}">
+                    <div class="feedback-text">${item.text}</div>
+                    <div class="feedback-explanation">${item.explanation}</div>
+                </div>
+            `).join('');
+            
+            // Ergebnis-Panel anzeigen
+            document.getElementById('results-panel').style.display = 'block';
+            
+            // Smooth scroll zu Ergebnissen
+            setTimeout(() => {
+                document.getElementById('results-panel').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 300);
+        }
+
+        function resetScanner() {
+            // Reset aller Variablen
+            selectedSegment = null;
+            userMarkings = {};
+            scannerAnalysisComplete = false;
+            
+            // Alle visuellen Markierungen entfernen
+            document.querySelectorAll('.text-segment').forEach(segment => {
+                segment.classList.remove('selected', 'marked', 'tatbestand', 'ausnahme', 'rechtsfolge', 'irrelevant', 'correct-highlight', 'missed-highlight', 'wrong-highlight');
+            });
+            
+            // Panels verstecken
+            document.getElementById('marking-panel').style.display = 'none';
+            document.getElementById('results-panel').style.display = 'none';
+            
+            // Analyse-Übersicht zurücksetzen
+            updateAnalysisOverview();
+            
+            // Button zurücksetzen
+            const analyzeBtn = document.querySelector('#task-14 .btn-primary');
+            analyzeBtn.textContent = 'Analyse starten';
+            analyzeBtn.onclick = analyzeMarkings;
+            
+            // Feedback verstecken
+            document.getElementById('feedback-14').style.display = 'none';
+        }
+
+        // Aufgabe 13: Prüfschema - Funktionen
+        function initializeSchema() {
+            const steps = document.querySelectorAll('.draggable-step');
+            const gaps = document.querySelectorAll('.schema-step.gap');
+            
+            // Drag Events für Schritte - nur Desktop
+            steps.forEach(step => {
+                step.addEventListener('dragstart', handleSchemaDragStart);
+                step.addEventListener('dragend', handleSchemaDragEnd);
+            });
+            
+            // Drop Events für Lücken
+            gaps.forEach(gap => {
+                gap.addEventListener('dragover', handleSchemaDragOver);
+                gap.addEventListener('dragenter', handleSchemaDragEnter);
+                gap.addEventListener('dragleave', handleSchemaDragLeave);
+                gap.addEventListener('drop', handleSchemaDrop);
+            });
+        }
+
+        function handleSchemaDragStart(e) {
+            schemaDraggedStep = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.outerHTML);
+        }
+
+        function handleSchemaDragEnd(e) {
+            this.classList.remove('dragging');
+            schemaDraggedStep = null;
+        }
+
+        function handleSchemaDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+
+        function handleSchemaDragEnter(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        }
+
+        function handleSchemaDragLeave(e) {
+            if (!this.contains(e.relatedTarget)) {
+                this.classList.remove('drag-over');
+            }
+        }
+
+        function handleSchemaDrop(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+            
+            if (!schemaDraggedStep) return;
+            
+            const gapPosition = parseInt(this.getAttribute('data-position'));
+            const gapContent = this.querySelector('.gap-content');
+            const stepText = schemaDraggedStep.querySelector('.step-text strong').textContent;
+            const stepSub = schemaDraggedStep.querySelector('.step-sub').textContent;
+            const stepIcon = schemaDraggedStep.querySelector('.step-icon').textContent;
+            
+            // Prüfen ob Lücke bereits belegt ist
+            if (schemaSlots[gapPosition]) {
+                // Alten Schritt wieder verfügbar machen
+                const oldStepId = schemaSlots[gapPosition].stepId;
+                const oldStep = document.getElementById(oldStepId);
+                if (oldStep) {
+                    oldStep.classList.remove('used');
+                }
+            }
+            
+            // Neuen Schritt in Lücke platzieren
+            schemaSlots[gapPosition] = {
+                stepId: schemaDraggedStep.id,
+                text: stepText,
+                sub: stepSub,
+                icon: stepIcon
+            };
+            
+            // Lücke visuell aktualisieren
+            gapContent.innerHTML = `
+                <div style="display: flex; align-items: center; width: 100%;">
+                    <div style="font-size: 1.4rem; margin-right: 15px;">${stepIcon}</div>
+                    <div style="flex: 1;">
+                        <strong style="font-size: 1.1rem; font-weight: 600; color: #1d1d1f; display: block; margin-bottom: 5px;">${stepText}</strong>
+                        <div style="font-size: 0.9rem; color: #6e6e73; font-style: italic;">${stepSub}</div>
+                    </div>
+                </div>
+            `;
+            this.classList.add('filled');
+            
+            // Schritt als verwendet markieren
+            schemaDraggedStep.classList.add('used');
+        }
+
+        function resetSchema() {
+            // Slots zurücksetzen
+            schemaSlots = { 2: null, 4: null, 6: null };
+            
+            // Lücken-Inhalte zurücksetzen
+            [2, 4, 6].forEach(position => {
+                const gap = document.querySelector(`[data-position="${position}"]`);
+                const gapContent = gap.querySelector('.gap-content');
+                gapContent.innerHTML = '<div class="gap-placeholder">Fehlender Schritt hier einfügen...</div>';
+                gap.classList.remove('filled', 'correct-placement', 'incorrect-placement');
+            });
+            
+            // Alle Schritte wieder verfügbar machen
+            document.querySelectorAll('.draggable-step').forEach(step => {
+                step.classList.remove('used');
+            });
+            
+            // Feedback verstecken
+            document.getElementById('feedback-13').style.display = 'none';
+        }
+
+        function checkTask13() {
+            // Prüfen ob alle Lücken gefüllt sind
+            const filledSlots = Object.values(schemaSlots).filter(slot => slot !== null);
+            
+            if (filledSlots.length < 3) {
+                showFeedback(13, false, 'Bitte füllen Sie alle drei Lücken mit den passenden Schritten aus.');
+                return;
+            }
+            
+            // Korrekte Zuordnung prüfen
+            const correctAssignments = {
+                2: 'step-c', // "Liegt ein Umsatz i.S.d. § 1 UStG vor?"
+                4: 'step-a', // "Ist der Leistungsempfänger Unternehmer?"
+                6: 'step-b'  // "Liegt der Leistungsort im Inland?"
+            };
+            
+            let correctCount = 0;
+            let isFullyCorrect = true;
+            
+            // Visuelle Markierung der Platzierungen
+            [2, 4, 6].forEach(position => {
+                const gap = document.querySelector(`[data-position="${position}"]`);
+                const isCorrect = schemaSlots[position] && schemaSlots[position].stepId === correctAssignments[position];
+                
+                if (isCorrect) {
+                    correctCount++;
+                    gap.classList.add('correct-placement');
+                } else {
+                    isFullyCorrect = false;
+                    gap.classList.add('incorrect-placement');
+                }
+            });
+            
+            let feedbackMessage = '';
+            if (isFullyCorrect) {
+                feedbackMessage = '✅ Perfekt! Sie haben das Prüfschema korrekt vervollständigt.<br><br>';
+                feedbackMessage += '<strong>📋 Vollständiges Prüfschema:</strong><br>';
+                feedbackMessage += '1. Liegt eine Lieferung oder sonstige Leistung vor?<br>';
+                feedbackMessage += '2. <strong>Liegt ein Umsatz i.S.d. § 1 UStG vor?</strong><br>';
+                feedbackMessage += '3. Handelt es sich um eine Lieferung?<br>';
+                feedbackMessage += '4. <strong>Ist der Leistungsempfänger Unternehmer?</strong><br>';
+                feedbackMessage += '5. Anwendung der Leistungsortregeln<br>';
+                feedbackMessage += '6. <strong>Liegt der Leistungsort im Inland?</strong><br>';
+                feedbackMessage += '7. Bestimmung der Steuerpflicht<br><br>';
+                feedbackMessage += '<strong>💡 Erklärung:</strong> Dieses Schema folgt der logischen Reihenfolge der umsatzsteuerlichen Prüfung von der grundsätzlichen Steuerpflicht bis zur territorialen Zuordnung.';
+            } else {
+                feedbackMessage = `❌ ${correctCount} von 3 Schritten sind korrekt platziert.<br><br><strong>Vollständige Lösung:</strong><br>`;
+                feedbackMessage += '<strong>Position 2:</strong> "Liegt ein Umsatz i.S.d. § 1 UStG vor?" - Grundvoraussetzung für Umsatzsteuerpflicht<br>';
+                feedbackMessage += '<strong>Position 4:</strong> "Ist der Leistungsempfänger Unternehmer?" - Wichtig für Leistungsortbestimmung<br>';
+                feedbackMessage += '<strong>Position 6:</strong> "Liegt der Leistungsort im Inland?" - Entscheidend für deutsche Umsatzsteuerpflicht<br><br>';
+                feedbackMessage += '<strong>💡 Tipp:</strong> Das Prüfschema folgt einer logischen Reihenfolge: Erst die grundsätzliche Steuerpflicht, dann die Art der Leistung, dann die Beteiligten und schließlich die territoriale Zuordnung.';
+            }
+            
+            showFeedback(13, isFullyCorrect, feedbackMessage);
+            saveTaskResult(13, JSON.stringify(schemaSlots), isFullyCorrect);
+        }
+
+        // Aufgabe 14: Relevanz-Scanner
+        let selectedSegment = null;
+        let userMarkings = {};
+        let scannerAnalysisComplete = false;
+
+        // Aufgabe 15: Gesetzesanker setzen - Funktionen
+        function initializeAnchors() {
+            const anchorSegments = document.querySelectorAll('.anchor-segment');
+            
+            anchorSegments.forEach(segment => {
+                segment.addEventListener('click', handleAnchorSegmentClick);
+            });
+        }
+
+        function handleAnchorSegmentClick(e) {
+            if (anchorAnalysisComplete) return;
+            
+            const segment = e.target;
+            const segmentId = segment.getAttribute('data-id');
+            
+            // Prüfen ob bereits verankert
+            if (userAnchors[segmentId]) {
+                // Anker entfernen
+                removeAnchor(segmentId);
+                return;
+            }
+            
+            // Segment für Zuordnung auswählen
+            selectedAnchorSegment = segment;
+            
+            // Visuell als ausgewählt markieren
+            document.querySelectorAll('.anchor-segment').forEach(s => s.classList.remove('selected'));
+            segment.classList.add('selected');
+            
+            // Zuordnungs-Panel anzeigen
+            showAnchorAssignmentPanel(segment.textContent);
+        }
+
+        function showAnchorAssignmentPanel(selectedText) {
+            const assignmentPanel = document.getElementById('anchor-assignment-panel');
+            const selectedTextDisplay = document.getElementById('selected-text-display');
+            const lawButtons = document.getElementById('law-buttons');
+            
+            selectedTextDisplay.textContent = selectedText;
+            
+            // Verfügbare Gesetze als Buttons anzeigen
+            const availableLaws = [
+                { law: '§ 8 Abs. 2 Satz 1 EStG', description: 'Geldwerter Vorteil bei Überlassung' },
+                { law: '§ 8 Abs. 2 Satz 2 EStG', description: '1%-Regelung Bewertung' },
+                { law: '§ 8 Abs. 2 Satz 3 EStG', description: 'Wohnung-Arbeitsstätte 0,03%' },
+                { law: '§ 6 Abs. 1 Nr. 4 Satz 2 EStG', description: 'Kraftfahrzeug Betriebsvermögen' },
+                { law: '§ 19 Abs. 1 Satz 1 EStG', description: 'Einkünfte aus nichtselbständiger Arbeit' },
+                { law: '§ 3 Nr. 15 EStG', description: 'Steuerfreie Einnahmen' },
+                { law: 'irrelevant', description: 'Nicht steuerlich relevant' }
+            ];
+            
+            lawButtons.innerHTML = availableLaws.map(lawItem => `
+                <button class="law-btn" onclick="assignLawToSegment('${lawItem.law}')">
+                    <div class="law-title">${lawItem.law === 'irrelevant' ? 'Irrelevant' : lawItem.law}</div>
+                    <div class="law-description">${lawItem.description}</div>
+                </button>
+            `).join('');
+            
+            assignmentPanel.style.display = 'block';
+            
+            // Smooth scroll zum Panel
+            assignmentPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function assignLawToSegment(selectedLaw) {
+            if (!selectedAnchorSegment) return;
+            
+            const segmentId = selectedAnchorSegment.getAttribute('data-id');
+            const segmentText = selectedAnchorSegment.textContent;
+            
+            // Anker speichern
+            userAnchors[segmentId] = {
+                text: segmentText,
+                law: selectedLaw,
+                element: selectedAnchorSegment
+            };
+            
+            // Visuell markieren
+            selectedAnchorSegment.classList.remove('selected');
+            selectedAnchorSegment.classList.add('anchored');
+            
+            // Panel verstecken
+            document.getElementById('anchor-assignment-panel').style.display = 'none';
+            
+            // Anker-Übersicht aktualisieren
+            updateAnchorsOverview();
+            
+            // Reset
+            selectedAnchorSegment = null;
+        }
+
+        function cancelAnchorAssignment() {
+            if (selectedAnchorSegment) {
+                selectedAnchorSegment.classList.remove('selected');
+                selectedAnchorSegment = null;
+            }
+            
+            document.getElementById('anchor-assignment-panel').style.display = 'none';
+        }
+
+        function removeAnchor(segmentId) {
+            if (!userAnchors[segmentId]) return;
+            
+            const anchor = userAnchors[segmentId];
+            const element = anchor.element;
+            
+            // Visuell entfernen
+            element.classList.remove('anchored');
+            
+            // Aus Datenstruktur entfernen
+            delete userAnchors[segmentId];
+            
+            // Anker-Übersicht aktualisieren
+            updateAnchorsOverview();
+        }
+
+        function updateAnchorsOverview() {
+            const anchorsList = document.getElementById('anchors-list');
+            const anchors = Object.values(userAnchors);
+            
+            if (anchors.length === 0) {
+                anchorsList.innerHTML = '<p class="no-anchors">Noch keine Gesetzesanker gesetzt</p>';
+                return;
+            }
+            
+            anchorsList.innerHTML = anchors.map(anchor => `
+                <div class="anchor-item">
+                    <div class="anchor-content">
+                        <div class="anchor-text">"${anchor.text}"</div>
+                        <div class="anchor-law">${anchor.law === 'irrelevant' ? 'Irrelevant' : anchor.law}</div>
+                    </div>
+                    <button class="remove-anchor" onclick="removeAnchor('${Object.keys(userAnchors).find(key => userAnchors[key] === anchor)}')" title="Anker entfernen">×</button>
+                </div>
+            `).join('');
+        }
+
+        function analyzeAnchors() {
+            if (Object.keys(userAnchors).length === 0) {
+                showFeedback(15, false, 'Bitte setzen Sie mindestens einen Gesetzesanker, bevor Sie die Analyse starten.');
+                return;
+            }
+            
+            anchorAnalysisComplete = true;
+            
+            // Alle Segmente analysieren
+            const allSegments = document.querySelectorAll('.anchor-segment');
+            let correctAnchors = 0;
+            let missedAnchors = 0;
+            let wrongAnchors = 0;
+            let irrelevantAnchors = 0;
+            
+            const feedbackItems = [];
+            
+            allSegments.forEach(segment => {
+                const segmentId = segment.getAttribute('data-id');
+                const correctLaw = segment.getAttribute('data-correct-law');
+                const explanation = segment.getAttribute('data-explanation');
+                const segmentText = segment.textContent;
+                const userAnchor = userAnchors[segmentId];
+                
+                if (correctLaw === 'irrelevant') {
+                    // Irrelevante Segmente
+                    if (userAnchor) {
+                        irrelevantAnchors++;
+                        segment.classList.add('wrong-anchor');
+                        feedbackItems.push({
+                            type: 'wrong',
+                            text: `"${segmentText}"`,
+                            law: userAnchor.law,
+                            explanation: `Irrelevant markiert: ${explanation}`
+                        });
+                    }
+                } else {
+                    // Relevante Segmente
+                    if (userAnchor) {
+                        if (userAnchor.law === correctLaw) {
+                            correctAnchors++;
+                            segment.classList.add('correct-anchor');
+                            feedbackItems.push({
+                                type: 'correct',
+                                text: `"${segmentText}"`,
+                                law: userAnchor.law,
+                                explanation: `✅ Richtig verankert: ${explanation}`
+                            });
+                        } else {
+                            wrongAnchors++;
+                            segment.classList.add('wrong-anchor');
+                            feedbackItems.push({
+                                type: 'wrong',
+                                text: `"${segmentText}"`,
+                                law: `${userAnchor.law} (richtig: ${correctLaw})`,
+                                explanation: `❌ Falsch verankert: ${explanation}`
+                            });
+                        }
+                    } else {
+                        missedAnchors++;
+                        segment.classList.add('missed-anchor');
+                        feedbackItems.push({
+                            type: 'missed',
+                            text: `"${segmentText}"`,
+                            law: correctLaw,
+                            explanation: `⚠️ Übersehen: ${explanation}`
+                        });
+                    }
+                }
+            });
+            
+            // Ergebnisse anzeigen
+            showAnchorResults(correctAnchors, missedAnchors, wrongAnchors, irrelevantAnchors, feedbackItems);
+            
+            // Button-Text ändern
+            const analyzeBtn = document.querySelector('#task-15 .btn-primary');
+            analyzeBtn.textContent = 'Zurücksetzen';
+            analyzeBtn.onclick = resetAnchors;
+            
+            // Hauptfeedback
+            const totalRelevant = allSegments.length - document.querySelectorAll('[data-correct-law="irrelevant"]').length;
+            const accuracy = Math.round((correctAnchors / totalRelevant) * 100);
+            const isSuccess = accuracy >= 70;
+            
+            showFeedback(15, isSuccess, `Gesetzesanker-Analyse abgeschlossen! ${correctAnchors} von ${totalRelevant} relevanten Stellen richtig verankert (${accuracy}% Genauigkeit).`);
+            
+            // Ergebnis speichern
+            saveTaskResult(15, JSON.stringify({
+                anchors: userAnchors,
+                correct: correctAnchors,
+                missed: missedAnchors,
+                wrong: wrongAnchors,
+                irrelevant: irrelevantAnchors,
+                accuracy: accuracy
+            }), isSuccess);
+        }
+
+        function showAnchorResults(correct, missed, wrong, irrelevant, feedbackItems) {
+            // Statistiken aktualisieren
+            document.getElementById('anchor-correct-count').textContent = correct;
+            document.getElementById('anchor-missed-count').textContent = missed;
+            document.getElementById('anchor-wrong-count').textContent = wrong;
+            document.getElementById('anchor-irrelevant-count').textContent = irrelevant;
+            
+            // Detailliertes Feedback
+            const feedbackList = document.getElementById('anchor-feedback-list');
+            feedbackList.innerHTML = feedbackItems.map(item => `
+                <div class="anchor-feedback-item ${item.type}">
+                    <div class="anchor-feedback-text">${item.text}</div>
+                    <div class="anchor-feedback-law">${item.law}</div>
+                    <div class="anchor-feedback-explanation">${item.explanation}</div>
+                </div>
+            `).join('');
+            
+            // Ergebnis-Panel anzeigen
+            document.getElementById('anchor-results-panel').style.display = 'block';
+            
+            // Smooth scroll zu Ergebnissen
+            setTimeout(() => {
+                document.getElementById('anchor-results-panel').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 300);
+        }
+
+        function resetAnchors() {
+            // Reset aller Variablen
+            selectedAnchorSegment = null;
+            userAnchors = {};
+            anchorAnalysisComplete = false;
+            
+            // Alle visuellen Markierungen entfernen
+            document.querySelectorAll('.anchor-segment').forEach(segment => {
+                segment.classList.remove('selected', 'anchored', 'correct-anchor', 'wrong-anchor', 'missed-anchor');
+            });
+            
+            // Panels verstecken
+            document.getElementById('anchor-assignment-panel').style.display = 'none';
+            document.getElementById('anchor-results-panel').style.display = 'none';
+            
+            // Anker-Übersicht zurücksetzen
+            updateAnchorsOverview();
+            
+            // Button zurücksetzen
+            const analyzeBtn = document.querySelector('#task-15 .btn-primary');
+            analyzeBtn.textContent = 'Analyse starten';
+            analyzeBtn.onclick = analyzeAnchors;
+            
+            // Feedback verstecken
+            document.getElementById('feedback-15').style.display = 'none';
+        }
+
+        // Aufgabe 15: Gesetzesanker setzen
+        let selectedAnchorSegment = null;
+        let userAnchors = {};
+        let anchorAnalysisComplete = false;
+
+        // Aufgabe 16: Das Schloss öffnen (Escape Game)
         let solvedPuzzles = 0;
         let puzzleAnswers = {};
         let trueFalseAnswer4 = null;
@@ -6257,6 +8880,20 @@
                     checkButton.textContent = 'Antwort prüfen';
                     checkButton.onclick = checkTask11;
                     break;
+                    
+                case 13:
+                    // Prüfschema zurücksetzen
+                    resetSchema();
+                    checkButton.textContent = 'Antwort prüfen';
+                    checkButton.onclick = checkTask13;
+                    break;
+                    
+                case 15:
+                    // Gesetzesanker zurücksetzen
+                    resetAnchors();
+                    checkButton.textContent = 'Analyse starten';
+                    checkButton.onclick = analyzeAnchors;
+                    break;
             }
         }
 
@@ -6293,7 +8930,10 @@
                 10: 'Wer bin ich?',
                 11: 'Begründung bauen',
                 12: 'Paragraphen-Schießen',
-                13: 'Das Schloss öffnen'
+                13: 'Was fehlt im Prüfschema?',
+                14: 'Relevanz-Scanner',
+                15: 'Gesetzesanker setzen',
+                16: 'Das Schloss öffnen'
             };
             return types[taskId] || 'Unbekannt';
         }
@@ -6389,7 +9029,10 @@
                 { id: 'task-5', text: 'Antwort prüfen', func: checkTask5 },
                 { id: 'task-6', text: 'Antwort prüfen', func: checkTask6 },
                 { id: 'task-7', text: 'Antwort prüfen', func: checkTask7 },
-                { id: 'task-11', text: 'Antwort prüfen', func: checkTask11 }
+                { id: 'task-11', text: 'Antwort prüfen', func: checkTask11 },
+                { id: 'task-13', text: 'Antwort prüfen', func: checkTask13 },
+                { id: 'task-14', text: 'Analyse starten', func: analyzeMarkings },
+                { id: 'task-15', text: 'Analyse starten', func: analyzeAnchors }
             ];
             
             taskButtons.forEach(task => {
@@ -6425,6 +9068,9 @@
             // Reset Begründung bauen
             resetReasoning();
             
+            // Reset Prüfschema
+            resetSchema();
+            
             // Reset Paragraphen-Schießen
             document.getElementById('shooting-start').style.display = 'block';
             document.getElementById('shooting-game').style.display = 'none';
@@ -6433,9 +9079,15 @@
             shootingGameActive = false;
             clearFlyingParagraphs();
             
+            // Reset Relevanz-Scanner
+            resetScanner();
+            
+            // Reset Gesetzesanker
+            resetAnchors();
+            
             // Reset Escape Game
             resetEscapeGame();
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f7838d03939240',t:'MTc2MzMwMTYxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f7c6b5b63a9240',t:'MTc2MzMwNDM2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
