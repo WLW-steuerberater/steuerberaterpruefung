@@ -78,6 +78,34 @@
       margin-bottom: 20px;
     }
 
+    .module-image {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f7fafc;
+    }
+
+    .module-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .module-icon-placeholder,
+    .module-icon-fallback {
+      font-size: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
     .module-card h2 {
       color: #2d3748;
       font-size: 28px;
@@ -101,7 +129,7 @@
     }
 
     .progress-fill {
-      background: #0055B8;
+      background: #48bb78;
       height: 100%;
       border-radius: 10px;
       transition: width 0.5s ease;
@@ -694,9 +722,11 @@
      <p id="welcome-message">Wähle dein Fachgebiet</p>
     </header>
     <div class="modules-grid">
-     <article class="module-card" data-module="ao">
-      <div class="module-icon">
-       📚
+     <article class="module-card" data-module="ao" style="background: #b1f5a3;">
+      <div class="module-image"><img src="https://www.dropbox.com/scl/fi/9t3oxpmqsmvyi9xfk4hh5/Abgabenordnung.png?rlkey=szjtzg6phhio3tv82twtzcyiu&amp;st=6r4di4fw&amp;dl=1" alt="Abgabenordnung" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="module-icon-fallback" style="display: none;">
+        📚
+       </div>
       </div>
       <h2>Abgabenordnung</h2>
       <p>Das "A" und "O" im Steuerrecht</p>
@@ -708,8 +738,10 @@
       </div>
      </article>
      <article class="module-card" data-module="bewertung">
-      <div class="module-icon">
-       💰
+      <div class="module-image">
+       <div class="module-icon-placeholder">
+        💰
+       </div>
       </div>
       <h2>Bewertung</h2>
       <p>Mit 50 € ist das Ding gut bezahlt</p>
@@ -721,8 +753,10 @@
       </div>
      </article>
      <article class="module-card" data-module="bilanzsteuerrecht">
-      <div class="module-icon">
-       📊
+      <div class="module-image">
+       <div class="module-icon-placeholder">
+        📊
+       </div>
       </div>
       <h2>Bilanzsteuerrecht</h2>
       <p>Das Leben des Hans Priller</p>
@@ -734,8 +768,10 @@
       </div>
      </article>
      <article class="module-card" data-module="einkommensteuer">
-      <div class="module-icon">
-       💼
+      <div class="module-image">
+       <div class="module-icon-placeholder">
+        💼
+       </div>
       </div>
       <h2>Einkommensteuer</h2>
       <p>Die wahre Königsdisziplin</p>
@@ -747,8 +783,10 @@
       </div>
      </article>
      <article class="module-card" data-module="erbschaftsteuer">
-      <div class="module-icon">
-       🎁
+      <div class="module-image">
+       <div class="module-icon-placeholder">
+        🎁
+       </div>
       </div>
       <h2>Erbschaftsteuer</h2>
       <p>Erbschaft- und Schenkungsteuerrecht</p>
@@ -760,8 +798,10 @@
       </div>
      </article>
      <article class="module-card" data-module="gewerbesteuer">
-      <div class="module-icon">
-       🏭
+      <div class="module-image">
+       <div class="module-icon-placeholder">
+        🏭
+       </div>
       </div>
       <h2>Gewerbesteuer</h2>
       <p>Gewerbesteuerrecht und Gewerbeertrag</p>
@@ -773,8 +813,10 @@
       </div>
      </article>
      <article class="module-card" data-module="grunderwerbsteuer">
-      <div class="module-icon">
-       🏠
+      <div class="module-image">
+       <div class="module-icon-placeholder">
+        🏠
+       </div>
       </div>
       <h2>Grunderwerbsteuer</h2>
       <p>Grunderwerbsteuerrecht und Erwerbsvorgänge</p>
@@ -786,8 +828,10 @@
       </div>
      </article>
      <article class="module-card" data-module="internationales">
-      <div class="module-icon">
-       🌍
+      <div class="module-image">
+       <div class="module-icon-placeholder">
+        🌍
+       </div>
       </div>
       <h2>Internationales Steuerrecht</h2>
       <p>Grenzüberschreitende Besteuerung und DBA</p>
@@ -799,8 +843,10 @@
       </div>
      </article>
      <article class="module-card" data-module="koerperschaftsteuer">
-      <div class="module-icon">
-       🏢
+      <div class="module-image">
+       <div class="module-icon-placeholder">
+        🏢
+       </div>
       </div>
       <h2>Körperschaftsteuer</h2>
       <p>Körperschaftsteuerrecht und Besteuerung von Kapitalgesellschaften</p>
@@ -812,8 +858,10 @@
       </div>
      </article>
      <article class="module-card" data-module="lohnsteuer">
-      <div class="module-icon">
-       👔
+      <div class="module-image">
+       <div class="module-icon-placeholder">
+        👔
+       </div>
       </div>
       <h2>Lohnsteuer</h2>
       <p>Lohnsteuerrecht und Arbeitslohnbesteuerung</p>
@@ -825,8 +873,10 @@
       </div>
      </article>
      <article class="module-card" data-module="umsatzsteuer">
-      <div class="module-icon">
-       🛒
+      <div class="module-image">
+       <div class="module-icon-placeholder">
+        🛒
+       </div>
       </div>
       <h2>Umsatzsteuer</h2>
       <p>Umsatzsteuerrecht und Mehrwertsteuer</p>
@@ -838,8 +888,10 @@
       </div>
      </article>
      <article class="module-card" data-module="umwandlung">
-      <div class="module-icon">
-       🔄
+      <div class="module-image">
+       <div class="module-icon-placeholder">
+        🔄
+       </div>
       </div>
       <h2>Umwandlung</h2>
       <p>Umwandlungssteuerrecht und Unternehmensumstrukturierung</p>
@@ -1404,15 +1456,6 @@
           const moduleId = card.dataset.module;
           showLearningPath(moduleId);
         });
-        
-        const moduleId = card.dataset.module;
-        const module = modules[moduleId];
-        if (module && module.color) {
-          const progressFill = card.querySelector('.progress-fill');
-          if (progressFill) {
-            progressFill.style.background = module.color;
-          }
-        }
       });
 
       document.getElementById('back-to-modules').addEventListener('click', () => {
@@ -1434,7 +1477,10 @@
         const progressFill = document.querySelector(`[data-progress="${moduleId}"]`);
         const progressText = document.querySelector(`[data-progress-text="${moduleId}"]`);
         
-        if (progressFill) progressFill.style.width = `${progress}%`;
+        if (progressFill) {
+          progressFill.style.width = `${progress}%`;
+          progressFill.style.background = '#48bb78';
+        }
         if (progressText) progressText.textContent = progress;
       });
     }
@@ -1464,6 +1510,17 @@
       }
       
       renderTopics();
+      
+      // Automatisch das aktuelle Thema ausklappen
+      if (appState.currentTopic) {
+        setTimeout(() => {
+          const currentTopicNode = document.querySelector(`[data-topic-id="${appState.currentTopic}"]`);
+          if (currentTopicNode) {
+            currentTopicNode.classList.add('expanded');
+            currentTopicNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 100);
+      }
     }
 
     function renderTopics() {
@@ -1949,5 +2006,5 @@
       initializeApp();
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a00c9fcd5699240',t:'MTc2MzM5ODg3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a0163b284314e42',t:'MTc2MzQwNTE3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
