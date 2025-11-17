@@ -12,7 +12,7 @@
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: transparent;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 100%;
       overflow-x: hidden;
     }
@@ -170,22 +170,12 @@
       animation-fill-mode: both;
     }
 
-    .topic-node:nth-child(1) .node-content {
+    .topic-node:nth-child(even) .node-content {
       margin-left: 0;
       margin-right: auto;
     }
 
-    .topic-node:nth-child(2) .node-content {
-      margin-left: auto;
-      margin-right: 0;
-    }
-
-    .topic-node:nth-child(3) .node-content {
-      margin-left: 0;
-      margin-right: auto;
-    }
-
-    .topic-node:nth-child(4) .node-content {
+    .topic-node:nth-child(odd) .node-content {
       margin-left: auto;
       margin-right: 0;
     }
@@ -205,17 +195,32 @@
       box-shadow: 0 15px 40px rgba(0,0,0,0.2);
     }
 
-    .node-content.locked {
-      opacity: 0.5;
-      cursor: not-allowed;
+    .node-content.completed {
+      background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+      border: 3px solid #38a169;
     }
 
-    .topic-icon-circle {
-      display: none;
+    .node-content.completed .topic-number {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .node-content.completed .topic-title h3 {
+      color: #ffffff;
+    }
+
+    .node-content.completed::after {
+      content: '✓';
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 32px;
+      color: #ffffff;
+      font-weight: 700;
     }
 
     .topic-header {
       margin-bottom: 20px;
+      cursor: pointer;
     }
 
     .topic-number {
@@ -231,10 +236,6 @@
       font-weight: 700;
       font-size: 18px;
       margin-bottom: 10px;
-    }
-
-    .node-content.locked .topic-number {
-      background: #cbd5e0;
     }
 
     .topic-title {
@@ -284,7 +285,7 @@
       gap: 12px;
     }
 
-    .step-item:hover:not(.locked) {
+    .step-item:hover {
       background: #edf2f7;
       border-color: #0055B8;
       transform: translateX(5px);
@@ -294,11 +295,6 @@
       background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
       border-color: #38a169;
       color: #ffffff;
-    }
-
-    .step-item.locked {
-      opacity: 0.5;
-      cursor: not-allowed;
     }
 
     .step-icon {
@@ -321,10 +317,6 @@
       color: #ffffff;
     }
 
-    .step-item.locked .step-name {
-      color: #a0aec0;
-    }
-
     .step-check {
       font-size: 20px;
       color: #ffffff;
@@ -333,22 +325,6 @@
 
     .step-item.completed .step-check {
       display: block;
-    }
-
-    .lock-badge {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      background: #cbd5e0;
-      color: #ffffff;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     .content-view {
@@ -394,6 +370,168 @@
     .video-placeholder .icon {
       font-size: 64px;
       margin-bottom: 15px;
+    }
+
+    .subchapter-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .subchapter-item {
+      background: #f7fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .subchapter-item:hover {
+      background: #edf2f7;
+      border-color: #0055B8;
+      transform: translateX(5px);
+    }
+
+    .subchapter-item.completed {
+      background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+      border-color: #38a169;
+    }
+
+    .subchapter-number {
+      background: #0055B8;
+      color: #ffffff;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .subchapter-item.completed .subchapter-number {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .subchapter-info {
+      flex-grow: 1;
+    }
+
+    .subchapter-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 5px;
+    }
+
+    .subchapter-item.completed .subchapter-name {
+      color: #ffffff;
+    }
+
+    .subchapter-status {
+      font-size: 14px;
+      color: #718096;
+    }
+
+    .subchapter-item.completed .subchapter-status {
+      color: rgba(255,255,255,0.9);
+    }
+
+    .subchapter-icon {
+      font-size: 28px;
+      color: #cbd5e0;
+    }
+
+    .subchapter-item.completed .subchapter-icon {
+      color: #ffffff;
+    }
+
+    .expand-icon {
+      font-size: 24px;
+      color: #cbd5e0;
+      transition: transform 0.3s ease;
+    }
+
+    .subchapter-item.completed .expand-icon {
+      color: #ffffff;
+    }
+
+    .subvideos-container {
+      display: none;
+      padding-left: 30px;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .subvideos-container.expanded {
+      display: flex;
+    }
+
+    .subvideo-item {
+      background: #ffffff;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 15px 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .subvideo-item:hover {
+      background: #edf2f7;
+      border-color: #0055B8;
+    }
+
+    .subvideo-item.completed {
+      background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+      border-color: #38a169;
+    }
+
+    .subvideo-number {
+      background: #0055B8;
+      color: #ffffff;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .subvideo-item.completed .subvideo-number {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .subvideo-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #2d3748;
+      flex-grow: 1;
+    }
+
+    .subvideo-item.completed .subvideo-name {
+      color: #ffffff;
+    }
+
+    .subvideo-icon {
+      font-size: 20px;
+      color: #cbd5e0;
+    }
+
+    .subvideo-item.completed .subvideo-icon {
+      color: #ffffff;
     }
 
     .quiz-container {
@@ -442,7 +580,7 @@
     }
 
     .complete-button {
-      background: #0055B8;
+      background: #48bb78;
       color: #ffffff;
       border: none;
       padding: 18px 40px;
@@ -451,20 +589,38 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0, 85, 184, 0.4);
+      box-shadow: 0 5px 15px rgba(72, 187, 120, 0.4);
       width: 100%;
       margin-top: 25px;
     }
 
     .complete-button:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 85, 184, 0.5);
+      box-shadow: 0 8px 20px rgba(72, 187, 120, 0.5);
     }
 
     .complete-button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
       transform: none;
+    }
+
+    .message-box {
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 15px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .message-box.error {
+      background: #fed7d7;
+      color: #c53030;
+    }
+
+    .message-box.warning {
+      background: #feebc8;
+      color: #c05621;
     }
 
     @keyframes fadeInDown {
@@ -511,12 +667,15 @@
         grid-template-columns: 1fr;
       }
 
-      .steps-grid {
-        grid-template-columns: 1fr;
-      }
-
       .content-card {
         padding: 25px;
+      }
+
+      .topic-node:nth-child(even) .node-content,
+      .topic-node:nth-child(odd) .node-content {
+        margin-left: auto;
+        margin-right: auto;
+        width: 95%;
       }
     }
   </style>
@@ -524,14 +683,14 @@
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body>
-  <div class="container">
-   <div id="module-selection" class="module-selection">
-    <div class="header">
-     <h1 id="platform-title">Steuerrecht Lernplattform</h1>
+  <main class="container">
+   <section id="module-selection" class="module-selection">
+    <header class="header">
+     <h1 id="platform-title">WLW+</h1>
      <p id="welcome-message">Wähle dein Fachgebiet</p>
-    </div>
+    </header>
     <div class="modules-grid">
-     <div class="module-card" data-module="ao">
+     <article class="module-card" data-module="ao">
       <div class="module-icon">
        📚
       </div>
@@ -543,8 +702,8 @@
       <div class="progress-text">
        <span data-progress-text="ao">0</span>% abgeschlossen
       </div>
-     </div>
-     <div class="module-card" data-module="est">
+     </article>
+     <article class="module-card" data-module="est">
       <div class="module-icon">
        💼
       </div>
@@ -556,25 +715,25 @@
       <div class="progress-text">
        <span data-progress-text="est">0</span>% abgeschlossen
       </div>
-     </div>
+     </article>
     </div>
-   </div>
-   <div id="learning-path" class="learning-path"><button class="back-button" id="back-to-modules">← Zurück zur Übersicht</button>
-    <div class="header">
+   </section>
+   <section id="learning-path" class="learning-path"><button class="back-button" id="back-to-modules">← Zurück zur Übersicht</button>
+    <header class="header">
      <h1 id="module-title">Abgabenordnung (AO)</h1>
      <p>Lernpfad</p>
-    </div>
+    </header>
     <div class="topics-container" id="topics-container"></div>
-   </div>
-   <div id="content-view" class="content-view"><button class="back-button" id="back-to-path">← Zurück zum Lernpfad</button>
-    <div class="content-card" id="content-card"></div>
-   </div>
-  </div>
+   </section>
+   <section id="content-view" class="content-view"><button class="back-button" id="back-to-path">← Zurück zum Lernpfad</button>
+    <article class="content-card" id="content-card"></article>
+   </section>
+  </main>
   <script>
     const defaultConfig = {
       platform_title: "WLW+",
       welcome_message: "Wähle dein Fachgebiet",
-      background_color: "transparent",
+      background_color: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
       card_background: "#ffffff",
       text_color: "#2d3748",
       primary_action: "#0055B8",
@@ -727,57 +886,49 @@
       }
     };
 
-    let currentModule = null;
-    let currentTopic = null;
-    let currentStep = null;
-    let completedSteps = [];
+    let appState = {
+      currentModule: null,
+      currentTopic: null,
+      currentStep: null,
+      completedSteps: [],
+      isInitialized: false
+    };
 
     const dataHandler = {
       onDataChanged(data) {
-        completedSteps = data;
+        appState.completedSteps = data;
         updateUI();
       }
     };
 
-    async function initApp() {
-      const initResult = await window.dataSdk.init(dataHandler);
-      if (!initResult.isOk) {
-        console.error("Failed to initialize data SDK");
+    async function waitForSDKs() {
+      let attempts = 0;
+      const maxAttempts = 50;
+      
+      while (attempts < maxAttempts) {
+        if (window.elementSdk && window.dataSdk) {
+          return true;
+        }
+        await new Promise(resolve => setTimeout(resolve, 100));
+        attempts++;
+      }
+      
+      return false;
+    }
+
+    async function initializeApp() {
+      const sdksReady = await waitForSDKs();
+      
+      if (!sdksReady) {
+        console.error("SDKs konnten nicht geladen werden");
         return;
       }
 
-      if (window.elementSdk) {
+      try {
         window.elementSdk.init({
           defaultConfig,
           onConfigChange: async (config) => {
-            const platformTitle = document.getElementById('platform-title');
-            const welcomeMessage = document.getElementById('welcome-message');
-            
-            if (platformTitle) {
-              platformTitle.textContent = config.platform_title || defaultConfig.platform_title;
-            }
-            if (welcomeMessage) {
-              welcomeMessage.textContent = config.welcome_message || defaultConfig.welcome_message;
-            }
-
-            const customFont = config.font_family || defaultConfig.font_family;
-            const baseSize = config.font_size || defaultConfig.font_size;
-            const baseFontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif';
-            
-            document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
-            document.body.style.fontSize = `${baseSize}px`;
-
-            document.body.style.background = config.background_color || defaultConfig.background_color;
-
-            const cards = document.querySelectorAll('.module-card, .topic-card, .content-card');
-            cards.forEach(card => {
-              card.style.background = config.card_background || defaultConfig.card_background;
-            });
-
-            const textElements = document.querySelectorAll('h1, h2, h3, h4, p, .step-name, .topic-title h3');
-            textElements.forEach(el => {
-              el.style.color = config.text_color || defaultConfig.text_color;
-            });
+            applyConfig(config);
           },
           mapToCapabilities: (config) => ({
             recolorables: [
@@ -852,10 +1003,65 @@
             ["welcome_message", config.welcome_message || defaultConfig.welcome_message]
           ])
         });
+
+        const initResult = await window.dataSdk.init(dataHandler);
+        
+        if (!initResult.isOk) {
+          console.error("Data SDK Initialisierung fehlgeschlagen");
+          return;
+        }
+
+        appState.isInitialized = true;
+        setupEventListeners();
+        updateUI();
+      } catch (error) {
+        console.error("Fehler bei der Initialisierung:", error);
+      }
+    }
+
+    function applyConfig(config) {
+      const platformTitle = document.getElementById('platform-title');
+      const welcomeMessage = document.getElementById('welcome-message');
+      
+      if (platformTitle) {
+        platformTitle.textContent = config.platform_title || defaultConfig.platform_title;
+      }
+      if (welcomeMessage) {
+        welcomeMessage.textContent = config.welcome_message || defaultConfig.welcome_message;
       }
 
-      setupEventListeners();
-      updateUI();
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      const baseFontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif';
+      
+      document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+      document.body.style.fontSize = `${baseSize}px`;
+      document.body.style.background = config.background_color || defaultConfig.background_color;
+
+      const cards = document.querySelectorAll('.module-card, .node-content, .content-card');
+      cards.forEach(card => {
+        card.style.background = config.card_background || defaultConfig.card_background;
+      });
+
+      const textElements = document.querySelectorAll('h2, h3, h4, p:not(.header p), .step-name, .topic-title h3');
+      textElements.forEach(el => {
+        el.style.color = config.text_color || defaultConfig.text_color;
+      });
+
+      const progressFills = document.querySelectorAll('.progress-fill');
+      progressFills.forEach(fill => {
+        fill.style.background = config.primary_action || defaultConfig.primary_action;
+      });
+
+      const topicNumbers = document.querySelectorAll('.topic-number');
+      topicNumbers.forEach(num => {
+        num.style.background = config.primary_action || defaultConfig.primary_action;
+      });
+
+      const completeButtons = document.querySelectorAll('.complete-button');
+      completeButtons.forEach(btn => {
+        btn.style.background = config.secondary_action || defaultConfig.secondary_action;
+      });
     }
 
     function setupEventListeners() {
@@ -871,13 +1077,16 @@
       });
 
       document.getElementById('back-to-path').addEventListener('click', () => {
-        showLearningPath(currentModule);
+        showLearningPath(appState.currentModule);
       });
     }
 
     function updateUI() {
+      if (!appState.isInitialized) return;
+      
       updateProgress();
-      if (currentModule) {
+      
+      if (appState.currentModule) {
         renderTopics();
       }
     }
@@ -886,7 +1095,7 @@
       Object.keys(modules).forEach(moduleId => {
         const module = modules[moduleId];
         const totalSteps = module.topics.reduce((sum, topic) => sum + topic.steps.length, 0);
-        const completedCount = completedSteps.filter(step => step.module_id === moduleId).length;
+        const completedCount = appState.completedSteps.filter(step => step.module_id === moduleId).length;
         const progress = totalSteps > 0 ? Math.round((completedCount / totalSteps) * 100) : 0;
 
         const progressFill = document.querySelector(`[data-progress="${moduleId}"]`);
@@ -901,13 +1110,13 @@
       document.getElementById('module-selection').style.display = 'block';
       document.getElementById('learning-path').classList.remove('active');
       document.getElementById('content-view').classList.remove('active');
-      currentModule = null;
-      currentTopic = null;
-      currentStep = null;
+      appState.currentModule = null;
+      appState.currentTopic = null;
+      appState.currentStep = null;
     }
 
     function showLearningPath(moduleId) {
-      currentModule = moduleId;
+      appState.currentModule = moduleId;
       const module = modules[moduleId];
       
       document.getElementById('module-selection').style.display = 'none';
@@ -922,50 +1131,50 @@
       const container = document.getElementById('topics-container');
       container.innerHTML = '<div class="path-line"></div>';
       
-      const module = modules[currentModule];
+      const module = modules[appState.currentModule];
       
       module.topics.forEach((topic, topicIndex) => {
-        const isCompleted = isTopicCompleted(currentModule, topic.id);
+        const isCompleted = isTopicCompleted(appState.currentModule, topic.id);
         
         const topicNode = document.createElement('div');
         topicNode.className = 'topic-node';
         topicNode.style.animationDelay = `${topicIndex * 0.15}s`;
         
         topicNode.innerHTML = `
-          <div class="node-content" data-topic-id="${topic.id}">
+          <div class="node-content ${isCompleted ? 'completed' : ''}" data-topic-id="${topic.id}">
             <div class="topic-header">
               <div class="topic-number">${topicIndex + 1}</div>
               <div class="topic-title">
                 <h3>${topic.title}</h3>
               </div>
             </div>
-            <div class="steps-list" id="steps-${topic.id}">
+            <div class="steps-list">
               <div class="steps-list-inner" id="steps-inner-${topic.id}"></div>
             </div>
-          </div>
-          <div class="topic-icon-circle ${isCompleted ? 'completed' : ''}">
-            ${isCompleted ? '✓' : (topicIndex + 1)}
           </div>
         `;
         
         container.appendChild(topicNode);
-        renderSteps(topic);
         
-        // Klick-Event für Aufklappen/Zuklappen
         const nodeContent = topicNode.querySelector('.node-content');
         const topicHeader = nodeContent.querySelector('.topic-header');
-        topicHeader.style.cursor = 'pointer';
+        
         topicHeader.addEventListener('click', () => {
           nodeContent.classList.toggle('expanded');
         });
+        
+        renderSteps(topic);
       });
     }
 
     function renderSteps(topic) {
       const stepsContainer = document.getElementById(`steps-inner-${topic.id}`);
+      if (!stepsContainer) return;
       
-      topic.steps.forEach((step, stepIndex) => {
-        const isCompleted = isStepCompleted(currentModule, topic.id, step.type);
+      stepsContainer.innerHTML = '';
+      
+      topic.steps.forEach((step) => {
+        const isCompleted = isStepCompleted(appState.currentModule, topic.id, step.type);
         
         const stepItem = document.createElement('div');
         stepItem.className = `step-item ${isCompleted ? 'completed' : ''}`;
@@ -976,7 +1185,7 @@
         `;
         
         stepItem.addEventListener('click', () => {
-          showContent(currentModule, topic.id, step.type);
+          showContent(appState.currentModule, topic.id, step.type);
         });
         
         stepsContainer.appendChild(stepItem);
@@ -984,9 +1193,9 @@
     }
 
     function showContent(moduleId, topicId, stepType) {
-      currentModule = moduleId;
-      currentTopic = topicId;
-      currentStep = stepType;
+      appState.currentModule = moduleId;
+      appState.currentTopic = topicId;
+      appState.currentStep = stepType;
       
       document.getElementById('learning-path').classList.remove('active');
       document.getElementById('content-view').classList.add('active');
@@ -996,113 +1205,16 @@
       const step = topic.steps.find(s => s.type === stepType);
       
       const contentCard = document.getElementById('content-card');
-      
       let content = '';
       
       if (stepType === 'video') {
-        let subchaptersHtml = '';
-        if (step.subchapters && step.subchapters.length > 0) {
-          subchaptersHtml = '<div style="margin-top: 30px;"><h3 style="color: #2d3748; font-size: 24px; margin-bottom: 20px;">Kapitel</h3><div style="display: flex; flex-direction: column; gap: 15px;">';
-          step.subchapters.forEach((subchapter, index) => {
-            const isCompleted = isSubchapterCompleted(moduleId, topicId, stepType, subchapter.id);
-            const hasSubvideos = subchapter.subvideos && subchapter.subvideos.length > 0;
-            
-            subchaptersHtml += `
-              <div class="subchapter-wrapper" style="display: flex; flex-direction: column; gap: 10px;">
-                <div class="subchapter-item ${isCompleted ? 'completed' : ''}" data-subchapter="${subchapter.id}" ${hasSubvideos ? 'data-has-subvideos="true"' : ''} style="background: ${isCompleted ? 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)' : '#f7fafc'}; border: 2px solid ${isCompleted ? '#38a169' : '#e2e8f0'}; border-radius: 12px; padding: 20px 25px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 15px;">
-                  <div style="background: ${isCompleted ? 'rgba(255,255,255,0.3)' : '#0055B8'}; color: #ffffff; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; flex-shrink: 0;">${index + 1}</div>
-                  <div style="flex-grow: 1;">
-                    <div style="font-size: 18px; font-weight: 600; color: ${isCompleted ? '#ffffff' : '#2d3748'}; margin-bottom: 5px;">${subchapter.name}</div>
-                    <div style="font-size: 14px; color: ${isCompleted ? 'rgba(255,255,255,0.9)' : '#718096'};">${isCompleted ? 'Abgeschlossen' : 'Noch nicht angesehen'}${hasSubvideos ? ' • ' + subchapter.subvideos.length + ' Untervideos' : ''}</div>
-                  </div>
-                  ${hasSubvideos ? `<div class="expand-icon" style="font-size: 24px; color: ${isCompleted ? '#ffffff' : '#cbd5e0'}; transition: transform 0.3s ease;">▼</div>` : `<div style="font-size: 28px; color: ${isCompleted ? '#ffffff' : '#cbd5e0'};">${isCompleted ? '✓' : '▶'}</div>`}
-                </div>
-            `;
-            
-            if (hasSubvideos) {
-              subchaptersHtml += `<div class="subvideos-container" data-parent="${subchapter.id}" style="display: none; padding-left: 30px; flex-direction: column; gap: 10px;">`;
-              subchapter.subvideos.forEach((subvideo, subIndex) => {
-                const isSubvideoCompleted = isSubchapterCompleted(moduleId, topicId, stepType, subvideo.id);
-                subchaptersHtml += `
-                  <div class="subchapter-item ${isSubvideoCompleted ? 'completed' : ''}" data-subchapter="${subvideo.id}" style="background: ${isSubvideoCompleted ? 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)' : '#ffffff'}; border: 2px solid ${isSubvideoCompleted ? '#38a169' : '#e2e8f0'}; border-radius: 12px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 12px;">
-                    <div style="background: ${isSubvideoCompleted ? 'rgba(255,255,255,0.3)' : '#0055B8'}; color: #ffffff; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0;">${index + 1}.${subIndex + 1}</div>
-                    <div style="flex-grow: 1;">
-                      <div style="font-size: 16px; font-weight: 600; color: ${isSubvideoCompleted ? '#ffffff' : '#2d3748'};">${subvideo.name}</div>
-                    </div>
-                    <div style="font-size: 20px; color: ${isSubvideoCompleted ? '#ffffff' : '#cbd5e0'};">${isSubvideoCompleted ? '✓' : '▶'}</div>
-                  </div>
-                `;
-              });
-              subchaptersHtml += `</div>`;
-            }
-            
-            subchaptersHtml += `</div>`;
-          });
-          subchaptersHtml += '</div></div>';
-        }
-        
-        content = `
-          <h2>${step.icon} ${step.name}</h2>
-          <p><strong>${topic.title}</strong></p>
-          <div class="video-placeholder">
-            <div class="icon">🎥</div>
-            <h3>Lernvideo</h3>
-            <p>Hier würde das Lernvideo zum Thema "${topic.title}" angezeigt werden.</p>
-          </div>
-          <p>In diesem Video lernst du die wichtigsten Grundlagen und Konzepte kennen.</p>
-          ${subchaptersHtml}
-        `;
+        content = generateVideoContent(step, topic, moduleId, topicId, stepType);
       } else if (stepType === 'technique') {
-        content = `
-          <h2>${step.icon} ${step.name}</h2>
-          <p><strong>${topic.title}</strong></p>
-          <h3>Klausurtechnik und Prüfungsschema</h3>
-          <p>Hier lernst du, wie du das Thema in der Klausur strukturiert bearbeitest:</p>
-          <ul style="color: #4a5568; font-size: 18px; line-height: 1.8; margin: 20px 0;">
-            <li>Schritt 1: Sachverhalt analysieren und relevante Normen identifizieren</li>
-            <li>Schritt 2: Prüfungsschema aufstellen und Struktur festlegen</li>
-            <li>Schritt 3: Subsumtion durchführen und Argumente entwickeln</li>
-            <li>Schritt 4: Ergebnis formulieren und begründen</li>
-          </ul>
-          <p>Achte besonders auf die korrekte Zitierweise und die logische Argumentationskette.</p>
-        `;
+        content = generateTechniqueContent(step, topic);
       } else if (stepType === 'test') {
-        content = `
-          <h2>${step.icon} ${step.name}</h2>
-          <p><strong>${topic.title}</strong></p>
-          <div class="quiz-container">
-            <div class="question">
-              <h4>Frage 1: Welche Aussage ist korrekt?</h4>
-              <div class="options">
-                <div class="option" data-question="1" data-option="a">A) Erste Antwortmöglichkeit</div>
-                <div class="option" data-question="1" data-option="b">B) Zweite Antwortmöglichkeit</div>
-                <div class="option" data-question="1" data-option="c">C) Dritte Antwortmöglichkeit</div>
-                <div class="option" data-question="1" data-option="d">D) Vierte Antwortmöglichkeit</div>
-              </div>
-            </div>
-            <div class="question">
-              <h4>Frage 2: Was trifft zu?</h4>
-              <div class="options">
-                <div class="option" data-question="2" data-option="a">A) Erste Antwortmöglichkeit</div>
-                <div class="option" data-question="2" data-option="b">B) Zweite Antwortmöglichkeit</div>
-                <div class="option" data-question="2" data-option="c">C) Dritte Antwortmöglichkeit</div>
-                <div class="option" data-question="2" data-option="d">D) Vierte Antwortmöglichkeit</div>
-              </div>
-            </div>
-          </div>
-        `;
+        content = generateTestContent(step, topic);
       } else if (stepType === 'case') {
-        content = `
-          <h2>${step.icon} ${step.name}</h2>
-          <p><strong>${topic.title}</strong></p>
-          <h3>Sachverhalt</h3>
-          <p>Hier würde ein praxisnaher Fall zum Thema "${topic.title}" dargestellt werden, den du eigenständig lösen sollst.</p>
-          <p style="background: #f7fafc; padding: 20px; border-radius: 12px; border-left: 4px solid #0055B8;">
-            Der Sachverhalt beschreibt eine typische Situation aus der Praxis, in der du dein erlerntes Wissen anwenden musst. Analysiere den Fall sorgfältig und wende das Prüfungsschema an.
-          </p>
-          <h3>Aufgabenstellung</h3>
-          <p>Prüfe die rechtlichen Voraussetzungen und komme zu einem begründeten Ergebnis.</p>
-        `;
+        content = generateCaseContent(step, topic);
       }
       
       contentCard.innerHTML = content + `
@@ -1111,6 +1223,126 @@
         </button>
       `;
       
+      attachContentEventListeners(stepType, moduleId, topicId);
+    }
+
+    function generateVideoContent(step, topic, moduleId, topicId, stepType) {
+      let subchaptersHtml = '';
+      
+      if (step.subchapters && step.subchapters.length > 0) {
+        subchaptersHtml = '<div style="margin-top: 30px;"><h3 style="color: #2d3748; font-size: 24px; margin-bottom: 20px;">Kapitel</h3>';
+        
+        step.subchapters.forEach((subchapter, index) => {
+          const isCompleted = isSubchapterCompleted(moduleId, topicId, stepType, subchapter.id);
+          const hasSubvideos = subchapter.subvideos && subchapter.subvideos.length > 0;
+          
+          subchaptersHtml += `
+            <div class="subchapter-wrapper">
+              <div class="subchapter-item ${isCompleted ? 'completed' : ''}" data-subchapter="${subchapter.id}" ${hasSubvideos ? 'data-has-subvideos="true"' : ''}>
+                <div class="subchapter-number">${index + 1}</div>
+                <div class="subchapter-info">
+                  <div class="subchapter-name">${subchapter.name}</div>
+                  <div class="subchapter-status">${isCompleted ? 'Abgeschlossen' : 'Noch nicht angesehen'}${hasSubvideos ? ' • ' + subchapter.subvideos.length + ' Untervideos' : ''}</div>
+                </div>
+                ${hasSubvideos ? '<div class="expand-icon">▼</div>' : `<div class="subchapter-icon">${isCompleted ? '✓' : '▶'}</div>`}
+              </div>
+          `;
+          
+          if (hasSubvideos) {
+            subchaptersHtml += `<div class="subvideos-container" data-parent="${subchapter.id}">`;
+            
+            subchapter.subvideos.forEach((subvideo, subIndex) => {
+              const isSubvideoCompleted = isSubchapterCompleted(moduleId, topicId, stepType, subvideo.id);
+              
+              subchaptersHtml += `
+                <div class="subvideo-item ${isSubvideoCompleted ? 'completed' : ''}" data-subchapter="${subvideo.id}">
+                  <div class="subvideo-number">${index + 1}.${subIndex + 1}</div>
+                  <div class="subvideo-name">${subvideo.name}</div>
+                  <div class="subvideo-icon">${isSubvideoCompleted ? '✓' : '▶'}</div>
+                </div>
+              `;
+            });
+            
+            subchaptersHtml += '</div>';
+          }
+          
+          subchaptersHtml += '</div>';
+        });
+        
+        subchaptersHtml += '</div>';
+      }
+      
+      return `
+        <h2>${step.icon} ${step.name}</h2>
+        <p><strong>${topic.title}</strong></p>
+        <div class="video-placeholder">
+          <div class="icon">🎥</div>
+          <h3>Lernvideo</h3>
+          <p>Hier würde das Lernvideo zum Thema "${topic.title}" angezeigt werden.</p>
+        </div>
+        <p>In diesem Video lernst du die wichtigsten Grundlagen und Konzepte kennen.</p>
+        ${subchaptersHtml}
+      `;
+    }
+
+    function generateTechniqueContent(step, topic) {
+      return `
+        <h2>${step.icon} ${step.name}</h2>
+        <p><strong>${topic.title}</strong></p>
+        <h3>Klausurtechnik und Prüfungsschema</h3>
+        <p>Hier lernst du, wie du das Thema in der Klausur strukturiert bearbeitest:</p>
+        <ul style="color: #4a5568; font-size: 18px; line-height: 1.8; margin: 20px 0;">
+          <li>Schritt 1: Sachverhalt analysieren und relevante Normen identifizieren</li>
+          <li>Schritt 2: Prüfungsschema aufstellen und Struktur festlegen</li>
+          <li>Schritt 3: Subsumtion durchführen und Argumente entwickeln</li>
+          <li>Schritt 4: Ergebnis formulieren und begründen</li>
+        </ul>
+        <p>Achte besonders auf die korrekte Zitierweise und die logische Argumentationskette.</p>
+      `;
+    }
+
+    function generateTestContent(step, topic) {
+      return `
+        <h2>${step.icon} ${step.name}</h2>
+        <p><strong>${topic.title}</strong></p>
+        <div class="quiz-container">
+          <div class="question">
+            <h4>Frage 1: Welche Aussage ist korrekt?</h4>
+            <div class="options">
+              <div class="option" data-question="1" data-option="a">A) Erste Antwortmöglichkeit</div>
+              <div class="option" data-question="1" data-option="b">B) Zweite Antwortmöglichkeit</div>
+              <div class="option" data-question="1" data-option="c">C) Dritte Antwortmöglichkeit</div>
+              <div class="option" data-question="1" data-option="d">D) Vierte Antwortmöglichkeit</div>
+            </div>
+          </div>
+          <div class="question">
+            <h4>Frage 2: Was trifft zu?</h4>
+            <div class="options">
+              <div class="option" data-question="2" data-option="a">A) Erste Antwortmöglichkeit</div>
+              <div class="option" data-question="2" data-option="b">B) Zweite Antwortmöglichkeit</div>
+              <div class="option" data-question="2" data-option="c">C) Dritte Antwortmöglichkeit</div>
+              <div class="option" data-question="2" data-option="d">D) Vierte Antwortmöglichkeit</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function generateCaseContent(step, topic) {
+      return `
+        <h2>${step.icon} ${step.name}</h2>
+        <p><strong>${topic.title}</strong></p>
+        <h3>Sachverhalt</h3>
+        <p>Hier würde ein praxisnaher Fall zum Thema "${topic.title}" dargestellt werden, den du eigenständig lösen sollst.</p>
+        <p style="background: #f7fafc; padding: 20px; border-radius: 12px; border-left: 4px solid #0055B8;">
+          Der Sachverhalt beschreibt eine typische Situation aus der Praxis, in der du dein erlerntes Wissen anwenden musst. Analysiere den Fall sorgfältig und wende das Prüfungsschema an.
+        </p>
+        <h3>Aufgabenstellung</h3>
+        <p>Prüfe die rechtlichen Voraussetzungen und komme zu einem begründeten Ergebnis.</p>
+      `;
+    }
+
+    function attachContentEventListeners(stepType, moduleId, topicId) {
       if (stepType === 'test') {
         document.querySelectorAll('.option').forEach(option => {
           option.addEventListener('click', () => {
@@ -1123,10 +1355,6 @@
         });
       }
       
-      document.getElementById('complete-step').addEventListener('click', async () => {
-        await completeStep(moduleId, topicId, stepType);
-      });
-
       if (stepType === 'video') {
         document.querySelectorAll('.subchapter-item').forEach(item => {
           item.addEventListener('click', async (e) => {
@@ -1134,36 +1362,41 @@
             const subchapterId = item.dataset.subchapter;
             
             if (hasSubvideos) {
-              // Aufklappen/Zuklappen der Untervideos
               e.stopPropagation();
               const container = document.querySelector(`.subvideos-container[data-parent="${subchapterId}"]`);
               const expandIcon = item.querySelector('.expand-icon');
               
               if (container) {
-                if (container.style.display === 'none' || container.style.display === '') {
-                  container.style.display = 'flex';
-                  if (expandIcon) expandIcon.style.transform = 'rotate(180deg)';
-                } else {
-                  container.style.display = 'none';
-                  if (expandIcon) expandIcon.style.transform = 'rotate(0deg)';
+                container.classList.toggle('expanded');
+                if (expandIcon) {
+                  expandIcon.style.transform = container.classList.contains('expanded') ? 'rotate(180deg)' : 'rotate(0deg)';
                 }
               }
             } else {
-              // Normales Kapitel oder Untervideo abspielen
               await completeSubchapter(moduleId, topicId, stepType, subchapterId);
             }
           });
+        });
+        
+        document.querySelectorAll('.subvideo-item').forEach(item => {
+          item.addEventListener('click', async () => {
+            const subchapterId = item.dataset.subchapter;
+            await completeSubchapter(moduleId, topicId, stepType, subchapterId);
+          });
+        });
+      }
+      
+      const completeButton = document.getElementById('complete-step');
+      if (completeButton) {
+        completeButton.addEventListener('click', async () => {
+          await completeStep(moduleId, topicId, stepType);
         });
       }
     }
 
     async function completeSubchapter(moduleId, topicId, stepType, subchapterId) {
-      if (completedSteps.length >= 999) {
-        const contentCard = document.getElementById('content-card');
-        const warningDiv = document.createElement('div');
-        warningDiv.style.cssText = 'background: #fed7d7; color: #c53030; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: center;';
-        warningDiv.textContent = 'Maximale Anzahl von 999 abgeschlossenen Schritten erreicht. Bitte kontaktiere den Support.';
-        contentCard.appendChild(warningDiv);
+      if (appState.completedSteps.length >= 999) {
+        showMessage('Maximale Anzahl von 999 abgeschlossenen Schritten erreicht.', 'warning');
         return;
       }
 
@@ -1174,40 +1407,23 @@
       const result = await window.dataSdk.create({
         module_id: moduleId,
         topic_id: topicId,
-        step_type: stepType + '_subchapter_' + subchapterId,
+        step_type: `${stepType}_subchapter_${subchapterId}`,
         completed: true,
         completed_at: new Date().toISOString()
       });
 
       if (result.isOk) {
-        // Automatisch Seite neu laden um nächstes Kapitel anzuzeigen
         setTimeout(() => {
           showContent(moduleId, topicId, stepType);
-        }, 500);
+        }, 300);
       } else {
-        const contentCard = document.getElementById('content-card');
-        const errorDiv = document.createElement('div');
-        errorDiv.style.cssText = 'background: #fed7d7; color: #c53030; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: center;';
-        errorDiv.textContent = 'Fehler beim Speichern. Bitte versuche es erneut.';
-        contentCard.appendChild(errorDiv);
+        showMessage('Fehler beim Speichern. Bitte versuche es erneut.', 'error');
       }
     }
 
-    function isSubchapterCompleted(moduleId, topicId, stepType, subchapterId) {
-      return completedSteps.some(step => 
-        step.module_id === moduleId && 
-        step.topic_id === topicId && 
-        step.step_type === stepType + '_subchapter_' + subchapterId
-      );
-    }
-
     async function completeStep(moduleId, topicId, stepType) {
-      if (completedSteps.length >= 999) {
-        const contentCard = document.getElementById('content-card');
-        const warningDiv = document.createElement('div');
-        warningDiv.style.cssText = 'background: #fed7d7; color: #c53030; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: center;';
-        warningDiv.textContent = 'Maximale Anzahl von 999 abgeschlossenen Schritten erreicht. Bitte kontaktiere den Support.';
-        contentCard.appendChild(warningDiv);
+      if (appState.completedSteps.length >= 999) {
+        showMessage('Maximale Anzahl von 999 abgeschlossenen Schritten erreicht.', 'warning');
         return;
       }
 
@@ -1230,33 +1446,52 @@
       if (result.isOk) {
         button.textContent = '✓ Abgeschlossen';
         
-        // Automatisch zum nächsten Schritt weiterleiten
         setTimeout(() => {
           const nextContent = findNextContent(moduleId, topicId, stepType);
           if (nextContent && nextContent.topicId === topicId) {
-            // Nur innerhalb des gleichen Themas weiterleiten
             showContent(nextContent.moduleId, nextContent.topicId, nextContent.stepType);
           } else {
-            // Zurück zum Lernpfad wenn Thema abgeschlossen
             showLearningPath(moduleId);
           }
         }, 1000);
       } else {
         button.disabled = false;
         button.textContent = 'Als abgeschlossen markieren';
-        const contentCard = document.getElementById('content-card');
-        const errorDiv = document.createElement('div');
-        errorDiv.style.cssText = 'background: #fed7d7; color: #c53030; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: center;';
-        errorDiv.textContent = 'Fehler beim Speichern. Bitte versuche es erneut.';
-        contentCard.appendChild(errorDiv);
+        showMessage('Fehler beim Speichern. Bitte versuche es erneut.', 'error');
       }
     }
 
+    function showMessage(text, type) {
+      const contentCard = document.getElementById('content-card');
+      const existingMessage = contentCard.querySelector('.message-box');
+      
+      if (existingMessage) {
+        existingMessage.remove();
+      }
+      
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message-box ${type}`;
+      messageDiv.textContent = text;
+      contentCard.appendChild(messageDiv);
+      
+      setTimeout(() => {
+        messageDiv.remove();
+      }, 5000);
+    }
+
     function isStepCompleted(moduleId, topicId, stepType) {
-      return completedSteps.some(step => 
+      return appState.completedSteps.some(step => 
         step.module_id === moduleId && 
         step.topic_id === topicId && 
         step.step_type === stepType
+      );
+    }
+
+    function isSubchapterCompleted(moduleId, topicId, stepType, subchapterId) {
+      return appState.completedSteps.some(step => 
+        step.module_id === moduleId && 
+        step.topic_id === topicId && 
+        step.step_type === `${stepType}_subchapter_${subchapterId}`
       );
     }
 
@@ -1272,7 +1507,6 @@
       const currentTopic = module.topics[currentTopicIndex];
       const currentStepIndex = currentTopic.steps.findIndex(s => s.type === currentStepType);
       
-      // Nächster Schritt im gleichen Thema
       if (currentStepIndex < currentTopic.steps.length - 1) {
         return {
           moduleId: currentModuleId,
@@ -1281,10 +1515,8 @@
         };
       }
       
-      // Nächstes Thema im gleichen Modul
       if (currentTopicIndex < module.topics.length - 1) {
         const nextTopic = module.topics[currentTopicIndex + 1];
-        // Prüfe ob das nächste Thema freigeschaltet ist
         if (isTopicCompleted(currentModuleId, currentTopicId)) {
           return {
             moduleId: currentModuleId,
@@ -1297,7 +1529,11 @@
       return null;
     }
 
-    initApp();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeApp);
+    } else {
+      initializeApp();
+    }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ff763dc6734e42',t:'MTc2MzM4NDk1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ff90ed838a3e95',t:'MTc2MzM4NjA1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
