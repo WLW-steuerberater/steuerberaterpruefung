@@ -11,7 +11,7 @@
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(180deg, #6facff, #aacfff);
       min-height: 100%;
       overflow-x: hidden;
     }
@@ -648,6 +648,15 @@
       }
     }
 
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.02);
+      }
+    }
+
     @media (max-width: 768px) {
       .header h1 {
         font-size: 36px;
@@ -858,7 +867,7 @@
     const defaultConfig = {
       platform_title: "WLW+",
       welcome_message: "Wähle dein Fachgebiet",
-      background_color: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      background_color: "linear-gradient(180deg, #6facff, #aacfff)",
       card_background: "#ffffff",
       text_color: "#2d3748",
       primary_action: "#0055B8",
@@ -871,6 +880,7 @@
       ao: {
         name: "Abgabenordnung",
         icon: "📚",
+        color: "#b1f5a3",
         topics: [
           {
             id: "grundsaetze",
@@ -946,6 +956,7 @@
       einkommensteuer: {
         name: "Einkommensteuer",
         icon: "💼",
+        color: "#ffd700",
         topics: [
           {
             id: "grundlagen",
@@ -1012,6 +1023,7 @@
       bilanzsteuerrecht: {
         name: "Bilanzsteuerrecht",
         icon: "📊",
+        color: "#87ceeb",
         topics: [
           {
             id: "grundlagen",
@@ -1032,6 +1044,7 @@
       bewertung: {
         name: "Bewertung",
         icon: "💰",
+        color: "#ffb6c1",
         topics: [
           {
             id: "grundlagen",
@@ -1052,6 +1065,7 @@
       gewerbesteuer: {
         name: "Gewerbesteuer",
         icon: "🏭",
+        color: "#dda0dd",
         topics: [
           {
             id: "grundlagen",
@@ -1072,6 +1086,7 @@
       erbschaftsteuer: {
         name: "Erbschaftsteuer",
         icon: "🎁",
+        color: "#f0e68c",
         topics: [
           {
             id: "grundlagen",
@@ -1092,6 +1107,7 @@
       grunderwerbsteuer: {
         name: "Grunderwerbsteuer",
         icon: "🏠",
+        color: "#ffa07a",
         topics: [
           {
             id: "grundlagen",
@@ -1112,6 +1128,7 @@
       internationales: {
         name: "Internationales Steuerrecht",
         icon: "🌍",
+        color: "#98fb98",
         topics: [
           {
             id: "grundlagen",
@@ -1132,6 +1149,7 @@
       koerperschaftsteuer: {
         name: "Körperschaftsteuer",
         icon: "🏢",
+        color: "#b0c4de",
         topics: [
           {
             id: "grundlagen",
@@ -1152,6 +1170,7 @@
       lohnsteuer: {
         name: "Lohnsteuer",
         icon: "👔",
+        color: "#f4a460",
         topics: [
           {
             id: "grundlagen",
@@ -1172,6 +1191,7 @@
       umsatzsteuer: {
         name: "Umsatzsteuer",
         icon: "🛒",
+        color: "#ff6b6b",
         topics: [
           {
             id: "grundlagen",
@@ -1192,6 +1212,7 @@
       umwandlung: {
         name: "Umwandlung",
         icon: "🔄",
+        color: "#c9a0dc",
         topics: [
           {
             id: "grundlagen",
@@ -1383,6 +1404,15 @@
           const moduleId = card.dataset.module;
           showLearningPath(moduleId);
         });
+        
+        const moduleId = card.dataset.module;
+        const module = modules[moduleId];
+        if (module && module.color) {
+          const progressFill = card.querySelector('.progress-fill');
+          if (progressFill) {
+            progressFill.style.background = module.color;
+          }
+        }
       });
 
       document.getElementById('back-to-modules').addEventListener('click', () => {
@@ -1427,6 +1457,12 @@
       document.getElementById('content-view').classList.remove('active');
       document.getElementById('module-title').textContent = module.name;
       
+      if (module.color) {
+        document.querySelectorAll('.topic-number').forEach(num => {
+          num.style.background = module.color;
+        });
+      }
+      
       renderTopics();
     }
 
@@ -1446,7 +1482,7 @@
         topicNode.innerHTML = `
           <div class="node-content ${isCompleted ? 'completed' : ''}" data-topic-id="${topic.id}">
             <div class="topic-header">
-              <div class="topic-number">${topicIndex + 1}</div>
+              <div class="topic-number" style="background: ${module.color || '#0055B8'}">${topicIndex + 1}</div>
               <div class="topic-title">
                 <h3>${topic.title}</h3>
               </div>
@@ -1532,8 +1568,11 @@
     function generateVideoContent(step, topic, moduleId, topicId, stepType) {
       let subchaptersHtml = '';
       
+      const module = modules[moduleId];
+      const moduleColor = module.color || '#0055B8';
+      
       if (step.subchapters && step.subchapters.length > 0) {
-        subchaptersHtml = '<div style="margin-top: 30px;"><h3 style="color: #2d3748; font-size: 24px; margin-bottom: 20px;">Kapitel</h3>';
+        subchaptersHtml = '<div style="margin-top: 30px;"><h3 style="color: #2d3748; font-size: 24px; margin-bottom: 20px;">Lernvideos</h3>';
         
         step.subchapters.forEach((subchapter, index) => {
           const isCompleted = isSubchapterCompleted(moduleId, topicId, stepType, subchapter.id);
@@ -1541,8 +1580,8 @@
           
           subchaptersHtml += `
             <div class="subchapter-wrapper">
-              <div class="subchapter-item ${isCompleted ? 'completed' : ''}" data-subchapter="${subchapter.id}" ${hasSubvideos ? 'data-has-subvideos="true"' : ''}>
-                <div class="subchapter-number">${index + 1}</div>
+              <div class="subchapter-item ${isCompleted ? 'completed' : ''}" data-subchapter="${subchapter.id}" data-subchapter-name="${subchapter.name}" ${hasSubvideos ? 'data-has-subvideos="true"' : ''}>
+                <div class="subchapter-number" style="background: ${moduleColor}">${index + 1}</div>
                 <div class="subchapter-info">
                   <div class="subchapter-name">${subchapter.name}</div>
                   <div class="subchapter-status">${isCompleted ? 'Abgeschlossen' : 'Noch nicht angesehen'}${hasSubvideos ? ' • ' + subchapter.subvideos.length + ' Untervideos' : ''}</div>
@@ -1558,8 +1597,8 @@
               const isSubvideoCompleted = isSubchapterCompleted(moduleId, topicId, stepType, subvideo.id);
               
               subchaptersHtml += `
-                <div class="subvideo-item ${isSubvideoCompleted ? 'completed' : ''}" data-subchapter="${subvideo.id}">
-                  <div class="subvideo-number">${index + 1}.${subIndex + 1}</div>
+                <div class="subvideo-item ${isSubvideoCompleted ? 'completed' : ''}" data-subchapter="${subvideo.id}" data-subchapter-name="${subvideo.name}">
+                  <div class="subvideo-number" style="background: ${moduleColor}">${index + 1}.${subIndex + 1}</div>
                   <div class="subvideo-name">${subvideo.name}</div>
                   <div class="subvideo-icon">${isSubvideoCompleted ? '✓' : '▶'}</div>
                 </div>
@@ -1578,12 +1617,35 @@
       return `
         <h2>${step.icon} ${step.name}</h2>
         <p><strong>${topic.title}</strong></p>
-        <div class="video-placeholder">
-          <div class="icon">🎥</div>
-          <h3>Lernvideo</h3>
-          <p>Hier würde das Lernvideo zum Thema "${topic.title}" angezeigt werden.</p>
+        <div style="margin: 25px 0;">
+          <video id="main-video-player" controls style="width: 100%; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);">
+            <source src="https://dl.dropboxusercontent.com/scl/fi/f4bujknjz22n5f9giat3b/5.1_Mitwirkungspflichten-fertig.mp4?rlkey=9q2jukbhvje21tz5nvuch81eh" type="video/mp4">
+            Dein Browser unterstützt das Video-Tag nicht.
+          </video>
+          <div style="margin-top: 15px; padding: 20px; background: #f7fafc; border-radius: 10px;">
+            <h3 id="video-title" style="color: #2d3748; font-size: 18px; margin: 0 0 15px 0; font-weight: 600;">Paragraphen-Markierungen</h3>
+            <div id="video-description" style="display: flex; flex-wrap: wrap; gap: 10px;">
+              <a href="https://wlw-steuern.de/content/t0RloanRHPjMqstkylq5Fu3bwJtmPvG4Qz-rk8LD9zI=.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: #0055B8; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 14px; border-radius: 20px; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0, 85, 184, 0.3);">
+                <span style="font-size: 16px;">§</span>
+                <span>90 Abs. 1 AO</span>
+              </a>
+              <a href="https://wlw-steuern.de/content/t0RloanRHPjMqstkylq5Fu3bwJtmPvG4Qz-rk8LD9zI=.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: #0055B8; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 14px; border-radius: 20px; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0, 85, 184, 0.3);">
+                <span style="font-size: 16px;">§</span>
+                <span>93 AO</span>
+              </a>
+              <a href="https://wlw-steuern.de/content/t0RloanRHPjMqstkylq5Fu3bwJtmPvG4Qz-rk8LD9zI=.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: #0055B8; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 14px; border-radius: 20px; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0, 85, 184, 0.3);">
+                <span style="font-size: 16px;">§</span>
+                <span>97 AO</span>
+              </a>
+            </div>
+          </div>
         </div>
-        <p>In diesem Video lernst du die wichtigsten Grundlagen und Konzepte kennen.</p>
+        <div style="margin-top: 25px; text-align: center;">
+          <button id="next-video-btn" style="background: #0055B8; color: #ffffff; border: none; padding: 15px 35px; border-radius: 12px; display: inline-flex; align-items: center; gap: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0, 85, 184, 0.3); font-size: 16px; font-weight: 600;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0, 85, 184, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0, 85, 184, 0.3)';">
+            <span>Nächstes Video</span>
+            <span style="font-size: 20px;">→</span>
+          </button>
+        </div>
         ${subchaptersHtml}
       `;
     }
@@ -1663,6 +1725,7 @@
           item.addEventListener('click', (e) => {
             const hasSubvideos = item.dataset.hasSubvideos === 'true';
             const subchapterId = item.dataset.subchapter;
+            const subchapterName = item.dataset.subchapterName;
             
             if (hasSubvideos) {
               e.stopPropagation();
@@ -1676,7 +1739,7 @@
                 }
               }
             } else {
-              completeSubchapter(moduleId, topicId, stepType, subchapterId);
+              playVideo(subchapterName, subchapterId);
             }
           });
         });
@@ -1684,9 +1747,17 @@
         document.querySelectorAll('.subvideo-item').forEach(item => {
           item.addEventListener('click', () => {
             const subchapterId = item.dataset.subchapter;
-            completeSubchapter(moduleId, topicId, stepType, subchapterId);
+            const subchapterName = item.dataset.subchapterName;
+            playVideo(subchapterName, subchapterId);
           });
         });
+        
+        const nextVideoBtn = document.getElementById('next-video-btn');
+        if (nextVideoBtn) {
+          nextVideoBtn.addEventListener('click', () => {
+            playNextVideo();
+          });
+        }
       }
       
       const completeButton = document.getElementById('complete-step');
@@ -1694,6 +1765,67 @@
         completeButton.addEventListener('click', () => {
           completeStep(moduleId, topicId, stepType);
         });
+      }
+    }
+
+    function playVideo(videoTitle, subchapterId) {
+      const videoPlayer = document.getElementById('main-video-player');
+      const videoTitleElement = document.getElementById('video-title');
+      
+      if (videoPlayer && videoTitleElement) {
+        videoTitleElement.textContent = videoTitle;
+        appState.currentSubchapterId = subchapterId;
+        
+        videoPlayer.currentTime = 0;
+        videoPlayer.play();
+        
+        videoPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        const existingListener = videoPlayer.onended;
+        if (existingListener) {
+          videoPlayer.removeEventListener('ended', existingListener);
+        }
+        
+        videoPlayer.onended = function() {
+          if (subchapterId && appState.currentModule && appState.currentTopic && appState.currentStep) {
+            completeSubchapter(appState.currentModule, appState.currentTopic, appState.currentStep, subchapterId);
+          }
+        };
+      }
+    }
+
+    function playNextVideo() {
+      if (!appState.currentModule || !appState.currentTopic || !appState.currentStep) {
+        return;
+      }
+
+      const module = modules[appState.currentModule];
+      const topic = module.topics.find(t => t.id === appState.currentTopic);
+      const step = topic.steps.find(s => s.type === appState.currentStep);
+
+      if (!step || !step.subchapters) {
+        return;
+      }
+
+      let allVideos = [];
+      step.subchapters.forEach(subchapter => {
+        if (subchapter.subvideos && subchapter.subvideos.length > 0) {
+          subchapter.subvideos.forEach(subvideo => {
+            allVideos.push({ id: subvideo.id, name: subvideo.name });
+          });
+        } else {
+          allVideos.push({ id: subchapter.id, name: subchapter.name });
+        }
+      });
+
+      const currentIndex = allVideos.findIndex(v => v.id === appState.currentSubchapterId);
+      
+      if (currentIndex !== -1 && currentIndex < allVideos.length - 1) {
+        const nextVideo = allVideos[currentIndex + 1];
+        playVideo(nextVideo.name, nextVideo.id);
+      } else if (currentIndex === -1 && allVideos.length > 0) {
+        const firstVideo = allVideos[0];
+        playVideo(firstVideo.name, firstVideo.id);
       }
     }
 
@@ -1817,5 +1949,5 @@
       initializeApp();
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ffd6abd6419240',t:'MTc2MzM4ODkwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a00c9fcd5699240',t:'MTc2MzM5ODg3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
