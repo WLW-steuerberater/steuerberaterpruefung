@@ -5894,6 +5894,7 @@
         let currentTask = 1;
         const totalTasks = 16;
         let completedTasks = 0;
+        let attemptedTasks = new Set(); // Speichert IDs der bearbeiteten Aufgaben
         let userAnswers = {};
         let taskAttempts = {};
         let correctAnswers = 0;
@@ -6141,9 +6142,9 @@
         }
 
         function updateProgress() {
-            const progress = (completedTasks / totalTasks) * 100;
+            const progress = (currentTask / totalTasks) * 100;
             document.getElementById('progress-fill').style.width = progress + '%';
-            document.getElementById('progress-text').textContent = `Aufgabe ${completedTasks} von ${totalTasks}`;
+            document.getElementById('progress-text').textContent = `Aufgabe ${currentTask} von ${totalTasks}`;
         }
 
         function showTask(taskNumber) {
@@ -6153,6 +6154,7 @@
             
             document.getElementById(`task-${taskNumber}`).classList.add('active');
             currentTask = taskNumber;
+            updateProgress();
             updateNavigationButtons();
         }
 
@@ -9482,6 +9484,44 @@
 
 
 
+        // Audio-Funktion für richtige Antworten
+        function playSuccessAudio() {
+            try {
+                // Verzögere Audio-Wiedergabe um 0.3 Sekunden
+                setTimeout(() => {
+                    // Erstelle ein neues Audio-Element
+                    const audio = new Audio('https://dl.dropboxusercontent.com/scl/fi/zuhoqmyi3mitcqhlu4rto/DSGNRise-Maximum_benefit_achi-Elevenlabs.mp3?rlkey=d055p7ipw1rvmyxjtg264ca3n');
+                    audio.volume = 0.5; // Lautstärke auf 50% setzen
+                    
+                    // Spiele Audio ab
+                    audio.play().catch(error => {
+                        console.log('Audio konnte nicht abgespielt werden:', error);
+                    });
+                }, 300); // 0.3 Sekunden Verzögerung
+            } catch (error) {
+                console.log('Fehler beim Erstellen des Audio-Elements:', error);
+            }
+        }
+
+        // Audio-Funktion für falsche Antworten
+        function playErrorAudio() {
+            try {
+                // Verzögere Audio-Wiedergabe um 0.3 Sekunden
+                setTimeout(() => {
+                    // Erstelle ein neues Audio-Element
+                    const audio = new Audio('https://dl.dropboxusercontent.com/scl/fi/ygcjyw19lmyp7z3c5ss3q/DSGNSynth-negative_space_spora-Elevenlabs.mp3?rlkey=vk7mvc6seuyvoomk9smb0z80o');
+                    audio.volume = 0.5; // Lautstärke auf 50% setzen
+                    
+                    // Spiele Audio ab
+                    audio.play().catch(error => {
+                        console.log('Audio konnte nicht abgespielt werden:', error);
+                    });
+                }, 300); // 0.3 Sekunden Verzögerung
+            } catch (error) {
+                console.log('Fehler beim Erstellen des Audio-Elements:', error);
+            }
+        }
+
         // Maskottchen Animation Funktionen
         function showMascotCelebration() {
             const mascotElement = document.getElementById('mascot-celebration');
@@ -9595,21 +9635,32 @@
             feedback.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
             feedback.style.display = 'block';
             
-            // Zeige Maskottchen bei richtigen und falschen Antworten
+            // Zeige Maskottchen bei richtigen UND falschen Antworten
             if (isCorrect) {
+                // Spiele Erfolgs-Audio ab
+                playSuccessAudio();
+                
                 setTimeout(() => {
                     showMascotCelebration();
                 }, 500); // Kurze Verzögerung für besseren Effekt
             } else {
+                // Spiele Fehler-Audio ab
+                playErrorAudio();
+                
                 setTimeout(() => {
                     showMascotSad();
-                }, 500); // Zeige trauriges Maskottchen bei falschen Antworten
+                }, 500); // Trauriges Maskottchen bei falschen Antworten
             }
             
-            if (isCorrect && !userAnswers[taskNumber]) {
-                completedTasks++;
-                correctAnswers++;
+            // Markiere Aufgabe als bearbeitet (unabhängig von richtig/falsch)
+            if (!attemptedTasks.has(taskNumber)) {
+                attemptedTasks.add(taskNumber);
                 updateProgress();
+            }
+            
+            // Zähle richtige Antworten separat
+            if (isCorrect && !userAnswers[taskNumber]) {
+                correctAnswers++;
             }
             
             totalAttempts++;
@@ -9791,6 +9842,17 @@
             
             document.getElementById('completion-screen').classList.add('active');
             
+            // Spiele Abschluss-Sound ab
+            try {
+                const completionAudio = new Audio('https://dl.dropboxusercontent.com/scl/fi/ihbf1lnql7alrj56roua9/DSGNBoom-a_medium_chest_loot_-Elevenlabs.mp3?rlkey=pi262j4mzxww9pbk8vv3apbdn');
+                completionAudio.volume = 0.6;
+                completionAudio.play().catch(error => {
+                    console.log('Abschluss-Audio konnte nicht abgespielt werden:', error);
+                });
+            } catch (error) {
+                console.log('Fehler beim Erstellen des Abschluss-Audio-Elements:', error);
+            }
+            
             // Zeige Maskottchen beim Abschluss der Lernkontrolle
             setTimeout(() => {
                 showMascotCelebration();
@@ -9811,6 +9873,7 @@
         function restartQuiz() {
             currentTask = 1;
             completedTasks = 0;
+            attemptedTasks = new Set(); // Reset bearbeitete Aufgaben
             userAnswers = {};
             taskAttempts = {};
             correctAnswers = 0;
@@ -9934,5 +9997,5 @@
             resetEscapeGame();
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f9408fc55e4e42',t:'MTc2MzMxOTg0Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ffc85a56813ecf',t:'MTc2MzM4ODMyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
