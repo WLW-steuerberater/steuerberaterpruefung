@@ -903,7 +903,7 @@
 
     async function waitForSDKs() {
       let attempts = 0;
-      const maxAttempts = 50;
+      const maxAttempts = 200;
       
       while (attempts < maxAttempts) {
         if (window.elementSdk && window.dataSdk) {
@@ -920,102 +920,110 @@
       const sdksReady = await waitForSDKs();
       
       if (!sdksReady) {
-        console.error("SDKs konnten nicht geladen werden");
+        console.error("SDKs konnten nicht geladen werden - Navigation wird trotzdem aktiviert");
+        setupEventListeners();
         return;
       }
 
       try {
-        window.elementSdk.init({
-          defaultConfig,
-          onConfigChange: async (config) => {
-            applyConfig(config);
-          },
-          mapToCapabilities: (config) => ({
-            recolorables: [
-              {
-                get: () => config.background_color || defaultConfig.background_color,
-                set: (value) => {
-                  if (window.elementSdk && window.elementSdk.config) {
-                    window.elementSdk.config.background_color = value;
-                    window.elementSdk.setConfig({ background_color: value });
-                  }
-                }
-              },
-              {
-                get: () => config.card_background || defaultConfig.card_background,
-                set: (value) => {
-                  if (window.elementSdk && window.elementSdk.config) {
-                    window.elementSdk.config.card_background = value;
-                    window.elementSdk.setConfig({ card_background: value });
-                  }
-                }
-              },
-              {
-                get: () => config.text_color || defaultConfig.text_color,
-                set: (value) => {
-                  if (window.elementSdk && window.elementSdk.config) {
-                    window.elementSdk.config.text_color = value;
-                    window.elementSdk.setConfig({ text_color: value });
-                  }
-                }
-              },
-              {
-                get: () => config.primary_action || defaultConfig.primary_action,
-                set: (value) => {
-                  if (window.elementSdk && window.elementSdk.config) {
-                    window.elementSdk.config.primary_action = value;
-                    window.elementSdk.setConfig({ primary_action: value });
-                  }
-                }
-              },
-              {
-                get: () => config.secondary_action || defaultConfig.secondary_action,
-                set: (value) => {
-                  if (window.elementSdk && window.elementSdk.config) {
-                    window.elementSdk.config.secondary_action = value;
-                    window.elementSdk.setConfig({ secondary_action: value });
-                  }
-                }
-              }
-            ],
-            borderables: [],
-            fontEditable: {
-              get: () => config.font_family || defaultConfig.font_family,
-              set: (value) => {
-                if (window.elementSdk && window.elementSdk.config) {
-                  window.elementSdk.config.font_family = value;
-                  window.elementSdk.setConfig({ font_family: value });
-                }
-              }
+        if (window.elementSdk) {
+          window.elementSdk.init({
+            defaultConfig,
+            onConfigChange: async (config) => {
+              applyConfig(config);
             },
-            fontSizeable: {
-              get: () => config.font_size || defaultConfig.font_size,
-              set: (value) => {
-                if (window.elementSdk && window.elementSdk.config) {
-                  window.elementSdk.config.font_size = value;
-                  window.elementSdk.setConfig({ font_size: value });
+            mapToCapabilities: (config) => ({
+              recolorables: [
+                {
+                  get: () => config.background_color || defaultConfig.background_color,
+                  set: (value) => {
+                    if (window.elementSdk && window.elementSdk.config) {
+                      window.elementSdk.config.background_color = value;
+                      window.elementSdk.setConfig({ background_color: value });
+                    }
+                  }
+                },
+                {
+                  get: () => config.card_background || defaultConfig.card_background,
+                  set: (value) => {
+                    if (window.elementSdk && window.elementSdk.config) {
+                      window.elementSdk.config.card_background = value;
+                      window.elementSdk.setConfig({ card_background: value });
+                    }
+                  }
+                },
+                {
+                  get: () => config.text_color || defaultConfig.text_color,
+                  set: (value) => {
+                    if (window.elementSdk && window.elementSdk.config) {
+                      window.elementSdk.config.text_color = value;
+                      window.elementSdk.setConfig({ text_color: value });
+                    }
+                  }
+                },
+                {
+                  get: () => config.primary_action || defaultConfig.primary_action,
+                  set: (value) => {
+                    if (window.elementSdk && window.elementSdk.config) {
+                      window.elementSdk.config.primary_action = value;
+                      window.elementSdk.setConfig({ primary_action: value });
+                    }
+                  }
+                },
+                {
+                  get: () => config.secondary_action || defaultConfig.secondary_action,
+                  set: (value) => {
+                    if (window.elementSdk && window.elementSdk.config) {
+                      window.elementSdk.config.secondary_action = value;
+                      window.elementSdk.setConfig({ secondary_action: value });
+                    }
+                  }
+                }
+              ],
+              borderables: [],
+              fontEditable: {
+                get: () => config.font_family || defaultConfig.font_family,
+                set: (value) => {
+                  if (window.elementSdk && window.elementSdk.config) {
+                    window.elementSdk.config.font_family = value;
+                    window.elementSdk.setConfig({ font_family: value });
+                  }
+                }
+              },
+              fontSizeable: {
+                get: () => config.font_size || defaultConfig.font_size,
+                set: (value) => {
+                  if (window.elementSdk && window.elementSdk.config) {
+                    window.elementSdk.config.font_size = value;
+                    window.elementSdk.setConfig({ font_size: value });
+                  }
                 }
               }
-            }
-          }),
-          mapToEditPanelValues: (config) => new Map([
-            ["platform_title", config.platform_title || defaultConfig.platform_title],
-            ["welcome_message", config.welcome_message || defaultConfig.welcome_message]
-          ])
-        });
-
-        const initResult = await window.dataSdk.init(dataHandler);
-        
-        if (!initResult.isOk) {
-          console.error("Data SDK Initialisierung fehlgeschlagen");
-          return;
+            }),
+            mapToEditPanelValues: (config) => new Map([
+              ["platform_title", config.platform_title || defaultConfig.platform_title],
+              ["welcome_message", config.welcome_message || defaultConfig.welcome_message]
+            ])
+          });
         }
 
-        appState.isInitialized = true;
+        if (window.dataSdk) {
+          const initResult = await window.dataSdk.init(dataHandler);
+          
+          if (!initResult.isOk) {
+            console.error("Data SDK Initialisierung fehlgeschlagen - App läuft ohne Datenpersistenz");
+            setupEventListeners();
+            return;
+          }
+
+          appState.isInitialized = true;
+        }
+
         setupEventListeners();
         updateUI();
       } catch (error) {
         console.error("Fehler bei der Initialisierung:", error);
+        setupEventListeners();
       }
     }
 
@@ -1535,5 +1543,5 @@
       initializeApp();
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ff974c97769240',t:'MTc2MzM4NjMxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ffa17496124e42',t:'MTc2MzM4NjcyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
