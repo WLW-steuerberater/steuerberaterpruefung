@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Steuerrecht Lernplattform</title>
-  <script src="/_sdk/data_sdk.js"></script>
   <script src="/_sdk/element_sdk.js"></script>
   <style>
     body {
@@ -613,14 +612,9 @@
       font-weight: 500;
     }
 
-    .message-box.error {
-      background: #fed7d7;
-      color: #c53030;
-    }
-
-    .message-box.warning {
-      background: #feebc8;
-      color: #c05621;
+    .message-box.success {
+      background: #c6f6d5;
+      color: #22543d;
     }
 
     @keyframes fadeInDown {
@@ -680,6 +674,7 @@
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body>
@@ -1220,23 +1215,15 @@
       currentModule: null,
       currentTopic: null,
       currentStep: null,
-      completedSteps: [],
-      isInitialized: false
+      completedSteps: []
     };
 
-    const dataHandler = {
-      onDataChanged(data) {
-        appState.completedSteps = data;
-        updateUI();
-      }
-    };
-
-    async function waitForSDKs() {
+    async function waitForSDK() {
       let attempts = 0;
       const maxAttempts = 200;
       
       while (attempts < maxAttempts) {
-        if (window.elementSdk && window.dataSdk) {
+        if (window.elementSdk) {
           return true;
         }
         await new Promise(resolve => setTimeout(resolve, 100));
@@ -1246,11 +1233,11 @@
       return false;
     }
 
-    async function initSdks() {
-      const sdksReady = await waitForSDKs();
+    async function initSdk() {
+      const sdkReady = await waitForSDK();
       
-      if (!sdksReady) {
-        console.error("SDKs konnten nicht geladen werden - App läuft ohne Datenpersistenz");
+      if (!sdkReady) {
+        console.error("Element SDK konnte nicht geladen werden");
         return;
       }
 
@@ -1335,18 +1322,6 @@
             ])
           });
         }
-
-        if (window.dataSdk) {
-          const initResult = await window.dataSdk.init(dataHandler);
-          
-          if (!initResult.isOk) {
-            console.error("Data SDK Initialisierung fehlgeschlagen - App läuft ohne Datenpersistenz");
-            return;
-          }
-
-          appState.isInitialized = true;
-          updateUI();
-        }
       } catch (error) {
         console.error("Fehler bei der SDK-Initialisierung:", error);
       }
@@ -1354,7 +1329,7 @@
 
     function initializeApp() {
       setupEventListeners();
-      initSdks();
+      initSdk();
     }
 
     function applyConfig(config) {
@@ -1417,16 +1392,6 @@
       document.getElementById('back-to-path').addEventListener('click', () => {
         showLearningPath(appState.currentModule);
       });
-    }
-
-    function updateUI() {
-      if (!appState.isInitialized) return;
-      
-      updateProgress();
-      
-      if (appState.currentModule) {
-        renderTopics();
-      }
     }
 
     function updateProgress() {
@@ -1695,7 +1660,7 @@
       
       if (stepType === 'video') {
         document.querySelectorAll('.subchapter-item').forEach(item => {
-          item.addEventListener('click', async (e) => {
+          item.addEventListener('click', (e) => {
             const hasSubvideos = item.dataset.hasSubvideos === 'true';
             const subchapterId = item.dataset.subchapter;
             
@@ -1711,92 +1676,71 @@
                 }
               }
             } else {
-              await completeSubchapter(moduleId, topicId, stepType, subchapterId);
+              completeSubchapter(moduleId, topicId, stepType, subchapterId);
             }
           });
         });
         
         document.querySelectorAll('.subvideo-item').forEach(item => {
-          item.addEventListener('click', async () => {
+          item.addEventListener('click', () => {
             const subchapterId = item.dataset.subchapter;
-            await completeSubchapter(moduleId, topicId, stepType, subchapterId);
+            completeSubchapter(moduleId, topicId, stepType, subchapterId);
           });
         });
       }
       
       const completeButton = document.getElementById('complete-step');
       if (completeButton) {
-        completeButton.addEventListener('click', async () => {
-          await completeStep(moduleId, topicId, stepType);
+        completeButton.addEventListener('click', () => {
+          completeStep(moduleId, topicId, stepType);
         });
       }
     }
 
-    async function completeSubchapter(moduleId, topicId, stepType, subchapterId) {
-      if (appState.completedSteps.length >= 999) {
-        showMessage('Maximale Anzahl von 999 abgeschlossenen Schritten erreicht.', 'warning');
-        return;
-      }
-
+    function completeSubchapter(moduleId, topicId, stepType, subchapterId) {
       if (isSubchapterCompleted(moduleId, topicId, stepType, subchapterId)) {
         return;
       }
 
-      const result = await window.dataSdk.create({
+      appState.completedSteps.push({
         module_id: moduleId,
         topic_id: topicId,
         step_type: `${stepType}_subchapter_${subchapterId}`,
-        completed: true,
-        completed_at: new Date().toISOString()
+        completed: true
       });
 
-      if (result.isOk) {
-        setTimeout(() => {
-          showContent(moduleId, topicId, stepType);
-        }, 300);
-      } else {
-        showMessage('Fehler beim Speichern. Bitte versuche es erneut.', 'error');
-      }
+      setTimeout(() => {
+        showContent(moduleId, topicId, stepType);
+      }, 300);
     }
 
-    async function completeStep(moduleId, topicId, stepType) {
-      if (appState.completedSteps.length >= 999) {
-        showMessage('Maximale Anzahl von 999 abgeschlossenen Schritten erreicht.', 'warning');
-        return;
-      }
-
+    function completeStep(moduleId, topicId, stepType) {
       if (isStepCompleted(moduleId, topicId, stepType)) {
         return;
       }
 
-      const button = document.getElementById('complete-step');
-      button.disabled = true;
-      button.textContent = 'Wird gespeichert...';
-
-      const result = await window.dataSdk.create({
+      appState.completedSteps.push({
         module_id: moduleId,
         topic_id: topicId,
         step_type: stepType,
-        completed: true,
-        completed_at: new Date().toISOString()
+        completed: true
       });
 
-      if (result.isOk) {
-        button.textContent = '✓ Abgeschlossen';
-        
-        setTimeout(() => {
-          const nextContent = findNextContent(moduleId, topicId, stepType);
-          if (nextContent && nextContent.topicId === topicId) {
-            showContent(nextContent.moduleId, nextContent.topicId, nextContent.stepType);
-          } else {
-            showLearningPath(moduleId);
-          }
-        }, 1000);
-      } else {
-        button.disabled = false;
-        button.textContent = 'Als abgeschlossen markieren';
-        showMessage('Fehler beim Speichern. Bitte versuche es erneut.', 'error');
-      }
+      const button = document.getElementById('complete-step');
+      button.textContent = '✓ Abgeschlossen';
+      
+      showMessage('Schritt abgeschlossen!', 'success');
+      
+      updateProgress();
+      
+      setTimeout(() => {
+        const nextContent = findNextContent(moduleId, topicId, stepType);
+        if (nextContent && nextContent.topicId === topicId) {
+          showContent(nextContent.moduleId, nextContent.topicId, nextContent.stepType);
+        } else {
+          showLearningPath(moduleId);
+        }
+      }, 1000);
     }
 
     function showMessage(text, type) {
@@ -1814,7 +1758,7 @@
       
       setTimeout(() => {
         messageDiv.remove();
-      }, 5000);
+      }, 3000);
     }
 
     function isStepCompleted(moduleId, topicId, stepType) {
@@ -1873,5 +1817,5 @@
       initializeApp();
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ffb6a972429240',t:'MTc2MzM4NzU5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ffd6abd6419240',t:'MTc2MzM4ODkwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
