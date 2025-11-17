@@ -48,6 +48,64 @@
       margin: 0;
     }
 
+    .progress-circle-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+      animation: fadeInDown 0.7s ease-out;
+    }
+
+    .progress-circle-wrapper {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .progress-circle {
+      transform: rotate(-90deg);
+      width: 200px;
+      height: 200px;
+    }
+
+    .progress-circle-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.2);
+      stroke-width: 20;
+    }
+
+    .progress-circle-segment {
+      fill: none;
+      stroke-width: 20;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s ease;
+    }
+
+    .progress-circle-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .progress-circle-percentage {
+      color: #ffffff;
+      font-size: 42px;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      display: block;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .progress-circle-label {
+      color: rgba(255,255,255,0.9);
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
     .streak-container {
       display: flex;
       justify-content: center;
@@ -831,6 +889,14 @@
      <h1 id="platform-title">WLW+</h1>
      <p id="welcome-message">Wähle dein Fachgebiet</p>
     </header>
+    <div class="progress-circle-container">
+     <div class="progress-circle-wrapper">
+      <svg class="progress-circle" viewbox="0 0 200 200"><circle class="progress-circle-bg" cx="100" cy="100" r="90"></circle> <g id="progress-segments"></g>
+      </svg>
+      <div class="progress-circle-text"><span class="progress-circle-percentage" id="total-progress-percentage">0%</span> <span class="progress-circle-label">Gesamt</span>
+      </div>
+     </div>
+    </div>
     <div class="streak-container">
      <div class="streak-card">
       <div class="streak-icon">
@@ -1105,7 +1171,11 @@
               },
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
               { type: "test", name: "Leistungskontrolle", icon: "📝" },
-              { type: "case", name: "Übungsfall", icon: "⚖️" }
+              { type: "case", name: "Übungsfall", icon: "⚖️", cases: [
+                { id: "case1", name: "Fall 1: Mitwirkungspflichten des Steuerpflichtigen" },
+                { id: "case2", name: "Fall 2: Amtsermittlungsgrundsatz" },
+                { id: "case3", name: "Fall 3: Verfahrensfehler und deren Folgen" }
+              ]}
             ]
           },
           {
@@ -1125,7 +1195,11 @@
               },
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
               { type: "test", name: "Leistungskontrolle", icon: "📝" },
-              { type: "case", name: "Übungsfall", icon: "⚖️" }
+              { type: "case", name: "Übungsfall", icon: "⚖️", cases: [
+                { id: "case1", name: "Fall 1: Steuerbescheid und Bestandskraft" },
+                { id: "case2", name: "Fall 2: Aufhebung eines Verwaltungsakts" },
+                { id: "case3", name: "Fall 3: Rechtsbehelfsverfahren" }
+              ]}
             ]
           },
           {
@@ -1145,7 +1219,11 @@
               },
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
               { type: "test", name: "Leistungskontrolle", icon: "📝" },
-              { type: "case", name: "Übungsfall", icon: "⚖️" }
+              { type: "case", name: "Übungsfall", icon: "⚖️", cases: [
+                { id: "case1", name: "Fall 1: Festsetzungsverjährung" },
+                { id: "case2", name: "Fall 2: Zahlungsverjährung" },
+                { id: "case3", name: "Fall 3: Hemmung der Verjährung" }
+              ]}
             ]
           }
         ]
@@ -1569,6 +1647,7 @@
 
     function initializeApp() {
       setupEventListeners();
+      updateProgress();
       initSdk();
     }
 
@@ -1635,11 +1714,17 @@
     }
 
     function updateProgress() {
+      let totalStepsAllModules = 0;
+      let completedStepsAllModules = 0;
+
       Object.keys(modules).forEach(moduleId => {
         const module = modules[moduleId];
         const totalSteps = module.topics.reduce((sum, topic) => sum + topic.steps.length, 0);
         const completedCount = appState.completedSteps.filter(step => step.module_id === moduleId).length;
         const progress = totalSteps > 0 ? Math.round((completedCount / totalSteps) * 100) : 0;
+
+        totalStepsAllModules += totalSteps;
+        completedStepsAllModules += completedCount;
 
         const progressFill = document.querySelector(`[data-progress="${moduleId}"]`);
         const progressText = document.querySelector(`[data-progress-text="${moduleId}"]`);
@@ -1650,6 +1735,38 @@
         }
         if (progressText) progressText.textContent = progress;
       });
+
+      const totalProgress = totalStepsAllModules > 0 ? (completedStepsAllModules / totalStepsAllModules) : 0;
+      updateProgressCircle(totalProgress);
+    }
+
+    function updateProgressCircle(totalProgress) {
+      const segmentsContainer = document.getElementById('progress-segments');
+      const percentageElement = document.getElementById('total-progress-percentage');
+      
+      if (!segmentsContainer || !percentageElement) return;
+
+      segmentsContainer.innerHTML = '';
+
+      const radius = 90;
+      const circumference = 2 * Math.PI * radius;
+      const progressLength = circumference * totalProgress;
+
+      if (totalProgress > 0) {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('class', 'progress-circle-segment');
+        circle.setAttribute('cx', '100');
+        circle.setAttribute('cy', '100');
+        circle.setAttribute('r', radius.toString());
+        circle.setAttribute('stroke', '#48bb78');
+        circle.setAttribute('stroke-dasharray', `${progressLength} ${circumference}`);
+        circle.setAttribute('stroke-dashoffset', '0');
+        
+        segmentsContainer.appendChild(circle);
+      }
+
+      const totalPercentage = Math.round(totalProgress * 100);
+      percentageElement.textContent = `${totalPercentage}%`;
     }
 
     function updateStreakDisplay() {
@@ -1706,11 +1823,13 @@
           });
 
           if (createResult.isOk) {
-            showStreakNotification(1, true);
+            showStreakNotification(1, false);
+          } else {
+            console.error("Fehler beim Erstellen der Streak-Daten");
           }
         } else {
           const lastActivityDate = appState.streakData.last_activity_date;
-
+          
           if (lastActivityDate === today) {
             isUpdatingStreak = false;
             return;
@@ -1718,11 +1837,13 @@
 
           let newCurrentStreak = appState.streakData.current_streak || 0;
           let newLongestStreak = appState.streakData.longest_streak || 0;
+          let isNewStreak = false;
 
           if (lastActivityDate === yesterday) {
             newCurrentStreak += 1;
           } else {
             newCurrentStreak = 1;
+            isNewStreak = true;
           }
 
           if (newCurrentStreak > newLongestStreak) {
@@ -1739,7 +1860,9 @@
           const updateResult = await window.dataSdk.update(updatedData);
 
           if (updateResult.isOk) {
-            showStreakNotification(newCurrentStreak, lastActivityDate !== yesterday);
+            showStreakNotification(newCurrentStreak, isNewStreak);
+          } else {
+            console.error("Fehler beim Aktualisieren der Streak-Daten");
           }
         }
       } catch (error) {
@@ -1853,7 +1976,12 @@
       stepsContainer.innerHTML = '';
       
       topic.steps.forEach((step) => {
-        const isCompleted = isStepCompleted(appState.currentModule, topic.id, step.type);
+        let isCompleted = isStepCompleted(appState.currentModule, topic.id, step.type);
+        
+        // Check if all subchapters/cases are completed for video and case steps
+        if (!isCompleted && (step.type === 'video' || step.type === 'case')) {
+          isCompleted = areAllSubitemsCompleted(appState.currentModule, topic.id, step);
+        }
         
         const stepItem = document.createElement('div');
         stepItem.className = `step-item ${isCompleted ? 'completed' : ''}`;
@@ -1893,14 +2021,25 @@
       } else if (stepType === 'test') {
         content = generateTestContent(step, topic);
       } else if (stepType === 'case') {
-        content = generateCaseContent(step, topic);
+        content = generateCaseContent(step, topic, moduleId, topicId, stepType);
       }
       
-      contentCard.innerHTML = content + `
-        <button class="complete-button" id="complete-step">
+      let buttonHtml = '';
+      if (stepType === 'video') {
+        buttonHtml = `<button class="complete-button" id="complete-step">Zur Klausurtechnik →</button>`;
+      } else if (stepType === 'technique') {
+        buttonHtml = `<button class="complete-button" id="complete-step">Zur Leistungskontrolle →</button>`;
+      } else if (stepType === 'test') {
+        buttonHtml = `<button class="complete-button" id="complete-step">Zu den Übungsfällen →</button>`;
+      } else if (stepType === 'case') {
+        buttonHtml = `<button class="complete-button" id="complete-step">Zum Lernpfad</button>`;
+      } else {
+        buttonHtml = `<button class="complete-button" id="complete-step">
           ${isStepCompleted(moduleId, topicId, stepType) ? '✓ Abgeschlossen' : 'Als abgeschlossen markieren'}
-        </button>
-      `;
+        </button>`;
+      }
+      
+      contentCard.innerHTML = content + buttonHtml;
       
       attachContentEventListeners(stepType, moduleId, topicId);
     }
@@ -2033,17 +2172,40 @@
       `;
     }
 
-    function generateCaseContent(step, topic) {
+    function generateCaseContent(step, topic, moduleId, topicId, stepType) {
+      let casesHtml = '';
+      
+      const module = modules[moduleId];
+      const moduleColor = module.color || '#0055B8';
+      
+      if (step.cases && step.cases.length > 0) {
+        casesHtml = '<div style="margin-top: 30px;"><h3 style="color: #2d3748; font-size: 24px; margin-bottom: 20px;">Übungsfälle</h3>';
+        
+        step.cases.forEach((caseItem, index) => {
+          const isCompleted = isSubchapterCompleted(moduleId, topicId, stepType, caseItem.id);
+          
+          casesHtml += `
+            <div class="subchapter-wrapper">
+              <div class="subchapter-item ${isCompleted ? 'completed' : ''}" data-case="${caseItem.id}" data-case-name="${caseItem.name}">
+                <div class="subchapter-number" style="background: ${moduleColor}">${index + 1}</div>
+                <div class="subchapter-info">
+                  <div class="subchapter-name">${caseItem.name}</div>
+                  <div class="subchapter-status">${isCompleted ? 'Abgeschlossen' : 'Noch nicht bearbeitet'}</div>
+                </div>
+                <div class="subchapter-icon">${isCompleted ? '✓' : '⚖️'}</div>
+              </div>
+            </div>
+          `;
+        });
+        
+        casesHtml += '</div>';
+      }
+      
       return `
         <h2>${step.icon} ${step.name}</h2>
         <p><strong>${topic.title}</strong></p>
-        <h3>Sachverhalt</h3>
-        <p>Hier würde ein praxisnaher Fall zum Thema "${topic.title}" dargestellt werden, den du eigenständig lösen sollst.</p>
-        <p style="background: #f7fafc; padding: 20px; border-radius: 12px; border-left: 4px solid #0055B8;">
-          Der Sachverhalt beschreibt eine typische Situation aus der Praxis, in der du dein erlerntes Wissen anwenden musst. Analysiere den Fall sorgfältig und wende das Prüfungsschema an.
-        </p>
-        <h3>Aufgabenstellung</h3>
-        <p>Prüfe die rechtlichen Voraussetzungen und komme zu einem begründeten Ergebnis.</p>
+        <div id="case-content-area"></div>
+        ${casesHtml}
       `;
     }
 
@@ -2100,10 +2262,34 @@
         }
       }
       
+      if (stepType === 'case') {
+        document.querySelectorAll('[data-case]').forEach(item => {
+          item.addEventListener('click', () => {
+            const caseId = item.dataset.case;
+            const caseName = item.dataset.caseName;
+            loadCase(caseName, caseId, moduleId, topicId, stepType);
+          });
+        });
+      }
+      
       const completeButton = document.getElementById('complete-step');
       if (completeButton) {
         completeButton.addEventListener('click', () => {
-          completeStep(moduleId, topicId, stepType);
+          if (stepType === 'video') {
+            // Navigate to Klausurtechnik (technique step)
+            showContent(moduleId, topicId, 'technique');
+          } else if (stepType === 'technique') {
+            // Navigate to Leistungskontrolle (test step)
+            showContent(moduleId, topicId, 'test');
+          } else if (stepType === 'test') {
+            // Navigate to Übungsfälle (case step)
+            showContent(moduleId, topicId, 'case');
+          } else if (stepType === 'case') {
+            // Navigate back to learning path
+            showLearningPath(moduleId);
+          } else {
+            completeStep(moduleId, topicId, stepType);
+          }
         });
       }
     }
@@ -2131,6 +2317,117 @@
             completeSubchapter(appState.currentModule, appState.currentTopic, appState.currentStep, subchapterId);
           }
         };
+      }
+    }
+
+    function loadCase(caseName, caseId, moduleId, topicId, stepType) {
+      const caseContentArea = document.getElementById('case-content-area');
+      
+      if (caseContentArea) {
+        appState.currentSubchapterId = caseId;
+        
+        caseContentArea.innerHTML = `
+          <h3>${caseName}</h3>
+          <div style="background: #f7fafc; padding: 25px; border-radius: 12px; border-left: 4px solid #0055B8; margin: 20px 0;">
+            <h4 style="color: #2d3748; font-size: 18px; margin: 0 0 15px 0;">Sachverhalt</h4>
+            <p style="color: #4a5568; font-size: 16px; line-height: 1.8; margin: 0;">
+              Der Steuerpflichtige S betreibt ein Einzelunternehmen und hat für das Jahr 2023 seine Steuererklärung abgegeben. Das Finanzamt fordert ihn auf, weitere Unterlagen vorzulegen, um die geltend gemachten Betriebsausgaben zu belegen. S ist der Ansicht, dass die bereits eingereichten Unterlagen ausreichend sind und verweigert die Vorlage weiterer Dokumente. Das Finanzamt schätzt daraufhin die Besteuerungsgrundlagen gemäß § 162 AO und setzt die Steuer höher fest als vom Steuerpflichtigen erklärt.
+            </p>
+          </div>
+          
+          <div style="margin: 20px 0;">
+            <h4 style="color: #2d3748; font-size: 18px; margin: 0 0 15px 0;">Deine Lösung</h4>
+            <textarea id="solution-input" placeholder="Gib hier deine Lösung ein..." style="width: 100%; min-height: 300px; padding: 20px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; font-family: inherit; line-height: 1.6; resize: vertical; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='#0055B8'" onblur="this.style.borderColor='#e2e8f0'"></textarea>
+          </div>
+          
+          <div style="display: flex; gap: 15px; margin: 20px 0;">
+            <button id="submit-answer-btn" style="background: #0055B8; color: #ffffff; border: none; padding: 15px 35px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0, 85, 184, 0.3); font-size: 16px; font-weight: 600;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0, 85, 184, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0, 85, 184, 0.3)';">
+              Antwort abgeben
+            </button>
+            <button id="show-solution-btn" style="background: #718096; color: #ffffff; border: none; padding: 15px 35px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(113, 128, 150, 0.3); font-size: 16px; font-weight: 600; display: none;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(113, 128, 150, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(113, 128, 150, 0.3)';">
+              Lösung anzeigen
+            </button>
+            <button id="complete-case-btn" style="background: #48bb78; color: #ffffff; border: none; padding: 15px 35px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3); font-size: 16px; font-weight: 600; display: none;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(72, 187, 120, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(72, 187, 120, 0.3)';">
+              ${isSubchapterCompleted(moduleId, topicId, stepType, caseId) ? '✓ Abgeschlossen' : 'Fall als abgeschlossen markieren'}
+            </button>
+          </div>
+          
+          <div id="user-answer-display" style="display: none; background: #e6f0ff; padding: 25px; border-radius: 12px; border-left: 4px solid #0055B8; margin: 20px 0;">
+            <h4 style="color: #2d3748; font-size: 18px; margin: 0 0 15px 0;">Deine Antwort</h4>
+            <div id="user-answer-content" style="color: #4a5568; font-size: 16px; line-height: 1.8; white-space: pre-wrap;"></div>
+          </div>
+          
+          <div id="solution-display" style="display: none; background: #f0fff4; padding: 25px; border-radius: 12px; border-left: 4px solid #48bb78; margin: 20px 0;">
+            <h4 style="color: #2d3748; font-size: 18px; margin: 0 0 15px 0;">Musterlösung</h4>
+            <div style="color: #4a5568; font-size: 16px; line-height: 1.8;">
+              <p><strong>I. Mitwirkungspflichten des Steuerpflichtigen</strong></p>
+              <p>Gemäß § 90 Abs. 1 AO haben Steuerpflichtige die Pflicht, über die steuerlich erheblichen Tatsachen Auskunft zu geben und auf Verlangen des Finanzamts die erforderlichen Unterlagen vorzulegen. Diese Mitwirkungspflicht dient der Ermittlung des zutreffenden Sachverhalts.</p>
+              
+              <p><strong>II. Verletzung der Mitwirkungspflicht</strong></p>
+              <p>S hat die Vorlage weiterer Unterlagen verweigert, obwohl das Finanzamt diese zur Überprüfung der geltend gemachten Betriebsausgaben angefordert hat. Dies stellt eine Verletzung der Mitwirkungspflicht nach § 90 Abs. 1 AO dar.</p>
+              
+              <p><strong>III. Schätzungsbefugnis des Finanzamts</strong></p>
+              <p>Nach § 162 Abs. 1 AO kann das Finanzamt die Besteuerungsgrundlagen schätzen, wenn der Steuerpflichtige seinen Mitwirkungspflichten nicht nachkommt. Die Voraussetzungen liegen hier vor, da S die angeforderten Unterlagen nicht vorgelegt hat.</p>
+              
+              <p><strong>IV. Rechtsfolge</strong></p>
+              <p>Die Schätzung durch das Finanzamt ist rechtmäßig. S hätte seiner Mitwirkungspflicht nachkommen müssen. Die höhere Steuerfestsetzung ist daher zu Recht erfolgt.</p>
+              
+              <p><strong>Ergebnis:</strong> Das Vorgehen des Finanzamts ist rechtmäßig. S hätte die angeforderten Unterlagen vorlegen müssen.</p>
+            </div>
+          </div>
+        `;
+        
+        caseContentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        const submitAnswerBtn = document.getElementById('submit-answer-btn');
+        const showSolutionBtn = document.getElementById('show-solution-btn');
+        const completeCaseBtn = document.getElementById('complete-case-btn');
+        const solutionInput = document.getElementById('solution-input');
+        const userAnswerDisplay = document.getElementById('user-answer-display');
+        const userAnswerContent = document.getElementById('user-answer-content');
+        const solutionDisplay = document.getElementById('solution-display');
+        
+        if (submitAnswerBtn && solutionInput && userAnswerDisplay && userAnswerContent && solutionDisplay) {
+          submitAnswerBtn.addEventListener('click', () => {
+            const userAnswer = solutionInput.value.trim();
+            
+            if (userAnswer !== '') {
+              userAnswerContent.textContent = userAnswer;
+              userAnswerDisplay.style.display = 'block';
+            }
+            
+            solutionDisplay.style.display = 'block';
+            solutionInput.disabled = true;
+            solutionInput.style.opacity = '0.6';
+            solutionInput.style.cursor = 'not-allowed';
+            
+            submitAnswerBtn.style.display = 'none';
+            showSolutionBtn.style.display = 'none';
+            completeCaseBtn.style.display = 'inline-block';
+            
+            if (userAnswer !== '') {
+              userAnswerDisplay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+              solutionDisplay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          });
+        }
+        
+        if (showSolutionBtn && solutionDisplay) {
+          showSolutionBtn.addEventListener('click', () => {
+            solutionDisplay.style.display = 'block';
+            showSolutionBtn.style.display = 'none';
+            completeCaseBtn.style.display = 'inline-block';
+            
+            solutionDisplay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+        }
+        
+        if (completeCaseBtn) {
+          completeCaseBtn.addEventListener('click', () => {
+            completeSubchapter(moduleId, topicId, stepType, caseId);
+          });
+        }
       }
     }
 
@@ -2252,10 +2549,46 @@
       );
     }
 
+    function areAllSubitemsCompleted(moduleId, topicId, step) {
+      if (step.type === 'video' && step.subchapters && step.subchapters.length > 0) {
+        // Check all subchapters and their subvideos
+        return step.subchapters.every(subchapter => {
+          if (subchapter.subvideos && subchapter.subvideos.length > 0) {
+            // If subchapter has subvideos, check all subvideos
+            return subchapter.subvideos.every(subvideo => 
+              isSubchapterCompleted(moduleId, topicId, step.type, subvideo.id)
+            );
+          } else {
+            // If no subvideos, check the subchapter itself
+            return isSubchapterCompleted(moduleId, topicId, step.type, subchapter.id);
+          }
+        });
+      }
+      
+      if (step.type === 'case' && step.cases && step.cases.length > 0) {
+        // Check all cases
+        return step.cases.every(caseItem => 
+          isSubchapterCompleted(moduleId, topicId, step.type, caseItem.id)
+        );
+      }
+      
+      return false;
+    }
+
     function isTopicCompleted(moduleId, topicId) {
       const module = modules[moduleId];
       const topic = module.topics.find(t => t.id === topicId);
-      return topic.steps.every(step => isStepCompleted(moduleId, topicId, step.type));
+      return topic.steps.every(step => {
+        const basicCompletion = isStepCompleted(moduleId, topicId, step.type);
+        if (basicCompletion) return true;
+        
+        // Check if all subitems are completed for video and case steps
+        if (step.type === 'video' || step.type === 'case') {
+          return areAllSubitemsCompleted(moduleId, topicId, step);
+        }
+        
+        return false;
+      });
     }
 
     function findNextContent(currentModuleId, currentTopicId, currentStepType) {
@@ -2292,5 +2625,5 @@
       initializeApp();
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a0171d307fc4e42',t:'MTc2MzQwNTc1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a01a7a785b54e42',t:'MTc2MzQwNzk1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
