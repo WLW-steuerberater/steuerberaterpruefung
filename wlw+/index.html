@@ -1,0 +1,1303 @@
+<!doctype html>
+<html lang="de">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steuerrecht Lernplattform</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: transparent;
+      min-height: 100%;
+      overflow-x: hidden;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      min-height: 100%;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+      animation: fadeInDown 0.6s ease-out;
+    }
+
+    .header h1 {
+      color: #ffffff;
+      font-size: 48px;
+      font-weight: 700;
+      margin: 0 0 15px 0;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .header p {
+      color: rgba(255,255,255,0.9);
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .module-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 35px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      animation: fadeInUp 0.6s ease-out;
+      animation-fill-mode: both;
+    }
+
+    .module-card:nth-child(1) { animation-delay: 0.1s; }
+    .module-card:nth-child(2) { animation-delay: 0.2s; }
+
+    .module-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .module-icon {
+      font-size: 50px;
+      margin-bottom: 20px;
+    }
+
+    .module-card h2 {
+      color: #2d3748;
+      font-size: 28px;
+      margin: 0 0 12px 0;
+      font-weight: 600;
+    }
+
+    .module-card p {
+      color: #718096;
+      font-size: 16px;
+      margin: 0 0 20px 0;
+      line-height: 1.6;
+    }
+
+    .progress-bar {
+      background: #e2e8f0;
+      height: 8px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .progress-fill {
+      background: #0055B8;
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    .progress-text {
+      color: #a0aec0;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .learning-path {
+      display: none;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .learning-path.active {
+      display: block;
+    }
+
+    .back-button {
+      background: rgba(255,255,255,0.2);
+      color: #ffffff;
+      border: 2px solid rgba(255,255,255,0.3);
+      padding: 12px 28px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-button:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateX(-5px);
+    }
+
+    .topics-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+    }
+
+    .path-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e0 100%);
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+
+    .topic-node {
+      position: relative;
+      margin: 60px 0;
+      z-index: 1;
+      animation: fadeInUp 0.6s ease-out;
+      animation-fill-mode: both;
+    }
+
+    .topic-node:nth-child(1) .node-content {
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    .topic-node:nth-child(2) .node-content {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    .topic-node:nth-child(3) .node-content {
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    .topic-node:nth-child(4) .node-content {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    .node-content {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      width: 85%;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .node-content:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .node-content.locked {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .topic-icon-circle {
+      display: none;
+    }
+
+    .topic-header {
+      margin-bottom: 20px;
+    }
+
+    .topic-number {
+      display: inline-block;
+      background: #0055B8;
+      color: #ffffff;
+      width: 35px;
+      height: 35px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .node-content.locked .topic-number {
+      background: #cbd5e0;
+    }
+
+    .topic-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .topic-title h3 {
+      color: #2d3748;
+      font-size: 20px;
+      margin: 0;
+      font-weight: 600;
+      line-height: 1.4;
+      flex-grow: 1;
+    }
+
+    .steps-list {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.4s ease, margin-top 0.4s ease;
+      overflow: hidden;
+    }
+
+    .steps-list-inner {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .node-content.expanded .steps-list {
+      grid-template-rows: 1fr;
+      margin-top: 15px;
+    }
+
+    .step-item {
+      background: #f7fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 15px 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .step-item:hover:not(.locked) {
+      background: #edf2f7;
+      border-color: #0055B8;
+      transform: translateX(5px);
+    }
+
+    .step-item.completed {
+      background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+      border-color: #38a169;
+      color: #ffffff;
+    }
+
+    .step-item.locked {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .step-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .step-item.completed .step-icon {
+      filter: brightness(0) invert(1);
+    }
+
+    .step-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #2d3748;
+      flex-grow: 1;
+    }
+
+    .step-item.completed .step-name {
+      color: #ffffff;
+    }
+
+    .step-item.locked .step-name {
+      color: #a0aec0;
+    }
+
+    .step-check {
+      font-size: 20px;
+      color: #ffffff;
+      display: none;
+    }
+
+    .step-item.completed .step-check {
+      display: block;
+    }
+
+    .lock-badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #cbd5e0;
+      color: #ffffff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .content-view {
+      display: none;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .content-view.active {
+      display: block;
+    }
+
+    .content-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      margin-bottom: 25px;
+    }
+
+    .content-card h2 {
+      color: #2d3748;
+      font-size: 32px;
+      margin: 0 0 25px 0;
+      font-weight: 700;
+    }
+
+    .content-card p {
+      color: #4a5568;
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .video-placeholder {
+      background: #0055B8;
+      border-radius: 15px;
+      padding: 80px 40px;
+      text-align: center;
+      color: #ffffff;
+      margin: 25px 0;
+    }
+
+    .video-placeholder .icon {
+      font-size: 64px;
+      margin-bottom: 15px;
+    }
+
+    .quiz-container {
+      margin-top: 30px;
+    }
+
+    .question {
+      background: #f7fafc;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .question h4 {
+      color: #2d3748;
+      font-size: 20px;
+      margin: 0 0 20px 0;
+      font-weight: 600;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option {
+      background: #ffffff;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 18px 22px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      color: #2d3748;
+    }
+
+    .option:hover {
+      border-color: #0055B8;
+      background: #edf2f7;
+    }
+
+    .option.selected {
+      border-color: #0055B8;
+      background: #e6f0ff;
+    }
+
+    .complete-button {
+      background: #0055B8;
+      color: #ffffff;
+      border: none;
+      padding: 18px 40px;
+      border-radius: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 85, 184, 0.4);
+      width: 100%;
+      margin-top: 25px;
+    }
+
+    .complete-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 85, 184, 0.5);
+    }
+
+    .complete-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 36px;
+      }
+
+      .header p {
+        font-size: 18px;
+      }
+
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .content-card {
+        padding: 25px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container">
+   <div id="module-selection" class="module-selection">
+    <div class="header">
+     <h1 id="platform-title">Steuerrecht Lernplattform</h1>
+     <p id="welcome-message">Wähle dein Fachgebiet</p>
+    </div>
+    <div class="modules-grid">
+     <div class="module-card" data-module="ao">
+      <div class="module-icon">
+       📚
+      </div>
+      <h2>Abgabenordnung (AO)</h2>
+      <p>Grundlagen des Steuerverfahrensrechts und Besteuerungsverfahren</p>
+      <div class="progress-bar">
+       <div class="progress-fill" data-progress="ao" style="width: 0%"></div>
+      </div>
+      <div class="progress-text">
+       <span data-progress-text="ao">0</span>% abgeschlossen
+      </div>
+     </div>
+     <div class="module-card" data-module="est">
+      <div class="module-icon">
+       💼
+      </div>
+      <h2>Einkommensteuer (ESt)</h2>
+      <p>Einkommensteuerrecht und Besteuerung natürlicher Personen</p>
+      <div class="progress-bar">
+       <div class="progress-fill" data-progress="est" style="width: 0%"></div>
+      </div>
+      <div class="progress-text">
+       <span data-progress-text="est">0</span>% abgeschlossen
+      </div>
+     </div>
+    </div>
+   </div>
+   <div id="learning-path" class="learning-path"><button class="back-button" id="back-to-modules">← Zurück zur Übersicht</button>
+    <div class="header">
+     <h1 id="module-title">Abgabenordnung (AO)</h1>
+     <p>Lernpfad</p>
+    </div>
+    <div class="topics-container" id="topics-container"></div>
+   </div>
+   <div id="content-view" class="content-view"><button class="back-button" id="back-to-path">← Zurück zum Lernpfad</button>
+    <div class="content-card" id="content-card"></div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      platform_title: "WLW+",
+      welcome_message: "Wähle dein Fachgebiet",
+      background_color: "transparent",
+      card_background: "#ffffff",
+      text_color: "#2d3748",
+      primary_action: "#0055B8",
+      secondary_action: "#48bb78",
+      font_family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif",
+      font_size: 16
+    };
+
+    const modules = {
+      ao: {
+        name: "Abgabenordnung (AO)",
+        icon: "📚",
+        topics: [
+          {
+            id: "grundsaetze",
+            title: "Grundsätze des Besteuerungsverfahrens",
+            steps: [
+              { 
+                type: "video", 
+                name: "Lernvideo", 
+                icon: "🎥",
+                subchapters: [
+                  { id: "intro", name: "Einführung und Überblick" },
+                  { id: "grundlagen", name: "Rechtliche Grundlagen" },
+                  { 
+                    id: "verfahren", 
+                    name: "Verfahrensablauf",
+                    subvideos: [
+                      { id: "verfahren_1", name: "Einleitung des Verfahrens" },
+                      { id: "verfahren_2", name: "Ermittlungsverfahren" },
+                      { id: "verfahren_3", name: "Steuerfestsetzung" },
+                      { id: "verfahren_4", name: "Rechtsbehelfsverfahren" }
+                    ]
+                  },
+                  { id: "zusammenfassung", name: "Zusammenfassung" }
+                ]
+              },
+              { type: "technique", name: "Klausurtechnik", icon: "✍️" },
+              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "case", name: "Übungsfall", icon: "⚖️" }
+            ]
+          },
+          {
+            id: "verwaltungsakt",
+            title: "Steuerverwaltungsakt",
+            steps: [
+              { 
+                type: "video", 
+                name: "Lernvideo", 
+                icon: "🎥",
+                subchapters: [
+                  { id: "definition", name: "Definition und Merkmale" },
+                  { id: "arten", name: "Arten von Verwaltungsakten" },
+                  { id: "wirksamkeit", name: "Wirksamkeit und Bestandskraft" },
+                  { id: "rechtsschutz", name: "Rechtsschutz" }
+                ]
+              },
+              { type: "technique", name: "Klausurtechnik", icon: "✍️" },
+              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "case", name: "Übungsfall", icon: "⚖️" }
+            ]
+          },
+          {
+            id: "verjaehrung",
+            title: "Verjährung im Steuerverfahren",
+            steps: [
+              { 
+                type: "video", 
+                name: "Lernvideo", 
+                icon: "🎥",
+                subchapters: [
+                  { id: "grundlagen", name: "Grundlagen der Verjährung" },
+                  { id: "fristen", name: "Verjährungsfristen" },
+                  { id: "hemmung", name: "Hemmung und Unterbrechung" },
+                  { id: "rechtsfolgen", name: "Rechtsfolgen" }
+                ]
+              },
+              { type: "technique", name: "Klausurtechnik", icon: "✍️" },
+              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "case", name: "Übungsfall", icon: "⚖️" }
+            ]
+          }
+        ]
+      },
+      est: {
+        name: "Einkommensteuer (ESt)",
+        icon: "💼",
+        topics: [
+          {
+            id: "grundlagen",
+            title: "Grundlagen der Einkommensteuer",
+            steps: [
+              { 
+                type: "video", 
+                name: "Lernvideo", 
+                icon: "🎥",
+                subchapters: [
+                  { id: "einfuehrung", name: "Einführung in die ESt" },
+                  { id: "steuerpflicht", name: "Steuerpflicht" },
+                  { id: "bemessungsgrundlage", name: "Bemessungsgrundlage" },
+                  { id: "tarif", name: "Steuertarif" }
+                ]
+              },
+              { type: "technique", name: "Klausurtechnik", icon: "✍️" },
+              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "case", name: "Übungsfall", icon: "⚖️" }
+            ]
+          },
+          {
+            id: "einkunftsarten",
+            title: "Die sieben Einkunftsarten",
+            steps: [
+              { 
+                type: "video", 
+                name: "Lernvideo", 
+                icon: "🎥",
+                subchapters: [
+                  { id: "ueberblick", name: "Überblick Einkunftsarten" },
+                  { id: "gewinneinkuenfte", name: "Gewinneinkünfte" },
+                  { id: "ueberschusseinkuenfte", name: "Überschusseinkünfte" },
+                  { id: "abgrenzung", name: "Abgrenzungsfragen" }
+                ]
+              },
+              { type: "technique", name: "Klausurtechnik", icon: "✍️" },
+              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "case", name: "Übungsfall", icon: "⚖️" }
+            ]
+          },
+          {
+            id: "sonderausgaben",
+            title: "Sonderausgaben und außergewöhnliche Belastungen",
+            steps: [
+              { 
+                type: "video", 
+                name: "Lernvideo", 
+                icon: "🎥",
+                subchapters: [
+                  { id: "sonderausgaben", name: "Sonderausgaben" },
+                  { id: "aussergewoehnlich", name: "Außergewöhnliche Belastungen" },
+                  { id: "abzugsfaehigkeit", name: "Abzugsfähigkeit" },
+                  { id: "beispiele", name: "Praxisbeispiele" }
+                ]
+              },
+              { type: "technique", name: "Klausurtechnik", icon: "✍️" },
+              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "case", name: "Übungsfall", icon: "⚖️" }
+            ]
+          }
+        ]
+      }
+    };
+
+    let currentModule = null;
+    let currentTopic = null;
+    let currentStep = null;
+    let completedSteps = [];
+
+    const dataHandler = {
+      onDataChanged(data) {
+        completedSteps = data;
+        updateUI();
+      }
+    };
+
+    async function initApp() {
+      const initResult = await window.dataSdk.init(dataHandler);
+      if (!initResult.isOk) {
+        console.error("Failed to initialize data SDK");
+        return;
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            const platformTitle = document.getElementById('platform-title');
+            const welcomeMessage = document.getElementById('welcome-message');
+            
+            if (platformTitle) {
+              platformTitle.textContent = config.platform_title || defaultConfig.platform_title;
+            }
+            if (welcomeMessage) {
+              welcomeMessage.textContent = config.welcome_message || defaultConfig.welcome_message;
+            }
+
+            const customFont = config.font_family || defaultConfig.font_family;
+            const baseSize = config.font_size || defaultConfig.font_size;
+            const baseFontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif';
+            
+            document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+            document.body.style.fontSize = `${baseSize}px`;
+
+            document.body.style.background = config.background_color || defaultConfig.background_color;
+
+            const cards = document.querySelectorAll('.module-card, .topic-card, .content-card');
+            cards.forEach(card => {
+              card.style.background = config.card_background || defaultConfig.card_background;
+            });
+
+            const textElements = document.querySelectorAll('h1, h2, h3, h4, p, .step-name, .topic-title h3');
+            textElements.forEach(el => {
+              el.style.color = config.text_color || defaultConfig.text_color;
+            });
+          },
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              {
+                get: () => config.background_color || defaultConfig.background_color,
+                set: (value) => {
+                  if (window.elementSdk && window.elementSdk.config) {
+                    window.elementSdk.config.background_color = value;
+                    window.elementSdk.setConfig({ background_color: value });
+                  }
+                }
+              },
+              {
+                get: () => config.card_background || defaultConfig.card_background,
+                set: (value) => {
+                  if (window.elementSdk && window.elementSdk.config) {
+                    window.elementSdk.config.card_background = value;
+                    window.elementSdk.setConfig({ card_background: value });
+                  }
+                }
+              },
+              {
+                get: () => config.text_color || defaultConfig.text_color,
+                set: (value) => {
+                  if (window.elementSdk && window.elementSdk.config) {
+                    window.elementSdk.config.text_color = value;
+                    window.elementSdk.setConfig({ text_color: value });
+                  }
+                }
+              },
+              {
+                get: () => config.primary_action || defaultConfig.primary_action,
+                set: (value) => {
+                  if (window.elementSdk && window.elementSdk.config) {
+                    window.elementSdk.config.primary_action = value;
+                    window.elementSdk.setConfig({ primary_action: value });
+                  }
+                }
+              },
+              {
+                get: () => config.secondary_action || defaultConfig.secondary_action,
+                set: (value) => {
+                  if (window.elementSdk && window.elementSdk.config) {
+                    window.elementSdk.config.secondary_action = value;
+                    window.elementSdk.setConfig({ secondary_action: value });
+                  }
+                }
+              }
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => config.font_family || defaultConfig.font_family,
+              set: (value) => {
+                if (window.elementSdk && window.elementSdk.config) {
+                  window.elementSdk.config.font_family = value;
+                  window.elementSdk.setConfig({ font_family: value });
+                }
+              }
+            },
+            fontSizeable: {
+              get: () => config.font_size || defaultConfig.font_size,
+              set: (value) => {
+                if (window.elementSdk && window.elementSdk.config) {
+                  window.elementSdk.config.font_size = value;
+                  window.elementSdk.setConfig({ font_size: value });
+                }
+              }
+            }
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ["platform_title", config.platform_title || defaultConfig.platform_title],
+            ["welcome_message", config.welcome_message || defaultConfig.welcome_message]
+          ])
+        });
+      }
+
+      setupEventListeners();
+      updateUI();
+    }
+
+    function setupEventListeners() {
+      document.querySelectorAll('.module-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const moduleId = card.dataset.module;
+          showLearningPath(moduleId);
+        });
+      });
+
+      document.getElementById('back-to-modules').addEventListener('click', () => {
+        showModuleSelection();
+      });
+
+      document.getElementById('back-to-path').addEventListener('click', () => {
+        showLearningPath(currentModule);
+      });
+    }
+
+    function updateUI() {
+      updateProgress();
+      if (currentModule) {
+        renderTopics();
+      }
+    }
+
+    function updateProgress() {
+      Object.keys(modules).forEach(moduleId => {
+        const module = modules[moduleId];
+        const totalSteps = module.topics.reduce((sum, topic) => sum + topic.steps.length, 0);
+        const completedCount = completedSteps.filter(step => step.module_id === moduleId).length;
+        const progress = totalSteps > 0 ? Math.round((completedCount / totalSteps) * 100) : 0;
+
+        const progressFill = document.querySelector(`[data-progress="${moduleId}"]`);
+        const progressText = document.querySelector(`[data-progress-text="${moduleId}"]`);
+        
+        if (progressFill) progressFill.style.width = `${progress}%`;
+        if (progressText) progressText.textContent = progress;
+      });
+    }
+
+    function showModuleSelection() {
+      document.getElementById('module-selection').style.display = 'block';
+      document.getElementById('learning-path').classList.remove('active');
+      document.getElementById('content-view').classList.remove('active');
+      currentModule = null;
+      currentTopic = null;
+      currentStep = null;
+    }
+
+    function showLearningPath(moduleId) {
+      currentModule = moduleId;
+      const module = modules[moduleId];
+      
+      document.getElementById('module-selection').style.display = 'none';
+      document.getElementById('learning-path').classList.add('active');
+      document.getElementById('content-view').classList.remove('active');
+      document.getElementById('module-title').textContent = module.name;
+      
+      renderTopics();
+    }
+
+    function renderTopics() {
+      const container = document.getElementById('topics-container');
+      container.innerHTML = '<div class="path-line"></div>';
+      
+      const module = modules[currentModule];
+      
+      module.topics.forEach((topic, topicIndex) => {
+        const isCompleted = isTopicCompleted(currentModule, topic.id);
+        
+        const topicNode = document.createElement('div');
+        topicNode.className = 'topic-node';
+        topicNode.style.animationDelay = `${topicIndex * 0.15}s`;
+        
+        topicNode.innerHTML = `
+          <div class="node-content" data-topic-id="${topic.id}">
+            <div class="topic-header">
+              <div class="topic-number">${topicIndex + 1}</div>
+              <div class="topic-title">
+                <h3>${topic.title}</h3>
+              </div>
+            </div>
+            <div class="steps-list" id="steps-${topic.id}">
+              <div class="steps-list-inner" id="steps-inner-${topic.id}"></div>
+            </div>
+          </div>
+          <div class="topic-icon-circle ${isCompleted ? 'completed' : ''}">
+            ${isCompleted ? '✓' : (topicIndex + 1)}
+          </div>
+        `;
+        
+        container.appendChild(topicNode);
+        renderSteps(topic);
+        
+        // Klick-Event für Aufklappen/Zuklappen
+        const nodeContent = topicNode.querySelector('.node-content');
+        const topicHeader = nodeContent.querySelector('.topic-header');
+        topicHeader.style.cursor = 'pointer';
+        topicHeader.addEventListener('click', () => {
+          nodeContent.classList.toggle('expanded');
+        });
+      });
+    }
+
+    function renderSteps(topic) {
+      const stepsContainer = document.getElementById(`steps-inner-${topic.id}`);
+      
+      topic.steps.forEach((step, stepIndex) => {
+        const isCompleted = isStepCompleted(currentModule, topic.id, step.type);
+        
+        const stepItem = document.createElement('div');
+        stepItem.className = `step-item ${isCompleted ? 'completed' : ''}`;
+        stepItem.innerHTML = `
+          <div class="step-icon">${step.icon}</div>
+          <div class="step-name">${step.name}</div>
+          <div class="step-check">✓</div>
+        `;
+        
+        stepItem.addEventListener('click', () => {
+          showContent(currentModule, topic.id, step.type);
+        });
+        
+        stepsContainer.appendChild(stepItem);
+      });
+    }
+
+    function showContent(moduleId, topicId, stepType) {
+      currentModule = moduleId;
+      currentTopic = topicId;
+      currentStep = stepType;
+      
+      document.getElementById('learning-path').classList.remove('active');
+      document.getElementById('content-view').classList.add('active');
+      
+      const module = modules[moduleId];
+      const topic = module.topics.find(t => t.id === topicId);
+      const step = topic.steps.find(s => s.type === stepType);
+      
+      const contentCard = document.getElementById('content-card');
+      
+      let content = '';
+      
+      if (stepType === 'video') {
+        let subchaptersHtml = '';
+        if (step.subchapters && step.subchapters.length > 0) {
+          subchaptersHtml = '<div style="margin-top: 30px;"><h3 style="color: #2d3748; font-size: 24px; margin-bottom: 20px;">Kapitel</h3><div style="display: flex; flex-direction: column; gap: 15px;">';
+          step.subchapters.forEach((subchapter, index) => {
+            const isCompleted = isSubchapterCompleted(moduleId, topicId, stepType, subchapter.id);
+            const hasSubvideos = subchapter.subvideos && subchapter.subvideos.length > 0;
+            
+            subchaptersHtml += `
+              <div class="subchapter-wrapper" style="display: flex; flex-direction: column; gap: 10px;">
+                <div class="subchapter-item ${isCompleted ? 'completed' : ''}" data-subchapter="${subchapter.id}" ${hasSubvideos ? 'data-has-subvideos="true"' : ''} style="background: ${isCompleted ? 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)' : '#f7fafc'}; border: 2px solid ${isCompleted ? '#38a169' : '#e2e8f0'}; border-radius: 12px; padding: 20px 25px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 15px;">
+                  <div style="background: ${isCompleted ? 'rgba(255,255,255,0.3)' : '#0055B8'}; color: #ffffff; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; flex-shrink: 0;">${index + 1}</div>
+                  <div style="flex-grow: 1;">
+                    <div style="font-size: 18px; font-weight: 600; color: ${isCompleted ? '#ffffff' : '#2d3748'}; margin-bottom: 5px;">${subchapter.name}</div>
+                    <div style="font-size: 14px; color: ${isCompleted ? 'rgba(255,255,255,0.9)' : '#718096'};">${isCompleted ? 'Abgeschlossen' : 'Noch nicht angesehen'}${hasSubvideos ? ' • ' + subchapter.subvideos.length + ' Untervideos' : ''}</div>
+                  </div>
+                  ${hasSubvideos ? `<div class="expand-icon" style="font-size: 24px; color: ${isCompleted ? '#ffffff' : '#cbd5e0'}; transition: transform 0.3s ease;">▼</div>` : `<div style="font-size: 28px; color: ${isCompleted ? '#ffffff' : '#cbd5e0'};">${isCompleted ? '✓' : '▶'}</div>`}
+                </div>
+            `;
+            
+            if (hasSubvideos) {
+              subchaptersHtml += `<div class="subvideos-container" data-parent="${subchapter.id}" style="display: none; padding-left: 30px; flex-direction: column; gap: 10px;">`;
+              subchapter.subvideos.forEach((subvideo, subIndex) => {
+                const isSubvideoCompleted = isSubchapterCompleted(moduleId, topicId, stepType, subvideo.id);
+                subchaptersHtml += `
+                  <div class="subchapter-item ${isSubvideoCompleted ? 'completed' : ''}" data-subchapter="${subvideo.id}" style="background: ${isSubvideoCompleted ? 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)' : '#ffffff'}; border: 2px solid ${isSubvideoCompleted ? '#38a169' : '#e2e8f0'}; border-radius: 12px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 12px;">
+                    <div style="background: ${isSubvideoCompleted ? 'rgba(255,255,255,0.3)' : '#0055B8'}; color: #ffffff; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0;">${index + 1}.${subIndex + 1}</div>
+                    <div style="flex-grow: 1;">
+                      <div style="font-size: 16px; font-weight: 600; color: ${isSubvideoCompleted ? '#ffffff' : '#2d3748'};">${subvideo.name}</div>
+                    </div>
+                    <div style="font-size: 20px; color: ${isSubvideoCompleted ? '#ffffff' : '#cbd5e0'};">${isSubvideoCompleted ? '✓' : '▶'}</div>
+                  </div>
+                `;
+              });
+              subchaptersHtml += `</div>`;
+            }
+            
+            subchaptersHtml += `</div>`;
+          });
+          subchaptersHtml += '</div></div>';
+        }
+        
+        content = `
+          <h2>${step.icon} ${step.name}</h2>
+          <p><strong>${topic.title}</strong></p>
+          <div class="video-placeholder">
+            <div class="icon">🎥</div>
+            <h3>Lernvideo</h3>
+            <p>Hier würde das Lernvideo zum Thema "${topic.title}" angezeigt werden.</p>
+          </div>
+          <p>In diesem Video lernst du die wichtigsten Grundlagen und Konzepte kennen.</p>
+          ${subchaptersHtml}
+        `;
+      } else if (stepType === 'technique') {
+        content = `
+          <h2>${step.icon} ${step.name}</h2>
+          <p><strong>${topic.title}</strong></p>
+          <h3>Klausurtechnik und Prüfungsschema</h3>
+          <p>Hier lernst du, wie du das Thema in der Klausur strukturiert bearbeitest:</p>
+          <ul style="color: #4a5568; font-size: 18px; line-height: 1.8; margin: 20px 0;">
+            <li>Schritt 1: Sachverhalt analysieren und relevante Normen identifizieren</li>
+            <li>Schritt 2: Prüfungsschema aufstellen und Struktur festlegen</li>
+            <li>Schritt 3: Subsumtion durchführen und Argumente entwickeln</li>
+            <li>Schritt 4: Ergebnis formulieren und begründen</li>
+          </ul>
+          <p>Achte besonders auf die korrekte Zitierweise und die logische Argumentationskette.</p>
+        `;
+      } else if (stepType === 'test') {
+        content = `
+          <h2>${step.icon} ${step.name}</h2>
+          <p><strong>${topic.title}</strong></p>
+          <div class="quiz-container">
+            <div class="question">
+              <h4>Frage 1: Welche Aussage ist korrekt?</h4>
+              <div class="options">
+                <div class="option" data-question="1" data-option="a">A) Erste Antwortmöglichkeit</div>
+                <div class="option" data-question="1" data-option="b">B) Zweite Antwortmöglichkeit</div>
+                <div class="option" data-question="1" data-option="c">C) Dritte Antwortmöglichkeit</div>
+                <div class="option" data-question="1" data-option="d">D) Vierte Antwortmöglichkeit</div>
+              </div>
+            </div>
+            <div class="question">
+              <h4>Frage 2: Was trifft zu?</h4>
+              <div class="options">
+                <div class="option" data-question="2" data-option="a">A) Erste Antwortmöglichkeit</div>
+                <div class="option" data-question="2" data-option="b">B) Zweite Antwortmöglichkeit</div>
+                <div class="option" data-question="2" data-option="c">C) Dritte Antwortmöglichkeit</div>
+                <div class="option" data-question="2" data-option="d">D) Vierte Antwortmöglichkeit</div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (stepType === 'case') {
+        content = `
+          <h2>${step.icon} ${step.name}</h2>
+          <p><strong>${topic.title}</strong></p>
+          <h3>Sachverhalt</h3>
+          <p>Hier würde ein praxisnaher Fall zum Thema "${topic.title}" dargestellt werden, den du eigenständig lösen sollst.</p>
+          <p style="background: #f7fafc; padding: 20px; border-radius: 12px; border-left: 4px solid #0055B8;">
+            Der Sachverhalt beschreibt eine typische Situation aus der Praxis, in der du dein erlerntes Wissen anwenden musst. Analysiere den Fall sorgfältig und wende das Prüfungsschema an.
+          </p>
+          <h3>Aufgabenstellung</h3>
+          <p>Prüfe die rechtlichen Voraussetzungen und komme zu einem begründeten Ergebnis.</p>
+        `;
+      }
+      
+      contentCard.innerHTML = content + `
+        <button class="complete-button" id="complete-step">
+          ${isStepCompleted(moduleId, topicId, stepType) ? '✓ Abgeschlossen' : 'Als abgeschlossen markieren'}
+        </button>
+      `;
+      
+      if (stepType === 'test') {
+        document.querySelectorAll('.option').forEach(option => {
+          option.addEventListener('click', () => {
+            const question = option.dataset.question;
+            document.querySelectorAll(`[data-question="${question}"]`).forEach(opt => {
+              opt.classList.remove('selected');
+            });
+            option.classList.add('selected');
+          });
+        });
+      }
+      
+      document.getElementById('complete-step').addEventListener('click', async () => {
+        await completeStep(moduleId, topicId, stepType);
+      });
+
+      if (stepType === 'video') {
+        document.querySelectorAll('.subchapter-item').forEach(item => {
+          item.addEventListener('click', async (e) => {
+            const hasSubvideos = item.dataset.hasSubvideos === 'true';
+            const subchapterId = item.dataset.subchapter;
+            
+            if (hasSubvideos) {
+              // Aufklappen/Zuklappen der Untervideos
+              e.stopPropagation();
+              const container = document.querySelector(`.subvideos-container[data-parent="${subchapterId}"]`);
+              const expandIcon = item.querySelector('.expand-icon');
+              
+              if (container) {
+                if (container.style.display === 'none' || container.style.display === '') {
+                  container.style.display = 'flex';
+                  if (expandIcon) expandIcon.style.transform = 'rotate(180deg)';
+                } else {
+                  container.style.display = 'none';
+                  if (expandIcon) expandIcon.style.transform = 'rotate(0deg)';
+                }
+              }
+            } else {
+              // Normales Kapitel oder Untervideo abspielen
+              await completeSubchapter(moduleId, topicId, stepType, subchapterId);
+            }
+          });
+        });
+      }
+    }
+
+    async function completeSubchapter(moduleId, topicId, stepType, subchapterId) {
+      if (completedSteps.length >= 999) {
+        const contentCard = document.getElementById('content-card');
+        const warningDiv = document.createElement('div');
+        warningDiv.style.cssText = 'background: #fed7d7; color: #c53030; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: center;';
+        warningDiv.textContent = 'Maximale Anzahl von 999 abgeschlossenen Schritten erreicht. Bitte kontaktiere den Support.';
+        contentCard.appendChild(warningDiv);
+        return;
+      }
+
+      if (isSubchapterCompleted(moduleId, topicId, stepType, subchapterId)) {
+        return;
+      }
+
+      const result = await window.dataSdk.create({
+        module_id: moduleId,
+        topic_id: topicId,
+        step_type: stepType + '_subchapter_' + subchapterId,
+        completed: true,
+        completed_at: new Date().toISOString()
+      });
+
+      if (result.isOk) {
+        // Automatisch Seite neu laden um nächstes Kapitel anzuzeigen
+        setTimeout(() => {
+          showContent(moduleId, topicId, stepType);
+        }, 500);
+      } else {
+        const contentCard = document.getElementById('content-card');
+        const errorDiv = document.createElement('div');
+        errorDiv.style.cssText = 'background: #fed7d7; color: #c53030; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: center;';
+        errorDiv.textContent = 'Fehler beim Speichern. Bitte versuche es erneut.';
+        contentCard.appendChild(errorDiv);
+      }
+    }
+
+    function isSubchapterCompleted(moduleId, topicId, stepType, subchapterId) {
+      return completedSteps.some(step => 
+        step.module_id === moduleId && 
+        step.topic_id === topicId && 
+        step.step_type === stepType + '_subchapter_' + subchapterId
+      );
+    }
+
+    async function completeStep(moduleId, topicId, stepType) {
+      if (completedSteps.length >= 999) {
+        const contentCard = document.getElementById('content-card');
+        const warningDiv = document.createElement('div');
+        warningDiv.style.cssText = 'background: #fed7d7; color: #c53030; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: center;';
+        warningDiv.textContent = 'Maximale Anzahl von 999 abgeschlossenen Schritten erreicht. Bitte kontaktiere den Support.';
+        contentCard.appendChild(warningDiv);
+        return;
+      }
+
+      if (isStepCompleted(moduleId, topicId, stepType)) {
+        return;
+      }
+
+      const button = document.getElementById('complete-step');
+      button.disabled = true;
+      button.textContent = 'Wird gespeichert...';
+
+      const result = await window.dataSdk.create({
+        module_id: moduleId,
+        topic_id: topicId,
+        step_type: stepType,
+        completed: true,
+        completed_at: new Date().toISOString()
+      });
+
+      if (result.isOk) {
+        button.textContent = '✓ Abgeschlossen';
+        
+        // Automatisch zum nächsten Schritt weiterleiten
+        setTimeout(() => {
+          const nextContent = findNextContent(moduleId, topicId, stepType);
+          if (nextContent && nextContent.topicId === topicId) {
+            // Nur innerhalb des gleichen Themas weiterleiten
+            showContent(nextContent.moduleId, nextContent.topicId, nextContent.stepType);
+          } else {
+            // Zurück zum Lernpfad wenn Thema abgeschlossen
+            showLearningPath(moduleId);
+          }
+        }, 1000);
+      } else {
+        button.disabled = false;
+        button.textContent = 'Als abgeschlossen markieren';
+        const contentCard = document.getElementById('content-card');
+        const errorDiv = document.createElement('div');
+        errorDiv.style.cssText = 'background: #fed7d7; color: #c53030; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: center;';
+        errorDiv.textContent = 'Fehler beim Speichern. Bitte versuche es erneut.';
+        contentCard.appendChild(errorDiv);
+      }
+    }
+
+    function isStepCompleted(moduleId, topicId, stepType) {
+      return completedSteps.some(step => 
+        step.module_id === moduleId && 
+        step.topic_id === topicId && 
+        step.step_type === stepType
+      );
+    }
+
+    function isTopicCompleted(moduleId, topicId) {
+      const module = modules[moduleId];
+      const topic = module.topics.find(t => t.id === topicId);
+      return topic.steps.every(step => isStepCompleted(moduleId, topicId, step.type));
+    }
+
+    function findNextContent(currentModuleId, currentTopicId, currentStepType) {
+      const module = modules[currentModuleId];
+      const currentTopicIndex = module.topics.findIndex(t => t.id === currentTopicId);
+      const currentTopic = module.topics[currentTopicIndex];
+      const currentStepIndex = currentTopic.steps.findIndex(s => s.type === currentStepType);
+      
+      // Nächster Schritt im gleichen Thema
+      if (currentStepIndex < currentTopic.steps.length - 1) {
+        return {
+          moduleId: currentModuleId,
+          topicId: currentTopicId,
+          stepType: currentTopic.steps[currentStepIndex + 1].type
+        };
+      }
+      
+      // Nächstes Thema im gleichen Modul
+      if (currentTopicIndex < module.topics.length - 1) {
+        const nextTopic = module.topics[currentTopicIndex + 1];
+        // Prüfe ob das nächste Thema freigeschaltet ist
+        if (isTopicCompleted(currentModuleId, currentTopicId)) {
+          return {
+            moduleId: currentModuleId,
+            topicId: nextTopic.id,
+            stepType: nextTopic.steps[0].type
+          };
+        }
+      }
+      
+      return null;
+    }
+
+    initApp();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ff763dc6734e42',t:'MTc2MzM4NDk1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
