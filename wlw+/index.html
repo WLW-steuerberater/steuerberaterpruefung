@@ -1332,6 +1332,191 @@
       display: flex;
     }
 
+    .character-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .character-modal-overlay.show {
+      display: flex;
+    }
+
+    .character-modal {
+      background: #ffffff;
+      border-radius: 25px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 85%;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      animation: slideUp 0.4s ease-out;
+    }
+
+    .character-editor-container {
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .character-preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+      border-radius: 20px;
+      padding: 40px;
+      min-height: 400px;
+    }
+
+    .character-avatar {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 120px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .character-name-display {
+      color: #2d3748;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .character-title-display {
+      color: #718096;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .character-options {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .character-option-group {
+      background: #f7fafc;
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .character-option-label {
+      color: #2d3748;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .character-option-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+      gap: 10px;
+    }
+
+    .character-option-item {
+      aspect-ratio: 1;
+      background: #ffffff;
+      border: 3px solid #e2e8f0;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .character-option-item:hover {
+      transform: scale(1.1);
+      border-color: #667eea;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .character-option-item.selected {
+      border-color: #667eea;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transform: scale(1.05);
+    }
+
+    .character-option-item.selected.color-option {
+      border-width: 4px;
+    }
+
+    .character-option-item.color-option {
+      border-radius: 50%;
+    }
+
+    .character-input-field {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+    }
+
+    .character-input-field:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .character-save-button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #ffffff;
+      border: none;
+      padding: 18px 40px;
+      border-radius: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .character-save-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    @media (max-width: 768px) {
+      .character-editor-container {
+        grid-template-columns: 1fr;
+        padding: 25px;
+      }
+
+      .character-preview {
+        padding: 30px;
+        min-height: 300px;
+      }
+
+      .character-avatar {
+        width: 150px;
+        height: 150px;
+        font-size: 90px;
+      }
+    }
+
     .badge-modal {
       background: #ffffff;
       border-radius: 25px;
@@ -1706,6 +1891,11 @@
   </div>
   <main class="container">
    <section id="module-selection" class="module-selection">
+    <header class="header">
+     <h1 id="platform-title">WLW+</h1>
+     <p id="welcome-message">Wähle dein Fachgebiet</p>
+     <p id="progress-title" style="color: rgba(255,255,255,0.95); font-size: 24px; font-weight: 700; margin-top: 10px; text-shadow: 0 2px 8px rgba(0,0,0,0.2);">Blutiger Anfänger</p>
+    </header>
     <div class="progress-circle-container">
      <div class="progress-circle-wrapper">
       <svg class="progress-circle" viewbox="0 0 200 200"><circle class="progress-circle-bg" cx="100" cy="100" r="90"></circle> <g id="progress-segments"></g>
@@ -1754,6 +1944,19 @@
        </div>
       </div>
      </div>
+     <div class="streak-card" id="character-card" style="cursor: pointer; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+      <div class="streak-icon">
+       ��
+      </div>
+      <div class="streak-info">
+       <div class="streak-label" style="color: rgba(255,255,255,0.9);">
+        Charakter
+       </div>
+       <div class="streak-value" style="color: #ffffff;">
+        Anpassen
+       </div>
+      </div>
+     </div>
     </div>
     <div class="badge-modal-overlay" id="badge-modal-overlay">
      <div class="badge-modal">
@@ -1762,6 +1965,38 @@
       </div>
       <div class="badge-modal-content">
        <div class="badges-grid" id="badges-grid"></div>
+      </div>
+     </div>
+    </div>
+    <div class="character-modal-overlay" id="character-modal-overlay">
+     <div class="character-modal">
+      <div class="badge-modal-header">
+       <h3 class="badge-modal-title">🎨 Charakter anpassen</h3><button class="badge-modal-close" id="character-modal-close">×</button>
+      </div>
+      <div class="character-editor-container">
+       <div class="character-preview">
+        <div class="character-avatar" id="character-avatar-preview">
+         👤
+        </div>
+        <div class="character-name-display" id="character-name-preview">
+         Dein Name
+        </div>
+        <div class="character-title-display" id="character-title-preview">
+         Steuerrecht-Experte
+        </div>
+       </div>
+       <div class="character-options">
+        <div class="character-option-group"><label class="character-option-label">Name</label> <input type="text" class="character-input-field" id="character-name-input" placeholder="Gib deinen Namen ein" maxlength="20">
+        </div>
+        <div class="character-option-group"><label class="character-option-label">Titel (basierend auf deinem Lernfortschritt)</label> <input type="text" class="character-input-field" id="character-title-input" placeholder="Dein Titel" maxlength="30" disabled style="background: #f7fafc; cursor: not-allowed; opacity: 0.7;">
+        </div>
+        <div class="character-option-group"><label class="character-option-label">Avatar wählen</label>
+         <div class="character-option-grid" id="avatar-options"></div>
+        </div>
+        <div class="character-option-group"><label class="character-option-label">Hintergrundfarbe</label>
+         <div class="character-option-grid" id="color-options"></div>
+        </div><button class="character-save-button" id="save-character-btn">Charakter speichern</button>
+       </div>
       </div>
      </div>
     </div>
@@ -2110,7 +2345,7 @@
                 ]
               },
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Lernkontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "������" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           },
@@ -2251,7 +2486,7 @@
             steps: [
               { type: "video", name: "Lernvideo", icon: "🎥", subchapters: [
                 { id: "einfuehrung", name: "Einführung in die Grunderwerbsteuer" },
-                { id: "erwerbsvorgaenge", name: "Erwerbsvorgänge" },
+                { id: "erwerbsvorgaenge", name: "Erwerbsvorg��nge" },
                 { id: "bemessungsgrundlage", name: "Bemessungsgrundlage" }
               ]},
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
@@ -2297,7 +2532,7 @@
                 { id: "einkommen", name: "Einkommen der Körperschaft" }
               ]},
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Lernkontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "���" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           }
@@ -2374,8 +2609,21 @@
       currentStep: null,
       completedSteps: [],
       streakData: null,
-      pendingBadge: null
+      pendingBadge: null,
+      character: {
+        name: 'Dein Name',
+        title: 'Blutiger Anfänger',
+        avatar: '👤',
+        backgroundColor: '#667eea'
+      }
     };
+
+    const characterAvatars = ['👤', '😊', '🤓', '😎', '🧑‍💼', '👨‍⚖️', '👩‍⚖️', '🧙', '🦸', '🤠', '👑', '🎓', '💼', '⚖️', '📚', '🏆'];
+    const characterColors = [
+      '#667eea', '#764ba2', '#f093fb', '#4facfe',
+      '#43e97b', '#fa709a', '#fee140', '#30cfd0',
+      '#a8edea', '#fed6e3', '#c471f5', '#fa8bff'
+    ];
 
     let isUpdatingStreak = false;
 
@@ -2524,6 +2772,7 @@
     }
 
     function initializeApp() {
+      loadCharacter();
       setupEventListeners();
       updateProgress();
       initSdk();
@@ -2591,7 +2840,7 @@
         "Stolz auf dich! Das war eine tolle Leistung! 🎊"
       ],
       streak: [
-        "Deine Streak steigt! Bleib dran! 🔥",
+        "Deine Streak steigt! Bleib dran! ���",
         "Jeden Tag ein bisschen besser! Super! 📈",
         "Kontinuität ist der Schlüssel zum Erfolg! 💪"
       ]
@@ -2838,6 +3087,43 @@
           }
         });
       }
+
+      const characterCard = document.getElementById('character-card');
+      if (characterCard) {
+        characterCard.addEventListener('click', () => {
+          openCharacterEditor();
+        });
+      }
+
+      const characterModalClose = document.getElementById('character-modal-close');
+      if (characterModalClose) {
+        characterModalClose.addEventListener('click', () => {
+          closeCharacterEditor();
+        });
+      }
+
+      const characterModalOverlay = document.getElementById('character-modal-overlay');
+      if (characterModalOverlay) {
+        characterModalOverlay.addEventListener('click', (e) => {
+          if (e.target === characterModalOverlay) {
+            closeCharacterEditor();
+          }
+        });
+      }
+
+      const saveCharacterBtn = document.getElementById('save-character-btn');
+      if (saveCharacterBtn) {
+        saveCharacterBtn.addEventListener('click', () => {
+          saveCharacter();
+        });
+      }
+
+      const characterNameInput = document.getElementById('character-name-input');
+      if (characterNameInput) {
+        characterNameInput.addEventListener('input', updateCharacterPreview);
+      }
+
+
     }
 
     function toggleBadgesDisplay() {
@@ -2852,6 +3138,200 @@
       const badgeModal = document.getElementById('badge-modal-overlay');
       if (badgeModal) {
         badgeModal.classList.remove('show');
+      }
+    }
+
+    function openCharacterEditor() {
+      const characterModal = document.getElementById('character-modal-overlay');
+      if (characterModal) {
+        characterModal.classList.add('show');
+        initializeCharacterEditor();
+      }
+    }
+
+    function closeCharacterEditor() {
+      const characterModal = document.getElementById('character-modal-overlay');
+      if (characterModal) {
+        characterModal.classList.remove('show');
+      }
+    }
+
+    function initializeCharacterEditor() {
+      const avatarOptions = document.getElementById('avatar-options');
+      const colorOptions = document.getElementById('color-options');
+      const nameInput = document.getElementById('character-name-input');
+      const titleInput = document.getElementById('character-title-input');
+
+      if (nameInput) nameInput.value = appState.character.name;
+      if (titleInput) titleInput.value = appState.character.title;
+
+      if (avatarOptions) {
+        avatarOptions.innerHTML = '';
+        characterAvatars.forEach(avatar => {
+          const option = document.createElement('div');
+          option.className = 'character-option-item';
+          if (avatar === appState.character.avatar) {
+            option.classList.add('selected');
+          }
+          option.textContent = avatar;
+          option.addEventListener('click', () => {
+            document.querySelectorAll('#avatar-options .character-option-item').forEach(el => {
+              el.classList.remove('selected');
+            });
+            option.classList.add('selected');
+            appState.character.avatar = avatar;
+            updateCharacterPreview();
+          });
+          avatarOptions.appendChild(option);
+        });
+      }
+
+      if (colorOptions) {
+        colorOptions.innerHTML = '';
+        characterColors.forEach(color => {
+          const option = document.createElement('div');
+          option.className = 'character-option-item color-option';
+          if (color === appState.character.backgroundColor) {
+            option.classList.add('selected');
+          }
+          option.style.background = color;
+          option.addEventListener('click', () => {
+            document.querySelectorAll('#color-options .character-option-item').forEach(el => {
+              el.classList.remove('selected');
+            });
+            option.classList.add('selected');
+            appState.character.backgroundColor = color;
+            updateCharacterPreview();
+          });
+          colorOptions.appendChild(option);
+        });
+      }
+
+      updateCharacterPreview();
+    }
+
+    function updateCharacterPreview() {
+      const avatarPreview = document.getElementById('character-avatar-preview');
+      const namePreview = document.getElementById('character-name-preview');
+      const titlePreview = document.getElementById('character-title-preview');
+      const nameInput = document.getElementById('character-name-input');
+      const titleInput = document.getElementById('character-title-input');
+
+      if (nameInput && nameInput.value.trim() !== '') {
+        appState.character.name = nameInput.value.trim();
+      }
+      
+      // Calculate title based on progress
+      const progressTitle = calculateProgressTitle();
+      appState.character.title = progressTitle;
+      
+      // Update title input with calculated title
+      if (titleInput) {
+        titleInput.value = progressTitle;
+      }
+
+      if (avatarPreview) {
+        avatarPreview.textContent = appState.character.avatar;
+        avatarPreview.style.background = appState.character.backgroundColor;
+      }
+      if (namePreview) {
+        namePreview.textContent = appState.character.name;
+      }
+      if (titlePreview) {
+        titlePreview.textContent = appState.character.title;
+      }
+    }
+    
+    function calculateProgressTitle() {
+      let totalStepsAllModules = 0;
+      let completedStepsAllModules = 0;
+
+      Object.keys(modules).forEach(moduleId => {
+        const module = modules[moduleId];
+        const totalSteps = module.topics.reduce((sum, topic) => sum + topic.steps.length, 0);
+        
+        let completedCount = 0;
+        module.topics.forEach(topic => {
+          topic.steps.forEach(step => {
+            const mainStepCompleted = isStepCompleted(moduleId, topic.id, step.type);
+            const allSubitemsCompleted = areAllSubitemsCompleted(moduleId, topic.id, step);
+            
+            if (mainStepCompleted || allSubitemsCompleted) {
+              completedCount++;
+            }
+          });
+        });
+
+        totalStepsAllModules += totalSteps;
+        completedStepsAllModules += completedCount;
+      });
+
+      const totalProgress = totalStepsAllModules > 0 ? (completedStepsAllModules / totalStepsAllModules) : 0;
+      const percentage = Math.round(totalProgress * 100);
+
+      if (percentage <= 5) {
+        return 'Blutiger Anfänger';
+      } else if (percentage <= 10) {
+        return 'Grundlagen-Beherrscher';
+      } else if (percentage <= 20) {
+        return 'Wissensdurstig';
+      } else if (percentage <= 30) {
+        return 'Fortgeschrittener';
+      } else if (percentage <= 40) {
+        return 'Engagierter Lerner';
+      } else if (percentage <= 50) {
+        return 'Halbzeit-Champion';
+      } else if (percentage <= 60) {
+        return 'Motivierter Profi';
+      } else if (percentage <= 70) {
+        return 'Wissens-Virtuose';
+      } else if (percentage <= 80) {
+        return 'Steuerrecht-Experte';
+      } else if (percentage <= 90) {
+        return 'Fast am Ziel';
+      } else if (percentage <= 99) {
+        return 'Meister des Steuerrechts';
+      } else {
+        return 'Vollständig gemeistert!';
+      }
+    }
+
+    function saveCharacter() {
+      localStorage.setItem('userCharacter', JSON.stringify(appState.character));
+      
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        color: white;
+        padding: 25px 50px;
+        border-radius: 20px;
+        font-size: 20px;
+        font-weight: 600;
+        box-shadow: 0 10px 40px rgba(72, 187, 120, 0.4);
+        z-index: 3000;
+        animation: slideUp 0.4s ease-out;
+      `;
+      notification.textContent = '✓ Charakter gespeichert!';
+      document.body.appendChild(notification);
+
+      setTimeout(() => {
+        notification.remove();
+        closeCharacterEditor();
+      }, 2000);
+    }
+
+    function loadCharacter() {
+      const saved = localStorage.getItem('userCharacter');
+      if (saved) {
+        try {
+          appState.character = JSON.parse(saved);
+        } catch (e) {
+          console.error('Fehler beim Laden des Charakters');
+        }
       }
     }
 
@@ -2898,6 +3378,7 @@
 
       const totalProgress = totalStepsAllModules > 0 ? (completedStepsAllModules / totalStepsAllModules) : 0;
       updateProgressCircle(totalProgress);
+      updateProgressTitle(totalProgress);
     }
 
     function updateProgressCircle(totalProgress) {
@@ -2927,6 +3408,42 @@
 
       const totalPercentage = Math.round(totalProgress * 100);
       percentageElement.textContent = `${totalPercentage}%`;
+    }
+
+    function updateProgressTitle(totalProgress) {
+      const progressTitleElement = document.getElementById('progress-title');
+      if (!progressTitleElement) return;
+
+      const percentage = Math.round(totalProgress * 100);
+      let title = '';
+
+      if (percentage <= 5) {
+        title = '🌱 Blutiger Anfänger';
+      } else if (percentage <= 10) {
+        title = '📖 Grundlagen-Beherrscher';
+      } else if (percentage <= 20) {
+        title = '🎯 Wissensdurstig';
+      } else if (percentage <= 30) {
+        title = '💪 Fortgeschrittener';
+      } else if (percentage <= 40) {
+        title = '⭐ Engagierter Lerner';
+      } else if (percentage <= 50) {
+        title = '🚀 Halbzeit-Champion';
+      } else if (percentage <= 60) {
+        title = '🔥 Motivierter Profi';
+      } else if (percentage <= 70) {
+        title = '🎓 Wissens-Virtuose';
+      } else if (percentage <= 80) {
+        title = '🏆 Steuerrecht-Experte';
+      } else if (percentage <= 90) {
+        title = '👑 Fast am Ziel';
+      } else if (percentage <= 99) {
+        title = '💎 Meister des Steuerrechts';
+      } else {
+        title = '🌟 Vollständig gemeistert!';
+      }
+
+      progressTitleElement.textContent = title;
     }
 
     function updateStreakDisplay() {
@@ -3302,7 +3819,7 @@
       // Show mascot message only first time for this learning path
       if (!mascotShownMessages.learningPath) {
         setTimeout(() => {
-          showMascotMessage("Wähle ein Thema aus dem Lernpfad! Klicke darauf, um die Schritte zu sehen. 📚", 4000);
+          showMascotMessage("Wähle ein Thema aus dem Lernpfad! Klicke darauf, um die Schritte zu sehen. ����", 4000);
           mascotShownMessages.learningPath = true;
         }, 500);
       }
@@ -4187,5 +4704,5 @@
       initializeApp();
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a076dc9b44cc49a',t:'MTc2MzQ2ODQ5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a077ef01216f311',t:'MTc2MzQ2OTIwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
