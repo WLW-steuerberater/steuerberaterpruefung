@@ -6,6 +6,7 @@
   <title>Steuerrecht Lernplattform</title>
   <script src="/_sdk/element_sdk.js"></script>
   <script src="/_sdk/data_sdk.js"></script>
+  <script src="https://wlw-info.de/api/embed/bundle.js" defer></script>
   <style>
     body {
       box-sizing: border-box;
@@ -797,11 +798,369 @@
       margin: 0;
     }
 
+    .completion-notification {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+      border-radius: 25px;
+      padding: 45px 60px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+      z-index: 1001;
+      text-align: center;
+      transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .completion-notification.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .completion-notification .check-icon {
+      font-size: 70px;
+      margin-bottom: 20px;
+      animation: checkAnimation 0.8s ease-in-out;
+      display: block;
+      color: #ffffff;
+    }
+
+    .completion-notification h3 {
+      color: #ffffff;
+      font-size: 28px;
+      margin: 0;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .completion-notification p {
+      color: #ffffff;
+      font-size: 16px;
+      margin: 0;
+      display: none;
+    }
+
+    .topic-completion-notification {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+      border-radius: 30px;
+      padding: 60px 80px;
+      box-shadow: 0 30px 90px rgba(255, 215, 0, 0.6);
+      z-index: 1002;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      border: 5px solid #ffed4e;
+    }
+
+    .topic-completion-notification.show {
+      transform: translate(-50%, -50%) scale(1);
+      animation: topicCompletionPulse 1s ease-in-out 0.6s 3;
+    }
+
+    .topic-completion-notification .trophy-icon {
+      font-size: 100px;
+      margin-bottom: 25px;
+      animation: trophyAnimation 1s ease-in-out;
+      display: block;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+    }
+
+    .topic-completion-notification h3 {
+      color: #2d3748;
+      font-size: 36px;
+      margin: 0 0 15px 0;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+    }
+
+    .topic-completion-notification p {
+      color: #2d3748;
+      font-size: 20px;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: #ffd700;
+      position: absolute;
+      animation: confettiFall 3s linear forwards;
+      z-index: 1000;
+    }
+
+    .mascot-helper {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 120px;
+      height: 120px;
+      z-index: 999;
+      cursor: default;
+      animation: floatAround 6s ease-in-out forwards, fadeOut 0.5s ease-out 6s forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatAround {
+      0% {
+        bottom: 30px;
+        right: 30px;
+        transform: rotate(0deg);
+        opacity: 1;
+      }
+      15% {
+        bottom: 60%;
+        right: 10%;
+        transform: rotate(15deg);
+        opacity: 1;
+      }
+      35% {
+        bottom: 80%;
+        right: 40%;
+        transform: rotate(-10deg);
+        opacity: 1;
+      }
+      55% {
+        bottom: 50%;
+        right: 80%;
+        transform: rotate(20deg);
+        opacity: 1;
+      }
+      75% {
+        bottom: 70%;
+        right: 20%;
+        transform: rotate(10deg);
+        opacity: 1;
+      }
+      90% {
+        bottom: 30px;
+        right: 30px;
+        transform: rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        bottom: -20%;
+        right: -20%;
+        transform: rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+        transform: scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+    }
+
+    .mascot-helper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    }
+
+    .mascot-speech-bubble {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 20px 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 300px;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      pointer-events: none;
+    }
+
+    .mascot-speech-bubble.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .mascot-speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      right: 50px;
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 15px solid #ffffff;
+    }
+
+    .mascot-speech-bubble p {
+      margin: 0;
+      color: #2d3748;
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .mascot-speech-bubble .mascot-name {
+      color: #0055B8;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .mascot-inline {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      margin: 0 10px;
+      vertical-align: middle;
+    }
+
+    .mascot-inline img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .mascot-encouragement {
+      background: linear-gradient(135deg, #e6f0ff 0%, #f0f9ff 100%);
+      border: 2px solid #0055B8;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 25px 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .mascot-encouragement img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .mascot-encouragement-text {
+      flex-grow: 1;
+    }
+
+    .mascot-encouragement-text h4 {
+      color: #0055B8;
+      font-size: 18px;
+      margin: 0 0 8px 0;
+      font-weight: 700;
+    }
+
+    .mascot-encouragement-text p {
+      color: #4a5568;
+      font-size: 15px;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .mascot-helper {
+        width: 80px;
+        height: 80px;
+        bottom: 20px;
+        right: 20px;
+      }
+
+      .mascot-speech-bubble {
+        bottom: 110px;
+        right: 20px;
+        max-width: 250px;
+        padding: 15px 20px;
+      }
+
+      .mascot-encouragement {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .mascot-encouragement img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    @keyframes trophyAnimation {
+      0% { 
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.4) rotate(20deg);
+      }
+      70% {
+        transform: scale(0.9) rotate(-10deg);
+      }
+      100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes topicCompletionPulse {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 30px 90px rgba(255, 215, 0, 0.6);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.05);
+        box-shadow: 0 35px 100px rgba(255, 215, 0, 0.8);
+      }
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
     @keyframes fireAnimation {
       0%, 100% { transform: scale(1) rotate(0deg); }
       25% { transform: scale(1.2) rotate(-10deg); }
       50% { transform: scale(1.3) rotate(10deg); }
       75% { transform: scale(1.2) rotate(-5deg); }
+    }
+
+    @keyframes checkAnimation {
+      0% { 
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.3) rotate(10deg);
+      }
+      100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes completionPulse {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.05);
+      }
     }
 
     @keyframes fadeInDown {
@@ -877,18 +1236,69 @@
         padding: 40px 30px;
         width: 90%;
       }
+
+      .subchapter-item {
+        padding: 15px 18px;
+        flex-wrap: wrap;
+      }
+
+      .subchapter-number {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+      }
+
+      .subchapter-name {
+        font-size: 16px;
+        flex-basis: calc(100% - 50px);
+      }
+
+      .subchapter-status {
+        font-size: 13px;
+        flex-basis: 100%;
+        margin-left: 47px;
+        margin-top: 5px;
+      }
+
+      .subchapter-icon {
+        font-size: 24px;
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .subvideo-item {
+        padding: 12px 16px;
+      }
+
+      .subvideo-number {
+        width: 28px;
+        height: 28px;
+        font-size: 13px;
+      }
+
+      .subvideo-name {
+        font-size: 14px;
+      }
+
+      .subvideo-icon {
+        font-size: 18px;
+      }
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body>
+  <div id="deployment-12de2f60-8a50-4416-99f4-b6a9b97fd7c1"></div><!-- WLW.li Maskottchen Helper -->
+  <div class="mascot-helper" id="mascot-helper"><img src="https://dl.dropboxusercontent.com/scl/fi/70ha0uv4p4zwsf2tqkvmi/Happy-1-1.gif?rlkey=ro98zv19936b4u4k6phy5x634&amp;raw=1" alt="WLW.li Maskottchen" id="mascot-image">
+  </div>
+  <div class="mascot-speech-bubble" id="mascot-speech"><span class="mascot-name">WLW.li</span>
+   <p id="mascot-message">Hallo! Ich bin WLW.li und helfe dir beim Lernen! 🎓</p>
+  </div>
   <main class="container">
    <section id="module-selection" class="module-selection">
-    <header class="header">
-     <h1 id="platform-title">WLW+</h1>
-     <p id="welcome-message">Wähle dein Fachgebiet</p>
-    </header>
     <div class="progress-circle-container">
      <div class="progress-circle-wrapper">
       <svg class="progress-circle" viewbox="0 0 200 200"><circle class="progress-circle-bg" cx="100" cy="100" r="90"></circle> <g id="progress-segments"></g>
@@ -1126,6 +1536,20 @@
    <h3 id="streak-notification-title">Streak erhöht!</h3>
    <p id="streak-notification-text">Du bist jetzt bei 1 Tag!</p>
   </div>
+  <div class="completion-notification" id="completion-notification">
+   <div class="check-icon">
+    ��
+   </div>
+   <h3 id="completion-notification-title">Abgeschlossen!</h3>
+   <p id="completion-notification-text">Du hast diesen Schritt erfolgreich beendet.</p>
+  </div>
+  <div class="topic-completion-notification" id="topic-completion-notification">
+   <div class="trophy-icon">
+    🏆
+   </div>
+   <h3 id="topic-completion-title">Thema abgeschlossen!</h3>
+   <p id="topic-completion-text">Großartige Leistung!</p>
+  </div>
   <script>
     const defaultConfig = {
       platform_title: "WLW+",
@@ -1275,7 +1699,7 @@
           },
           {
             id: "sonderausgaben",
-            title: "Sonderausgaben und außergewöhnliche Belastungen",
+            title: "Sonderausgaben und au��ergewöhnliche Belastungen",
             steps: [
               { 
                 type: "video", 
@@ -1649,6 +2073,131 @@
       setupEventListeners();
       updateProgress();
       initSdk();
+      initMascot();
+      playStartSound();
+    }
+
+    function playStartSound() {
+      const startSound = new Audio('https://dl.dropboxusercontent.com/scl/fi/jq911z7rdony7o9hn7wwy/start.mp3?rlkey=9uvaf3hwpni67lpntzx13w5mr');
+      startSound.play().catch(error => {
+        console.log('Start-Sound konnte nicht abgespielt werden:', error);
+      });
+    }
+
+    // Mascot interaction system
+    const mascotMessages = {
+      welcome: [
+        "Hallo! Ich bin WLW.li und helfe dir beim Lernen! 🎓",
+        "Schön, dass du da bist! Lass uns gemeinsam lernen! 😊",
+        "Bereit für eine produktive Lernsession? Los geht's! 💪"
+      ],
+      moduleSelection: [
+        "Wähle ein Modul aus, das dich interessiert!",
+        "Such dir ein Thema aus - ich bin immer für dich da! 📚",
+        "Welches Gebiet möchtest du heute meistern?"
+      ],
+      videoStart: [
+        "Konzentriere dich auf das Video - du schaffst das! 🎥",
+        "Mach dir ruhig Notizen zu den wichtigen Punkten! ✍️",
+        "Das Video erklärt alles Schritt für Schritt!"
+      ],
+      videoComplete: [
+        "Super gemacht! Das Video hast du geschafft! ��",
+        "Gut zugehört! Weiter geht's mit der Klausurtechnik! ���",
+        "Verstanden? Perfekt! Auf zum nächsten Schritt! ✨"
+      ],
+      techniqueStart: [
+        "Jetzt lernst du, wie du es in der Klausur anwendest! 📝",
+        "Die Struktur ist wichtig - präge sie dir gut ein! 🎯",
+        "Mit der richtigen Technik wird alles einfacher! 💡"
+      ],
+      testStart: [
+        "Zeit, dein Wissen zu testen! Du bist bereit! 🎯",
+        "Keine Angst vor Fehlern - daraus lernt man! 💪",
+        "Zeig, was du gelernt hast! Ich glaube an dich! ���"
+      ],
+      caseStart: [
+        "Jetzt wird's praktisch! Übungsfälle festigen dein Wissen! ⚖️",
+        "Versuche erst selbst zu lösen, bevor du die Lösung ansiehst! 💡",
+        "Praxisfälle sind der beste Weg zum Lernen! 📖"
+      ],
+      topicComplete: [
+        "Wahnsinn! Ein ganzes Thema abgeschlossen! ��",
+        "Du bist großartig! Weiter so! 🌟",
+        "Stolz auf dich! Das war eine tolle Leistung! 🎊"
+      ],
+      streak: [
+        "Deine Streak steigt! Bleib dran! 🔥",
+        "Jeden Tag ein bisschen besser! Super! 📈",
+        "Kontinuität ist der Schlüssel zum Erfolg! 💪"
+      ]
+    };
+
+    let mascotCurrentState = 'idle';
+    let mascotMessageTimeout;
+
+    const mascotShownMessages = {
+      welcome: false,
+      moduleSelection: false,
+      learningPath: false,
+      contentView: {}
+    };
+
+    function initMascot() {
+      const mascot = document.getElementById('mascot-helper');
+      const speechBubble = document.getElementById('mascot-speech');
+
+      // Show welcome message after 6 seconds, visible for 5 seconds
+      setTimeout(() => {
+        if (!mascotShownMessages.welcome) {
+          showMascotMessage(getRandomMessage('welcome'), 5000);
+          mascotShownMessages.welcome = true;
+        }
+      }, 6000);
+
+      // Mascot click interaction - disabled after first message
+      mascot.addEventListener('click', () => {
+        // Click is now disabled
+      });
+
+      // Auto-hide speech bubble on click
+      speechBubble.addEventListener('click', () => {
+        hideMascotMessage();
+      });
+    }
+
+    function getRandomMessage(category) {
+      const messages = mascotMessages[category] || mascotMessages.welcome;
+      return messages[Math.floor(Math.random() * messages.length)];
+    }
+
+    function showMascotMessage(message, duration = 4000) {
+      const speechBubble = document.getElementById('mascot-speech');
+      const messageElement = document.getElementById('mascot-message');
+      
+      if (mascotMessageTimeout) {
+        clearTimeout(mascotMessageTimeout);
+      }
+
+      messageElement.textContent = message;
+      speechBubble.classList.add('show');
+
+      mascotMessageTimeout = setTimeout(() => {
+        hideMascotMessage();
+      }, duration);
+    }
+
+    function hideMascotMessage() {
+      const speechBubble = document.getElementById('mascot-speech');
+      speechBubble.classList.remove('show');
+    }
+
+    function changeMascotState(state, message = null) {
+      mascotCurrentState = state;
+
+      if (message) {
+        showMascotMessage(message);
+      }
     }
 
     function applyConfig(config) {
@@ -1883,13 +2432,99 @@
       } else {
         title.textContent = 'Streak erhöht! 🔥';
         text.textContent = `Du bist jetzt bei ${streakCount} ${streakCount === 1 ? 'Tag' : 'Tagen'}!`;
+        
+        // Mascot encourages streak
+        changeMascotState('excited', getRandomMessage('streak'));
+        
+        // Play streak sound
+        const streakSound = new Audio('https://dl.dropboxusercontent.com/scl/fi/d5y3u2qxzd8pmhqdkaedm/streak-erh-hen.mp3?rlkey=t6qpzxq0sp9czqdxasmwec1r4');
+        streakSound.play().catch(error => {
+          console.log('Sound konnte nicht abgespielt werden:', error);
+        });
       }
 
       notification.classList.add('show');
 
       setTimeout(() => {
         notification.classList.remove('show');
+        changeMascotState('idle');
       }, 3000);
+    }
+
+    function showCompletionNotification(stepType) {
+      const notification = document.getElementById('completion-notification');
+      const title = document.getElementById('completion-notification-title');
+      const text = document.getElementById('completion-notification-text');
+
+      const stepNames = {
+        'video': '🎥 Lernvideo',
+        'technique': '✍️ Klausurtechnik',
+        'test': '�������� Leistungskontrolle',
+        'case': '⚖️ Übungsfall'
+      };
+
+      title.textContent = `${stepNames[stepType] || 'Schritt'} abgeschlossen!`;
+      text.textContent = 'Weiter zur nächsten Kategorie';
+
+      // Play completion sound
+      const completionSound = new Audio('https://dl.dropboxusercontent.com/scl/fi/5v0h0fiwgoviybwhv1hlb/Katgeorie-fertig.mp3?rlkey=7qycy4p2zrg7pt312xgcxvviu');
+      completionSound.play().catch(error => {
+        console.log('Sound konnte nicht abgespielt werden:', error);
+      });
+
+      notification.classList.add('show');
+
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 2000);
+    }
+
+    function showTopicCompletionNotification(topicTitle) {
+      const notification = document.getElementById('topic-completion-notification');
+      const title = document.getElementById('topic-completion-title');
+      const text = document.getElementById('topic-completion-text');
+
+      title.textContent = 'Thema abgeschlossen! 🎉';
+      text.textContent = `"${topicTitle}" vollständig gemeistert!`;
+
+      // Mascot celebrates
+      changeMascotState('celebrating', getRandomMessage('topicComplete'));
+
+      // Create confetti effect
+      createConfetti();
+
+      // Play topic completion sound
+      const topicSound = new Audio('https://dl.dropboxusercontent.com/scl/fi/hhg7mpup0ewyff0lzm9m2/Thema-fertig.mp3?rlkey=nalbt6ak5iixpp5lq13q3l8p7');
+      topicSound.play().catch(error => {
+        console.log('Sound konnte nicht abgespielt werden:', error);
+      });
+
+      notification.classList.add('show');
+
+      setTimeout(() => {
+        notification.classList.remove('show');
+        changeMascotState('idle');
+      }, 4000);
+    }
+
+    function createConfetti() {
+      const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#a29bfe', '#fd79a8'];
+      const confettiCount = 50;
+
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 0.5 + 's';
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 3500);
+      }
     }
 
     function showModuleSelection() {
@@ -1899,6 +2534,17 @@
       appState.currentModule = null;
       appState.currentTopic = null;
       appState.currentStep = null;
+      
+      // Reset mascot to idle state
+      changeMascotState('idle');
+      
+      // Show mascot message only first time
+      if (!mascotShownMessages.moduleSelection) {
+        setTimeout(() => {
+          showMascotMessage(getRandomMessage('moduleSelection'), 4000);
+          mascotShownMessages.moduleSelection = true;
+        }, 500);
+      }
     }
 
     function showLearningPath(moduleId) {
@@ -1926,6 +2572,14 @@
             currentTopicNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
         }, 100);
+      }
+      
+      // Show mascot message only first time for this learning path
+      if (!mascotShownMessages.learningPath) {
+        setTimeout(() => {
+          showMascotMessage("Wähle ein Thema aus dem Lernpfad! Klicke darauf, um die Schritte zu sehen. 📚", 4000);
+          mascotShownMessages.learningPath = true;
+        }, 500);
       }
     }
 
@@ -2006,6 +2660,25 @@
       
       document.getElementById('learning-path').classList.remove('active');
       document.getElementById('content-view').classList.add('active');
+
+      // Show mascot message only first time for this step type
+      const contentKey = stepType;
+      if (!mascotShownMessages.contentView[contentKey]) {
+        // Mascot reacts to content type
+        if (stepType === 'video') {
+          changeMascotState('happy', getRandomMessage('videoStart'));
+        } else if (stepType === 'technique') {
+          changeMascotState('thinking', getRandomMessage('techniqueStart'));
+        } else if (stepType === 'test') {
+          changeMascotState('excited', getRandomMessage('testStart'));
+        } else if (stepType === 'case') {
+          changeMascotState('studying', getRandomMessage('caseStart'));
+        }
+        mascotShownMessages.contentView[contentKey] = true;
+      } else {
+        // Just change state without message
+        changeMascotState('idle');
+      }
       
       const module = modules[moduleId];
       const topic = module.topics.find(t => t.id === topicId);
@@ -2026,7 +2699,7 @@
       
       let buttonHtml = '';
       if (stepType === 'video') {
-        buttonHtml = `<button class="complete-button" id="complete-step">Zur Klausurtechnik →</button>`;
+        buttonHtml = `<button class="complete-button" id="complete-step">Zur Klausurtechnik ��</button>`;
       } else if (stepType === 'technique') {
         buttonHtml = `<button class="complete-button" id="complete-step">Zur Leistungskontrolle →</button>`;
       } else if (stepType === 'test') {
@@ -2049,6 +2722,9 @@
       
       const module = modules[moduleId];
       const moduleColor = module.color || '#0055B8';
+
+      // Mascot encouragement box removed
+      const mascotEncouragement = ``;
       
       if (step.subchapters && step.subchapters.length > 0) {
         subchaptersHtml = '<div style="margin-top: 30px;"><h3 style="color: #2d3748; font-size: 24px; margin-bottom: 20px;">Lernvideos</h3>';
@@ -2096,6 +2772,7 @@
       return `
         <h2>${step.icon} ${step.name}</h2>
         <p><strong>${topic.title}</strong></p>
+        ${mascotEncouragement}
         <div style="margin: 25px 0;">
           <video id="main-video-player" controls style="width: 100%; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);">
             <source src="https://dl.dropboxusercontent.com/scl/fi/f4bujknjz22n5f9giat3b/5.1_Mitwirkungspflichten-fertig.mp4?rlkey=9q2jukbhvje21tz5nvuch81eh" type="video/mp4">
@@ -2130,6 +2807,10 @@
     }
 
     function generateTechniqueContent(step, topic) {
+      const moduleId = appState.currentModule;
+      const topicId = appState.currentTopic;
+      const isCompleted = isStepCompleted(moduleId, topicId, 'technique');
+      
       return `
         <h2>${step.icon} ${step.name}</h2>
         <p><strong>${topic.title}</strong></p>
@@ -2142,10 +2823,19 @@
           <li>Schritt 4: Ergebnis formulieren und begründen</li>
         </ul>
         <p>Achte besonders auf die korrekte Zitierweise und die logische Argumentationskette.</p>
+        <div style="margin-top: 30px; text-align: center;">
+          <button id="complete-technique-btn" style="background: ${isCompleted ? '#a0aec0' : '#48bb78'}; color: #ffffff; border: none; padding: 18px 40px; border-radius: 15px; font-size: 18px; font-weight: 600; cursor: ${isCompleted ? 'not-allowed' : 'pointer'}; transition: all 0.3s ease; box-shadow: 0 5px 15px ${isCompleted ? 'rgba(160, 174, 192, 0.4)' : 'rgba(72, 187, 120, 0.4)'}; ${isCompleted ? 'opacity: 0.8;' : ''}" ${isCompleted ? 'disabled' : ''} onmouseover="${isCompleted ? '' : `this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(72, 187, 120, 0.5)';`}" onmouseout="${isCompleted ? '' : `this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(72, 187, 120, 0.4)';`}">
+            ${isCompleted ? '✓ Abgeschlossen' : 'Als abgeschlossen markieren'}
+          </button>
+        </div>
       `;
     }
 
     function generateTestContent(step, topic) {
+      const moduleId = appState.currentModule;
+      const topicId = appState.currentTopic;
+      const isCompleted = isStepCompleted(moduleId, topicId, 'test');
+      
       return `
         <h2>${step.icon} ${step.name}</h2>
         <p><strong>${topic.title}</strong></p>
@@ -2169,6 +2859,11 @@
             </div>
           </div>
         </div>
+        <div style="margin-top: 30px; text-align: center;">
+          <button id="complete-test-btn" style="background: ${isCompleted ? '#a0aec0' : '#48bb78'}; color: #ffffff; border: none; padding: 18px 40px; border-radius: 15px; font-size: 18px; font-weight: 600; cursor: ${isCompleted ? 'not-allowed' : 'pointer'}; transition: all 0.3s ease; box-shadow: 0 5px 15px ${isCompleted ? 'rgba(160, 174, 192, 0.4)' : 'rgba(72, 187, 120, 0.4)'}; ${isCompleted ? 'opacity: 0.8;' : ''}" ${isCompleted ? 'disabled' : ''} onmouseover="${isCompleted ? '' : `this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(72, 187, 120, 0.5)';`}" onmouseout="${isCompleted ? '' : `this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(72, 187, 120, 0.4)';`}">
+            ${isCompleted ? '✓ Abgeschlossen' : 'Als abgeschlossen markieren'}
+          </button>
+        </div>
       `;
     }
 
@@ -2177,6 +2872,8 @@
       
       const module = modules[moduleId];
       const moduleColor = module.color || '#0055B8';
+
+      const mascotEncouragement = ``;
       
       if (step.cases && step.cases.length > 0) {
         casesHtml = '<div style="margin-top: 30px;"><h3 style="color: #2d3748; font-size: 24px; margin-bottom: 20px;">Übungsfälle</h3>';
@@ -2192,7 +2889,7 @@
                   <div class="subchapter-name">${caseItem.name}</div>
                   <div class="subchapter-status">${isCompleted ? 'Abgeschlossen' : 'Noch nicht bearbeitet'}</div>
                 </div>
-                <div class="subchapter-icon">${isCompleted ? '✓' : '⚖️'}</div>
+                <div class="subchapter-icon">${isCompleted ? '✓' : ''}</div>
               </div>
             </div>
           `;
@@ -2204,12 +2901,22 @@
       return `
         <h2>${step.icon} ${step.name}</h2>
         <p><strong>${topic.title}</strong></p>
+        ${mascotEncouragement}
         <div id="case-content-area"></div>
         ${casesHtml}
       `;
     }
 
     function attachContentEventListeners(stepType, moduleId, topicId) {
+      if (stepType === 'technique') {
+        const completeTechniqueBtn = document.getElementById('complete-technique-btn');
+        if (completeTechniqueBtn && !completeTechniqueBtn.disabled) {
+          completeTechniqueBtn.addEventListener('click', () => {
+            completeStep(moduleId, topicId, 'technique');
+          });
+        }
+      }
+      
       if (stepType === 'test') {
         document.querySelectorAll('.option').forEach(option => {
           option.addEventListener('click', () => {
@@ -2220,6 +2927,13 @@
             option.classList.add('selected');
           });
         });
+        
+        const completeTestBtn = document.getElementById('complete-test-btn');
+        if (completeTestBtn && !completeTestBtn.disabled) {
+          completeTestBtn.addEventListener('click', () => {
+            completeStep(moduleId, topicId, 'test');
+          });
+        }
       }
       
       if (stepType === 'video') {
@@ -2340,14 +3054,14 @@
             <textarea id="solution-input" placeholder="Gib hier deine Lösung ein..." style="width: 100%; min-height: 300px; padding: 20px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; font-family: inherit; line-height: 1.6; resize: vertical; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='#0055B8'" onblur="this.style.borderColor='#e2e8f0'"></textarea>
           </div>
           
-          <div style="display: flex; gap: 15px; margin: 20px 0;">
-            <button id="submit-answer-btn" style="background: #0055B8; color: #ffffff; border: none; padding: 15px 35px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0, 85, 184, 0.3); font-size: 16px; font-weight: 600;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0, 85, 184, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0, 85, 184, 0.3)';">
+          <div style="display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap;">
+            <button id="submit-answer-btn" style="background: #0055B8; color: #ffffff; border: none; padding: 15px 35px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0, 85, 184, 0.3); font-size: 16px; font-weight: 600; flex: 1; min-width: 200px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0, 85, 184, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0, 85, 184, 0.3)';">
               Antwort abgeben
             </button>
-            <button id="show-solution-btn" style="background: #718096; color: #ffffff; border: none; padding: 15px 35px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(113, 128, 150, 0.3); font-size: 16px; font-weight: 600; display: none;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(113, 128, 150, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(113, 128, 150, 0.3)';">
+            <button id="show-solution-btn" style="background: #718096; color: #ffffff; border: none; padding: 15px 35px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(113, 128, 150, 0.3); font-size: 16px; font-weight: 600; display: none; flex: 1; min-width: 200px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(113, 128, 150, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(113, 128, 150, 0.3)';">
               Lösung anzeigen
             </button>
-            <button id="complete-case-btn" style="background: #48bb78; color: #ffffff; border: none; padding: 15px 35px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3); font-size: 16px; font-weight: 600; display: none;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(72, 187, 120, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(72, 187, 120, 0.3)';">
+            <button id="complete-case-btn" style="background: #48bb78; color: #ffffff; border: none; padding: 15px 35px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3); font-size: 16px; font-weight: 600; display: none; flex: 1; min-width: 200px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(72, 187, 120, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(72, 187, 120, 0.3)';">
               ${isSubchapterCompleted(moduleId, topicId, stepType, caseId) ? '✓ Abgeschlossen' : 'Fall als abgeschlossen markieren'}
             </button>
           </div>
@@ -2480,9 +3194,78 @@
 
       updateStreakOnActivity();
 
-      setTimeout(() => {
-        showContent(moduleId, topicId, stepType);
-      }, 300);
+      // Check if all subitems are now completed
+      const module = modules[moduleId];
+      const topic = module.topics.find(t => t.id === topicId);
+      const step = topic.steps.find(s => s.type === stepType);
+      
+      if (step && areAllSubitemsCompleted(moduleId, topicId, step)) {
+        // Check if this is a subvideo completion that should also mark parent subchapter as complete
+        if (stepType === 'video' && step.subchapters) {
+          step.subchapters.forEach(subchapter => {
+            if (subchapter.subvideos && subchapter.subvideos.length > 0) {
+              // Check if all subvideos of this parent are completed
+              const allSubvideosComplete = subchapter.subvideos.every(subvideo => 
+                isSubchapterCompleted(moduleId, topicId, stepType, subvideo.id)
+              );
+              
+              // If all subvideos complete, mark parent subchapter as complete too
+              if (allSubvideosComplete && !isSubchapterCompleted(moduleId, topicId, stepType, subchapter.id)) {
+                appState.completedSteps.push({
+                  module_id: moduleId,
+                  topic_id: topicId,
+                  step_type: `${stepType}_subchapter_${subchapter.id}`,
+                  completed: true
+                });
+              }
+            }
+          });
+        }
+        
+        showCompletionNotification(stepType);
+        updateProgress();
+        
+        // Check if entire topic is now completed
+        const topicNowCompleted = isTopicCompleted(moduleId, topicId);
+        
+        setTimeout(() => {
+          if (topicNowCompleted) {
+            // Show topic completion animation
+            showTopicCompletionNotification(topic.title);
+            
+            // Navigate back to learning path after animation
+            setTimeout(() => {
+              showLearningPath(moduleId);
+            }, 4500);
+          } else {
+            showContent(moduleId, topicId, stepType);
+          }
+        }, 2500);
+      } else {
+        // Check if completing a subvideo should mark parent subchapter as complete
+        if (stepType === 'video' && step && step.subchapters) {
+          step.subchapters.forEach(subchapter => {
+            if (subchapter.subvideos && subchapter.subvideos.length > 0) {
+              const allSubvideosComplete = subchapter.subvideos.every(subvideo => 
+                isSubchapterCompleted(moduleId, topicId, stepType, subvideo.id)
+              );
+              
+              if (allSubvideosComplete && !isSubchapterCompleted(moduleId, topicId, stepType, subchapter.id)) {
+                appState.completedSteps.push({
+                  module_id: moduleId,
+                  topic_id: topicId,
+                  step_type: `${stepType}_subchapter_${subchapter.id}`,
+                  completed: true
+                });
+              }
+            }
+          });
+        }
+        
+        setTimeout(() => {
+          showContent(moduleId, topicId, stepType);
+        }, 300);
+      }
     }
 
     function completeStep(moduleId, topicId, stepType) {
@@ -2500,19 +3283,34 @@
       const button = document.getElementById('complete-step');
       button.textContent = '✓ Abgeschlossen';
       
-      showMessage('Schritt abgeschlossen!', 'success');
+      showCompletionNotification(stepType);
       
       updateProgress();
       updateStreakOnActivity();
+
+      // Check if topic is now fully completed
+      const module = modules[moduleId];
+      const topic = module.topics.find(t => t.id === topicId);
+      const topicNowCompleted = isTopicCompleted(moduleId, topicId);
       
       setTimeout(() => {
-        const nextContent = findNextContent(moduleId, topicId, stepType);
-        if (nextContent && nextContent.topicId === topicId) {
-          showContent(nextContent.moduleId, nextContent.topicId, nextContent.stepType);
+        if (topicNowCompleted) {
+          // Show topic completion animation
+          showTopicCompletionNotification(topic.title);
+          
+          // Navigate back to learning path after animation
+          setTimeout(() => {
+            showLearningPath(moduleId);
+          }, 4500);
         } else {
-          showLearningPath(moduleId);
+          const nextContent = findNextContent(moduleId, topicId, stepType);
+          if (nextContent && nextContent.topicId === topicId) {
+            showContent(nextContent.moduleId, nextContent.topicId, nextContent.stepType);
+          } else {
+            showLearningPath(moduleId);
+          }
         }
-      }, 1000);
+      }, 2500);
     }
 
     function showMessage(text, type) {
@@ -2625,5 +3423,5 @@
       initializeApp();
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a01a7a785b54e42',t:'MTc2MzQwNzk1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a07088b77144e42',t:'MTc2MzQ2NDM1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
