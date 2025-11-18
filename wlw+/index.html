@@ -185,8 +185,8 @@
     .module-card:nth-child(2) { animation-delay: 0.2s; }
 
     .module-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
     }
 
     .module-icon {
@@ -313,6 +313,104 @@
       animation-fill-mode: both;
     }
 
+    .badge-preview {
+      margin: 80px auto;
+      max-width: 400px;
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+      border: 3px solid #ffed4e;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 0.6s ease-out;
+      animation-fill-mode: both;
+    }
+
+    .badge-preview.locked {
+      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 50%, #e2e8f0 100%);
+      border-color: #cbd5e0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      filter: grayscale(80%);
+    }
+
+    .badge-preview.unlocked {
+      animation: fadeInUp 0.6s ease-out, badgePulse 2s ease-in-out infinite;
+    }
+
+    .badge-preview-icon {
+      font-size: 72px;
+      margin-bottom: 15px;
+      display: block;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    }
+
+    .badge-preview.locked .badge-preview-icon {
+      filter: grayscale(100%) brightness(0.8);
+    }
+
+    .badge-preview-title {
+      color: #2d3748;
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0 0 10px 0;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    }
+
+    .badge-preview-description {
+      color: #4a5568;
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0 15px 0;
+      line-height: 1.5;
+    }
+
+    .badge-preview-requirement {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-size: 14px;
+      color: #2d3748;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .badge-preview.unlocked .badge-preview-requirement {
+      background: rgba(72, 187, 120, 0.2);
+      color: #22543d;
+    }
+
+    .badge-preview-lock {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      background: #ffffff;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .badge-preview.unlocked .badge-preview-lock {
+      background: #48bb78;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+      }
+      50% {
+        transform: scale(1.02);
+        box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+      }
+    }
+
     .topic-node:nth-child(even) .node-content {
       margin-left: 0;
       margin-right: auto;
@@ -352,7 +450,7 @@
     }
 
     .node-content.completed::after {
-      content: '✓';
+      content: '\2713';
       position: absolute;
       top: 20px;
       right: 20px;
@@ -464,10 +562,15 @@
       font-size: 20px;
       color: #ffffff;
       display: none;
+      line-height: 1;
     }
 
     .step-item.completed .step-check {
       display: block;
+    }
+    
+    .step-check::before {
+      content: '\2713';
     }
 
     .content-view {
@@ -983,6 +1086,14 @@
       pointer-events: none;
     }
 
+    .mascot-speech-bubble.center-mode {
+      bottom: 60%;
+      right: 50%;
+      transform: translate(50%, 50%);
+      max-width: 400px;
+      padding: 25px 30px;
+    }
+
     .mascot-speech-bubble.show {
       opacity: 1;
       transform: translateY(0) scale(1);
@@ -1203,6 +1314,268 @@
       }
     }
 
+    .badge-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .badge-modal-overlay.show {
+      display: flex;
+    }
+
+    .badge-modal {
+      background: #ffffff;
+      border-radius: 25px;
+      width: 90%;
+      max-width: 1000px;
+      max-height: 85%;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      animation: slideUp 0.4s ease-out;
+      position: relative;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .badge-modal-header {
+      padding: 30px 40px;
+      border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: #ffffff;
+      border-radius: 25px 25px 0 0;
+      z-index: 1;
+    }
+
+    .badge-modal-title {
+      color: #2d3748;
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-modal-close {
+      background: #f7fafc;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 24px;
+      color: #718096;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .badge-modal-close:hover {
+      background: #e2e8f0;
+      transform: rotate(90deg);
+    }
+
+    .badge-modal-content {
+      padding: 40px;
+    }
+
+    .badges-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .badge-item {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: 3px solid transparent;
+    }
+
+    .badge-item.locked {
+      opacity: 0.6;
+      background: #f7fafc;
+      border-color: #e2e8f0;
+    }
+
+    .badge-item.locked .badge-icon {
+      filter: grayscale(100%);
+      opacity: 0.5;
+    }
+
+    .badge-item:not(.locked) {
+      border-color: #ffd700;
+      background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
+    }
+
+    .badge-item:not(.locked):hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+    }
+
+    .badge-item.locked:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+    }
+
+    .badge-icon {
+      font-size: 72px;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .badge-name {
+      color: #2d3748;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .badge-description {
+      color: #718096;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .badge-unlock-date {
+      color: #48bb78;
+      font-size: 12px;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    .badge-lock-overlay {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #cbd5e0;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+
+    .badge-item:not(.locked) .badge-lock-overlay {
+      background: #48bb78;
+    }
+
+    .badge-new {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #48bb78;
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .badge-notification {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+      border-radius: 30px;
+      padding: 60px 80px;
+      box-shadow: 0 30px 90px rgba(255, 215, 0, 0.6);
+      z-index: 1003;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      border: 5px solid #ffed4e;
+    }
+
+    .badge-notification.show {
+      transform: translate(-50%, -50%) scale(1);
+      animation: badgeNotificationPulse 1s ease-in-out 0.6s 3;
+    }
+
+    .badge-notification .badge-icon-large {
+      font-size: 100px;
+      margin-bottom: 25px;
+      animation: badgeAnimation 1s ease-in-out;
+      display: block;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+    }
+
+    .badge-notification h3 {
+      color: #2d3748;
+      font-size: 36px;
+      margin: 0 0 15px 0;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+    }
+
+    .badge-notification p {
+      color: #2d3748;
+      font-size: 20px;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    @keyframes badgeAnimation {
+      0% { 
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.4) rotate(20deg);
+      }
+      70% {
+        transform: scale(0.9) rotate(-10deg);
+      }
+      100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes badgeNotificationPulse {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 30px 90px rgba(255, 215, 0, 0.6);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.05);
+        box-shadow: 0 35px 100px rgba(255, 215, 0, 0.8);
+      }
+    }
+
     @media (max-width: 768px) {
       .header h1 {
         font-size: 36px;
@@ -1215,6 +1588,40 @@
       .streak-container {
         flex-direction: column;
         align-items: center;
+      }
+
+      .badges-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+      }
+
+      .badge-item {
+        padding: 20px;
+      }
+
+      .badge-icon {
+        font-size: 48px;
+      }
+
+      .badge-name {
+        font-size: 16px;
+      }
+
+      .badge-notification {
+        padding: 40px 30px;
+        width: 90%;
+      }
+
+      .badge-notification .badge-icon-large {
+        font-size: 80px;
+      }
+
+      .badge-notification h3 {
+        font-size: 28px;
+      }
+
+      .badge-notification p {
+        font-size: 16px;
       }
 
       .modules-grid {
@@ -1334,6 +1741,29 @@
        </div>
       </div>
      </div>
+     <div class="streak-card" id="badges-card" style="cursor: pointer;">
+      <div class="streak-icon">
+       🎖️
+      </div>
+      <div class="streak-info">
+       <div class="streak-label">
+        Badges
+       </div>
+       <div class="streak-value" id="badge-count">
+        0<span class="streak-unit">erhalten</span>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="badge-modal-overlay" id="badge-modal-overlay">
+     <div class="badge-modal">
+      <div class="badge-modal-header">
+       <h3 class="badge-modal-title">🎖️ Deine Badges</h3><button class="badge-modal-close" id="badge-modal-close">×</button>
+      </div>
+      <div class="badge-modal-content">
+       <div class="badges-grid" id="badges-grid"></div>
+      </div>
+     </div>
     </div>
     <div class="modules-grid">
      <article class="module-card" data-module="ao" style="background: #b1f5a3;">
@@ -1399,7 +1829,7 @@
      <article class="module-card" data-module="erbschaftsteuer">
       <div class="module-image">
        <div class="module-icon-placeholder">
-        🎁
+        ���
        </div>
       </div>
       <h2>Erbschaftsteuer</h2>
@@ -1538,7 +1968,7 @@
   </div>
   <div class="completion-notification" id="completion-notification">
    <div class="check-icon">
-    ��
+    ✓
    </div>
    <h3 id="completion-notification-title">Abgeschlossen!</h3>
    <p id="completion-notification-text">Du hast diesen Schritt erfolgreich beendet.</p>
@@ -1549,6 +1979,13 @@
    </div>
    <h3 id="topic-completion-title">Thema abgeschlossen!</h3>
    <p id="topic-completion-text">Großartige Leistung!</p>
+  </div>
+  <div class="badge-notification" id="badge-notification">
+   <div class="badge-icon-large" id="badge-notification-icon">
+    🎖️
+   </div>
+   <h3 id="badge-notification-title">Badge freigeschaltet!</h3>
+   <p id="badge-notification-text">Du hast ein neues Badge verdient!</p>
   </div>
   <script>
     const defaultConfig = {
@@ -1594,8 +2031,8 @@
                 ]
               },
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
-              { type: "case", name: "Übungsfall", icon: "⚖️", cases: [
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
+              { type: "case", name: "��bungsfall", icon: "⚖️", cases: [
                 { id: "case1", name: "Fall 1: Mitwirkungspflichten des Steuerpflichtigen" },
                 { id: "case2", name: "Fall 2: Amtsermittlungsgrundsatz" },
                 { id: "case3", name: "Fall 3: Verfahrensfehler und deren Folgen" }
@@ -1618,8 +2055,8 @@
                 ]
               },
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
-              { type: "case", name: "Übungsfall", icon: "⚖️", cases: [
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
+              { type: "case", name: "Übungsfall", icon: "⚖���", cases: [
                 { id: "case1", name: "Fall 1: Steuerbescheid und Bestandskraft" },
                 { id: "case2", name: "Fall 2: Aufhebung eines Verwaltungsakts" },
                 { id: "case3", name: "Fall 3: Rechtsbehelfsverfahren" }
@@ -1642,7 +2079,7 @@
                 ]
               },
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️", cases: [
                 { id: "case1", name: "Fall 1: Festsetzungsverjährung" },
                 { id: "case2", name: "Fall 2: Zahlungsverjährung" },
@@ -1673,7 +2110,7 @@
                 ]
               },
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           },
@@ -1693,13 +2130,13 @@
                 ]
               },
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           },
           {
             id: "sonderausgaben",
-            title: "Sonderausgaben und au��ergewöhnliche Belastungen",
+            title: "Sonderausgaben und außergewöhnliche Belastungen",
             steps: [
               { 
                 type: "video", 
@@ -1713,7 +2150,7 @@
                 ]
               },
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           }
@@ -1734,7 +2171,7 @@
                 { id: "ansatz", name: "Bilanzansatz" }
               ]},
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           }
@@ -1755,7 +2192,7 @@
                 { id: "methoden", name: "Bewertungsmethoden" }
               ]},
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           }
@@ -1776,7 +2213,7 @@
                 { id: "bemessungsgrundlage", name: "Gewerbeertrag" }
               ]},
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           }
@@ -1797,7 +2234,7 @@
                 { id: "freibetraege", name: "Freibeträge und Steuerklassen" }
               ]},
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           }
@@ -1818,7 +2255,7 @@
                 { id: "bemessungsgrundlage", name: "Bemessungsgrundlage" }
               ]},
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           }
@@ -1839,7 +2276,7 @@
                 { id: "verrechnungspreise", name: "Verrechnungspreise" }
               ]},
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           }
@@ -1860,7 +2297,7 @@
                 { id: "einkommen", name: "Einkommen der Körperschaft" }
               ]},
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           }
@@ -1876,12 +2313,12 @@
             title: "Grundlagen der Lohnsteuer",
             steps: [
               { type: "video", name: "Lernvideo", icon: "🎥", subchapters: [
-                { id: "einfuehrung", name: "Einführung in die Lohnsteuer" },
+                { id: "einfuehrung", name: "Einf��hrung in die Lohnsteuer" },
                 { id: "arbeitslohn", name: "Arbeitslohn" },
                 { id: "abzugsverfahren", name: "Lohnsteuerabzugsverfahren" }
               ]},
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           }
@@ -1902,7 +2339,7 @@
                 { id: "vorsteuerabzug", name: "Vorsteuerabzug" }
               ]},
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           }
@@ -1923,7 +2360,7 @@
                 { id: "spaltung", name: "Spaltung" }
               ]},
               { type: "technique", name: "Klausurtechnik", icon: "✍️" },
-              { type: "test", name: "Leistungskontrolle", icon: "📝" },
+              { type: "test", name: "Lernkontrolle", icon: "📝" },
               { type: "case", name: "Übungsfall", icon: "⚖️" }
             ]
           }
@@ -1936,16 +2373,33 @@
       currentTopic: null,
       currentStep: null,
       completedSteps: [],
-      streakData: null
+      streakData: null,
+      pendingBadge: null
     };
 
     let isUpdatingStreak = false;
+
+    // Available badges definition
+    const availableBadges = {
+      'ao_118_profi': {
+        id: 'ao_118_profi',
+        name: '§ 118-Profi in Ausbildung',
+        icon: '⚖️',
+        description: 'Schließe die ersten beiden Themen in Abgabenordnung ab',
+        moduleId: 'ao',
+        requiredTopics: ['grundsaetze', 'verwaltungsakt'],
+        checkUnlock: () => {
+          return isTopicCompleted('ao', 'grundsaetze') && isTopicCompleted('ao', 'verwaltungsakt');
+        }
+      }
+    };
 
     const dataHandler = {
       onDataChanged(data) {
         if (data && data.length > 0) {
           appState.streakData = data[0];
           updateStreakDisplay();
+          updateBadgesDisplay();
         }
       }
     };
@@ -2089,16 +2543,26 @@
       welcome: [
         "Hallo! Ich bin WLW.li und helfe dir beim Lernen! 🎓",
         "Schön, dass du da bist! Lass uns gemeinsam lernen! 😊",
-        "Bereit für eine produktive Lernsession? Los geht's! 💪"
+        "Bereit für eine produktive Lernsession? Los geht's! ��",
+        "Hey! Willkommen zurück! Heute wird ein erfolgreicher Lerntag! ⭐",
+        "Perfektes Timing! Ich habe schon auf dich gewartet! 🎯",
+        "Super, dass du da bist! Zusammen schaffen wir das! 🚀",
+        "Hallo Steuergenie! Bereit, dein Wissen zu erweitern? 📚",
+        "Willkommen! Lass uns heute richtig durchstarten! 💫",
+        "Grüß dich! Ich freue mich, dich zu unterstützen! 🌟",
+        "Hey! Heute bringst du dein Steuerrecht auf das nächste Level! ���",
+        "Herzlich willkommen! Deine Lernreise beginnt jetzt! ����",
+        "Hi! Schön, dass du wieder da bist! Let's go! 🔥",
+        "Willkommen zurück! Heute wird ein großartiger Tag zum Lernen! �����"
       ],
       moduleSelection: [
-        "Wähle ein Modul aus, das dich interessiert!",
+        "W��hle ein Modul aus, das dich interessiert!",
         "Such dir ein Thema aus - ich bin immer für dich da! 📚",
         "Welches Gebiet möchtest du heute meistern?"
       ],
       videoStart: [
         "Konzentriere dich auf das Video - du schaffst das! 🎥",
-        "Mach dir ruhig Notizen zu den wichtigen Punkten! ✍️",
+        "Mach dir ruhig Notizen zu den wichtigen Punkten! ✍���",
         "Das Video erklärt alles Schritt für Schritt!"
       ],
       videoComplete: [
@@ -2109,7 +2573,7 @@
       techniqueStart: [
         "Jetzt lernst du, wie du es in der Klausur anwendest! 📝",
         "Die Struktur ist wichtig - präge sie dir gut ein! 🎯",
-        "Mit der richtigen Technik wird alles einfacher! 💡"
+        "Mit der richtigen Technik wird alles einfacher! ��"
       ],
       testStart: [
         "Zeit, dein Wissen zu testen! Du bist bereit! 🎯",
@@ -2118,11 +2582,11 @@
       ],
       caseStart: [
         "Jetzt wird's praktisch! Übungsfälle festigen dein Wissen! ⚖️",
-        "Versuche erst selbst zu lösen, bevor du die Lösung ansiehst! 💡",
-        "Praxisfälle sind der beste Weg zum Lernen! 📖"
+        "Versuche erst selbst zu l����sen, bevor du die Lösung ansiehst! 💡",
+        "Praxisfälle sind der beste Weg zum Lernen! ��"
       ],
       topicComplete: [
-        "Wahnsinn! Ein ganzes Thema abgeschlossen! ��",
+        "Wahnsinn! Ein ganzes Thema abgeschlossen! ���",
         "Du bist großartig! Weiter so! 🌟",
         "Stolz auf dich! Das war eine tolle Leistung! 🎊"
       ],
@@ -2155,15 +2619,106 @@
         }
       }, 6000);
 
-      // Mascot click interaction - disabled after first message
+      // Mascot click interaction - opens AI chat
       mascot.addEventListener('click', () => {
-        // Click is now disabled
+        openAIChat();
       });
 
       // Auto-hide speech bubble on click
       speechBubble.addEventListener('click', () => {
         hideMascotMessage();
       });
+
+      // Random fly to center and prompt for interaction
+      startRandomFlyToCenter();
+    }
+
+    function startRandomFlyToCenter() {
+      // First interaction after 5 minutes, then every 45 minutes
+      const isFirstInteraction = !window.hasHadFirstInteraction;
+      const interval = isFirstInteraction ? 300000 : 2700000; // 5 min or 45 min in milliseconds
+      
+      setTimeout(() => {
+        window.hasHadFirstInteraction = true;
+        flyToCenter();
+        // Schedule next random fly
+        startRandomFlyToCenter();
+      }, interval);
+    }
+
+    function flyToCenter() {
+      const mascot = document.getElementById('mascot-helper');
+      const speechBubble = document.getElementById('mascot-speech');
+      
+      // Make mascot visible and fly to center
+      mascot.style.opacity = '1';
+      mascot.style.pointerEvents = 'auto';
+      mascot.style.animation = 'none';
+      mascot.style.bottom = '50%';
+      mascot.style.right = '50%';
+      mascot.style.transform = 'translate(50%, 50%) scale(1.5)';
+      mascot.style.transition = 'all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+      mascot.style.zIndex = '2000';
+      mascot.style.cursor = 'pointer';
+      
+      // Position speech bubble in center
+      setTimeout(() => {
+        speechBubble.classList.add('center-mode');
+        
+        // Random message variations
+        const messages = [
+          'Klicke unten rechts auf mich und ich beantworte dir mit Hilfe meiner künstlichen Intelligenz jede fachliche Frage! 🤖',
+          'Klicke unten rechts auf mich und ich erstelle dir eine individuelle Lernübersicht! 📊',
+          'Klicke unten rechts auf mich und ich erkläre dir komplexe Steuerrechts-Themen in einfachen Worten! 💡',
+          'Klicke unten rechts auf mich und ich helfe dir bei der Vorbereitung auf deine Klausur! 📝'
+        ];
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        
+        showMascotMessage(randomMessage, 6000);
+        
+        // Return to corner after 7 seconds
+        setTimeout(() => {
+          returnToCorner();
+        }, 7000);
+      }, 1000);
+    }
+
+    function returnToCorner() {
+      const mascot = document.getElementById('mascot-helper');
+      const speechBubble = document.getElementById('mascot-speech');
+      
+      mascot.style.bottom = '30px';
+      mascot.style.right = '30px';
+      mascot.style.transform = 'scale(1)';
+      mascot.style.zIndex = '999';
+      
+      // Reset speech bubble position
+      speechBubble.style.bottom = '100px';
+      speechBubble.style.right = '30px';
+      speechBubble.style.transform = 'translateY(0)';
+      speechBubble.classList.remove('center-mode');
+      
+      hideMascotMessage();
+      
+      // Hide mascot after returning to corner
+      setTimeout(() => {
+        mascot.style.opacity = '0';
+        mascot.style.pointerEvents = 'none';
+      }, 500);
+    }
+
+    function openAIChat() {
+      // Open WLW.li AI chat in new window
+      window.open('https://wlw-info.de/chat', '_blank', 'noopener,noreferrer');
+      
+      // Show confirmation message
+      showMascotMessage('Ich öffne den Chat für dich! Stelle mir jede Frage zum Steuerrecht! 💬', 4000);
+      
+      // Return to corner if in center
+      const mascot = document.getElementById('mascot-helper');
+      if (mascot.style.bottom === '50%') {
+        returnToCorner();
+      }
     }
 
     function getRandomMessage(category) {
@@ -2260,6 +2815,44 @@
       document.getElementById('back-to-path').addEventListener('click', () => {
         showLearningPath(appState.currentModule);
       });
+
+      const badgesCard = document.getElementById('badges-card');
+      if (badgesCard) {
+        badgesCard.addEventListener('click', () => {
+          toggleBadgesDisplay();
+        });
+      }
+
+      const badgeModalClose = document.getElementById('badge-modal-close');
+      if (badgeModalClose) {
+        badgeModalClose.addEventListener('click', () => {
+          closeBadgeModal();
+        });
+      }
+
+      const badgeModalOverlay = document.getElementById('badge-modal-overlay');
+      if (badgeModalOverlay) {
+        badgeModalOverlay.addEventListener('click', (e) => {
+          if (e.target === badgeModalOverlay) {
+            closeBadgeModal();
+          }
+        });
+      }
+    }
+
+    function toggleBadgesDisplay() {
+      const badgeModal = document.getElementById('badge-modal-overlay');
+      if (badgeModal) {
+        badgeModal.classList.add('show');
+        updateBadgesDisplay();
+      }
+    }
+
+    function closeBadgeModal() {
+      const badgeModal = document.getElementById('badge-modal-overlay');
+      if (badgeModal) {
+        badgeModal.classList.remove('show');
+      }
     }
 
     function updateProgress() {
@@ -2268,8 +2861,26 @@
 
       Object.keys(modules).forEach(moduleId => {
         const module = modules[moduleId];
+        
+        // Count total steps (only base steps, not subchapters/cases)
         const totalSteps = module.topics.reduce((sum, topic) => sum + topic.steps.length, 0);
-        const completedCount = appState.completedSteps.filter(step => step.module_id === moduleId).length;
+        
+        // Count completed steps for this module
+        let completedCount = 0;
+        module.topics.forEach(topic => {
+          topic.steps.forEach(step => {
+            // Check if the main step is completed
+            const mainStepCompleted = isStepCompleted(moduleId, topic.id, step.type);
+            
+            // Check if all subitems are completed (for video and case steps)
+            const allSubitemsCompleted = areAllSubitemsCompleted(moduleId, topic.id, step);
+            
+            if (mainStepCompleted || allSubitemsCompleted) {
+              completedCount++;
+            }
+          });
+        });
+        
         const progress = totalSteps > 0 ? Math.round((completedCount / totalSteps) * 100) : 0;
 
         totalStepsAllModules += totalSteps;
@@ -2340,6 +2951,120 @@
           longestStreakEl.innerHTML = `0<span class="streak-unit">Tage</span>`;
         }
       }
+    }
+
+    function getEarnedBadges() {
+      if (!appState.streakData || !appState.streakData.earned_badges) {
+        return [];
+      }
+      try {
+        return JSON.parse(appState.streakData.earned_badges);
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function hasBadge(badgeId) {
+      const earnedBadges = getEarnedBadges();
+      return earnedBadges.some(badge => badge.id === badgeId);
+    }
+
+    async function awardBadge(badge) {
+      if (hasBadge(badge.id) || !window.dataSdk || !appState.streakData) {
+        return;
+      }
+
+      const earnedBadges = getEarnedBadges();
+      earnedBadges.push({
+        id: badge.id,
+        unlocked_at: new Date().toISOString()
+      });
+
+      const updatedData = {
+        ...appState.streakData,
+        earned_badges: JSON.stringify(earnedBadges)
+      };
+
+      const updateResult = await window.dataSdk.update(updatedData);
+
+      if (updateResult.isOk) {
+        // Store badge for later display on learning path
+        appState.pendingBadge = badge;
+      }
+    }
+
+    function showBadgeNotification(badge) {
+      const notification = document.getElementById('badge-notification');
+      const icon = document.getElementById('badge-notification-icon');
+      const title = document.getElementById('badge-notification-title');
+      const text = document.getElementById('badge-notification-text');
+
+      icon.textContent = badge.icon;
+      title.textContent = 'Badge freigeschaltet! 🎖️';
+      text.textContent = badge.name;
+
+      // Create confetti
+      createConfetti();
+
+      // Play badge sound
+      const badgeSound = new Audio('https://dl.dropboxusercontent.com/scl/fi/82b0egxxl1sd23be7y2bv/level-up-04-243762.mp3?rlkey=hj5wa02yraimcmllvtjwabd3g');
+      badgeSound.play().catch(error => {
+        console.log('Sound konnte nicht abgespielt werden:', error);
+      });
+
+      notification.classList.add('show');
+
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 4000);
+    }
+
+    function updateBadgesDisplay() {
+      const badgeCountEl = document.getElementById('badge-count');
+      const badgesGrid = document.getElementById('badges-grid');
+
+      const earnedBadges = getEarnedBadges();
+      
+      if (badgeCountEl) {
+        badgeCountEl.innerHTML = `${earnedBadges.length}<span class="streak-unit">erhalten</span>`;
+      }
+
+      if (badgesGrid) {
+        badgesGrid.innerHTML = '';
+
+        Object.values(availableBadges).forEach(badge => {
+          const earnedBadge = earnedBadges.find(b => b.id === badge.id);
+          const isUnlocked = !!earnedBadge;
+
+          const badgeItem = document.createElement('div');
+          badgeItem.className = `badge-item ${!isUnlocked ? 'locked' : ''}`;
+          
+          let badgeHtml = `
+            <div class="badge-lock-overlay">${isUnlocked ? '🔓' : '🔒'}</div>
+            <div class="badge-icon">${badge.icon}</div>
+            <div class="badge-name">${badge.name}</div>
+            <div class="badge-description">${badge.description}</div>
+          `;
+
+          if (isUnlocked && earnedBadge.unlocked_at) {
+            const unlockDate = new Date(earnedBadge.unlocked_at);
+            badgeHtml += `<div class="badge-unlock-date">✓ Freigeschaltet am ${unlockDate.toLocaleDateString('de-DE')}</div>`;
+          } else {
+            badgeHtml += `<div class="badge-unlock-date" style="color: #a0aec0; font-weight: 500;">Noch nicht freigeschaltet</div>`;
+          }
+
+          badgeItem.innerHTML = badgeHtml;
+          badgesGrid.appendChild(badgeItem);
+        });
+      }
+    }
+
+    function checkAndAwardBadges() {
+      Object.values(availableBadges).forEach(badge => {
+        if (!hasBadge(badge.id) && badge.checkUnlock()) {
+          awardBadge(badge);
+        }
+      });
     }
 
     function getTodayDateString() {
@@ -2457,9 +3182,9 @@
       const text = document.getElementById('completion-notification-text');
 
       const stepNames = {
-        'video': '🎥 Lernvideo',
+        'video': '��� Lernvideo',
         'technique': '✍️ Klausurtechnik',
-        'test': '�������� Leistungskontrolle',
+        'test': '📝 Lernkontrolle',
         'case': '⚖️ Übungsfall'
       };
 
@@ -2581,6 +3306,14 @@
           mascotShownMessages.learningPath = true;
         }, 500);
       }
+      
+      // Show pending badge notification if any
+      if (appState.pendingBadge) {
+        setTimeout(() => {
+          showBadgeNotification(appState.pendingBadge);
+          appState.pendingBadge = null;
+        }, 800);
+      }
     }
 
     function renderTopics() {
@@ -2620,6 +3353,35 @@
         });
         
         renderSteps(topic);
+        
+        // Check if this is the position where a badge should be shown
+        const badgeToShow = Object.values(availableBadges).find(badge => 
+          badge.moduleId === appState.currentModule && 
+          badge.requiredTopics && 
+          badge.requiredTopics.length > 0 &&
+          badge.requiredTopics[badge.requiredTopics.length - 1] === topic.id
+        );
+        
+        if (badgeToShow) {
+          const badgeUnlocked = hasBadge(badgeToShow.id);
+          const badgePreview = document.createElement('div');
+          badgePreview.className = `badge-preview ${badgeUnlocked ? 'unlocked' : 'locked'}`;
+          badgePreview.style.animationDelay = `${(topicIndex + 1) * 0.15}s`;
+          
+          const requirementText = badgeUnlocked 
+            ? '✓ Freigeschaltet!' 
+            : '';
+          
+          badgePreview.innerHTML = `
+            <div class="badge-preview-lock">${badgeUnlocked ? '🔓' : '🔒'}</div>
+            <div class="badge-preview-icon">${badgeUnlocked ? badgeToShow.icon : '🎖️'}</div>
+            <div class="badge-preview-title">${badgeToShow.name}</div>
+            <div class="badge-preview-description">${badgeToShow.description}</div>
+            <div class="badge-preview-requirement">${requirementText}</div>
+          `;
+          
+          container.appendChild(badgePreview);
+        }
       });
     }
 
@@ -2642,7 +3404,7 @@
         stepItem.innerHTML = `
           <div class="step-icon">${step.icon}</div>
           <div class="step-name">${step.name}</div>
-          <div class="step-check">✓</div>
+          <div class="step-check"></div>
         `;
         
         stepItem.addEventListener('click', () => {
@@ -2701,7 +3463,7 @@
       if (stepType === 'video') {
         buttonHtml = `<button class="complete-button" id="complete-step">Zur Klausurtechnik ��</button>`;
       } else if (stepType === 'technique') {
-        buttonHtml = `<button class="complete-button" id="complete-step">Zur Leistungskontrolle →</button>`;
+        buttonHtml = `<button class="complete-button" id="complete-step">Zur Lernkontrolle →</button>`;
       } else if (stepType === 'test') {
         buttonHtml = `<button class="complete-button" id="complete-step">Zu den Übungsfällen →</button>`;
       } else if (stepType === 'case') {
@@ -2741,7 +3503,7 @@
                   <div class="subchapter-name">${subchapter.name}</div>
                   <div class="subchapter-status">${isCompleted ? 'Abgeschlossen' : 'Noch nicht angesehen'}${hasSubvideos ? ' • ' + subchapter.subvideos.length + ' Untervideos' : ''}</div>
                 </div>
-                ${hasSubvideos ? '<div class="expand-icon">▼</div>' : `<div class="subchapter-icon">${isCompleted ? '✓' : '▶'}</div>`}
+                ${hasSubvideos ? '<div class="expand-icon">&#9660;</div>' : `<div class="subchapter-icon">${isCompleted ? '&#10003;' : '&#9654;'}</div>`}
               </div>
           `;
           
@@ -2755,7 +3517,7 @@
                 <div class="subvideo-item ${isSubvideoCompleted ? 'completed' : ''}" data-subchapter="${subvideo.id}" data-subchapter-name="${subvideo.name}">
                   <div class="subvideo-number" style="background: ${moduleColor}">${index + 1}.${subIndex + 1}</div>
                   <div class="subvideo-name">${subvideo.name}</div>
-                  <div class="subvideo-icon">${isSubvideoCompleted ? '✓' : '▶'}</div>
+                  <div class="subvideo-icon">${isSubvideoCompleted ? '&#10003;' : '&#9654;'}</div>
                 </div>
               `;
             });
@@ -2776,7 +3538,7 @@
         <div style="margin: 25px 0;">
           <video id="main-video-player" controls style="width: 100%; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);">
             <source src="https://dl.dropboxusercontent.com/scl/fi/f4bujknjz22n5f9giat3b/5.1_Mitwirkungspflichten-fertig.mp4?rlkey=9q2jukbhvje21tz5nvuch81eh" type="video/mp4">
-            Dein Browser unterstützt das Video-Tag nicht.
+            Dein Browser unterst��tzt das Video-Tag nicht.
           </video>
           <div style="margin-top: 15px; padding: 20px; background: #f7fafc; border-radius: 10px;">
             <h3 id="video-title" style="color: #2d3748; font-size: 18px; margin: 0 0 15px 0; font-weight: 600;">Paragraphen-Markierungen</h3>
@@ -2861,7 +3623,7 @@
         </div>
         <div style="margin-top: 30px; text-align: center;">
           <button id="complete-test-btn" style="background: ${isCompleted ? '#a0aec0' : '#48bb78'}; color: #ffffff; border: none; padding: 18px 40px; border-radius: 15px; font-size: 18px; font-weight: 600; cursor: ${isCompleted ? 'not-allowed' : 'pointer'}; transition: all 0.3s ease; box-shadow: 0 5px 15px ${isCompleted ? 'rgba(160, 174, 192, 0.4)' : 'rgba(72, 187, 120, 0.4)'}; ${isCompleted ? 'opacity: 0.8;' : ''}" ${isCompleted ? 'disabled' : ''} onmouseover="${isCompleted ? '' : `this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(72, 187, 120, 0.5)';`}" onmouseout="${isCompleted ? '' : `this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(72, 187, 120, 0.4)';`}">
-            ${isCompleted ? '✓ Abgeschlossen' : 'Als abgeschlossen markieren'}
+            ${isCompleted ? '&#10003; Abgeschlossen' : 'Als abgeschlossen markieren'}
           </button>
         </div>
       `;
@@ -2889,7 +3651,7 @@
                   <div class="subchapter-name">${caseItem.name}</div>
                   <div class="subchapter-status">${isCompleted ? 'Abgeschlossen' : 'Noch nicht bearbeitet'}</div>
                 </div>
-                <div class="subchapter-icon">${isCompleted ? '✓' : ''}</div>
+                <div class="subchapter-icon">${isCompleted ? '&#10003;' : ''}</div>
               </div>
             </div>
           `;
@@ -3045,12 +3807,12 @@
           <div style="background: #f7fafc; padding: 25px; border-radius: 12px; border-left: 4px solid #0055B8; margin: 20px 0;">
             <h4 style="color: #2d3748; font-size: 18px; margin: 0 0 15px 0;">Sachverhalt</h4>
             <p style="color: #4a5568; font-size: 16px; line-height: 1.8; margin: 0;">
-              Der Steuerpflichtige S betreibt ein Einzelunternehmen und hat für das Jahr 2023 seine Steuererklärung abgegeben. Das Finanzamt fordert ihn auf, weitere Unterlagen vorzulegen, um die geltend gemachten Betriebsausgaben zu belegen. S ist der Ansicht, dass die bereits eingereichten Unterlagen ausreichend sind und verweigert die Vorlage weiterer Dokumente. Das Finanzamt schätzt daraufhin die Besteuerungsgrundlagen gemäß § 162 AO und setzt die Steuer höher fest als vom Steuerpflichtigen erklärt.
+              Der Steuerpflichtige S betreibt ein Einzelunternehmen und hat für das Jahr 2023 seine Steuererkl����rung abgegeben. Das Finanzamt fordert ihn auf, weitere Unterlagen vorzulegen, um die geltend gemachten Betriebsausgaben zu belegen. S ist der Ansicht, dass die bereits eingereichten Unterlagen ausreichend sind und verweigert die Vorlage weiterer Dokumente. Das Finanzamt schätzt daraufhin die Besteuerungsgrundlagen gemäß § 162 AO und setzt die Steuer höher fest als vom Steuerpflichtigen erklärt.
             </p>
           </div>
           
           <div style="margin: 20px 0;">
-            <h4 style="color: #2d3748; font-size: 18px; margin: 0 0 15px 0;">Deine Lösung</h4>
+            <h4 style="color: #2d3748; font-size: 18px; margin: 0 0 15px 0;">Deine L��sung</h4>
             <textarea id="solution-input" placeholder="Gib hier deine Lösung ein..." style="width: 100%; min-height: 300px; padding: 20px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; font-family: inherit; line-height: 1.6; resize: vertical; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='#0055B8'" onblur="this.style.borderColor='#e2e8f0'"></textarea>
           </div>
           
@@ -3062,7 +3824,7 @@
               Lösung anzeigen
             </button>
             <button id="complete-case-btn" style="background: #48bb78; color: #ffffff; border: none; padding: 15px 35px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3); font-size: 16px; font-weight: 600; display: none; flex: 1; min-width: 200px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(72, 187, 120, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(72, 187, 120, 0.3)';">
-              ${isSubchapterCompleted(moduleId, topicId, stepType, caseId) ? '✓ Abgeschlossen' : 'Fall als abgeschlossen markieren'}
+              ${isSubchapterCompleted(moduleId, topicId, stepType, caseId) ? '&#10003; Abgeschlossen' : 'Fall als abgeschlossen markieren'}
             </button>
           </div>
           
@@ -3193,6 +3955,7 @@
       });
 
       updateStreakOnActivity();
+      checkAndAwardBadges();
 
       // Check if all subitems are now completed
       const module = modules[moduleId];
@@ -3281,12 +4044,13 @@
       });
 
       const button = document.getElementById('complete-step');
-      button.textContent = '✓ Abgeschlossen';
+      button.innerHTML = '&#10003; Abgeschlossen';
       
       showCompletionNotification(stepType);
       
       updateProgress();
       updateStreakOnActivity();
+      checkAndAwardBadges();
 
       // Check if topic is now fully completed
       const module = modules[moduleId];
@@ -3423,5 +4187,5 @@
       initializeApp();
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a07088b77144e42',t:'MTc2MzQ2NDM1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a076dc9b44cc49a',t:'MTc2MzQ2ODQ5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
