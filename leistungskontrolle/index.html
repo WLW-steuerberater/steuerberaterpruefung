@@ -4896,17 +4896,16 @@
     <div class="category-container">
      <div class="drop-zone" data-category="direkt" id="zone-direkt">
       <h4>Außenwirkung</h4>
-      <p class="category-description">Steuern, die direkt vom Einkommen oder Vermögen erhoben werden</p>
+      <p class="category-description"></p>
       <div class="dropped-items" id="dropped-direkt"></div>
      </div>
      <div class="drop-zone" data-category="indirekt" id="zone-indirekt">
       <h4>Keine Außenwirkung</h4>
-      <p class="category-description">Steuern, die über den Konsum oder Verbrauch erhoben werden</p>
+      <p class="category-description"></p>
       <div class="dropped-items" id="dropped-indirekt"></div>
      </div>
     </div><!-- Begriffe unten -->
     <div class="terms-container">
-     <h4>Steuerarten (ziehen Sie diese in die passenden Kategorien)</h4>
      <div class="draggable-terms" id="draggable-terms">
       <div class="draggable-term" data-category="direkt" draggable="true" id="term-einkommensteuer"><span class="term-icon"></span> Feststellungsbescheid
       </div>
@@ -5109,7 +5108,7 @@
        🎮
       </div>
       <h3>Steuer-Tetris bereit!</h3>
-      <p>Ordnen Sie 10 Steuerbegriffe den richtigen Kategorien zu</p>
+      <p>Ordnen Sie 10 Maßnahmen den richtigen Kategorien zu</p>
       <p><strong>Steuerung:</strong> <span class="desktop-start-controls">← → Pfeiltasten zum Steuern, ↓ schneller fallen</span> <span class="mobile-start-controls" style="display: none;">Wischbewegungen zum Steuern: ← → ↓</span></p>
       <script>
                         // Zeige passende Steuerungsanleitung im Startbildschirm
@@ -5141,13 +5140,13 @@
        </div><!-- Drop Zones -->
        <div class="tetris-zones">
         <div class="tetris-zone" data-category="betriebsausgabe" id="zone-betriebsausgabe">
-         <h4>Betriebsausgabe</h4>
-         <p>Abziehbare Geschäftskosten</p>
+         <h4>Verwaltungsakt</h4>
+         <p> </p>
          <div class="zone-indicator"></div>
         </div>
         <div class="tetris-zone" data-category="nicht-abziehbar" id="zone-nicht-abziehbar">
-         <h4>Nicht abziehbar</h4>
-         <p>Private oder nicht absetzbare Ausgaben</p>
+         <h4>Kein Verwaltungsakt</h4>
+         <p> </p>
          <div class="zone-indicator"></div>
         </div>
        </div>
@@ -6574,7 +6573,7 @@
             
             let feedbackMessage = '';
             if (isCorrect) {
-                feedbackMessage = '✅ Richtig! Alle Steuerarten wurden korrekt zugeordnet.';
+                feedbackMessage = '✅ Richtig!';
             } else {
                 feedbackMessage = '❌ Noch nicht alle Zuordnungen sind korrekt.<br><br><strong>Vollständige Lösung:</strong><br>';
                 feedbackMessage += '<strong>Direkte Steuern:</strong><br>';
@@ -6925,18 +6924,18 @@
 
         const speedQuizQuestions = [
             {
-                question: "Ist Kindergeld steuerpflichtig?",
-                optionA: "Steuerpflichtig",
-                optionB: "Nicht steuerpflichtig",
+                question: "Ist die Festlegung des Namens des Außenprüfers ein VA?",
+                optionA: "VA",
+                optionB: "kein VA",
                 correct: "b",
-                explanation: "Kindergeld ist nicht steuerpflichtig"
+                explanation: "Kein VA mangels Außenwirkung"
             },
             {
-                question: "Fahrtkosten zur Arbeit:",
-                optionA: "Betrieblich",
-                optionB: "Privat",
-                correct: "a",
-                explanation: "Fahrtkosten zur Arbeit sind betriebliche Ausgaben"
+                question: "Kontrollmitteilung",
+                optionA: "VA",
+                optionB: "kein VA",
+                correct: "b",
+                explanation: " Kein VA mangels Außenwirkung"
             },
             {
                 question: "Ist eine Firmenweihnachtsfeier steuerpflichtig?",
@@ -7181,12 +7180,12 @@
 
         const tetrisGameTerms = [
             {
-                term: "Büroausstattung",
-                category: "betriebsausgabe",
+                term: "Mahnung",
+                category: "nicht-abziehbar",
                 explanation: "Büroausstattung ist eine abziehbare Betriebsausgabe"
             },
             {
-                term: "Privatreise",
+                term: "Aufrechnungserklärung",
                 category: "nicht-abziehbar",
                 explanation: "Privatreisen sind private Ausgaben und nicht absetzbar"
             },
