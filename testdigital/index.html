@@ -49,7 +49,7 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full">
-  <div id="app" class="h-full w-full overflow-auto" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"><!-- Login Screen -->
+  <div id="app" class="h-full w-full overflow-auto" style="background: #e5e7eb;"><!-- Login Screen -->
    <div id="loginScreen" class="min-h-full flex items-center justify-center px-4 py-8">
     <div class="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full">
      <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Online-Prüfung Anmeldung</h1>
@@ -68,21 +68,25 @@
    </div><!-- Editor Screen -->
    <div id="editorScreen" class="hidden min-h-full flex flex-col items-center py-8 px-4"><!-- Header with Kennummer, Prüfungsname, Timer, etc. -->
     <div class="w-full bg-white shadow-lg p-4 mb-4 flex justify-between items-start"><!-- Left: Kennummer and Prüfungsname -->
-     <div>
-      <div class="text-sm font-semibold text-gray-600">
-       Kennummer:
+     <div class="flex gap-8 items-center">
+      <div>
+       <div class="text-sm font-semibold text-gray-600">
+        Kennummer:
+       </div>
+       <div id="header-kennummer" class="text-lg font-bold text-gray-800"></div>
       </div>
-      <div id="header-kennummer" class="text-lg font-bold text-gray-800 mb-2"></div>
-      <div class="text-xl font-bold text-blue-600" id="header-pruefungsname"></div>
+      <div>
+       <div class="text-lg font-bold text-blue-600" id="header-pruefungsname"></div>
+      </div>
      </div><!-- Right: Controls -->
      <div class="flex items-center gap-4"><!-- Größe der Funktionsleiste -->
       <div class="flex gap-2 items-center"><button onclick="changeToolbarSize('small')" id="btn-small" class="px-3 py-2 border-2 border-gray-300 rounded-lg hover:bg-gray-100 text-sm"> A </button> <button onclick="changeToolbarSize('medium')" id="btn-medium" class="px-3 py-2 border-2 border-blue-500 bg-blue-50 rounded-lg hover:bg-blue-100 text-base font-semibold"> A </button> <button onclick="changeToolbarSize('large')" id="btn-large" class="px-3 py-2 border-2 border-gray-300 rounded-lg hover:bg-gray-100 text-lg font-bold"> A </button>
       </div><!-- Timer -->
       <div class="text-center">
-       <div id="timer" class="text-2xl font-bold text-red-600">
+       <div id="timer" class="text-2xl font-bold text-gray-800">
         06:00 Stunden
        </div>
-      </div><!-- Prüfung beenden Button --> <button onclick="showEndExamDialog()" class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-lg transition-all"> Prüfung beenden </button>
+      </div><!-- Prüfung beenden Button --> <button onclick="showEndExamDialog()" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-lg shadow-lg transition-all"> Prüfung beenden </button>
      </div>
     </div><!-- Toolbar -->
     <div class="w-full bg-white shadow-lg p-3 flex flex-wrap gap-2 border-b-2 border-gray-200 mb-2"><!-- 1. Rückgängig --> <button onclick="undo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rückgängig (Strg+Z)"> ↶ </button> <!-- 2. Wiederholen --> <button onclick="redo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Wiederholen (Strg+Y)"> ↷ </button>
@@ -198,14 +202,8 @@
       const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} Stunden`;
       timerElement.textContent = formattedTime;
       
-      // Change color when time is running low
-      if (remainingMinutes <= 30) {
-        timerElement.classList.remove('text-red-600');
-        timerElement.classList.add('text-red-800', 'font-extrabold');
-      } else if (remainingMinutes <= 60) {
-        timerElement.classList.remove('text-red-600');
-        timerElement.classList.add('text-orange-600');
-      }
+      // Keep timer color neutral
+      timerElement.classList.add('text-gray-800');
     }
 
     function showTimeUpDialog() {
@@ -259,9 +257,8 @@
       document.getElementById('endExamDialog').classList.add('hidden');
     }
 
-    function endExam() {
+    async function endExam() {
       clearInterval(timerInterval);
-      downloadDocument();
       hideEndExamDialog();
       
       // Show confirmation message
@@ -269,6 +266,10 @@
       message.className = 'fixed top-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg z-50';
       message.textContent = 'Prüfung beendet. PDF wird heruntergeladen...';
       document.body.appendChild(message);
+      
+      // Wait a moment for the message to be visible, then download
+      await new Promise(resolve => setTimeout(resolve, 500));
+      await downloadDocument();
       
       setTimeout(() => {
         message.remove();
@@ -305,7 +306,7 @@
       document.getElementById('editor').focus();
     }
 
-    // 5. Einfügen
+    // 5. Einf��gen
     function pasteText() {
       document.execCommand('paste', false, null);
       document.getElementById('editor').focus();
@@ -554,5 +555,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad738112486e0d3',t:'MTc2NTY0NzMzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad73fbf67c7e0d3',t:'MTc2NTY0NzY1MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
