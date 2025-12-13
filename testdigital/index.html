@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="de" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Texteditor</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    .editor-content {
+      min-height: 500px;
+      outline: none;
+    }
+    
+    .toolbar-button {
+      transition: all 0.2s;
+    }
+    
+    .toolbar-button:hover {
+      transform: translateY(-1px);
+    }
+    
+    .toolbar-button:active {
+      transform: translateY(0);
+    }
+    
+    .toolbar-button.active {
+      background-color: #3b82f6;
+      color: white;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+   <div class="min-h-full flex flex-col items-center py-8 px-4"><!-- Document Title -->
+    <div class="w-full max-w-4xl mb-4">
+     <h1 id="doc-title" class="text-3xl font-bold text-white text-center">Mein Dokument</h1>
+    </div><!-- Toolbar -->
+    <div class="w-full max-w-4xl bg-white rounded-t-lg shadow-lg p-3 flex flex-wrap gap-2 border-b-2 border-gray-200"><!-- 1. Rückgängig --> <button onclick="undo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rückgängig (Strg+Z)"> ↶ </button> <!-- 2. Wiederholen --> <button onclick="redo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Wiederholen (Strg+Y)"> ↷ </button>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 3. Ausschneiden --> <button onclick="cutText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Ausschneiden (Strg+X)"> ✂ </button> <!-- 4. Kopieren --> <button onclick="copyText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Kopieren (Strg+C)"> 📋 </button> <!-- 5. Einfügen --> <button onclick="pasteText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Einfügen (Strg+V)"> 📄 </button>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 5b. Seitenumbruch --> <button onclick="insertPageBreak()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Seitenumbruch"> ⎯⎯ </button>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 6. Kopfzeile oder Absatz --> <select id="formatType" onchange="changeFormatType(this.value)" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 border-none cursor-pointer" title="Format"> <option value="p" selected>Absatz</option> <option value="h1">Kopfzeile 1</option> <option value="h2">Kopfzeile 2</option> <option value="h3">Kopfzeile 3</option> </select>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 7. Texthervorhebungsfarbe --> <select onchange="highlightText(this.value)" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 border-none cursor-pointer" title="Texthervorhebung"> <option value="">Farbauswahl aufheben</option> <option value="#d3d3d3">Grau</option> </select>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 8. Fett --> <button onclick="formatText('bold')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 font-bold" title="Fett"> B </button> <!-- 9. Kursiv --> <button onclick="formatText('italic')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 italic" title="Kursiv"> I </button> <!-- 10. Durchgestrichen --> <button onclick="formatText('strikeThrough')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 line-through" title="Durchgestrichen"> S </button> <!-- 11. Hochgestellt --> <button onclick="formatText('superscript')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Hochgestellt"> x² </button> <!-- 12. Tiefgestellt --> <button onclick="formatText('subscript')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Tiefgestellt"> x₂ </button> <!-- 13. Rot unterstrichen --> <button onclick="redUnderline()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 text-red-600 underline" title="Rot unterstrichen"> U </button>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 14. Linksbündig --> <button onclick="formatText('justifyLeft')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Linksbündig"> ⬅ </button> <!-- 15. Zentrieren --> <button onclick="formatText('justifyCenter')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Zentrieren"> ↔ </button> <!-- 16. Rechtsbündig --> <button onclick="formatText('justifyRight')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rechtsbündig"> ➡ </button> <!-- 17. Blocksatz --> <button onclick="formatText('justifyFull')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Blocksatz"> ⬌ </button>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 18. Aufzählung --> <button onclick="formatText('insertUnorderedList')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Aufzählung"> • Liste </button> <!-- 19. Nummerierte Liste --> <button onclick="formatText('insertOrderedList')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Nummerierte Liste"> 1. Liste </button>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 20. Geschütztes Leerzeichen --> <button onclick="insertNonBreakingSpace()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Geschütztes Leerzeichen"> ␣ </button> <!-- 21. Einzug verkleinern --> <button onclick="formatText('outdent')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Einzug verkleinern"> ⬅| </button> <!-- 22. Einzug vergrößern --> <button onclick="formatText('indent')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Einzug vergrößern"> |➡ </button>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 23. Tabelle einfügen --> <button onclick="showTableDialog()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Tabelle einfügen"> ⊞ Tabelle </button>
+    </div><!-- Table Dialog -->
+    <div id="tableDialog" class="hidden w-full max-w-4xl bg-white shadow-lg p-4 rounded-lg mb-2">
+     <h3 class="font-bold mb-3 text-lg">Tabelle einfügen</h3>
+     <div class="flex gap-4 items-end">
+      <div><label class="block text-sm mb-1">Zeilen:</label> <input type="number" id="tableRows" value="3" min="1" max="20" class="border rounded px-3 py-2 w-20">
+      </div>
+      <div><label class="block text-sm mb-1">Spalten:</label> <input type="number" id="tableCols" value="3" min="1" max="10" class="border rounded px-3 py-2 w-20">
+      </div><button onclick="insertTable()" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"> Einfügen </button> <button onclick="hideTableDialog()" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded"> Abbrechen </button>
+     </div>
+    </div><!-- Editor Area -->
+    <div class="w-full max-w-4xl bg-white rounded-b-lg shadow-lg p-8 mb-8" style="min-height: 600px;">
+     <div id="editor" class="editor-content" contenteditable="true" style="font-family: 'Georgia', serif; font-size: 16px; line-height: 1.6; color: #333;">
+      <p>Beginne hier mit dem Schreiben...</p>
+     </div>
+    </div><!-- Action Buttons -->
+    <div class="w-full max-w-4xl flex gap-3 justify-center"><button onclick="clearEditor()" class="px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold shadow-lg transition-all"> Alles löschen </button> <button onclick="downloadDocument()" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold shadow-lg transition-all"> Als PDF herunterladen </button>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      document_title: "Mein Dokument"
+    };
+
+    // Format text in editor
+    function formatText(command) {
+      document.execCommand(command, false, null);
+      document.getElementById('editor').focus();
+    }
+
+    // 1. Rückgängig machen
+    function undo() {
+      document.execCommand('undo', false, null);
+      document.getElementById('editor').focus();
+    }
+
+    // 2. Wiederholen
+    function redo() {
+      document.execCommand('redo', false, null);
+      document.getElementById('editor').focus();
+    }
+
+    // 3. Ausschneiden
+    function cutText() {
+      document.execCommand('cut', false, null);
+      document.getElementById('editor').focus();
+    }
+
+    // 4. Kopieren
+    function copyText() {
+      document.execCommand('copy', false, null);
+      document.getElementById('editor').focus();
+    }
+
+    // 5. Einfügen
+    function pasteText() {
+      document.execCommand('paste', false, null);
+      document.getElementById('editor').focus();
+    }
+
+    // 5b. Seitenumbruch einfügen
+    function insertPageBreak() {
+      const pageBreak = '<div style="page-break-after: always; border-top: 2px dashed #999; margin: 20px 0; padding-top: 20px;"></div>';
+      document.execCommand('insertHTML', false, pageBreak);
+      document.getElementById('editor').focus();
+    }
+
+    // 6. Kopfzeile oder Absatz ändern
+    function changeFormatType(tag) {
+      document.execCommand('formatBlock', false, tag);
+      document.getElementById('editor').focus();
+    }
+
+    // 7. Texthervorhebungsfarbe
+    function highlightText(color) {
+      if (color === '') {
+        document.execCommand('removeFormat', false, null);
+      } else {
+        document.execCommand('backColor', false, color);
+      }
+      document.getElementById('editor').focus();
+    }
+
+    // 13. Rot unterstrichen
+    function redUnderline() {
+      const selection = window.getSelection();
+      if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const span = document.createElement('span');
+        span.style.textDecoration = 'underline';
+        span.style.textDecorationColor = 'red';
+        span.style.textDecorationThickness = '2px';
+        try {
+          range.surroundContents(span);
+        } catch (e) {
+          // Fallback für komplexe Auswahlen
+          const contents = range.extractContents();
+          span.appendChild(contents);
+          range.insertNode(span);
+        }
+      }
+      document.getElementById('editor').focus();
+    }
+
+    // 20. Geschütztes Leerzeichen
+    function insertNonBreakingSpace() {
+      document.execCommand('insertHTML', false, '&nbsp;');
+      document.getElementById('editor').focus();
+    }
+
+    // 23. Tabelle Dialog anzeigen
+    function showTableDialog() {
+      document.getElementById('tableDialog').classList.remove('hidden');
+    }
+
+    function hideTableDialog() {
+      document.getElementById('tableDialog').classList.add('hidden');
+    }
+
+    // Tabelle einfügen
+    function insertTable() {
+      const rows = parseInt(document.getElementById('tableRows').value);
+      const cols = parseInt(document.getElementById('tableCols').value);
+      
+      let tableHTML = '<table style="border-collapse: collapse; width: 100%; margin: 10px 0;">';
+      
+      for (let i = 0; i < rows; i++) {
+        tableHTML += '<tr>';
+        for (let j = 0; j < cols; j++) {
+          tableHTML += '<td style="border: 1px solid #333; padding: 8px; min-width: 60px;">&nbsp;</td>';
+        }
+        tableHTML += '</tr>';
+      }
+      
+      tableHTML += '</table><p><br></p>';
+      
+      document.execCommand('insertHTML', false, tableHTML);
+      hideTableDialog();
+      document.getElementById('editor').focus();
+    }
+
+    // Tastaturkürzel
+    document.addEventListener('keydown', function(e) {
+      if (e.ctrlKey || e.metaKey) {
+        switch(e.key.toLowerCase()) {
+          case 'z':
+            if (!e.shiftKey) {
+              e.preventDefault();
+              undo();
+            }
+            break;
+          case 'y':
+            e.preventDefault();
+            redo();
+            break;
+          case 'x':
+            // Browser-Standard wird verwendet
+            break;
+          case 'c':
+            // Browser-Standard wird verwendet
+            break;
+          case 'v':
+            // Browser-Standard wird verwendet
+            break;
+        }
+      }
+    });
+
+    // Clear editor
+    function clearEditor() {
+      const editor = document.getElementById('editor');
+      editor.innerHTML = '<p>Beginne hier mit dem Schreiben...</p>';
+      editor.focus();
+    }
+
+    // Download document as PDF
+    async function downloadDocument() {
+      const editor = document.getElementById('editor');
+      const title = document.getElementById('doc-title').textContent;
+      
+      // Temporärer Container für PDF-Generierung
+      const tempContainer = document.createElement('div');
+      tempContainer.style.position = 'absolute';
+      tempContainer.style.left = '-9999px';
+      tempContainer.style.top = '0';
+      tempContainer.style.width = '210mm'; // A4 Breite
+      tempContainer.style.padding = '20mm';
+      tempContainer.style.backgroundColor = 'white';
+      tempContainer.style.fontFamily = 'Georgia, serif';
+      tempContainer.style.fontSize = '16px';
+      tempContainer.style.lineHeight = '1.6';
+      tempContainer.style.color = '#333';
+      
+      // Titel und Inhalt hinzufügen
+      const titleElement = document.createElement('h1');
+      titleElement.textContent = title;
+      titleElement.style.marginBottom = '20px';
+      tempContainer.appendChild(titleElement);
+      
+      const contentClone = editor.cloneNode(true);
+      tempContainer.appendChild(contentClone);
+      
+      document.body.appendChild(tempContainer);
+      
+      try {
+        // HTML zu Canvas konvertieren
+        const canvas = await html2canvas(tempContainer, {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          backgroundColor: '#ffffff'
+        });
+        
+        // PDF erstellen
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({
+          orientation: 'portrait',
+          unit: 'mm',
+          format: 'a4'
+        });
+        
+        const imgData = canvas.toDataURL('image/png');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const imgWidth = pdfWidth;
+        const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+        
+        let heightLeft = imgHeight;
+        let position = 0;
+        
+        // Erste Seite
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pdfHeight;
+        
+        // Weitere Seiten falls nötig
+        while (heightLeft > 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pdfHeight;
+        }
+        
+        // PDF herunterladen
+        pdf.save(`${title}.pdf`);
+      } catch (error) {
+        console.error('Fehler beim PDF-Export:', error);
+      } finally {
+        // Temporären Container entfernen
+        document.body.removeChild(tempContainer);
+      }
+    }
+
+    // Element SDK implementation
+    async function onConfigChange(config) {
+      const titleElement = document.getElementById('doc-title');
+      titleElement.textContent = config.document_title || defaultConfig.document_title;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["document_title", config.document_title || defaultConfig.document_title]
+      ]);
+    }
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad7092b37429884',t:'MTc2NTY0NTQxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
