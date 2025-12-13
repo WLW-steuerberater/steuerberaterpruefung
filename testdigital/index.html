@@ -95,7 +95,7 @@
      <div class="w-px bg-gray-300 mx-1"></div><!-- 6. Kopfzeile oder Absatz --> <select id="formatType" onchange="changeFormatType(this.value)" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 border-none cursor-pointer" title="Format"> <option value="p" selected>Absatz</option> <option value="h1">Kopfzeile 1</option> <option value="h2">Kopfzeile 2</option> <option value="h3">Kopfzeile 3</option> </select>
      <div class="w-px bg-gray-300 mx-1"></div><!-- 7. Texthervorhebungsfarbe --> <select onchange="highlightText(this.value)" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 border-none cursor-pointer" title="Texthervorhebung"> <option value="">Farbauswahl aufheben</option> <option value="#d3d3d3">Grau</option> </select>
      <div class="w-px bg-gray-300 mx-1"></div><!-- 8. Fett --> <button onclick="formatText('bold')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 font-bold" title="Fett"> B </button> <!-- 9. Kursiv --> <button onclick="formatText('italic')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 italic" title="Kursiv"> I </button> <!-- 10. Durchgestrichen --> <button onclick="formatText('strikeThrough')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 line-through" title="Durchgestrichen"> S </button> <!-- 11. Hochgestellt --> <button onclick="formatText('superscript')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Hochgestellt"> x² </button> <!-- 12. Tiefgestellt --> <button onclick="formatText('subscript')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Tiefgestellt"> x₂ </button> <!-- 13. Rot unterstrichen --> <button onclick="redUnderline()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 text-red-600 underline" title="Rot unterstrichen"> U </button>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 14. Linksbündig --> <button onclick="formatText('justifyLeft')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Linksbündig"> ⬅ </button> <!-- 15. Zentrieren --> <button onclick="formatText('justifyCenter')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Zentrieren"> ↔ </button> <!-- 16. Rechtsbündig --> <button onclick="formatText('justifyRight')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rechtsbündig"> ➡ </button> <!-- 17. Blocksatz --> <button onclick="formatText('justifyFull')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Blocksatz"> ��� </button>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 14. Linksbündig --> <button onclick="formatText('justifyLeft')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Linksbündig"> ���� </button> <!-- 15. Zentrieren --> <button onclick="formatText('justifyCenter')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Zentrieren"> ↔ </button> <!-- 16. Rechtsbündig --> <button onclick="formatText('justifyRight')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rechtsbündig"> ➡ </button> <!-- 17. Blocksatz --> <button onclick="formatText('justifyFull')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Blocksatz"> ��� </button>
      <div class="w-px bg-gray-300 mx-1"></div><!-- 18. Aufzählung --> <button onclick="formatText('insertUnorderedList')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Aufzählung">
       <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line> <line x1="8" y1="12" x2="21" y2="12"></line> <line x1="8" y1="18" x2="21" y2="18"></line> <circle cx="4" cy="6" r="1" fill="currentColor"></circle> <circle cx="4" cy="12" r="1" fill="currentColor"></circle> <circle cx="4" cy="18" r="1" fill="currentColor"></circle>
       </svg></button> <!-- 19. Nummerierte Liste --> <button onclick="formatText('insertOrderedList')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Nummerierte Liste">
@@ -126,7 +126,6 @@
      </div><!-- Schreibbereich (2/3 der Breite) -->
      <div class="w-2/3 p-8">
       <div id="editor" class="editor-content" contenteditable="true" style="font-family: 'Georgia', serif; font-size: 16px; line-height: 1.6; color: #333; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap;">
-       <p>Beginne hier mit dem Schreiben...</p>
       </div>
      </div>
     </div><!-- Action Buttons -->
@@ -177,7 +176,7 @@
       document.getElementById('header-kennummer').textContent = userKennummer;
       document.getElementById('header-pruefungsname').textContent = pruefungsname;
       
-      // Start timer
+      // Start timer immediately when confirmation button is clicked
       startTimer();
     }
 
@@ -193,6 +192,11 @@
           showTimeUpDialog();
         }
       }, 60000); // Update every minute (60000 ms)
+      
+      // Also update every second for more accurate countdown display
+      setInterval(() => {
+        updateTimerDisplay();
+      }, 1000);
     }
 
     function updateTimerDisplay() {
@@ -295,20 +299,43 @@
     }
 
     // 3. Ausschneiden
-    function cutText() {
-      document.execCommand('cut', false, null);
+    async function cutText() {
+      try {
+        const selection = window.getSelection();
+        if (selection.toString()) {
+          await navigator.clipboard.writeText(selection.toString());
+          document.execCommand('delete', false, null);
+        }
+      } catch (err) {
+        // Fallback zu execCommand
+        document.execCommand('cut', false, null);
+      }
       document.getElementById('editor').focus();
     }
 
     // 4. Kopieren
-    function copyText() {
-      document.execCommand('copy', false, null);
+    async function copyText() {
+      try {
+        const selection = window.getSelection();
+        if (selection.toString()) {
+          await navigator.clipboard.writeText(selection.toString());
+        }
+      } catch (err) {
+        // Fallback zu execCommand
+        document.execCommand('copy', false, null);
+      }
       document.getElementById('editor').focus();
     }
 
-    // 5. Einfügen
-    function pasteText() {
-      document.execCommand('paste', false, null);
+    // 5. Einf��gen
+    async function pasteText() {
+      try {
+        const text = await navigator.clipboard.readText();
+        document.execCommand('insertText', false, text);
+      } catch (err) {
+        // Fallback zu execCommand
+        document.execCommand('paste', false, null);
+      }
       document.getElementById('editor').focus();
     }
 
@@ -423,7 +450,7 @@
     // Clear editor
     function clearEditor() {
       const editor = document.getElementById('editor');
-      editor.innerHTML = '<p>Beginne hier mit dem Schreiben...</p>';
+      editor.innerHTML = '';
       editor.focus();
     }
 
@@ -554,5 +581,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad74790664fe0d3',t:'MTc2NTY0Nzk3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad7565d5344e0d3',t:'MTc2NTY0ODU3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
