@@ -89,7 +89,7 @@
       </div><!-- Prüfung beenden Button --> <button onclick="showEndExamDialog()" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-lg shadow-lg transition-all"> Prüfung beenden </button>
      </div>
     </div><!-- Toolbar -->
-    <div class="w-full bg-white shadow-lg p-3 flex flex-wrap gap-2 border-b-2 border-gray-200 mb-2"><!-- 1. Rückgängig --> <button onclick="undo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rückgängig (Strg+Z)"> ↶ </button> <!-- 2. Wiederholen --> <button onclick="redo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Wiederholen (Strg+Y)"> ↷ </button>
+    <div class="w-full bg-white shadow-lg p-3 flex flex-wrap gap-2 border-b-2 border-gray-200 mb-2"><!-- 1. Rückgängig --> <button onclick="undo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rückgängig (Strg+Z)"> ����� </button> <!-- 2. Wiederholen --> <button onclick="redo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Wiederholen (Strg+Y)"> ↷ </button>
      <div class="w-px bg-gray-300 mx-1"></div><!-- 3. Ausschneiden --> <button onclick="cutText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Ausschneiden (Strg+X)"> ✂ </button> <!-- 4. Kopieren --> <button onclick="copyText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Kopieren (Strg+C)"> 📋 </button> <!-- 5. Einfügen --> <button onclick="pasteText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Einfügen (Strg+V)"> 📄 </button>
      <div class="w-px bg-gray-300 mx-1"></div><!-- 5b. Seitenumbruch --> <button onclick="insertPageBreak()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Seitenumbruch"> ⎯⎯ </button>
      <div class="w-px bg-gray-300 mx-1"></div><!-- 6. Kopfzeile oder Absatz --> <select id="formatType" onchange="changeFormatType(this.value)" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 border-none cursor-pointer" title="Format"> <option value="p" selected>Absatz</option> <option value="h1">Kopfzeile 1</option> <option value="h2">Kopfzeile 2</option> <option value="h3">Kopfzeile 3</option> </select>
@@ -454,7 +454,7 @@
       editor.focus();
     }
 
-    // Download document as PDF
+    // Download document as PDF (text-based)
     async function downloadDocument() {
       const editor = document.getElementById('editor');
       
@@ -487,101 +487,278 @@
         const pdfHeight = pdf.internal.pageSize.getHeight();
         const margin = 20;
         const contentWidth = pdfWidth - 2 * margin;
-        const contentHeight = pdfHeight - 2 * margin - 10; // Extra space for header
-        
-        // Get editor content
-        const content = editor.innerHTML;
-        
-        // Split content into smaller chunks if very large
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = content;
-        tempDiv.style.position = 'absolute';
-        tempDiv.style.left = '-9999px';
-        tempDiv.style.top = '0';
-        tempDiv.style.width = contentWidth + 'mm';
-        tempDiv.style.fontFamily = 'Georgia, serif';
-        tempDiv.style.fontSize = '12pt';
-        tempDiv.style.lineHeight = '1.6';
-        tempDiv.style.color = '#333';
-        tempDiv.style.backgroundColor = 'white';
-        tempDiv.style.padding = '10px';
-        document.body.appendChild(tempDiv);
-        
-        // Convert to canvas with lower scale for better performance
-        const canvas = await html2canvas(tempDiv, {
-          scale: 1.5, // Reduced from 2 for better performance
-          useCORS: true,
-          logging: false,
-          backgroundColor: '#ffffff',
-          windowWidth: tempDiv.scrollWidth,
-          windowHeight: tempDiv.scrollHeight
-        });
-        
-        document.body.removeChild(tempDiv);
-        
-        const imgData = canvas.toDataURL('image/jpeg', 0.85); // Use JPEG with compression
-        const imgWidth = contentWidth;
-        const imgHeight = (canvas.height * contentWidth) / canvas.width;
-        
-        let heightLeft = imgHeight;
-        let position = margin + 10; // Start below header
+        const lineHeight = 7;
+        const headerHeight = 20;
+        let yPosition = headerHeight + margin;
         let pageNumber = 1;
-        const totalPages = Math.ceil(imgHeight / contentHeight);
+        
+        // Set default font
+        pdf.setFont('helvetica');
         
         // Function to add header to page
-        function addHeader(pdf, pageNum) {
+        function addHeader(pageNum) {
           pdf.setFontSize(10);
           pdf.setTextColor(60, 60, 60);
           pdf.text(userKennummer, margin, 12);
           pdf.text(pruefungsname, pdfWidth / 2, 12, { align: 'center' });
-          pdf.text(`Seite ${pageNum}/${totalPages}`, pdfWidth - margin, 12, { align: 'right' });
+          pdf.text(`Seite ${pageNum}`, pdfWidth - margin, 12, { align: 'right' });
           pdf.setLineWidth(0.3);
           pdf.setDrawColor(200, 200, 200);
           pdf.line(margin, 15, pdfWidth - margin, 15);
         }
         
-        // First page
-        addHeader(pdf, pageNumber);
+        // Function to add new page
+        function addNewPage() {
+          pdf.addPage();
+          pageNumber++;
+          yPosition = headerHeight + margin;
+          addHeader(pageNumber);
+        }
         
-        if (imgHeight <= contentHeight) {
-          // Single page - fits completely
-          pdf.addImage(imgData, 'JPEG', margin, position, imgWidth, imgHeight, undefined, 'FAST');
-        } else {
-          // Multiple pages needed
-          let yOffset = 0;
+        // Function to check if we need a new page
+        function checkNewPage(requiredSpace) {
+          if (yPosition + requiredSpace > pdfHeight - margin) {
+            addNewPage();
+            return true;
+          }
+          return false;
+        }
+        
+        // Add first page header
+        addHeader(pageNumber);
+        
+        // Parse HTML content
+        function parseElement(element, isBold = false, isItalic = false, isUnderline = false, isStrikethrough = false) {
+          const tagName = element.tagName ? element.tagName.toLowerCase() : '';
           
-          while (heightLeft > 0) {
-            if (pageNumber > 1) {
-              pdf.addPage();
-              addHeader(pdf, pageNumber);
+          // Handle text nodes
+          if (element.nodeType === Node.TEXT_NODE) {
+            const text = element.textContent.trim();
+            if (text) {
+              // Apply formatting
+              let fontStyle = '';
+              if (isBold && isItalic) fontStyle = 'bolditalic';
+              else if (isBold) fontStyle = 'bold';
+              else if (isItalic) fontStyle = 'italic';
+              else fontStyle = 'normal';
+              
+              pdf.setFont('helvetica', fontStyle);
+              
+              // Split text into lines that fit
+              const lines = pdf.splitTextToSize(text, contentWidth);
+              
+              lines.forEach(line => {
+                checkNewPage(lineHeight);
+                
+                if (isStrikethrough) {
+                  const textWidth = pdf.getTextWidth(line);
+                  pdf.text(line, margin, yPosition);
+                  pdf.line(margin, yPosition - 2, margin + textWidth, yPosition - 2);
+                } else if (isUnderline) {
+                  const textWidth = pdf.getTextWidth(line);
+                  pdf.text(line, margin, yPosition);
+                  pdf.line(margin, yPosition + 1, margin + textWidth, yPosition + 1);
+                } else {
+                  pdf.text(line, margin, yPosition);
+                }
+                
+                yPosition += lineHeight;
+              });
             }
-            
-            // Calculate the portion of the image to show on this page
-            const pageHeight = Math.min(contentHeight, heightLeft);
-            
-            // Add the image portion
-            pdf.addImage(
-              imgData, 
-              'JPEG', 
-              margin, 
-              position - yOffset, 
-              imgWidth, 
-              imgHeight,
-              undefined,
-              'FAST'
-            );
-            
-            yOffset += contentHeight;
-            heightLeft -= contentHeight;
-            pageNumber++;
-            
-            // Prevent infinite loop
-            if (pageNumber > 100) {
-              console.warn('PDF generation stopped at 100 pages');
+            return;
+          }
+          
+          // Handle different HTML elements
+          switch(tagName) {
+            case 'h1':
+              checkNewPage(lineHeight * 1.5);
+              pdf.setFontSize(20);
+              pdf.setFont('helvetica', 'bold');
+              const h1Text = element.textContent.trim();
+              if (h1Text) {
+                const h1Lines = pdf.splitTextToSize(h1Text, contentWidth);
+                h1Lines.forEach(line => {
+                  pdf.text(line, margin, yPosition);
+                  yPosition += lineHeight * 1.5;
+                });
+              }
+              yPosition += lineHeight * 0.5;
+              pdf.setFontSize(12);
               break;
-            }
+              
+            case 'h2':
+              checkNewPage(lineHeight * 1.3);
+              pdf.setFontSize(16);
+              pdf.setFont('helvetica', 'bold');
+              const h2Text = element.textContent.trim();
+              if (h2Text) {
+                const h2Lines = pdf.splitTextToSize(h2Text, contentWidth);
+                h2Lines.forEach(line => {
+                  pdf.text(line, margin, yPosition);
+                  yPosition += lineHeight * 1.3;
+                });
+              }
+              yPosition += lineHeight * 0.3;
+              pdf.setFontSize(12);
+              break;
+              
+            case 'h3':
+              checkNewPage(lineHeight * 1.2);
+              pdf.setFontSize(14);
+              pdf.setFont('helvetica', 'bold');
+              const h3Text = element.textContent.trim();
+              if (h3Text) {
+                const h3Lines = pdf.splitTextToSize(h3Text, contentWidth);
+                h3Lines.forEach(line => {
+                  pdf.text(line, margin, yPosition);
+                  yPosition += lineHeight * 1.2;
+                });
+              }
+              yPosition += lineHeight * 0.2;
+              pdf.setFontSize(12);
+              break;
+              
+            case 'p':
+            case 'div':
+              // Check for page break
+              if (element.style.pageBreakAfter === 'always') {
+                addNewPage();
+              } else {
+                Array.from(element.childNodes).forEach(child => {
+                  parseElement(child, isBold, isItalic, isUnderline, isStrikethrough);
+                });
+                yPosition += lineHeight * 0.5;
+              }
+              break;
+              
+            case 'br':
+              yPosition += lineHeight;
+              checkNewPage(lineHeight);
+              break;
+              
+            case 'b':
+            case 'strong':
+              Array.from(element.childNodes).forEach(child => {
+                parseElement(child, true, isItalic, isUnderline, isStrikethrough);
+              });
+              break;
+              
+            case 'i':
+            case 'em':
+              Array.from(element.childNodes).forEach(child => {
+                parseElement(child, isBold, true, isUnderline, isStrikethrough);
+              });
+              break;
+              
+            case 'u':
+              Array.from(element.childNodes).forEach(child => {
+                parseElement(child, isBold, isItalic, true, isStrikethrough);
+              });
+              break;
+              
+            case 'strike':
+            case 's':
+              Array.from(element.childNodes).forEach(child => {
+                parseElement(child, isBold, isItalic, isUnderline, true);
+              });
+              break;
+              
+            case 'span':
+              // Check for red underline
+              const hasRedUnderline = element.style.textDecorationColor === 'red' || 
+                                     element.style.textDecoration.includes('underline');
+              
+              Array.from(element.childNodes).forEach(child => {
+                parseElement(child, isBold, isItalic, hasRedUnderline, isStrikethrough);
+              });
+              break;
+              
+            case 'ul':
+            case 'ol':
+              let listIndex = 1;
+              Array.from(element.children).forEach(li => {
+                if (li.tagName.toLowerCase() === 'li') {
+                  checkNewPage(lineHeight);
+                  const bullet = tagName === 'ul' ? '• ' : `${listIndex}. `;
+                  pdf.setFont('helvetica', 'normal');
+                  pdf.text(bullet, margin, yPosition);
+                  
+                  const textX = margin + 10;
+                  const liText = li.textContent.trim();
+                  const liLines = pdf.splitTextToSize(liText, contentWidth - 10);
+                  
+                  liLines.forEach((line, idx) => {
+                    if (idx > 0) {
+                      checkNewPage(lineHeight);
+                    }
+                    pdf.text(line, textX, yPosition);
+                    yPosition += lineHeight;
+                  });
+                  
+                  listIndex++;
+                }
+              });
+              yPosition += lineHeight * 0.5;
+              break;
+              
+            case 'table':
+              checkNewPage(lineHeight * 2);
+              
+              const rows = Array.from(element.querySelectorAll('tr'));
+              const colWidths = [];
+              
+              // Calculate column widths
+              if (rows.length > 0) {
+                const firstRow = rows[0];
+                const cells = Array.from(firstRow.querySelectorAll('td, th'));
+                const numCols = cells.length;
+                const colWidth = contentWidth / numCols;
+                
+                for (let i = 0; i < numCols; i++) {
+                  colWidths.push(colWidth);
+                }
+              }
+              
+              // Draw table
+              rows.forEach((row, rowIdx) => {
+                const cells = Array.from(row.querySelectorAll('td, th'));
+                const rowHeight = lineHeight * 1.5;
+                
+                checkNewPage(rowHeight);
+                
+                let xPos = margin;
+                cells.forEach((cell, colIdx) => {
+                  // Draw cell border
+                  pdf.rect(xPos, yPosition - 5, colWidths[colIdx], rowHeight);
+                  
+                  // Draw cell text
+                  const cellText = cell.textContent.trim();
+                  if (cellText) {
+                    pdf.text(cellText, xPos + 2, yPosition);
+                  }
+                  
+                  xPos += colWidths[colIdx];
+                });
+                
+                yPosition += rowHeight;
+              });
+              
+              yPosition += lineHeight * 0.5;
+              break;
+              
+            default:
+              // For other elements, process children
+              Array.from(element.childNodes).forEach(child => {
+                parseElement(child, isBold, isItalic, isUnderline, isStrikethrough);
+              });
+              break;
           }
         }
+        
+        // Parse the editor content
+        Array.from(editor.childNodes).forEach(node => {
+          parseElement(node);
+        });
         
         // Save PDF
         pdf.save(`${pruefungsname}_${userKennummer}.pdf`);
@@ -649,5 +826,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad771add216e0d3',t:'MTc2NTY0OTY5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad7af9aa152e0d3',t:'MTc2NTY1MjIzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
