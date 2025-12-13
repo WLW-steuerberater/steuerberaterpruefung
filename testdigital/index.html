@@ -28,6 +28,31 @@
       border: none !important;
     }
     
+    /* List styles */
+    #editor ul {
+      list-style-type: disc;
+      margin-left: 30px;
+      padding-left: 10px;
+    }
+    
+    #editor ol {
+      list-style-type: decimal;
+      margin-left: 30px;
+      padding-left: 10px;
+    }
+    
+    #editor li {
+      margin: 5px 0;
+    }
+    
+    /* Heading styles */
+    #editor h2 {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 15px 0 10px 0;
+      line-height: 1.3;
+    }
+    
     .toolbar-button {
       transition: all 0.2s;
     }
@@ -134,7 +159,7 @@
    </div><!-- Confirmation Screen -->
    <div id="confirmationScreen" class="hidden min-h-full flex items-center justify-center px-4 py-8">
     <div class="bg-white rounded-lg shadow-2xl p-8 max-w-2xl w-full">
-     <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Bestätigung</h1>
+     <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Best��tigung</h1>
      <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 mb-6">
       <p class="text-gray-800 text-lg leading-relaxed">Hiermit bestätige ich, dass ich mich mit meiner eigenen Kennummer <strong id="confirmedName" class="text-blue-600"></strong> eingeloggt habe und die nachfolgende Online-Prüfung alleine durchführen werde. Ich sehe mich heute physisch und psychisch dazu in der Lage, die Prüfung zu absolvieren.</p>
      </div><button onclick="startEditor()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg"> Bestätigen </button>
@@ -160,16 +185,16 @@
        <div id="timer" class="text-2xl font-bold text-gray-800">
         06:00 Stunden
        </div>
-      </div><!-- Prüfung beenden Button --> <button onclick="showEndExamDialog()" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-lg shadow-lg transition-all"> Prüfung beenden </button>
+      </div><!-- Pr����fung beenden Button --> <button onclick="showEndExamDialog()" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-lg shadow-lg transition-all"> Prüfung beenden </button>
      </div>
     </div><!-- Toolbar -->
-    <div class="w-full bg-white shadow-lg p-3 flex flex-wrap gap-2 border-b-2 border-gray-200 mb-2 fixed z-30" style="top: 80px;"><!-- 1. Rückgängig --> <button onclick="undo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rückgängig (Strg+Z)"> �������� </button> <!-- 2. Wiederholen --> <button onclick="redo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Wiederholen (Strg+Y)"> �� </button>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 3. Ausschneiden --> <button onclick="cutText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Ausschneiden (Strg+X)"> ✂ </button> <!-- 4. Kopieren --> <button onclick="copyText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Kopieren (Strg+C)"> ���� </button> <!-- 5. Einfügen --> <button onclick="pasteText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Einfügen (Strg+V)"> 📄 </button>
+    <div class="w-full bg-white shadow-lg p-3 flex flex-wrap gap-2 border-b-2 border-gray-200 mb-2 fixed z-30" style="top: 80px;"><!-- 1. R��ckgängig --> <button onclick="undo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rückgängig (Strg+Z)"> �������� </button> <!-- 2. Wiederholen --> <button onclick="redo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Wiederholen (Strg+Y)"> �� </button>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 3. Ausschneiden --> <button onclick="cutText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Ausschneiden (Strg+X)"> ��� </button> <!-- 4. Kopieren --> <button onclick="copyText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Kopieren (Strg+C)"> ���� </button> <!-- 5. Einfügen --> <button onclick="pasteText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Einfügen (Strg+V)"> 📄 </button>
      <div class="w-px bg-gray-300 mx-1"></div><!-- 5b. Seitenumbruch --> <button onclick="insertPageBreak()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Seitenumbruch"> ⎯⎯ </button>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 6. Kopfzeile oder Absatz --> <select id="formatType" onchange="changeFormatType(this.value)" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 border-none cursor-pointer" title="Format"> <option value="p" selected>Absatz</option> <option value="h1">Kopfzeile 1</option> <option value="h2">Kopfzeile 2</option> <option value="h3">Kopfzeile 3</option> </select>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 6. Kopfzeile oder Absatz --> <select id="formatType" onchange="changeFormatType(this.value)" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 border-none cursor-pointer" title="Format"> <option value="p" selected>Absatz</option> <option value="h2">Kopfzeile</option> </select>
      <div class="w-px bg-gray-300 mx-1"></div><!-- 7. Texthervorhebungsfarbe --> <select onchange="highlightText(this.value)" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 border-none cursor-pointer" title="Texthervorhebung"> <option value="">Farbauswahl aufheben</option> <option value="#d3d3d3">Grau</option> </select>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 8. Fett --> <button onclick="formatText('bold')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 font-bold" title="Fett"> B </button> <!-- 9. Kursiv --> <button onclick="formatText('italic')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 italic" title="Kursiv"> I </button> <!-- 10. Durchgestrichen --> <button onclick="formatText('strikeThrough')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 line-through" title="Durchgestrichen"> S </button> <!-- 11. Hochgestellt --> <button onclick="formatText('superscript')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Hochgestellt"> x² </button> <!-- 12. Tiefgestellt --> <button onclick="formatText('subscript')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Tiefgestellt"> x₂ </button> <!-- 13. Rot unterstrichen --> <button onclick="redUnderline()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 text-red-600 underline" title="Rot unterstrichen"> U </button>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 14. Linksbündig --> <button onclick="formatText('justifyLeft')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Linksbündig"> ������� </button> <!-- 15. Zentrieren --> <button onclick="formatText('justifyCenter')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Zentrieren"> ↔ </button> <!-- 16. Rechtsb��ndig --> <button onclick="formatText('justifyRight')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rechtsbündig"> ➡ </button> <!-- 17. Blocksatz --> <button onclick="formatText('justifyFull')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Blocksatz"> ��� </button>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 8. Fett --> <button onclick="formatText('bold')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 font-bold" title="Fett"> B </button> <!-- 9. Kursiv --> <button onclick="formatText('italic')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 italic" title="Kursiv"> I </button> <!-- 10. Durchgestrichen --> <button onclick="formatText('strikeThrough')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 line-through" title="Durchgestrichen"> S </button> <!-- 11. Hochgestellt --> <button onclick="formatText('superscript')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Hochgestellt"> x² </button> <!-- 12. Tiefgestellt --> <button onclick="formatText('subscript')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Tiefgestellt"> x��� </button> <!-- 13. Rot unterstrichen --> <button onclick="redUnderline()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 text-red-600 underline" title="Rot unterstrichen"> U </button>
+     <div class="w-px bg-gray-300 mx-1"></div><!-- 14. Linksbündig --> <button onclick="formatText('justifyLeft')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Linksbündig"> ������� </button> <!-- 15. Zentrieren --> <button onclick="formatText('justifyCenter')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Zentrieren"> ↔ </button> <!-- 16. Rechtsb��ndig --> <button onclick="formatText('justifyRight')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rechtsbündig"> ➡ </button> <!-- 17. Blocksatz --> <button onclick="formatText('justifyFull')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Blocksatz"> ������� </button>
      <div class="w-px bg-gray-300 mx-1"></div><!-- 18. Aufzählung --> <button onclick="formatText('insertUnorderedList')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Aufzählung">
       <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line> <line x1="8" y1="12" x2="21" y2="12"></line> <line x1="8" y1="18" x2="21" y2="18"></line> <circle cx="4" cy="6" r="1" fill="currentColor"></circle> <circle cx="4" cy="12" r="1" fill="currentColor"></circle> <circle cx="4" cy="18" r="1" fill="currentColor"></circle>
       </svg></button> <!-- 19. Nummerierte Liste --> <button onclick="formatText('insertOrderedList')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Nummerierte Liste">
@@ -186,14 +211,14 @@
       <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect> <line x1="3" y1="9" x2="21" y2="9"></line> <line x1="3" y1="15" x2="21" y2="15"></line> <line x1="9" y1="3" x2="9" y2="21"></line> <line x1="15" y1="3" x2="15" y2="21"></line>
       </svg></button>
     </div><!-- Spacer for fixed headers -->
-    <div style="height: 180px;"></div><!-- Table Dialog -->
-    <div id="tableDialog" class="hidden w-full bg-white shadow-lg p-4 mb-2 max-w-4xl">
-     <h3 class="font-bold mb-3 text-lg">Tabelle einfügen</h3>
-     <div class="flex gap-4 items-end">
-      <div><label class="block text-sm mb-1">Zeilen:</label> <input type="number" id="tableRows" value="3" min="1" max="20" class="border rounded px-3 py-2 w-20">
+    <div style="height: 180px;"></div><!-- Table Dialog as Pop-up -->
+    <div id="tableDialog" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+     <div class="bg-white rounded-lg shadow-2xl p-6 max-w-md w-full mx-4">
+      <h3 class="font-bold mb-4 text-xl text-gray-800">Tabelle einfügen</h3>
+      <div class="mb-4">
+       <div id="tableGrid" class="inline-block border-2 border-gray-300 rounded"></div>
+       <div id="tableSelection" class="mt-3 text-sm font-semibold text-gray-700"></div>
       </div>
-      <div><label class="block text-sm mb-1">Spalten:</label> <input type="number" id="tableCols" value="3" min="1" max="10" class="border rounded px-3 py-2 w-20">
-      </div><button onclick="insertTable()" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"> Einfügen </button> <button onclick="hideTableDialog()" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded"> Abbrechen </button>
      </div>
     </div><!-- Editor Area -->
     <div class="w-full max-w-4xl bg-white rounded-b-lg shadow-lg mb-8 flex" style="min-height: 600px;"><!-- Korrekturrand (1/3 der Breite) - unsichtbar -->
@@ -203,8 +228,6 @@
       <div id="editor" class="editor-content" contenteditable="true" style="font-family: 'Georgia', serif; font-size: 16px; line-height: 1.6; color: #333; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap;">
       </div>
      </div>
-    </div><!-- Action Buttons -->
-    <div class="w-full max-w-4xl flex gap-3 justify-center"><button onclick="clearEditor()" class="px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold shadow-lg transition-all"> Alles löschen </button> <button onclick="downloadDocument()" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold shadow-lg transition-all"> Als PDF herunterladen </button>
     </div>
    </div><!-- End Exam Confirmation Dialog -->
    <div id="endExamDialog" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -460,39 +483,360 @@
 
     // 20. Geschütztes Leerzeichen
     function insertNonBreakingSpace() {
-      document.execCommand('insertHTML', false, '&nbsp;');
-      document.getElementById('editor').focus();
+      const editor = document.getElementById('editor');
+      editor.focus();
+      const selection = window.getSelection();
+      if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+        const textNode = document.createTextNode('\u00A0');
+        range.insertNode(textNode);
+        range.setStartAfter(textNode);
+        range.setEndAfter(textNode);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
     }
 
     // 23. Tabelle Dialog anzeigen
+    let selectedRows = 3;
+    let selectedCols = 3;
+    
     function showTableDialog() {
       document.getElementById('tableDialog').classList.remove('hidden');
+      createTableGrid();
+      
+      // Add click listener to background to close dialog
+      const dialog = document.getElementById('tableDialog');
+      dialog.addEventListener('click', function(e) {
+        if (e.target === dialog) {
+          hideTableDialog();
+        }
+      });
     }
 
     function hideTableDialog() {
       document.getElementById('tableDialog').classList.add('hidden');
     }
 
-    // Tabelle einfügen
-    function insertTable() {
-      const rows = parseInt(document.getElementById('tableRows').value);
-      const cols = parseInt(document.getElementById('tableCols').value);
+    // Erstelle das Kästchenraster (10x10)
+    function createTableGrid() {
+      const grid = document.getElementById('tableGrid');
+      grid.innerHTML = '';
       
-      let tableHTML = '<table style="border-collapse: collapse; width: 100%; margin: 10px 0;">';
+      const maxRows = 10;
+      const maxCols = 10;
       
-      for (let i = 0; i < rows; i++) {
-        tableHTML += '<tr>';
-        for (let j = 0; j < cols; j++) {
-          tableHTML += '<td style="border: 1px solid #333; padding: 8px; min-width: 60px;">&nbsp;</td>';
+      for (let row = 0; row < maxRows; row++) {
+        const rowDiv = document.createElement('div');
+        rowDiv.style.display = 'flex';
+        
+        for (let col = 0; col < maxCols; col++) {
+          const cell = document.createElement('div');
+          cell.style.width = '20px';
+          cell.style.height = '20px';
+          cell.style.border = '1px solid #ccc';
+          cell.style.cursor = 'pointer';
+          cell.style.transition = 'background-color 0.1s';
+          cell.dataset.row = row + 1;
+          cell.dataset.col = col + 1;
+          
+          // Hover-Effekt
+          cell.addEventListener('mouseenter', function() {
+            const hoverRow = parseInt(this.dataset.row);
+            const hoverCol = parseInt(this.dataset.col);
+            highlightCells(hoverRow, hoverCol);
+            updateSelectionText(hoverRow, hoverCol);
+          });
+          
+          // Klick zum Auswählen
+          cell.addEventListener('click', function(e) {
+            e.stopPropagation();
+            selectedRows = parseInt(this.dataset.row);
+            selectedCols = parseInt(this.dataset.col);
+            insertTableFromGrid();
+          });
+          
+          rowDiv.appendChild(cell);
         }
-        tableHTML += '</tr>';
+        
+        grid.appendChild(rowDiv);
       }
       
-      tableHTML += '</table><p><br></p>';
+      // Initial Auswahl anzeigen
+      highlightCells(3, 3);
+      updateSelectionText(3, 3);
+    }
+    
+    // Markiere Zellen bis zur ausgewählten Position
+    function highlightCells(rows, cols) {
+      const grid = document.getElementById('tableGrid');
+      const allCells = grid.querySelectorAll('div[data-row]');
       
-      document.execCommand('insertHTML', false, tableHTML);
+      allCells.forEach(cell => {
+        const cellRow = parseInt(cell.dataset.row);
+        const cellCol = parseInt(cell.dataset.col);
+        
+        if (cellRow <= rows && cellCol <= cols) {
+          cell.style.backgroundColor = '#3b82f6';
+        } else {
+          cell.style.backgroundColor = 'transparent';
+        }
+      });
+    }
+    
+    // Zeige aktuelle Auswahl als Text
+    function updateSelectionText(rows, cols) {
+      const text = document.getElementById('tableSelection');
+      text.textContent = `${rows} x ${cols} Tabelle`;
+    }
+
+    // Tabelle einfügen basierend auf Grid-Auswahl
+    function insertTableFromGrid() {
+      const editor = document.getElementById('editor');
+      
+      // Erstelle Tabelle als DOM-Element
+      const table = document.createElement('table');
+      table.style.borderCollapse = 'collapse';
+      table.style.width = '100%';
+      table.style.margin = '10px 0';
+      
+      for (let i = 0; i < selectedRows; i++) {
+        const row = document.createElement('tr');
+        for (let j = 0; j < selectedCols; j++) {
+          const cell = document.createElement('td');
+          cell.style.border = '1px solid #333';
+          cell.style.padding = '8px';
+          cell.style.minWidth = '60px';
+          cell.contentEditable = 'true';
+          cell.innerHTML = '&nbsp;';
+          cell.addEventListener('click', function(e) {
+            showTableContextMenu(e, this);
+          });
+          row.appendChild(cell);
+        }
+        table.appendChild(row);
+      }
+      
+      // Füge Tabelle in Editor ein
+      editor.focus();
+      const selection = window.getSelection();
+      if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+        range.insertNode(table);
+        
+        // Füge Leerzeile nach Tabelle hinzu
+        const br = document.createElement('br');
+        range.setStartAfter(table);
+        range.insertNode(br);
+        
+        // Setze Cursor nach der Tabelle
+        range.setStartAfter(br);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      } else {
+        // Fallback: Hänge am Ende an
+        editor.appendChild(table);
+        const br = document.createElement('br');
+        editor.appendChild(br);
+      }
+      
       hideTableDialog();
-      document.getElementById('editor').focus();
+      editor.focus();
+    }
+
+    // Kontextmenü für Tabellenzellen
+    let contextMenu = null;
+    let currentCell = null;
+
+    function showTableContextMenu(event, cell) {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      currentCell = cell;
+      
+      // Entferne altes Kontextmenü falls vorhanden
+      if (contextMenu) {
+        contextMenu.remove();
+      }
+      
+      // Erstelle neues Kontextmenü
+      contextMenu = document.createElement('div');
+      contextMenu.style.position = 'absolute';
+      contextMenu.style.backgroundColor = 'white';
+      contextMenu.style.border = '2px solid #ccc';
+      contextMenu.style.borderRadius = '8px';
+      contextMenu.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+      contextMenu.style.zIndex = '1000';
+      contextMenu.style.minWidth = '220px';
+      contextMenu.style.padding = '8px 0';
+      
+      // Positioniere das Menü unterhalb der Tabelle in der Mitte
+      const table = cell.closest('table');
+      const tableRect = table.getBoundingClientRect();
+      const editorRect = document.getElementById('editor').getBoundingClientRect();
+      
+      // Berechne Position relativ zum Editor
+      const leftPosition = tableRect.left - editorRect.left + (tableRect.width / 2) - 110; // 110 = halbe Menü-Breite
+      const topPosition = tableRect.bottom - editorRect.top + 10; // 10px Abstand unter der Tabelle
+      
+      contextMenu.style.left = leftPosition + 'px';
+      contextMenu.style.top = topPosition + 'px';
+      
+      const menuItems = [
+        { text: 'Zeile davor einfügen', action: () => insertRowBefore(cell) },
+        { text: 'Zeile danach einfügen', action: () => insertRowAfter(cell) },
+        { text: 'Spalte davor einfügen', action: () => insertColumnBefore(cell) },
+        { text: 'Spalte danach einfügen', action: () => insertColumnAfter(cell) },
+        { text: '---', action: null },
+        { text: 'Tabelle löschen', action: () => deleteTable(cell), danger: true }
+      ];
+      
+      menuItems.forEach(item => {
+        if (item.text === '---') {
+          const divider = document.createElement('div');
+          divider.style.height = '1px';
+          divider.style.backgroundColor = '#e0e0e0';
+          divider.style.margin = '4px 0';
+          contextMenu.appendChild(divider);
+        } else {
+          const menuItem = document.createElement('div');
+          menuItem.textContent = item.text;
+          menuItem.style.padding = '10px 16px';
+          menuItem.style.cursor = 'pointer';
+          menuItem.style.fontSize = '14px';
+          menuItem.style.color = item.danger ? '#dc2626' : '#333';
+          menuItem.style.fontWeight = item.danger ? 'bold' : 'normal';
+          
+          menuItem.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = item.danger ? '#fee2e2' : '#f3f4f6';
+          });
+          
+          menuItem.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = 'transparent';
+          });
+          
+          menuItem.addEventListener('click', function() {
+            item.action();
+            hideContextMenu();
+          });
+          
+          contextMenu.appendChild(menuItem);
+        }
+      });
+      
+      document.body.appendChild(contextMenu);
+      
+      // Schließe Menü beim Klick außerhalb
+      setTimeout(() => {
+        document.addEventListener('click', hideContextMenu);
+      }, 100);
+    }
+
+    function hideContextMenu() {
+      if (contextMenu) {
+        contextMenu.remove();
+        contextMenu = null;
+      }
+      document.removeEventListener('click', hideContextMenu);
+    }
+
+    function insertRowBefore(cell) {
+      const row = cell.closest('tr');
+      const table = cell.closest('table');
+      const colCount = row.cells.length;
+      
+      const newRow = document.createElement('tr');
+      for (let i = 0; i < colCount; i++) {
+        const newCell = document.createElement('td');
+        newCell.style.border = '1px solid #333';
+        newCell.style.padding = '8px';
+        newCell.style.minWidth = '60px';
+        newCell.contentEditable = 'true';
+        newCell.onclick = function(e) { showTableContextMenu(e, this); };
+        newCell.innerHTML = '&nbsp;';
+        newRow.appendChild(newCell);
+      }
+      
+      row.parentNode.insertBefore(newRow, row);
+    }
+
+    function insertRowAfter(cell) {
+      const row = cell.closest('tr');
+      const table = cell.closest('table');
+      const colCount = row.cells.length;
+      
+      const newRow = document.createElement('tr');
+      for (let i = 0; i < colCount; i++) {
+        const newCell = document.createElement('td');
+        newCell.style.border = '1px solid #333';
+        newCell.style.padding = '8px';
+        newCell.style.minWidth = '60px';
+        newCell.contentEditable = 'true';
+        newCell.onclick = function(e) { showTableContextMenu(e, this); };
+        newCell.innerHTML = '&nbsp;';
+        newRow.appendChild(newCell);
+      }
+      
+      if (row.nextSibling) {
+        row.parentNode.insertBefore(newRow, row.nextSibling);
+      } else {
+        row.parentNode.appendChild(newRow);
+      }
+    }
+
+    function insertColumnBefore(cell) {
+      const table = cell.closest('table');
+      const cellIndex = cell.cellIndex;
+      
+      const rows = table.querySelectorAll('tr');
+      rows.forEach(row => {
+        const newCell = document.createElement('td');
+        newCell.style.border = '1px solid #333';
+        newCell.style.padding = '8px';
+        newCell.style.minWidth = '50px';
+        newCell.style.maxWidth = '100%';
+        newCell.style.wordWrap = 'break-word';
+        newCell.style.overflowWrap = 'break-word';
+        newCell.contentEditable = 'true';
+        newCell.onclick = function(e) { showTableContextMenu(e, this); };
+        newCell.innerHTML = '&nbsp;';
+        row.insertBefore(newCell, row.cells[cellIndex]);
+      });
+    }
+
+    function insertColumnAfter(cell) {
+      const table = cell.closest('table');
+      const cellIndex = cell.cellIndex;
+      
+      const rows = table.querySelectorAll('tr');
+      rows.forEach(row => {
+        const newCell = document.createElement('td');
+        newCell.style.border = '1px solid #333';
+        newCell.style.padding = '8px';
+        newCell.style.minWidth = '50px';
+        newCell.style.maxWidth = '100%';
+        newCell.style.wordWrap = 'break-word';
+        newCell.style.overflowWrap = 'break-word';
+        newCell.contentEditable = 'true';
+        newCell.onclick = function(e) { showTableContextMenu(e, this); };
+        newCell.innerHTML = '&nbsp;';
+        
+        if (cellIndex + 1 < row.cells.length) {
+          row.insertBefore(newCell, row.cells[cellIndex + 1]);
+        } else {
+          row.appendChild(newCell);
+        }
+      });
+    }
+
+    function deleteTable(cell) {
+      const table = cell.closest('table');
+      if (table) {
+        table.remove();
+      }
     }
 
     // Tastaturkürzel
@@ -615,5 +959,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad7eb107653e0d3',t:'MTc2NTY1NDY2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad91346352e9884',t:'MTc2NTY2NjgwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
