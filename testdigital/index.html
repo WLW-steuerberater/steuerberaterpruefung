@@ -18,6 +18,16 @@
       outline: none;
     }
     
+    .editor-content:focus {
+      outline: none;
+      border: none;
+    }
+    
+    #editor {
+      outline: none !important;
+      border: none !important;
+    }
+    
     .toolbar-button {
       transition: all 0.2s;
     }
@@ -39,12 +49,28 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full">
-  <div id="app" class="h-full w-full overflow-auto" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-   <div class="min-h-full flex flex-col items-center py-8 px-4"><!-- Document Title -->
+  <div id="app" class="h-full w-full overflow-auto" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"><!-- Login Screen -->
+   <div id="loginScreen" class="min-h-full flex items-center justify-center px-4 py-8">
+    <div class="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full">
+     <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Online-Prüfung Anmeldung</h1>
+     <p class="text-gray-600 mb-6 text-center">Hier müssten Sie bei Ihrer Prüfung Ihre zugeteilte Nummer eingeben. Bei uns bitte Ihren Namen.</p>
+     <form id="loginForm" onsubmit="handleLogin(event)"><label for="kennummer" class="block text-sm font-semibold text-gray-700 mb-2">Kennummer / Name:</label> <input type="text" id="kennummer" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none mb-4" placeholder="Bitte eingeben..."> <label for="pruefungsname" class="block text-sm font-semibold text-gray-700 mb-2">Name der Prüfung:</label> <input type="text" id="pruefungsname" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none mb-6" placeholder="Bitte eingeben..."> <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg"> Anmelden </button>
+     </form>
+    </div>
+   </div><!-- Confirmation Screen -->
+   <div id="confirmationScreen" class="hidden min-h-full flex items-center justify-center px-4 py-8">
+    <div class="bg-white rounded-lg shadow-2xl p-8 max-w-2xl w-full">
+     <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Bestätigung</h1>
+     <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 mb-6">
+      <p class="text-gray-800 text-lg leading-relaxed">Hiermit bestätige ich, dass ich mich mit meiner eigenen Kennummer <strong id="confirmedName" class="text-blue-600"></strong> eingeloggt habe und die nachfolgende Online-Prüfung alleine durchführen werde. Ich sehe mich heute physisch und psychisch dazu in der Lage, die Prüfung zu absolvieren.</p>
+     </div><button onclick="startEditor()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg"> Bestätigen </button>
+    </div>
+   </div><!-- Editor Screen -->
+   <div id="editorScreen" class="hidden min-h-full flex flex-col items-center py-8 px-4"><!-- Document Title -->
     <div class="w-full max-w-4xl mb-4">
      <h1 id="doc-title" class="text-3xl font-bold text-white text-center">Mein Dokument</h1>
     </div><!-- Toolbar -->
-    <div class="w-full max-w-4xl bg-white rounded-t-lg shadow-lg p-3 flex flex-wrap gap-2 border-b-2 border-gray-200"><!-- 1. Rückgängig --> <button onclick="undo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rückgängig (Strg+Z)"> ↶ </button> <!-- 2. Wiederholen --> <button onclick="redo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Wiederholen (Strg+Y)"> ↷ </button>
+    <div class="w-full bg-white shadow-lg p-3 flex flex-wrap gap-2 border-b-2 border-gray-200 mb-2"><!-- 1. Rückgängig --> <button onclick="undo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rückgängig (Strg+Z)"> ↶ </button> <!-- 2. Wiederholen --> <button onclick="redo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Wiederholen (Strg+Y)"> ↷ </button>
      <div class="w-px bg-gray-300 mx-1"></div><!-- 3. Ausschneiden --> <button onclick="cutText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Ausschneiden (Strg+X)"> ✂ </button> <!-- 4. Kopieren --> <button onclick="copyText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Kopieren (Strg+C)"> 📋 </button> <!-- 5. Einfügen --> <button onclick="pasteText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Einfügen (Strg+V)"> 📄 </button>
      <div class="w-px bg-gray-300 mx-1"></div><!-- 5b. Seitenumbruch --> <button onclick="insertPageBreak()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Seitenumbruch"> ⎯⎯ </button>
      <div class="w-px bg-gray-300 mx-1"></div><!-- 6. Kopfzeile oder Absatz --> <select id="formatType" onchange="changeFormatType(this.value)" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 border-none cursor-pointer" title="Format"> <option value="p" selected>Absatz</option> <option value="h1">Kopfzeile 1</option> <option value="h2">Kopfzeile 2</option> <option value="h3">Kopfzeile 3</option> </select>
@@ -55,7 +81,7 @@
      <div class="w-px bg-gray-300 mx-1"></div><!-- 20. Geschütztes Leerzeichen --> <button onclick="insertNonBreakingSpace()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Geschütztes Leerzeichen"> ␣ </button> <!-- 21. Einzug verkleinern --> <button onclick="formatText('outdent')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Einzug verkleinern"> ⬅| </button> <!-- 22. Einzug vergrößern --> <button onclick="formatText('indent')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Einzug vergrößern"> |➡ </button>
      <div class="w-px bg-gray-300 mx-1"></div><!-- 23. Tabelle einfügen --> <button onclick="showTableDialog()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Tabelle einfügen"> ⊞ Tabelle </button>
     </div><!-- Table Dialog -->
-    <div id="tableDialog" class="hidden w-full max-w-4xl bg-white shadow-lg p-4 rounded-lg mb-2">
+    <div id="tableDialog" class="hidden w-full bg-white shadow-lg p-4 mb-2">
      <h3 class="font-bold mb-3 text-lg">Tabelle einfügen</h3>
      <div class="flex gap-4 items-end">
       <div><label class="block text-sm mb-1">Zeilen:</label> <input type="number" id="tableRows" value="3" min="1" max="20" class="border rounded px-3 py-2 w-20">
@@ -64,9 +90,13 @@
       </div><button onclick="insertTable()" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"> Einfügen </button> <button onclick="hideTableDialog()" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded"> Abbrechen </button>
      </div>
     </div><!-- Editor Area -->
-    <div class="w-full max-w-4xl bg-white rounded-b-lg shadow-lg p-8 mb-8" style="min-height: 600px;">
-     <div id="editor" class="editor-content" contenteditable="true" style="font-family: 'Georgia', serif; font-size: 16px; line-height: 1.6; color: #333;">
-      <p>Beginne hier mit dem Schreiben...</p>
+    <div class="w-full max-w-4xl bg-white rounded-b-lg shadow-lg mb-8 flex" style="min-height: 600px;"><!-- Korrekturrand (1/3 der Breite) - unsichtbar -->
+     <div class="w-1/3 bg-white p-4">
+     </div><!-- Schreibbereich (2/3 der Breite) -->
+     <div class="w-2/3 p-8">
+      <div id="editor" class="editor-content" contenteditable="true" style="font-family: 'Georgia', serif; font-size: 16px; line-height: 1.6; color: #333; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap;">
+       <p>Beginne hier mit dem Schreiben...</p>
+      </div>
      </div>
     </div><!-- Action Buttons -->
     <div class="w-full max-w-4xl flex gap-3 justify-center"><button onclick="clearEditor()" class="px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold shadow-lg transition-all"> Alles löschen </button> <button onclick="downloadDocument()" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold shadow-lg transition-all"> Als PDF herunterladen </button>
@@ -77,6 +107,31 @@
     const defaultConfig = {
       document_title: "Mein Dokument"
     };
+
+    let userKennummer = "";
+    let pruefungsname = "";
+
+    // Handle login form submission
+    function handleLogin(event) {
+      event.preventDefault();
+      userKennummer = document.getElementById('kennummer').value.trim();
+      pruefungsname = document.getElementById('pruefungsname').value.trim();
+      
+      if (userKennummer && pruefungsname) {
+        // Hide login screen
+        document.getElementById('loginScreen').classList.add('hidden');
+        
+        // Show confirmation screen with user's name
+        document.getElementById('confirmedName').textContent = userKennummer;
+        document.getElementById('confirmationScreen').classList.remove('hidden');
+      }
+    }
+
+    // Start the editor
+    function startEditor() {
+      document.getElementById('confirmationScreen').classList.add('hidden');
+      document.getElementById('editorScreen').classList.remove('hidden');
+    }
 
     // Format text in editor
     function formatText(command) {
@@ -283,21 +338,41 @@
         
         let heightLeft = imgHeight;
         let position = 0;
+        let pageNumber = 1;
+        
+        // Berechne Gesamtanzahl der Seiten
+        const totalPages = Math.ceil(imgHeight / pdfHeight);
         
         // Erste Seite
         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        
+        // Kopfzeile zur ersten Seite hinzufügen
+        pdf.setFontSize(10);
+        pdf.text(userKennummer, 10, 10); // Links: Kennummer
+        pdf.text(pruefungsname, pdfWidth / 2, 10, { align: 'center' }); // Mitte: Prüfungsname
+        pdf.text(`${pageNumber}/${totalPages}`, pdfWidth - 10, 10, { align: 'right' }); // Rechts: Seitenzahl
+        
         heightLeft -= pdfHeight;
+        pageNumber++;
         
         // Weitere Seiten falls nötig
         while (heightLeft > 0) {
           position = heightLeft - imgHeight;
           pdf.addPage();
           pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          
+          // Kopfzeile zu jeder weiteren Seite hinzufügen
+          pdf.setFontSize(10);
+          pdf.text(userKennummer, 10, 10);
+          pdf.text(pruefungsname, pdfWidth / 2, 10, { align: 'center' });
+          pdf.text(`${pageNumber}/${totalPages}`, pdfWidth - 10, 10, { align: 'right' });
+          
           heightLeft -= pdfHeight;
+          pageNumber++;
         }
         
         // PDF herunterladen
-        pdf.save(`${title}.pdf`);
+        pdf.save(`${pruefungsname}_${userKennummer}.pdf`);
       } catch (error) {
         console.error('Fehler beim PDF-Export:', error);
       } finally {
@@ -337,5 +412,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad7092b37429884',t:'MTc2NTY0NTQxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad7207ad20ee0d3',t:'MTc2NTY0NjM3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
