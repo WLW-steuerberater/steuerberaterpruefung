@@ -306,7 +306,7 @@
       document.getElementById('editor').focus();
     }
 
-    // 5. Einf��gen
+    // 5. Einfügen
     function pasteText() {
       document.execCommand('paste', false, null);
       document.getElementById('editor').focus();
@@ -483,10 +483,13 @@
         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
         
         // Kopfzeile zur ersten Seite hinzufügen
-        pdf.setFontSize(10);
-        pdf.text(userKennummer, 10, 10); // Links: Kennummer
-        pdf.text(pruefungsname, pdfWidth / 2, 10, { align: 'center' }); // Mitte: Prüfungsname
-        pdf.text(`${pageNumber}/${totalPages}`, pdfWidth - 10, 10, { align: 'right' }); // Rechts: Seitenzahl
+        pdf.setFontSize(12);
+        pdf.text(userKennummer, 10, 12); // Links: Kennummer
+        pdf.text(pruefungsname, pdfWidth / 2, 12, { align: 'center' }); // Mitte: Prüfungsname
+        pdf.text(`${pageNumber}/${totalPages}`, pdfWidth - 10, 12, { align: 'right' }); // Rechts: Seitenzahl
+        // Trennlinie unter der Kopfzeile
+        pdf.setLineWidth(0.5);
+        pdf.line(10, 15, pdfWidth - 10, 15);
         
         heightLeft -= pdfHeight;
         pageNumber++;
@@ -498,10 +501,13 @@
           pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
           
           // Kopfzeile zu jeder weiteren Seite hinzufügen
-          pdf.setFontSize(10);
-          pdf.text(userKennummer, 10, 10);
-          pdf.text(pruefungsname, pdfWidth / 2, 10, { align: 'center' });
-          pdf.text(`${pageNumber}/${totalPages}`, pdfWidth - 10, 10, { align: 'right' });
+          pdf.setFontSize(12);
+          pdf.text(userKennummer, 10, 12);
+          pdf.text(pruefungsname, pdfWidth / 2, 12, { align: 'center' });
+          pdf.text(`${pageNumber}/${totalPages}`, pdfWidth - 10, 12, { align: 'right' });
+          // Trennlinie unter der Kopfzeile
+          pdf.setLineWidth(0.5);
+          pdf.line(10, 15, pdfWidth - 10, 15);
           
           heightLeft -= pdfHeight;
           pageNumber++;
@@ -548,5 +554,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad742a8d17be0d3',t:'MTc2NTY0Nzc3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad74790664fe0d3',t:'MTc2NTY0Nzk3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
