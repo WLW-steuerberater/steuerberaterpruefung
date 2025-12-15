@@ -233,9 +233,12 @@
     </div>
    </div>
    <div id="endExamDialog" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full mx-4">
+    <div class="bg-white rounded-lg shadow-2xl p-8 max-w-xl w-full mx-4">
      <h2 class="text-2xl font-bold text-gray-800 mb-4">Prüfung beenden?</h2>
-     <p class="text-gray-700 mb-6">Wollen Sie die Prüfung wirklich endgültig beenden?</p>
+     <p class="text-gray-700 mb-4">Wollen Sie die Prüfung wirklich endgültig beenden?</p>
+     <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-4 mb-6">
+      <p class="text-gray-800 text-sm leading-relaxed">Wenn Sie die Prüfung beenden, öffnet sich automatisch die Downloadmöglichkeit. Wählen Sie als Ziel bzw. Drucker <strong>"Als PDF speichern"</strong> aus. Diese PDF können Sie in Ihrem Benutzerkonto zur Korrektur hochladen.</p>
+     </div>
      <div class="flex gap-4 justify-end"><button onclick="hideEndExamDialog()" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-lg transition-all">Nein</button> <button onclick="endExam()" class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all">Ja, Prüfung beenden</button>
      </div>
     </div>
@@ -1004,5 +1007,5 @@
       window.elementSdk.init({ defaultConfig: defaultConfig, onConfigChange: onConfigChange, mapToCapabilities: mapToCapabilities, mapToEditPanelValues: mapToEditPanelValues });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ae62948665ae0d3',t:'MTc2NTgwNDAxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ae62fc970689884',t:'MTc2NTgwNDI4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
