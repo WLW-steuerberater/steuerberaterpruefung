@@ -6,8 +6,6 @@
   <title>Texteditor</title>
   <script src="/_sdk/element_sdk.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     body {
       box-sizing: border-box;
@@ -28,7 +26,6 @@
       border: none !important;
     }
     
-    /* List styles */
     #editor ul {
       list-style-type: disc;
       margin-left: 30px;
@@ -45,7 +42,6 @@
       margin: 5px 0;
     }
     
-    /* Heading styles */
     #editor h2 {
       font-size: 22px;
       font-weight: bold;
@@ -70,9 +66,7 @@
       color: white;
     }
 
-    /* Print Styles */
     @media print {
-      /* Hide everything except print content */
       body * {
         visibility: hidden;
       }
@@ -89,13 +83,11 @@
         display: block !important;
       }
       
-      /* Page setup */
       @page {
         size: A4;
         margin: 2cm;
       }
       
-      /* Print header on every page */
       .print-header {
         display: block;
         padding: 15px 0;
@@ -105,23 +97,20 @@
         page-break-after: avoid;
       }
       
-      /* Print content */
       .print-content {
         display: block;
         margin-top: 0;
         padding-top: 0;
-        font-family: 'Georgia', serif;
+        font-family: 'Arial', sans-serif;
         font-size: 12pt;
         line-height: 1.6;
         color: #000;
       }
       
-      /* Handle page breaks */
       .print-content div[style*="page-break-after: always"] {
         page-break-after: always;
       }
       
-      /* Table styles for print */
       .print-content table {
         border-collapse: collapse;
         width: 100%;
@@ -133,7 +122,6 @@
         padding: 5px;
       }
       
-      /* Avoid breaks inside elements */
       .print-content h1, .print-content h2, .print-content h3 {
         page-break-after: avoid;
       }
@@ -148,7 +136,7 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full">
-  <div id="app" class="h-full w-full overflow-auto" style="background: #e5e7eb;"><!-- Login Screen -->
+  <div id="app" class="h-full w-full overflow-auto" style="background: #e5e7eb;">
    <div id="loginScreen" class="min-h-full flex items-center justify-center px-4 py-8">
     <div class="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full">
      <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Online-Prüfung Anmeldung</h1>
@@ -156,17 +144,17 @@
      <form id="loginForm" onsubmit="handleLogin(event)"><label for="kennummer" class="block text-sm font-semibold text-gray-700 mb-2">Kennummer / Name:</label> <input type="text" id="kennummer" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none mb-4" placeholder="Bitte eingeben..."> <label for="pruefungsname" class="block text-sm font-semibold text-gray-700 mb-2">Name der Prüfung:</label> <input type="text" id="pruefungsname" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none mb-6" placeholder="Bitte eingeben..."> <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg"> Anmelden </button>
      </form>
     </div>
-   </div><!-- Confirmation Screen -->
+   </div>
    <div id="confirmationScreen" class="hidden min-h-full flex items-center justify-center px-4 py-8">
     <div class="bg-white rounded-lg shadow-2xl p-8 max-w-2xl w-full">
-     <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Best��tigung</h1>
+     <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Bestätigung</h1>
      <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 mb-6">
       <p class="text-gray-800 text-lg leading-relaxed">Hiermit bestätige ich, dass ich mich mit meiner eigenen Kennummer <strong id="confirmedName" class="text-blue-600"></strong> eingeloggt habe und die nachfolgende Online-Prüfung alleine durchführen werde. Ich sehe mich heute physisch und psychisch dazu in der Lage, die Prüfung zu absolvieren.</p>
      </div><button onclick="startEditor()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg"> Bestätigen </button>
     </div>
-   </div><!-- Editor Screen -->
-   <div id="editorScreen" class="hidden min-h-full flex flex-col items-center py-8 px-4"><!-- Header with Kennummer, Prüfungsname, Timer, etc. -->
-    <div class="w-full bg-white shadow-lg p-4 mb-4 flex justify-between items-start fixed top-0 left-0 right-0 z-40"><!-- Left: Kennummer and Prüfungsname -->
+   </div>
+   <div id="editorScreen" class="hidden min-h-full flex flex-col items-center py-8 px-4">
+    <div class="w-full bg-white shadow-lg p-4 mb-4 flex justify-between items-start fixed top-0 left-0 right-0 z-40">
      <div class="flex gap-8 items-center">
       <div>
        <div class="text-sm font-semibold text-gray-600">
@@ -177,41 +165,39 @@
       <div>
        <div class="text-lg font-bold text-blue-600" id="header-pruefungsname"></div>
       </div>
-     </div><!-- Right: Controls -->
-     <div class="flex items-center gap-4"><!-- Größe der Funktionsleiste -->
+     </div>
+     <div class="flex items-center gap-4">
       <div class="flex gap-2 items-center"><button onclick="changeToolbarSize('small')" id="btn-small" class="px-3 py-2 border-2 border-gray-300 rounded-lg hover:bg-gray-100 text-sm"> A </button> <button onclick="changeToolbarSize('medium')" id="btn-medium" class="px-3 py-2 border-2 border-blue-500 bg-blue-50 rounded-lg hover:bg-blue-100 text-base font-semibold"> A </button> <button onclick="changeToolbarSize('large')" id="btn-large" class="px-3 py-2 border-2 border-gray-300 rounded-lg hover:bg-gray-100 text-lg font-bold"> A </button>
-      </div><!-- Timer -->
+      </div>
       <div class="text-center">
        <div id="timer" class="text-2xl font-bold text-gray-800">
         06:00 Stunden
        </div>
-      </div><!-- Pr����fung beenden Button --> <button onclick="showEndExamDialog()" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-lg shadow-lg transition-all"> Prüfung beenden </button>
+      </div><button onclick="showEndExamDialog()" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-lg shadow-lg transition-all"> Prüfung beenden </button>
      </div>
-    </div><!-- Toolbar -->
-    <div class="w-full bg-white shadow-lg p-3 flex flex-wrap gap-2 border-b-2 border-gray-200 mb-2 fixed z-30" style="top: 80px;"><!-- 1. R��ckgängig --> <button onclick="undo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rückgängig (Strg+Z)"> �������� </button> <!-- 2. Wiederholen --> <button onclick="redo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Wiederholen (Strg+Y)"> �� </button>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 3. Ausschneiden --> <button onclick="cutText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Ausschneiden (Strg+X)"> ��� </button> <!-- 4. Kopieren --> <button onclick="copyText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Kopieren (Strg+C)"> ���� </button> <!-- 5. Einfügen --> <button onclick="pasteText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Einfügen (Strg+V)"> 📄 </button>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 5b. Seitenumbruch --> <button onclick="insertPageBreak()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Seitenumbruch"> ⎯⎯ </button>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 6. Kopfzeile oder Absatz --> <select id="formatType" onchange="changeFormatType(this.value)" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 border-none cursor-pointer" title="Format"> <option value="p" selected>Absatz</option> <option value="h2">Kopfzeile</option> </select>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 7. Texthervorhebungsfarbe --> <select onchange="highlightText(this.value)" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 border-none cursor-pointer" title="Texthervorhebung"> <option value="">Farbauswahl aufheben</option> <option value="#d3d3d3">Grau</option> </select>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 8. Fett --> <button onclick="formatText('bold')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 font-bold" title="Fett"> B </button> <!-- 9. Kursiv --> <button onclick="formatText('italic')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 italic" title="Kursiv"> I </button> <!-- 10. Durchgestrichen --> <button onclick="formatText('strikeThrough')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 line-through" title="Durchgestrichen"> S </button> <!-- 11. Hochgestellt --> <button onclick="formatText('superscript')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Hochgestellt"> x² </button> <!-- 12. Tiefgestellt --> <button onclick="formatText('subscript')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Tiefgestellt"> x��� </button> <!-- 13. Rot unterstrichen --> <button onclick="redUnderline()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 text-red-600 underline" title="Rot unterstrichen"> U </button>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 14. Linksbündig --> <button onclick="formatText('justifyLeft')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Linksbündig"> ������� </button> <!-- 15. Zentrieren --> <button onclick="formatText('justifyCenter')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Zentrieren"> ↔ </button> <!-- 16. Rechtsb��ndig --> <button onclick="formatText('justifyRight')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rechtsbündig"> ➡ </button> <!-- 17. Blocksatz --> <button onclick="formatText('justifyFull')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Blocksatz"> ������� </button>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 18. Aufzählung --> <button onclick="formatText('insertUnorderedList')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Aufzählung">
-      <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line> <line x1="8" y1="12" x2="21" y2="12"></line> <line x1="8" y1="18" x2="21" y2="18"></line> <circle cx="4" cy="6" r="1" fill="currentColor"></circle> <circle cx="4" cy="12" r="1" fill="currentColor"></circle> <circle cx="4" cy="18" r="1" fill="currentColor"></circle>
-      </svg></button> <!-- 19. Nummerierte Liste --> <button onclick="formatText('insertOrderedList')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Nummerierte Liste">
-      <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"></line> <line x1="10" y1="12" x2="21" y2="12"></line> <line x1="10" y1="18" x2="21" y2="18"></line> <path d="M4 6h1v4" stroke-width="1.5"></path> <path d="M4 10h2" stroke-width="1.5"></path> <path d="M6 15H4c0-1 2-2 2-3s-1-1.5-1-1.5S4 11 4 12" stroke-width="1.5"></path> <path d="M4 19h2v-1H5v-1h1" stroke-width="1.5"></path>
+    </div>
+    <div class="w-full bg-white shadow-lg p-3 flex flex-wrap gap-2 border-b-2 border-gray-200 mb-2 fixed z-30" style="top: 80px;"><button onclick="undo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rückgängig">↶</button> <button onclick="redo()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Wiederholen">↷</button>
+     <div class="w-px bg-gray-300 mx-1"></div><button onclick="cutText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Ausschneiden">✂</button> <button onclick="copyText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Kopieren">📋</button> <button onclick="pasteText()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Einfügen">📄</button>
+     <div class="w-px bg-gray-300 mx-1"></div><button onclick="insertPageBreak()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Seitenumbruch">⎯⎯</button>
+     <div class="w-px bg-gray-300 mx-1"></div><select id="formatType" onchange="changeFormatType(this.value)" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 border-none cursor-pointer"> <option value="p">Absatz</option> <option value="h2">Kopfzeile</option> </select>
+     <div class="w-px bg-gray-300 mx-1"></div><select onchange="highlightText(this.value)" class="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 border-none cursor-pointer"> <option value="">Farbauswahl aufheben</option> <option value="#d3d3d3">Grau</option> </select>
+     <div class="w-px bg-gray-300 mx-1"></div><button onclick="formatText('bold')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 font-bold">B</button> <button onclick="formatText('italic')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 italic">I</button> <button onclick="formatText('strikeThrough')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 line-through">S</button> <button onclick="formatText('superscript')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200">x²</button> <button onclick="formatText('subscript')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200">x₂</button> <button onclick="redUnderline()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 text-red-600 underline">U</button>
+     <div class="w-px bg-gray-300 mx-1"></div><button onclick="formatText('justifyLeft')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Linksbündig">
+      <svg width="16" height="16" viewbox="0 0 16 16" fill="currentColor"><rect x="2" y="2" width="12" height="2" rx="0.5" /> <rect x="2" y="6" width="8" height="2" rx="0.5" /> <rect x="2" y="10" width="10" height="2" rx="0.5" />
+      </svg></button> <button onclick="formatText('justifyCenter')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Zentriert">
+      <svg width="16" height="16" viewbox="0 0 16 16" fill="currentColor"><rect x="2" y="2" width="12" height="2" rx="0.5" /> <rect x="4" y="6" width="8" height="2" rx="0.5" /> <rect x="3" y="10" width="10" height="2" rx="0.5" />
+      </svg></button> <button onclick="formatText('justifyRight')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Rechtsbündig">
+      <svg width="16" height="16" viewbox="0 0 16 16" fill="currentColor"><rect x="2" y="2" width="12" height="2" rx="0.5" /> <rect x="6" y="6" width="8" height="2" rx="0.5" /> <rect x="4" y="10" width="10" height="2" rx="0.5" />
+      </svg></button> <button onclick="formatText('justifyFull')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Blocksatz">
+      <svg width="16" height="16" viewbox="0 0 16 16" fill="currentColor"><rect x="2" y="2" width="12" height="2" rx="0.5" /> <rect x="2" y="6" width="12" height="2" rx="0.5" /> <rect x="2" y="10" width="12" height="2" rx="0.5" />
       </svg></button>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 20. Geschütztes Leerzeichen --> <button onclick="insertNonBreakingSpace()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Geschütztes Leerzeichen">
-      <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="10" width="4" height="4" fill="currentColor" opacity="0.3"></rect> <rect x="14" y="10" width="4" height="4" fill="currentColor" opacity="0.3"></rect>
-      </svg></button> <!-- 21. Einzug verkleinern --> <button onclick="formatText('outdent')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Einzug verkleinern">
-      <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="11 17 6 12 11 7"></polyline> <line x1="18" y1="18" x2="6" y2="18"></line> <line x1="18" y1="14" x2="13" y2="14"></line> <line x1="18" y1="10" x2="13" y2="10"></line> <line x1="18" y1="6" x2="6" y2="6"></line>
-      </svg></button> <!-- 22. Einzug vergrößern --> <button onclick="formatText('indent')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Einzug vergrößern">
-      <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 7 18 12 13 17"></polyline> <line x1="18" y1="18" x2="6" y2="18"></line> <line x1="18" y1="14" x2="13" y2="14"></line> <line x1="18" y1="10" x2="13" y2="10"></line> <line x1="18" y1="6" x2="6" y2="6"></line>
-      </svg></button>
-     <div class="w-px bg-gray-300 mx-1"></div><!-- 23. Tabelle einfügen --> <button onclick="showTableDialog()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200" title="Tabelle einfügen">
-      <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect> <line x1="3" y1="9" x2="21" y2="9"></line> <line x1="3" y1="15" x2="21" y2="15"></line> <line x1="9" y1="3" x2="9" y2="21"></line> <line x1="15" y1="3" x2="15" y2="21"></line>
-      </svg></button>
-    </div><!-- Spacer for fixed headers -->
-    <div style="height: 180px;"></div><!-- Table Dialog as Pop-up -->
+     <div class="w-px bg-gray-300 mx-1"></div><button onclick="formatText('insertUnorderedList')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200">•</button> <button onclick="formatText('insertOrderedList')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200">1.</button>
+     <div class="w-px bg-gray-300 mx-1"></div><button onclick="insertNonBreakingSpace()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200">␣</button> <button onclick="formatText('outdent')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200">◁</button> <button onclick="formatText('indent')" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200">▷</button>
+     <div class="w-px bg-gray-300 mx-1"></div><button onclick="showTableDialog()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200">⊞</button>
+     <div class="w-px bg-gray-300 mx-1"></div><button onclick="showSpecialCharDialog()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200">Ω</button>
+     <div class="w-px bg-gray-300 mx-1"></div><button onclick="showFindReplaceDialog()" class="toolbar-button px-3 py-2 rounded bg-gray-100 hover:bg-gray-200">🔍</button>
+    </div>
+    <div style="height: 180px;"></div>
     <div id="tableDialog" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
      <div class="bg-white rounded-lg shadow-2xl p-6 max-w-md w-full mx-4">
       <h3 class="font-bold mb-4 text-xl text-gray-800">Tabelle einfügen</h3>
@@ -220,247 +206,209 @@
        <div id="tableSelection" class="mt-3 text-sm font-semibold text-gray-700"></div>
       </div>
      </div>
-    </div><!-- Editor Area -->
-    <div class="w-full max-w-4xl bg-white rounded-b-lg shadow-lg mb-8 flex" style="min-height: 600px;"><!-- Korrekturrand (1/3 der Breite) - unsichtbar -->
-     <div class="w-1/3 bg-white p-4">
-     </div><!-- Schreibbereich (2/3 der Breite) -->
-     <div class="w-2/3 p-8">
-      <div id="editor" class="editor-content" contenteditable="true" style="font-family: 'Georgia', serif; font-size: 16px; line-height: 1.6; color: #333; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap;">
+    </div>
+    <div id="specialCharDialog" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+     <div class="bg-white rounded-lg shadow-2xl p-6 max-w-2xl w-full mx-4" style="max-height: 80%; overflow-y: auto;">
+      <h3 class="font-bold mb-4 text-xl text-gray-800">Sonderzeichen einfügen</h3>
+      <div id="specialCharGrid" class="grid grid-cols-8 gap-2"></div>
+     </div>
+    </div>
+    <div id="findReplaceDialog" class="hidden fixed top-4 right-4 z-50">
+     <div class="bg-white rounded-lg shadow-2xl p-6 w-96 border-2 border-gray-300 relative"><button onclick="hideFindReplaceDialog()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-800 hover:bg-gray-100 rounded-full text-2xl font-bold transition-all" title="Schließen"> × </button>
+      <h3 class="font-bold mb-4 text-xl text-gray-800 pr-8">Suchen und Ersetzen</h3>
+      <div class="mb-4 flex gap-2"><input type="text" id="findText" class="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" placeholder="Suchen nach..." onkeyup="if(event.key==='Enter') findNext()"> <button onclick="findNext()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all"> Suchen </button> <button onclick="findPrevious()" class="px-3 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg font-bold text-gray-700 transition-all" title="Vorheriges"> ↑ </button> <button onclick="findNext()" class="px-3 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg font-bold text-gray-700 transition-all" title="Nächstes"> ↓ </button>
+      </div>
+      <div class="mb-4"><input type="text" id="replaceText" class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none" placeholder="Ersetzen durch...">
+      </div>
+      <div id="findReplaceResult" class="mb-4 text-sm text-gray-600 hidden"></div>
+      <div class="flex gap-2"><button onclick="replaceOne()" class="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all"> Ersetzen </button> <button onclick="replaceAll()" class="flex-1 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-all"> Alle ersetzen </button>
       </div>
      </div>
     </div>
-   </div><!-- End Exam Confirmation Dialog -->
+    <div class="w-full max-w-4xl bg-white rounded-b-lg shadow-lg mb-8 flex" style="min-height: 600px;">
+     <div class="w-1/3 bg-white p-4"></div>
+     <div class="w-2/3 p-8">
+      <div id="editor" class="editor-content" contenteditable="true" style="font-family: 'Arial', sans-serif; font-size: 16px; line-height: 1.6; color: #333; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap;"></div>
+     </div>
+    </div>
+   </div>
    <div id="endExamDialog" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div class="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full mx-4">
      <h2 class="text-2xl font-bold text-gray-800 mb-4">Prüfung beenden?</h2>
      <p class="text-gray-700 mb-6">Wollen Sie die Prüfung wirklich endgültig beenden?</p>
-     <div class="flex gap-4 justify-end"><button onclick="hideEndExamDialog()" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-lg transition-all"> Nein </button> <button onclick="endExam()" class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all"> Ja, Prüfung beenden </button>
+     <div class="flex gap-4 justify-end"><button onclick="hideEndExamDialog()" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-lg transition-all">Nein</button> <button onclick="endExam()" class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all">Ja, Prüfung beenden</button>
      </div>
     </div>
    </div>
   </div>
   <script>
-    const defaultConfig = {
-      document_title: "Mein Dokument"
-    };
-
+    const defaultConfig = { document_title: "Mein Dokument" };
     let userKennummer = "";
     let pruefungsname = "";
-    let remainingMinutes = 360; // 6 Stunden = 360 Minuten
+    let remainingMinutes = 360;
     let timerInterval = null;
 
-    // Handle login form submission
     function handleLogin(event) {
       event.preventDefault();
       userKennummer = document.getElementById('kennummer').value.trim();
       pruefungsname = document.getElementById('pruefungsname').value.trim();
-      
       if (userKennummer && pruefungsname) {
-        // Hide login screen
         document.getElementById('loginScreen').classList.add('hidden');
-        
-        // Show confirmation screen with user's name
         document.getElementById('confirmedName').textContent = userKennummer;
         document.getElementById('confirmationScreen').classList.remove('hidden');
       }
     }
 
-    // Start the editor
     function startEditor() {
       document.getElementById('confirmationScreen').classList.add('hidden');
       document.getElementById('editorScreen').classList.remove('hidden');
-      
-      // Update header with user info
       document.getElementById('header-kennummer').textContent = userKennummer;
       document.getElementById('header-pruefungsname').textContent = pruefungsname;
-      
-      // Start timer immediately when confirmation button is clicked
       startTimer();
     }
 
-    // Timer functions
     function startTimer() {
       updateTimerDisplay();
-      timerInterval = setInterval(() => {
+      timerInterval = setInterval(function() {
         remainingMinutes--;
         updateTimerDisplay();
-        
         if (remainingMinutes <= 0) {
           clearInterval(timerInterval);
           showTimeUpDialog();
         }
-      }, 60000); // Update every minute (60000 ms)
-      
-      // Also update every second for more accurate countdown display
-      setInterval(() => {
-        updateTimerDisplay();
-      }, 1000);
+      }, 60000);
+      setInterval(function() { updateTimerDisplay(); }, 1000);
     }
 
     function updateTimerDisplay() {
-      const timerElement = document.getElementById('timer');
       const hours = Math.floor(remainingMinutes / 60);
       const minutes = remainingMinutes % 60;
-      const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} Stunden`;
-      timerElement.textContent = formattedTime;
-      
-      // Keep timer color neutral
-      timerElement.classList.add('text-gray-800');
+      document.getElementById('timer').textContent = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ' Stunden';
     }
 
     function showTimeUpDialog() {
       const dialog = document.createElement('div');
       dialog.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-      dialog.innerHTML = `
-        <div class="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full mx-4">
-          <h2 class="text-2xl font-bold text-red-600 mb-4">Zeit abgelaufen!</h2>
-          <p class="text-gray-700 mb-6">Die Prüfungszeit ist abgelaufen. Bitte laden Sie Ihr Dokument herunter.</p>
-          <button onclick="downloadDocument()" class="w-full px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg">
-            Dokument herunterladen
-          </button>
-        </div>
-      `;
+      dialog.innerHTML = '<div class="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full mx-4"><h2 class="text-2xl font-bold text-red-600 mb-4">Zeit abgelaufen!</h2><p class="text-gray-700 mb-6">Die Prüfungszeit ist abgelaufen. Bitte laden Sie Ihr Dokument herunter.</p><button onclick="downloadDocument()" class="w-full px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg">Dokument herunterladen</button></div>';
       document.body.appendChild(dialog);
     }
 
-    // Change toolbar size
     function changeToolbarSize(size) {
       const toolbar = document.querySelector('#editorScreen > div:nth-of-type(2)');
-      
-      // Remove active state from all buttons
       document.getElementById('btn-small').className = 'px-3 py-2 border-2 border-gray-300 rounded-lg hover:bg-gray-100 text-sm';
       document.getElementById('btn-medium').className = 'px-3 py-2 border-2 border-gray-300 rounded-lg hover:bg-gray-100 text-base font-semibold';
       document.getElementById('btn-large').className = 'px-3 py-2 border-2 border-gray-300 rounded-lg hover:bg-gray-100 text-lg font-bold';
-      
       if (size === 'small') {
-        toolbar.classList.remove('p-3');
-        toolbar.classList.add('p-2');
-        toolbar.style.fontSize = '12px';
+        toolbar.classList.remove('p-3'); toolbar.classList.add('p-2'); toolbar.style.fontSize = '12px';
         document.getElementById('btn-small').className = 'px-3 py-2 border-2 border-blue-500 bg-blue-50 rounded-lg hover:bg-blue-100 text-sm';
       } else if (size === 'large') {
-        toolbar.classList.remove('p-3');
-        toolbar.classList.add('p-4');
-        toolbar.style.fontSize = '16px';
+        toolbar.classList.remove('p-3'); toolbar.classList.add('p-4'); toolbar.style.fontSize = '16px';
         document.getElementById('btn-large').className = 'px-3 py-2 border-2 border-blue-500 bg-blue-50 rounded-lg hover:bg-blue-100 text-lg font-bold';
       } else {
-        toolbar.classList.remove('p-2', 'p-4');
-        toolbar.classList.add('p-3');
-        toolbar.style.fontSize = '14px';
+        toolbar.classList.remove('p-2', 'p-4'); toolbar.classList.add('p-3'); toolbar.style.fontSize = '14px';
         document.getElementById('btn-medium').className = 'px-3 py-2 border-2 border-blue-500 bg-blue-50 rounded-lg hover:bg-blue-100 text-base font-semibold';
       }
     }
 
-    // End exam dialog functions
-    function showEndExamDialog() {
-      document.getElementById('endExamDialog').classList.remove('hidden');
-    }
+    function showEndExamDialog() { document.getElementById('endExamDialog').classList.remove('hidden'); }
+    function hideEndExamDialog() { document.getElementById('endExamDialog').classList.add('hidden'); }
 
-    function hideEndExamDialog() {
-      document.getElementById('endExamDialog').classList.add('hidden');
-    }
-
-    async function endExam() {
+    function endExam() {
       clearInterval(timerInterval);
       hideEndExamDialog();
-      
-      // Show confirmation message
       const message = document.createElement('div');
       message.className = 'fixed top-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg z-50';
       message.textContent = 'Prüfung beendet. PDF wird heruntergeladen...';
       document.body.appendChild(message);
-      
-      // Wait a moment for the message to be visible, then download
-      await new Promise(resolve => setTimeout(resolve, 500));
-      await downloadDocument();
-      
-      setTimeout(() => {
-        message.remove();
-      }, 3000);
+      setTimeout(function() {
+        downloadDocument();
+        setTimeout(function() { message.remove(); }, 3000);
+      }, 500);
     }
 
-    // Format text in editor
     function formatText(command) {
-      document.execCommand(command, false, null);
+      if (command === 'indent' || command === 'outdent') {
+        const selection = window.getSelection();
+        if (selection.rangeCount > 0) {
+          const range = selection.getRangeAt(0);
+          let element = range.startContainer;
+          
+          if (element.nodeType === Node.TEXT_NODE) {
+            element = element.parentElement;
+          }
+          
+          while (element && element !== document.getElementById('editor')) {
+            if (element.tagName === 'P' || element.tagName === 'DIV' || element.tagName === 'H2') {
+              const currentMargin = parseInt(window.getComputedStyle(element).marginLeft) || 0;
+              
+              if (command === 'indent') {
+                element.style.marginLeft = (currentMargin + 40) + 'px';
+              } else if (command === 'outdent') {
+                const newMargin = Math.max(0, currentMargin - 40);
+                element.style.marginLeft = newMargin + 'px';
+              }
+              break;
+            }
+            element = element.parentElement;
+          }
+        }
+      } else {
+        document.execCommand(command, false, null);
+      }
       document.getElementById('editor').focus();
     }
 
-    // 1. Rückgängig machen
-    function undo() {
-      document.execCommand('undo', false, null);
-      document.getElementById('editor').focus();
-    }
+    function undo() { document.execCommand('undo', false, null); document.getElementById('editor').focus(); }
+    function redo() { document.execCommand('redo', false, null); document.getElementById('editor').focus(); }
 
-    // 2. Wiederholen
-    function redo() {
-      document.execCommand('redo', false, null);
-      document.getElementById('editor').focus();
-    }
-
-    // 3. Ausschneiden
-    async function cutText() {
+    function cutText() {
       try {
         const selection = window.getSelection();
         if (selection.toString()) {
-          await navigator.clipboard.writeText(selection.toString());
-          document.execCommand('delete', false, null);
+          navigator.clipboard.writeText(selection.toString()).then(function() {
+            document.execCommand('delete', false, null);
+          });
         }
-      } catch (err) {
-        // Fallback zu execCommand
-        document.execCommand('cut', false, null);
-      }
+      } catch (err) { document.execCommand('cut', false, null); }
       document.getElementById('editor').focus();
     }
 
-    // 4. Kopieren
-    async function copyText() {
+    function copyText() {
       try {
         const selection = window.getSelection();
-        if (selection.toString()) {
-          await navigator.clipboard.writeText(selection.toString());
+        if (selection.toString()) { 
+          navigator.clipboard.writeText(selection.toString());
         }
-      } catch (err) {
-        // Fallback zu execCommand
-        document.execCommand('copy', false, null);
-      }
+      } catch (err) { document.execCommand('copy', false, null); }
       document.getElementById('editor').focus();
     }
 
-    // 5. Einf��gen
-    async function pasteText() {
+    function pasteText() {
       try {
-        const text = await navigator.clipboard.readText();
-        document.execCommand('insertText', false, text);
-      } catch (err) {
-        // Fallback zu execCommand
-        document.execCommand('paste', false, null);
-      }
+        navigator.clipboard.readText().then(function(text) {
+          document.execCommand('insertText', false, text);
+        });
+      } catch (err) { document.execCommand('paste', false, null); }
       document.getElementById('editor').focus();
     }
 
-    // 5b. Seitenumbruch einfügen
     function insertPageBreak() {
       const pageBreak = '<div style="page-break-after: always; border-top: 2px dashed #999; margin: 20px 0; padding-top: 20px;"></div>';
       document.execCommand('insertHTML', false, pageBreak);
       document.getElementById('editor').focus();
     }
 
-    // 6. Kopfzeile oder Absatz ändern
     function changeFormatType(tag) {
       document.execCommand('formatBlock', false, tag);
       document.getElementById('editor').focus();
     }
 
-    // 7. Texthervorhebungsfarbe
     function highlightText(color) {
-      if (color === '') {
-        document.execCommand('removeFormat', false, null);
-      } else {
-        document.execCommand('backColor', false, color);
-      }
+      if (color === '') { document.execCommand('removeFormat', false, null); }
+      else { document.execCommand('backColor', false, color); }
       document.getElementById('editor').focus();
     }
 
-    // 13. Rot unterstrichen
     function redUnderline() {
       const selection = window.getSelection();
       if (selection.rangeCount > 0) {
@@ -469,10 +417,8 @@
         span.style.textDecoration = 'underline';
         span.style.textDecorationColor = 'red';
         span.style.textDecorationThickness = '2px';
-        try {
-          range.surroundContents(span);
-        } catch (e) {
-          // Fallback für komplexe Auswahlen
+        try { range.surroundContents(span); }
+        catch (e) {
           const contents = range.extractContents();
           span.appendChild(contents);
           range.insertNode(span);
@@ -481,7 +427,6 @@
       document.getElementById('editor').focus();
     }
 
-    // 20. Geschütztes Leerzeichen
     function insertNonBreakingSpace() {
       const editor = document.getElementById('editor');
       editor.focus();
@@ -498,309 +443,497 @@
       }
     }
 
-    // 23. Tabelle Dialog anzeigen
     let selectedRows = 3;
     let selectedCols = 3;
     
     function showTableDialog() {
       document.getElementById('tableDialog').classList.remove('hidden');
       createTableGrid();
-      
-      // Add click listener to background to close dialog
       const dialog = document.getElementById('tableDialog');
       dialog.addEventListener('click', function(e) {
-        if (e.target === dialog) {
-          hideTableDialog();
-        }
+        if (e.target === dialog) { hideTableDialog(); }
       });
     }
 
-    function hideTableDialog() {
-      document.getElementById('tableDialog').classList.add('hidden');
+    function hideTableDialog() { document.getElementById('tableDialog').classList.add('hidden'); }
+    
+    function showSpecialCharDialog() {
+      document.getElementById('specialCharDialog').classList.remove('hidden');
+      createSpecialCharGrid();
+      const dialog = document.getElementById('specialCharDialog');
+      dialog.addEventListener('click', function(e) {
+        if (e.target === dialog) { hideSpecialCharDialog(); }
+      });
+    }
+    
+    function hideSpecialCharDialog() { document.getElementById('specialCharDialog').classList.add('hidden'); }
+    
+    let currentSearchIndex = -1;
+    let searchMatches = [];
+    
+    function showFindReplaceDialog() {
+      document.getElementById('findReplaceDialog').classList.remove('hidden');
+      document.getElementById('findText').focus();
+      const dialog = document.getElementById('findReplaceDialog');
+      dialog.addEventListener('click', function(e) {
+        if (e.target === dialog) { hideFindReplaceDialog(); }
+      });
+    }
+    
+    function hideFindReplaceDialog() {
+      document.getElementById('findReplaceDialog').classList.add('hidden');
+      clearHighlights();
+      searchMatches = [];
+      currentSearchIndex = -1;
+      document.getElementById('findReplaceResult').classList.add('hidden');
+    }
+    
+    function clearHighlights() {
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+    }
+    
+    function findNext() {
+      const findText = document.getElementById('findText').value;
+      if (!findText) {
+        showFindReplaceResult('Bitte geben Sie einen Suchtext ein.', 'error');
+        return;
+      }
+      
+      const editor = document.getElementById('editor');
+      clearHighlights();
+      searchMatches = [];
+      
+      const walker = document.createTreeWalker(
+        editor,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+      
+      const nodes = [];
+      let node;
+      while (node = walker.nextNode()) {
+        nodes.push(node);
+      }
+      
+      const searchLower = findText.toLowerCase();
+      nodes.forEach(function(textNode) {
+        const text = textNode.textContent;
+        const textLower = text.toLowerCase();
+        let index = 0;
+        
+        while ((index = textLower.indexOf(searchLower, index)) !== -1) {
+          searchMatches.push({ node: textNode, start: index, end: index + findText.length });
+          index += findText.length;
+        }
+      });
+      
+      if (searchMatches.length === 0) {
+        showFindReplaceResult('Keine Übereinstimmungen gefunden.', 'error');
+        currentSearchIndex = -1;
+        return;
+      }
+      
+      if (currentSearchIndex === -1) {
+        currentSearchIndex = 0;
+      } else {
+        currentSearchIndex = (currentSearchIndex + 1) % searchMatches.length;
+      }
+      
+      highlightCurrentMatch();
+      scrollToCurrentMatch();
+      showFindReplaceResult('Treffer ' + (currentSearchIndex + 1) + ' von ' + searchMatches.length, 'success');
+    }
+    
+    function findPrevious() {
+      const findText = document.getElementById('findText').value;
+      if (!findText) {
+        showFindReplaceResult('Bitte geben Sie einen Suchtext ein.', 'error');
+        return;
+      }
+      
+      if (searchMatches.length === 0) {
+        findNext();
+        return;
+      }
+      
+      currentSearchIndex = (currentSearchIndex - 1 + searchMatches.length) % searchMatches.length;
+      
+      highlightCurrentMatch();
+      scrollToCurrentMatch();
+      showFindReplaceResult('Treffer ' + (currentSearchIndex + 1) + ' von ' + searchMatches.length, 'success');
+    }
+    
+    function escapeRegex(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    
+    function highlightCurrentMatch() {
+      if (currentSearchIndex === -1 || searchMatches.length === 0) return;
+      
+      const match = searchMatches[currentSearchIndex];
+      const range = document.createRange();
+      range.setStart(match.node, match.start);
+      range.setEnd(match.node, match.end);
+      
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+    
+    function scrollToCurrentMatch() {
+      const selection = window.getSelection();
+      if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const tempSpan = document.createElement('span');
+        const rangeClone = range.cloneRange();
+        rangeClone.insertNode(tempSpan);
+        
+        tempSpan.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+        
+        tempSpan.remove();
+        
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+    
+    function replaceOne() {
+      const findText = document.getElementById('findText').value;
+      const replaceText = document.getElementById('replaceText').value;
+      
+      if (!findText) {
+        showFindReplaceResult('Bitte geben Sie einen Suchtext ein.', 'error');
+        return;
+      }
+      
+      if (searchMatches.length === 0 || currentSearchIndex === -1) {
+        showFindReplaceResult('Keine Übereinstimmung ausgewählt. Bitte zuerst suchen.', 'error');
+        return;
+      }
+      
+      const selection = window.getSelection();
+      if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+        const textNode = document.createTextNode(replaceText);
+        range.insertNode(textNode);
+        range.setStartAfter(textNode);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+      
+      searchMatches = [];
+      currentSearchIndex = -1;
+      
+      showFindReplaceResult('Ersetzt! Klicken Sie "Suchen" für die nächste Übereinstimmung.', 'success');
+    }
+    
+    function replaceAll() {
+      const findText = document.getElementById('findText').value;
+      const replaceText = document.getElementById('replaceText').value;
+      
+      if (!findText) {
+        showFindReplaceResult('Bitte geben Sie einen Suchtext ein.', 'error');
+        return;
+      }
+      
+      const editor = document.getElementById('editor');
+      const walker = document.createTreeWalker(
+        editor,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+      
+      const nodes = [];
+      let node;
+      while (node = walker.nextNode()) {
+        nodes.push(node);
+      }
+      
+      let totalCount = 0;
+      const searchLower = findText.toLowerCase();
+      
+      nodes.forEach(function(textNode) {
+        const text = textNode.textContent;
+        const textLower = text.toLowerCase();
+        
+        const regex = new RegExp(escapeRegex(findText), 'gi');
+        const matches = text.match(regex);
+        if (matches) {
+          totalCount += matches.length;
+          textNode.textContent = text.replace(regex, replaceText);
+        }
+      });
+      
+      clearHighlights();
+      searchMatches = [];
+      currentSearchIndex = -1;
+      
+      if (totalCount > 0) {
+        showFindReplaceResult(totalCount + ' Übereinstimmung(en) ersetzt.', 'success');
+      } else {
+        showFindReplaceResult('Keine Übereinstimmungen gefunden.', 'error');
+      }
+    }
+    
+    function showFindReplaceResult(message, type) {
+      const resultDiv = document.getElementById('findReplaceResult');
+      resultDiv.textContent = message;
+      resultDiv.className = 'mb-4 text-sm font-semibold ' + (type === 'error' ? 'text-red-600' : 'text-green-600');
+      resultDiv.classList.remove('hidden');
+    }
+    
+    function createSpecialCharGrid() {
+      const grid = document.getElementById('specialCharGrid');
+      grid.innerHTML = '';
+      
+      const specialChars = [
+        '\u00B1', '\u00D7', '\u00F7', '\u2260', '\u2248', '\u2264', '\u2265', '\u221E',
+        '\u2211', '\u220F', '\u221A', '\u221B', '\u221C', '\u222B', '\u2202', '\u2207',
+        '\u00B0', '\u2032', '\u2033', '\u2030', '\u2031', '\u03C0', '\u03B8', '\u03A9',
+        '\u2190', '\u2192', '\u2191', '\u2193', '\u2194', '\u2195', '\u21D0', '\u21D2',
+        '\u21D1', '\u21D3', '\u21D4', '\u21D5', '\u2934', '\u2935', '\u21A9', '\u21AA',
+        '\u25A0', '\u25A1', '\u25AA', '\u25AB', '\u25CF', '\u25CB', '\u25B2', '\u25B3',
+        '\u25BC', '\u25BD', '\u25C6', '\u25C7', '\u2605', '\u2606', '\u2660', '\u2663',
+        '\u2665', '\u2666', '\u2B1B', '\u2B1C', '\u25FC', '\u25FB', '\u25AE', '\u25AF',
+        '\u20AC', '$', '\u00A3', '\u00A5', '\u20B9', '\u20BD', '\u20A9', '\u20AA',
+        '\u00A2', '\u20B1', '\u20B4', '\u20B5', '\u201A', '\u2018', '\u2019', '\u201B',
+        '\u201C', '\u201D', '\u201E', '\u201F', '\u00AB', '\u00BB', '\u2039', '\u203A',
+        '\u2013', '\u2014', '\u2010', '\u2011', '\u2026', '\u2022', '\u00B7', '\u2027',
+        '\u03B1', '\u03B2', '\u03B3', '\u03B4', '\u03B5', '\u03B6', '\u03B7', '\u03B8',
+        '\u03B9', '\u03BA', '\u03BB', '\u03BC', '\u03BD', '\u03BE', '\u03BF', '\u03C0',
+        '\u03C1', '\u03C3', '\u03C4', '\u03C5', '\u03C6', '\u03C7', '\u03C8', '\u03C9',
+        '\u00C1', '\u00C0', '\u00C2', '\u00C4', '\u00C3', '\u00C5', '\u00C6', '\u00C7',
+        '\u00C9', '\u00C8', '\u00CA', '\u00CB', '\u00CD', '\u00CC', '\u00CE', '\u00CF',
+        '\u00D1', '\u00D3', '\u00D2', '\u00D4', '\u00D6', '\u00D5', '\u00D8', '\u0152',
+        '\u00DA', '\u00D9', '\u00DB', '\u00DC', '\u00DD', '\u0178', '\u00DE', '\u00DF',
+        '\u00E1', '\u00E0', '\u00E2', '\u00E4', '\u00E3', '\u00E5', '\u00E6', '\u00E7',
+        '\u00E9', '\u00E8', '\u00EA', '\u00EB', '\u00ED', '\u00EC', '\u00EE', '\u00EF',
+        '\u00F1', '\u00F3', '\u00F2', '\u00F4', '\u00F6', '\u00F5', '\u00F8', '\u0153',
+        '\u00FA', '\u00F9', '\u00FB', '\u00FC', '\u00FD', '\u00FF', '\u00FE', '\u00F0',
+        '\u00A7', '\u00B6', '\u2020', '\u2021', '\u00A9', '\u00AE', '\u2122', '\u2103',
+        '\u2109', '\u2113', '\u00BC', '\u00BD', '\u00BE', '\u2153', '\u2154', '\u215B',
+        '\u215C', '\u215D', '\u215E', '\u00B9', '\u00B2', '\u00B3', '\u2074', '\u2075',
+        '\u2076', '\u2077', '\u2078', '\u2079', '\u2070', '\u2080', '\u2081', '\u2082',
+        '\u2083', '\u2084', '\u2085', '\u2086', '\u2087', '\u2088', '\u2089', '\u00AA',
+        '\u00BA', '\u00B5'
+      ];
+      
+      specialChars.forEach(function(char) {
+        const charButton = document.createElement('button');
+        charButton.textContent = char;
+        charButton.className = 'px-4 py-3 text-2xl border-2 border-gray-300 rounded-lg hover:bg-blue-100 hover:border-blue-500 transition-all cursor-pointer';
+        charButton.title = char + ' einfügen';
+        charButton.addEventListener('click', function(e) {
+          e.stopPropagation();
+          insertSpecialChar(char);
+        });
+        grid.appendChild(charButton);
+      });
+    }
+    
+    function insertSpecialChar(char) {
+      const editor = document.getElementById('editor');
+      editor.focus();
+      document.execCommand('insertText', false, char);
+      hideSpecialCharDialog();
     }
 
-    // Erstelle das Kästchenraster (10x10)
     function createTableGrid() {
       const grid = document.getElementById('tableGrid');
       grid.innerHTML = '';
-      
-      const maxRows = 10;
-      const maxCols = 10;
-      
-      for (let row = 0; row < maxRows; row++) {
+      for (let row = 0; row < 10; row++) {
         const rowDiv = document.createElement('div');
         rowDiv.style.display = 'flex';
-        
-        for (let col = 0; col < maxCols; col++) {
+        for (let col = 0; col < 10; col++) {
           const cell = document.createElement('div');
-          cell.style.width = '20px';
-          cell.style.height = '20px';
-          cell.style.border = '1px solid #ccc';
-          cell.style.cursor = 'pointer';
-          cell.style.transition = 'background-color 0.1s';
-          cell.dataset.row = row + 1;
-          cell.dataset.col = col + 1;
-          
-          // Hover-Effekt
+          cell.style.width = '20px'; cell.style.height = '20px'; cell.style.border = '1px solid #ccc'; cell.style.cursor = 'pointer'; cell.style.transition = 'background-color 0.1s';
+          cell.dataset.row = row + 1; cell.dataset.col = col + 1;
           cell.addEventListener('mouseenter', function() {
-            const hoverRow = parseInt(this.dataset.row);
-            const hoverCol = parseInt(this.dataset.col);
-            highlightCells(hoverRow, hoverCol);
-            updateSelectionText(hoverRow, hoverCol);
+            highlightCells(parseInt(this.dataset.row), parseInt(this.dataset.col));
+            updateSelectionText(parseInt(this.dataset.row), parseInt(this.dataset.col));
           });
-          
-          // Klick zum Auswählen
           cell.addEventListener('click', function(e) {
             e.stopPropagation();
             selectedRows = parseInt(this.dataset.row);
             selectedCols = parseInt(this.dataset.col);
             insertTableFromGrid();
           });
-          
           rowDiv.appendChild(cell);
         }
-        
         grid.appendChild(rowDiv);
       }
-      
-      // Initial Auswahl anzeigen
       highlightCells(3, 3);
       updateSelectionText(3, 3);
     }
     
-    // Markiere Zellen bis zur ausgewählten Position
     function highlightCells(rows, cols) {
       const grid = document.getElementById('tableGrid');
       const allCells = grid.querySelectorAll('div[data-row]');
-      
-      allCells.forEach(cell => {
+      allCells.forEach(function(cell) {
         const cellRow = parseInt(cell.dataset.row);
         const cellCol = parseInt(cell.dataset.col);
-        
-        if (cellRow <= rows && cellCol <= cols) {
-          cell.style.backgroundColor = '#3b82f6';
-        } else {
-          cell.style.backgroundColor = 'transparent';
-        }
+        cell.style.backgroundColor = (cellRow <= rows && cellCol <= cols) ? '#3b82f6' : 'transparent';
       });
     }
     
-    // Zeige aktuelle Auswahl als Text
     function updateSelectionText(rows, cols) {
-      const text = document.getElementById('tableSelection');
-      text.textContent = `${rows} x ${cols} Tabelle`;
+      document.getElementById('tableSelection').textContent = rows + ' x ' + cols + ' Tabelle';
     }
 
-    // Tabelle einfügen basierend auf Grid-Auswahl
+    let lastRange = null;
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const editor = document.getElementById('editor');
+      editor.addEventListener('blur', function() {
+        const selection = window.getSelection();
+        if (selection.rangeCount > 0) { lastRange = selection.getRangeAt(0).cloneRange(); }
+      });
+      editor.addEventListener('keyup', function() {
+        const selection = window.getSelection();
+        if (selection.rangeCount > 0) { lastRange = selection.getRangeAt(0).cloneRange(); }
+      });
+      editor.addEventListener('mouseup', function() {
+        const selection = window.getSelection();
+        if (selection.rangeCount > 0) { lastRange = selection.getRangeAt(0).cloneRange(); }
+      });
+    });
+    
     function insertTableFromGrid() {
       const editor = document.getElementById('editor');
-      
-      // Erstelle Tabelle als DOM-Element
       const table = document.createElement('table');
-      table.style.borderCollapse = 'collapse';
-      table.style.width = '100%';
-      table.style.margin = '10px 0';
-      
+      table.style.borderCollapse = 'collapse'; table.style.width = '100%'; table.style.margin = '10px 0'; table.style.tableLayout = 'fixed';
       for (let i = 0; i < selectedRows; i++) {
         const row = document.createElement('tr');
         for (let j = 0; j < selectedCols; j++) {
           const cell = document.createElement('td');
-          cell.style.border = '1px solid #333';
-          cell.style.padding = '8px';
-          cell.style.minWidth = '60px';
-          cell.contentEditable = 'true';
+          cell.style.border = '1px solid #333'; cell.style.padding = '8px'; cell.style.wordWrap = 'break-word'; cell.style.overflowWrap = 'break-word'; cell.style.whiteSpace = 'normal'; cell.contentEditable = 'true';
           cell.innerHTML = '&nbsp;';
-          cell.addEventListener('click', function(e) {
-            showTableContextMenu(e, this);
-          });
+          cell.addEventListener('click', function(e) { showTableContextMenu(e, this); });
           row.appendChild(cell);
         }
         table.appendChild(row);
       }
-      
-      // Füge Tabelle in Editor ein
       editor.focus();
       const selection = window.getSelection();
+      if (lastRange) {
+        try { selection.removeAllRanges(); selection.addRange(lastRange); }
+        catch (e) {
+          const range = document.createRange();
+          range.selectNodeContents(editor);
+          range.collapse(false);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      }
       if (selection.rangeCount > 0) {
         const range = selection.getRangeAt(0);
         range.deleteContents();
         range.insertNode(table);
-        
-        // Füge Leerzeile nach Tabelle hinzu
         const br = document.createElement('br');
         range.setStartAfter(table);
         range.insertNode(br);
-        
-        // Setze Cursor nach der Tabelle
         range.setStartAfter(br);
         range.collapse(true);
         selection.removeAllRanges();
         selection.addRange(range);
+        lastRange = range.cloneRange();
       } else {
-        // Fallback: Hänge am Ende an
         editor.appendChild(table);
         const br = document.createElement('br');
         editor.appendChild(br);
       }
-      
       hideTableDialog();
       editor.focus();
     }
 
-    // Kontextmenü für Tabellenzellen
     let contextMenu = null;
     let currentCell = null;
 
     function showTableContextMenu(event, cell) {
       event.preventDefault();
       event.stopPropagation();
-      
       currentCell = cell;
-      
-      // Entferne altes Kontextmenü falls vorhanden
-      if (contextMenu) {
-        contextMenu.remove();
-      }
-      
-      // Erstelle neues Kontextmenü
+      if (contextMenu) { contextMenu.remove(); }
       contextMenu = document.createElement('div');
-      contextMenu.style.position = 'absolute';
-      contextMenu.style.backgroundColor = 'white';
-      contextMenu.style.border = '2px solid #ccc';
-      contextMenu.style.borderRadius = '8px';
-      contextMenu.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-      contextMenu.style.zIndex = '1000';
-      contextMenu.style.minWidth = '220px';
-      contextMenu.style.padding = '8px 0';
-      
-      // Positioniere das Menü unterhalb der Tabelle in der Mitte
+      contextMenu.style.position = 'absolute'; contextMenu.style.backgroundColor = 'white'; contextMenu.style.border = '2px solid #ccc'; contextMenu.style.borderRadius = '8px'; contextMenu.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)'; contextMenu.style.zIndex = '1000'; contextMenu.style.minWidth = '220px'; contextMenu.style.padding = '8px 0';
       const table = cell.closest('table');
       const tableRect = table.getBoundingClientRect();
       const editorRect = document.getElementById('editor').getBoundingClientRect();
-      
-      // Berechne Position relativ zum Editor
-      const leftPosition = tableRect.left - editorRect.left + (tableRect.width / 2) - 110; // 110 = halbe Menü-Breite
-      const topPosition = tableRect.bottom - editorRect.top + 10; // 10px Abstand unter der Tabelle
-      
-      contextMenu.style.left = leftPosition + 'px';
-      contextMenu.style.top = topPosition + 'px';
-      
+      contextMenu.style.left = (tableRect.left - editorRect.left + (tableRect.width / 2) - 110) + 'px';
+      contextMenu.style.top = (tableRect.bottom - editorRect.top + 10) + 'px';
       const menuItems = [
-        { text: 'Zeile davor einfügen', action: () => insertRowBefore(cell) },
-        { text: 'Zeile danach einfügen', action: () => insertRowAfter(cell) },
-        { text: 'Spalte davor einfügen', action: () => insertColumnBefore(cell) },
-        { text: 'Spalte danach einfügen', action: () => insertColumnAfter(cell) },
+        { text: 'Zeile davor einfügen', action: function() { insertRowBefore(cell); } },
+        { text: 'Zeile danach einfügen', action: function() { insertRowAfter(cell); } },
+        { text: 'Spalte davor einfügen', action: function() { insertColumnBefore(cell); } },
+        { text: 'Spalte danach einfügen', action: function() { insertColumnAfter(cell); } },
         { text: '---', action: null },
-        { text: 'Tabelle löschen', action: () => deleteTable(cell), danger: true }
+        { text: 'Tabelle löschen', action: function() { deleteTable(cell); }, danger: true }
       ];
-      
-      menuItems.forEach(item => {
+      menuItems.forEach(function(item) {
         if (item.text === '---') {
           const divider = document.createElement('div');
-          divider.style.height = '1px';
-          divider.style.backgroundColor = '#e0e0e0';
-          divider.style.margin = '4px 0';
+          divider.style.height = '1px'; divider.style.backgroundColor = '#e0e0e0'; divider.style.margin = '4px 0';
           contextMenu.appendChild(divider);
         } else {
           const menuItem = document.createElement('div');
           menuItem.textContent = item.text;
-          menuItem.style.padding = '10px 16px';
-          menuItem.style.cursor = 'pointer';
-          menuItem.style.fontSize = '14px';
-          menuItem.style.color = item.danger ? '#dc2626' : '#333';
-          menuItem.style.fontWeight = item.danger ? 'bold' : 'normal';
-          
-          menuItem.addEventListener('mouseenter', function() {
-            this.style.backgroundColor = item.danger ? '#fee2e2' : '#f3f4f6';
-          });
-          
-          menuItem.addEventListener('mouseleave', function() {
-            this.style.backgroundColor = 'transparent';
-          });
-          
-          menuItem.addEventListener('click', function() {
-            item.action();
-            hideContextMenu();
-          });
-          
+          menuItem.style.padding = '10px 16px'; menuItem.style.cursor = 'pointer'; menuItem.style.fontSize = '14px'; menuItem.style.color = item.danger ? '#dc2626' : '#333'; menuItem.style.fontWeight = item.danger ? 'bold' : 'normal';
+          menuItem.addEventListener('mouseenter', function() { this.style.backgroundColor = item.danger ? '#fee2e2' : '#f3f4f6'; });
+          menuItem.addEventListener('mouseleave', function() { this.style.backgroundColor = 'transparent'; });
+          menuItem.addEventListener('click', function() { item.action(); hideContextMenu(); });
           contextMenu.appendChild(menuItem);
         }
       });
-      
       document.body.appendChild(contextMenu);
-      
-      // Schließe Menü beim Klick außerhalb
-      setTimeout(() => {
-        document.addEventListener('click', hideContextMenu);
-      }, 100);
+      setTimeout(function() { document.addEventListener('click', hideContextMenu); }, 100);
     }
 
     function hideContextMenu() {
-      if (contextMenu) {
-        contextMenu.remove();
-        contextMenu = null;
-      }
+      if (contextMenu) { contextMenu.remove(); contextMenu = null; }
       document.removeEventListener('click', hideContextMenu);
     }
 
     function insertRowBefore(cell) {
       const row = cell.closest('tr');
-      const table = cell.closest('table');
       const colCount = row.cells.length;
-      
       const newRow = document.createElement('tr');
       for (let i = 0; i < colCount; i++) {
         const newCell = document.createElement('td');
-        newCell.style.border = '1px solid #333';
-        newCell.style.padding = '8px';
-        newCell.style.minWidth = '60px';
-        newCell.contentEditable = 'true';
+        newCell.style.border = '1px solid #333'; newCell.style.padding = '8px'; newCell.style.wordWrap = 'break-word'; newCell.style.overflowWrap = 'break-word'; newCell.style.whiteSpace = 'normal'; newCell.contentEditable = 'true';
         newCell.onclick = function(e) { showTableContextMenu(e, this); };
         newCell.innerHTML = '&nbsp;';
         newRow.appendChild(newCell);
       }
-      
       row.parentNode.insertBefore(newRow, row);
     }
 
     function insertRowAfter(cell) {
       const row = cell.closest('tr');
-      const table = cell.closest('table');
       const colCount = row.cells.length;
-      
       const newRow = document.createElement('tr');
       for (let i = 0; i < colCount; i++) {
         const newCell = document.createElement('td');
-        newCell.style.border = '1px solid #333';
-        newCell.style.padding = '8px';
-        newCell.style.minWidth = '60px';
-        newCell.contentEditable = 'true';
+        newCell.style.border = '1px solid #333'; newCell.style.padding = '8px'; newCell.style.wordWrap = 'break-word'; newCell.style.overflowWrap = 'break-word'; newCell.style.whiteSpace = 'normal'; newCell.contentEditable = 'true';
         newCell.onclick = function(e) { showTableContextMenu(e, this); };
         newCell.innerHTML = '&nbsp;';
         newRow.appendChild(newCell);
       }
-      
-      if (row.nextSibling) {
-        row.parentNode.insertBefore(newRow, row.nextSibling);
-      } else {
-        row.parentNode.appendChild(newRow);
-      }
+      if (row.nextSibling) { row.parentNode.insertBefore(newRow, row.nextSibling); }
+      else { row.parentNode.appendChild(newRow); }
     }
 
     function insertColumnBefore(cell) {
       const table = cell.closest('table');
       const cellIndex = cell.cellIndex;
-      
       const rows = table.querySelectorAll('tr');
-      rows.forEach(row => {
+      rows.forEach(function(row) {
         const newCell = document.createElement('td');
-        newCell.style.border = '1px solid #333';
-        newCell.style.padding = '8px';
-        newCell.style.minWidth = '50px';
-        newCell.style.maxWidth = '100%';
-        newCell.style.wordWrap = 'break-word';
-        newCell.style.overflowWrap = 'break-word';
-        newCell.contentEditable = 'true';
+        newCell.style.border = '1px solid #333'; newCell.style.padding = '8px'; newCell.style.wordWrap = 'break-word'; newCell.style.overflowWrap = 'break-word'; newCell.style.whiteSpace = 'normal'; newCell.contentEditable = 'true';
         newCell.onclick = function(e) { showTableContextMenu(e, this); };
         newCell.innerHTML = '&nbsp;';
         row.insertBefore(newCell, row.cells[cellIndex]);
@@ -810,72 +943,32 @@
     function insertColumnAfter(cell) {
       const table = cell.closest('table');
       const cellIndex = cell.cellIndex;
-      
       const rows = table.querySelectorAll('tr');
-      rows.forEach(row => {
+      rows.forEach(function(row) {
         const newCell = document.createElement('td');
-        newCell.style.border = '1px solid #333';
-        newCell.style.padding = '8px';
-        newCell.style.minWidth = '50px';
-        newCell.style.maxWidth = '100%';
-        newCell.style.wordWrap = 'break-word';
-        newCell.style.overflowWrap = 'break-word';
-        newCell.contentEditable = 'true';
+        newCell.style.border = '1px solid #333'; newCell.style.padding = '8px'; newCell.style.wordWrap = 'break-word'; newCell.style.overflowWrap = 'break-word'; newCell.style.whiteSpace = 'normal'; newCell.contentEditable = 'true';
         newCell.onclick = function(e) { showTableContextMenu(e, this); };
         newCell.innerHTML = '&nbsp;';
-        
-        if (cellIndex + 1 < row.cells.length) {
-          row.insertBefore(newCell, row.cells[cellIndex + 1]);
-        } else {
-          row.appendChild(newCell);
-        }
+        if (cellIndex + 1 < row.cells.length) { row.insertBefore(newCell, row.cells[cellIndex + 1]); }
+        else { row.appendChild(newCell); }
       });
     }
 
     function deleteTable(cell) {
       const table = cell.closest('table');
-      if (table) {
-        table.remove();
-      }
+      if (table) { table.remove(); }
     }
 
-    // Tastaturkürzel
     document.addEventListener('keydown', function(e) {
       if (e.ctrlKey || e.metaKey) {
         switch(e.key.toLowerCase()) {
-          case 'z':
-            if (!e.shiftKey) {
-              e.preventDefault();
-              undo();
-            }
-            break;
-          case 'y':
-            e.preventDefault();
-            redo();
-            break;
-          case 'x':
-            // Browser-Standard wird verwendet
-            break;
-          case 'c':
-            // Browser-Standard wird verwendet
-            break;
-          case 'v':
-            // Browser-Standard wird verwendet
-            break;
+          case 'z': if (!e.shiftKey) { e.preventDefault(); undo(); } break;
+          case 'y': e.preventDefault(); redo(); break;
         }
       }
     });
 
-    // Clear editor
-    function clearEditor() {
-      const editor = document.getElementById('editor');
-      editor.innerHTML = '';
-      editor.focus();
-    }
-
-    // Download document as PDF (using print dialog)
     function downloadDocument() {
-      // Create print content if it doesn't exist
       let printDiv = document.getElementById('printContent');
       if (!printDiv) {
         printDiv = document.createElement('div');
@@ -883,81 +976,33 @@
         printDiv.style.display = 'none';
         document.body.appendChild(printDiv);
       }
-      
       const editor = document.getElementById('editor');
-      
-      // Create header
-      const header = `
-        <div class="print-header">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div><strong>Kennummer:</strong> ${userKennummer}</div>
-            <div style="text-align: center;"><strong>${pruefungsname}</strong></div>
-          </div>
-        </div>
-      `;
-      
-      // Clone editor content
+      const header = '<div class="print-header"><div style="display: flex; justify-content: space-between; align-items: center;"><div><strong>Kennummer:</strong> ' + userKennummer + '</div><div style="text-align: center;"><strong>' + pruefungsname + '</strong></div></div></div>';
       const content = editor.cloneNode(true);
       content.classList.add('print-content');
-      
-      // Wrap content in a layout with correction margin
-      const layoutWrapper = `
-        <div style="display: flex; width: 100%;">
-          <div style="width: 33.33%; border-right: 1px solid #ccc;"></div>
-          <div style="width: 66.67%; padding-left: 20px;">
-            ${content.outerHTML}
-          </div>
-        </div>
-      `;
-      
-      // Set print content
+      const layoutWrapper = '<div style="display: flex; width: 100%;"><div style="width: 33.33%; border-right: 1px solid #ccc;"></div><div style="width: 66.67%; padding-left: 20px;">' + content.outerHTML + '</div></div>';
       printDiv.innerHTML = header + layoutWrapper;
       printDiv.style.display = 'block';
-      
-      // Set document title for PDF filename (used by print dialog)
       const originalTitle = document.title;
-      document.title = `${pruefungsname}_${userKennummer}`;
-      
-      // Trigger print dialog
+      document.title = pruefungsname + '_' + userKennummer;
       window.print();
-      
-      // Restore original title and hide print content after printing
-      setTimeout(() => {
+      setTimeout(function() {
         document.title = originalTitle;
         printDiv.style.display = 'none';
       }, 1000);
     }
 
-    // Element SDK implementation
-    async function onConfigChange(config) {
-      const titleElement = document.getElementById('doc-title');
-      titleElement.textContent = config.document_title || defaultConfig.document_title;
-    }
-
+    function onConfigChange(config) {}
     function mapToCapabilities(config) {
-      return {
-        recolorables: [],
-        borderables: [],
-        fontEditable: undefined,
-        fontSizeable: undefined
-      };
+      return { recolorables: [], borderables: [], fontEditable: undefined, fontSizeable: undefined };
     }
-
     function mapToEditPanelValues(config) {
-      return new Map([
-        ["document_title", config.document_title || defaultConfig.document_title]
-      ]);
+      return new Map([["document_title", config.document_title || defaultConfig.document_title]]);
     }
 
-    // Initialize Element SDK
     if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange,
-        mapToCapabilities,
-        mapToEditPanelValues
-      });
+      window.elementSdk.init({ defaultConfig: defaultConfig, onConfigChange: onConfigChange, mapToCapabilities: mapToCapabilities, mapToEditPanelValues: mapToEditPanelValues });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad91346352e9884',t:'MTc2NTY2NjgwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ae62948665ae0d3',t:'MTc2NTgwNDAxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
