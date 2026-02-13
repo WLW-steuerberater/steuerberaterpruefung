@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infoabend Master Steuerberatung | Universität Bamberg & WLW</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Fira Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      color: #1d1d1f;
+    }
+
+    .main-container {
+      width: 100%;
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .hero-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-logo {
+      height: 60px;
+      object-fit: contain;
+    }
+
+    .hero-logo-divider {
+      font-size: 2rem;
+      color: #6e6e73;
+      font-weight: 300;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff6fac 0%, #e64a8f 100%);
+      color: white;
+      padding: 0.5rem 1.25rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hero h1 {
+      font-size: 2.75rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+      color: #1d1d1f;
+      line-height: 1.15;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #6facff 0%, #4a8fe6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-intro {
+      font-size: 1.1rem;
+      color: #6e6e73;
+      max-width: 55rem;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+
+    /* Event Info Box */
+    .event-info-box {
+      background: linear-gradient(135deg, #6facff 0%, #4a8fe6 100%);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      margin: 2rem auto;
+      max-width: 50rem;
+      color: white;
+      box-shadow: 0 8px 30px rgba(111, 172, 255, 0.3);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .event-info-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .event-info-icon {
+      width: 3rem;
+      height: 3rem;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .event-info-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .event-info-label {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-bottom: 0.25rem;
+    }
+
+    .event-info-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .event-info-box {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 2rem;
+      }
+
+      .hero h1 {
+        font-size: 1.85rem;
+      }
+    }
+
+    /* Inline Links */
+    .inline-link {
+      color: #4a8fe6;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .inline-link:hover {
+      color: #6facff;
+      text-decoration: underline;
+    }
+
+    /* Section Styling */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #1d1d1f;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      text-align: center;
+      color: #6e6e73;
+      max-width: 50rem;
+      margin: 0 auto 3rem;
+      line-height: 1.6;
+    }
+
+    /* Overview Section */
+    .overview-section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.4s forwards;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 70rem;
+      margin: 0 auto;
+    }
+
+    .overview-card {
+      background: #f9f9fb;
+      border-radius: 1.25rem;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .overview-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(111, 172, 255, 0.15);
+    }
+
+    .overview-card-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      background: linear-gradient(135deg, #6facff 0%, #4a8fe6 100%);
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .overview-card-icon svg {
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+
+    .overview-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      margin-bottom: 0.75rem;
+    }
+
+    .overview-card p {
+      font-size: 0.95rem;
+      color: #6e6e73;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Curriculum Section */
+    .curriculum-section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.4s forwards;
+    }
+
+    .curriculum-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 70rem;
+      margin: 0 auto;
+    }
+
+    .curriculum-block {
+      background: #ffffff;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .curriculum-block-header {
+      padding: 1.5rem;
+      color: white;
+    }
+
+    .curriculum-logo {
+      height: 40px;
+      margin-bottom: 0.75rem;
+      filter: brightness(0) invert(1);
+    }
+
+    .curriculum-block-header.uni {
+      background: linear-gradient(135deg, #1d5aa5 0%, #0d3b6e 100%);
+    }
+
+    .curriculum-block-header.wlw {
+      background: linear-gradient(135deg, #6facff 0%, #4a8fe6 100%);
+    }
+
+    .curriculum-block-header h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0 0 0.25rem 0;
+    }
+
+    .curriculum-block-header p {
+      font-size: 0.85rem;
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .curriculum-block-content {
+      padding: 1.5rem;
+    }
+
+    .curriculum-semester {
+      margin-bottom: 1.5rem;
+    }
+
+    .curriculum-semester:last-child {
+      margin-bottom: 0;
+    }
+
+    .curriculum-semester-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #6facff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .curriculum-semester-title.uni {
+      color: #1d5aa5;
+    }
+
+    .curriculum-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      font-size: 0.9rem;
+      color: #1d1d1f;
+      border-bottom: 1px solid #f0f0f2;
+    }
+
+    .curriculum-item:last-child {
+      border-bottom: none;
+    }
+
+    .curriculum-item::before {
+      content: '•';
+      color: #6facff;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .curriculum-item.uni::before {
+      color: #1d5aa5;
+    }
+
+    @media (max-width: 768px) {
+      .curriculum-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Included Section */
+    .included-section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.5s forwards;
+    }
+
+    .included-box {
+      background: linear-gradient(135deg, #f9f9fb 0%, #f0f5ff 100%);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      max-width: 70rem;
+      margin: 0 auto;
+    }
+
+    .included-box h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .included-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .included-check {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: linear-gradient(135deg, #6facff 0%, #4a8fe6 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 0.1rem;
+    }
+
+    .included-item span {
+      font-size: 0.9rem;
+      color: #1d1d1f;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 968px) {
+      .included-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .included-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Pricing Section */
+    .pricing-section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.6s forwards;
+    }
+
+    .pricing-card {
+      background: linear-gradient(135deg, #6facff 0%, #4a8fe6 100%);
+      border-radius: 1.5rem;
+      padding: 3rem;
+      max-width: 50rem;
+      margin: 0 auto;
+      color: white;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(111, 172, 255, 0.3);
+    }
+
+    .pricing-price {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-label {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-details {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-details p {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    .pricing-note {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    /* Requirements Section */
+    .requirements-section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.7s forwards;
+    }
+
+    .requirements-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 60rem;
+      margin: 0 auto;
+    }
+
+    .requirement-card {
+      background: #f9f9fb;
+      border-radius: 1.25rem;
+      padding: 2rem;
+    }
+
+    .requirement-card h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      margin-bottom: 0.75rem;
+    }
+
+    .requirement-card p {
+      font-size: 0.95rem;
+      color: #6e6e73;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .requirement-card a {
+      color: #4a8fe6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .requirement-card a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .requirements-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Registration Form Section */
+    .registration-section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.15s forwards;
+    }
+
+    .registration-container {
+      max-width: 40rem;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .registration-header {
+      background: linear-gradient(135deg, #ff6fac 0%, #e64a8f 100%);
+      padding: 2rem;
+      color: white;
+      text-align: center;
+    }
+
+    .registration-header h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .registration-header p {
+      font-size: 1rem;
+      margin: 0;
+      opacity: 0.95;
+    }
+
+    .registration-form {
+      padding: 2rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1d1d1f;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-label .required {
+      color: #e64a8f;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      font-size: 1rem;
+      font-family: inherit;
+      border: 2px solid #e5e5e7;
+      border-radius: 0.75rem;
+      background: #f9f9fb;
+      color: #1d1d1f;
+      transition: all 0.2s ease;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: #6facff;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(111, 172, 255, 0.15);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-checkbox {
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-top: 0.1rem;
+      accent-color: #6facff;
+      cursor: pointer;
+    }
+
+    .form-checkbox-label {
+      font-size: 0.9rem;
+      color: #6e6e73;
+      line-height: 1.5;
+    }
+
+    .form-checkbox-label a {
+      color: #4a8fe6;
+      text-decoration: none;
+    }
+
+    .form-checkbox-label a:hover {
+      text-decoration: underline;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      font-family: inherit;
+      color: white;
+      background: linear-gradient(135deg, #6facff 0%, #4a8fe6 100%);
+      border: none;
+      border-radius: 3rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(111, 172, 255, 0.35);
+    }
+
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(111, 172, 255, 0.45);
+    }
+
+    .form-submit:active {
+      transform: translateY(0);
+    }
+
+    .form-privacy-note {
+      font-size: 0.85rem;
+      color: #6e6e73;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-privacy-note a {
+      color: #4a8fe6;
+      text-decoration: none;
+    }
+
+    .form-privacy-note a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+    }
+
+    /* Contact Section */
+    .contact-section {
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 1s forwards;
+    }
+
+    /* Speakers Section */
+    .speakers-section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.3s forwards;
+    }
+
+    /* USP Section */
+    .usp-section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.35s forwards;
+    }
+
+    .usp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 70rem;
+      margin: 0 auto;
+    }
+
+    .usp-card {
+      background: linear-gradient(135deg, #f8faff 0%, #eef5ff 100%);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      border: 2px solid #d4e5ff;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .usp-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(111, 172, 255, 0.2);
+      border-color: #6facff;
+    }
+
+    .usp-number {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #6facff 0%, #4a8fe6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .usp-icon {
+      width: 4rem;
+      height: 4rem;
+      background: linear-gradient(135deg, #6facff 0%, #4a8fe6 100%);
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .usp-icon.uni-icon {
+      background: linear-gradient(135deg, #1d5aa5 0%, #0d3b6e 100%);
+    }
+
+    .usp-icon svg {
+      width: 28px;
+      height: 28px;
+      color: white;
+    }
+
+    .usp-content h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      margin-bottom: 0.75rem;
+    }
+
+    .usp-content p {
+      font-size: 0.95rem;
+      color: #6e6e73;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .usp-content strong {
+      color: #1d1d1f;
+    }
+
+    @media (max-width: 900px) {
+      .usp-grid {
+        grid-template-columns: 1fr;
+        max-width: 28rem;
+      }
+    }
+
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 60rem;
+      margin: 0 auto;
+    }
+
+    .speaker-card {
+      background: #ffffff;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .speaker-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(111, 172, 255, 0.2);
+    }
+
+    .speaker-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .speaker-info {
+      padding: 1.5rem;
+    }
+
+    .speaker-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      margin-bottom: 0.25rem;
+    }
+
+    .speaker-role {
+      font-size: 0.9rem;
+      color: #6e6e73;
+      margin-bottom: 0.5rem;
+    }
+
+    .speaker-org {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #4a8fe6;
+      background: #e8f4ff;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+    }
+
+    .speaker-org.uni {
+      color: #1d5aa5;
+      background: #e5eef8;
+    }
+
+    @media (max-width: 900px) {
+      .speakers-grid {
+        grid-template-columns: 1fr;
+        max-width: 20rem;
+      }
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 60rem;
+      margin: 0 auto;
+    }
+
+    .contact-card {
+      background: #f9f9fb;
+      border-radius: 1.25rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .contact-card-logo {
+      height: 50px;
+      margin-bottom: 1.25rem;
+      object-fit: contain;
+    }
+
+    .contact-card h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      margin-bottom: 1rem;
+    }
+
+    .contact-card p {
+      font-size: 0.95rem;
+      color: #6e6e73;
+      margin: 0.5rem 0;
+    }
+
+    .contact-card a {
+      color: #4a8fe6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="main-container">
+
+      <!-- Hero Section -->
+      <header class="hero">
+        <div class="hero-logos">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uni_Bamberg_Logo.svg/1200px-Uni_Bamberg_Logo.svg.png" alt="Universität Bamberg" class="hero-logo">
+          <span class="hero-logo-divider">×</span>
+          <img src="https://wlw-steuern.de/storage/files/shares/Logo/wlw-logo-komplett.png" alt="WLW" class="hero-logo">
+        </div>
+        <span class="hero-badge">Kostenloser Infoabend</span>
+        <h1>Master Steuerberatung (M.Sc.)<br><span>Infoabend für Interessierte</span></h1>
+        <p class="hero-intro">
+          Informiere dich über den berufsbegleitenden Weiterbildungsmaster Steuerberatung der Universität Bamberg – in Kooperation mit dem WLW. Erfahre alles über Studieninhalte, Zulassungsvoraussetzungen, Prüfungsvorbereitung und Karrierechancen.
+        </p>
+
+        <!-- Event Info Box -->
+        <div class="event-info-box">
+          <div class="event-info-item">
+            <div class="event-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="4" width="18" height="18" rx="2" stroke="white" stroke-width="2"/>
+                <path d="M16 2V6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 2V6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <path d="M3 10H21" stroke="white" stroke-width="2"/>
+              </svg>
+            </div>
+            <span class="event-info-label">Datum</span>
+            <span class="event-info-value">15. April 2026</span>
+          </div>
+          <div class="event-info-item">
+            <div class="event-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
+                <path d="M12 6V12L16 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="event-info-label">Uhrzeit</span>
+            <span class="event-info-value">18:00 Uhr</span>
+          </div>
+          <div class="event-info-item">
+            <div class="event-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="3" width="20" height="14" rx="2" stroke="white" stroke-width="2"/>
+                <path d="M8 21H16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 17V21" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="event-info-label">Format</span>
+            <span class="event-info-value">Online (Zoom)</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Registration Form Section - moved up -->
+      <section class="registration-section" id="anmeldung">
+        <div class="registration-container">
+          <div class="registration-header">
+            <h2>Jetzt zum Infoabend anmelden</h2>
+            <p>Master Steuerberatung – 15. April 2026, 18:00 Uhr</p>
+          </div>
+          <form class="registration-form" action="https://formspree.io/f/mbdagprk" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="vorname">Vorname <span class="required">*</span></label>
+                <input type="text" class="form-input" id="vorname" name="vorname" required placeholder="Max">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="nachname">Nachname <span class="required">*</span></label>
+                <input type="text" class="form-input" id="nachname" name="nachname" required placeholder="Mustermann">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">E-Mail-Adresse <span class="required">*</span></label>
+              <input type="email" class="form-input" id="email" name="email" required placeholder="max.mustermann@beispiel.de">
+            </div>
+
+            <p class="form-privacy-note">Mit der Anmeldung stimmst du unserer <a href="https://wlw-steuern.de/datenschutz" target="_blank">Datenschutzerklärung</a> zu.</p>
+
+            <button type="submit" class="form-submit">
+              Kostenlos anmelden
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Speakers Section -->
+      <section class="speakers-section">
+        <h2 class="section-title">Deine Referenten</h2>
+        <p class="section-subtitle">Lerne die Dozenten kennen, die dich durch den Infoabend führen werden.</p>
+
+        <div class="speakers-grid">
+          <div class="speaker-card">
+            <img src="https://www.uni-bamberg.de/fileadmin/_processed_/a/f/csm_Bild_Hr._Egner_8530a378a6.webp" alt="Prof. Dr. Thomas Egner" class="speaker-image">
+            <div class="speaker-info">
+              <div class="speaker-name">Prof. Dr. Thomas Egner</div>
+              <span class="speaker-org uni">Universität Bamberg</span>
+            </div>
+          </div>
+
+          <div class="speaker-card">
+            <img src="https://wlw-steuern.de/storage/lecturer_image/6FwBtDYuhYD1OMLjysSuWp2OJPZHfRgPtLRhLila.jpg" alt="Dr. Peter Wirth" class="speaker-image">
+            <div class="speaker-info">
+              <div class="speaker-name">Dr. Peter Wirth</div>
+              <span class="speaker-org">WLW</span>
+            </div>
+          </div>
+
+          <div class="speaker-card">
+            <img src="https://wlw-steuern.de/storage/lecturer_image/H0EhzKqTEMuQ75434v8Kw4zCe6ADUO06CGziilr2.jpg" alt="Marcus Wirth" class="speaker-image">
+            <div class="speaker-info">
+              <div class="speaker-name">Marcus Wirth</div>
+              <span class="speaker-org">WLW</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- USP Highlights Section -->
+      <section class="usp-section">
+        <h2 class="section-title">Warum dieser Master?</h2>
+        <p class="section-subtitle">Drei entscheidende Vorteile auf einen Blick</p>
+
+        <div class="usp-grid">
+          <div class="usp-card">
+            <div class="usp-number">2×</div>
+            <div class="usp-content">
+              <h3>Zwei Abschlüsse – ein Studium</h3>
+              <p>Du erwirbst den akademischen Grad <strong>Master of Science (M.Sc.)</strong> und bereitest dich gleichzeitig umfassend auf das <strong>Steuerberaterexamen</strong> vor. Ein Studiengang, doppelter Karriereschub.</p>
+            </div>
+          </div>
+
+          <div class="usp-card">
+            <div class="usp-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M2 12H22" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="usp-content">
+              <h3>Deutschlandweit studieren</h3>
+              <p>Fast alle Veranstaltungen finden <strong>online</strong> statt. Du kannst von überall in Deutschland teilnehmen – ohne Umzug, ohne lange Anfahrt, flexibel neben dem Beruf.</p>
+            </div>
+          </div>
+
+          <div class="usp-card">
+            <div class="usp-icon uni-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3L1 9L12 15L23 9L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M1 9V17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M5 11V19C5 19 8 21 12 21C16 21 19 19 19 19V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="usp-content">
+              <h3>Echter Universitäts-Master</h3>
+              <p>Kein FH-Abschluss, sondern ein vollwertiger <strong>Universitätsabschluss</strong> der Otto-Friedrich-Universität Bamberg – mit wissenschaftlicher Tiefe und höchstem Renommee.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Overview Section -->
+      <section class="overview-section">
+        <h2 class="section-title">Der Master Steuerberatung im Überblick</h2>
+        <p class="section-subtitle">Seit dem Wintersemester 2022/23 bietet die Universität Bamberg in Kooperation mit dem WLW einen einzigartigen Weiterbildungsmaster an, der universitäre Lehre mit praxisnaher Examensvorbereitung verbindet.</p>
+
+        <div class="overview-grid">
+          <div class="overview-card">
+            <div class="overview-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 10V6C22 4.89543 21.1046 4 20 4H4C2.89543 4 2 4.89543 2 6V18C2 19.1046 2.89543 20 4 20H12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <path d="M17 15L19 17L23 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Doppelter Abschluss</h3>
+            <p>Master of Science (M.Sc.) der Universität Bamberg und optimale Vorbereitung auf das Steuerberaterexamen – schriftlich und mündlich.</p>
+          </div>
+
+          <div class="overview-card">
+            <div class="overview-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
+                <path d="M12 6V12L16 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>4 Semester Regelstudienzeit</h3>
+            <p>Berufsbegleitend studieren mit flexibler Zeiteinteilung. Viele Module können online belegt werden, WLW-Aufzeichnungen jederzeit abrufbar.</p>
+          </div>
+
+          <div class="overview-card">
+            <div class="overview-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 15C15.866 15 19 11.866 19 8C19 4.13401 15.866 1 12 1C8.13401 1 5 4.13401 5 8C5 11.866 8.13401 15 12 15Z" stroke="white" stroke-width="2"/>
+                <path d="M8.21 13.89L7 23L12 20L17 23L15.79 13.88" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Integrierte Prüfungsvorbereitung</h3>
+            <p>Der WLW-Vollzeitkurs, Klausurenkurse, Intensivkurs und die mündliche Vorbereitung sind bereits im Studium enthalten.</p>
+          </div>
+
+          <div class="overview-card">
+            <div class="overview-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 21V19C16 16.7909 14.2091 15 12 15H5C2.79086 15 1 16.7909 1 19V21" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="8.5" cy="7" r="4" stroke="white" stroke-width="2"/>
+                <path d="M17 11L19 13L23 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Zulassung zur StB-Prüfung</h3>
+            <p>Mit einjähriger Berufstätigkeit vor dem Master und studienbegleitender Tätigkeit erfüllst du die Zulassungsvoraussetzungen nach § 36 StBerG.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Curriculum Section -->
+      <section class="curriculum-section">
+        <h2 class="section-title">Studieninhalte</h2>
+        <p class="section-subtitle">Der Master umfasst 120 ECTS-Punkte und verbindet wissenschaftliche Lehre der Universität mit praxisnaher Examensvorbereitung durch das WLW.</p>
+
+        <div class="curriculum-container">
+          <!-- University Block -->
+          <div class="curriculum-block">
+            <div class="curriculum-block-header uni">
+              <img src="https://upload.wikimedia.org/wikipedia/de/1/1f/Otto-Friedrich-Universit%C3%A4t_Bamberg_logo.svg" alt="Universität Bamberg" class="curriculum-logo">
+              <h3>Universität Bamberg</h3>
+              <p>60 ECTS-Punkte</p>
+            </div>
+            <div class="curriculum-block-content">
+              <div class="curriculum-semester">
+                <div class="curriculum-semester-title uni">1. Semester</div>
+                <div class="curriculum-item uni">Methoden und Forschung</div>
+                <div class="curriculum-item uni">Betriebswirtschaftliche Beratung (Finanzierung, Controlling, Digitalisierung)</div>
+              </div>
+              <div class="curriculum-semester">
+                <div class="curriculum-semester-title uni">3. Semester</div>
+                <div class="curriculum-item uni">Betriebswirtschaftliche Beratung (Vertiefung)</div>
+                <div class="curriculum-item uni">Masterarbeit inkl. Seminar</div>
+                <div class="curriculum-item uni">Disputation oder Kolloquium</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- WLW Block -->
+          <div class="curriculum-block">
+            <div class="curriculum-block-header wlw">
+              <img src="https://wlw-steuern.de/storage/files/shares/Bilder/Videos%20Website/Logo%20transparent%203.png" alt="WLW" class="curriculum-logo">
+              <h3>WLW Examensvorbereitung</h3>
+              <p>60 ECTS-Punkte + mündliche Prüfung</p>
+            </div>
+            <div class="curriculum-block-content">
+              <div class="curriculum-semester">
+                <div class="curriculum-semester-title">1. & 2. Semester</div>
+                <div class="curriculum-item">Steuerliche Grundlagen I & II (Fernkurs)</div>
+                <div class="curriculum-item">Bilanzsteuerrecht I (Online)</div>
+                <div class="curriculum-item">Abgabenordnung (Online)</div>
+                <div class="curriculum-item">Einkommensteuer I (Online)</div>
+              </div>
+              <div class="curriculum-semester">
+                <div class="curriculum-semester-title">4. Semester</div>
+                <div class="curriculum-item">Bewertung / Erbschaftsteuer</div>
+                <div class="curriculum-item">ESt II / KSt / GewSt / Int. StR</div>
+                <div class="curriculum-item">Umsatzsteuer</div>
+                <div class="curriculum-item">Bilanzsteuerrecht II / UmwStR</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Included Section -->
+      <section class="included-section">
+        <div class="included-box">
+          <h3>Im Gesamtpreis enthaltene WLW-Leistungen</h3>
+          <div class="included-grid">
+            <div class="included-item">
+              <span class="included-check">✓</span>
+              <span>Mittwochabend- Samstagskurs</span>
+            </div>
+            <div class="included-item">
+              <span class="included-check">✓</span>
+              <span>Intensivkurs (August 2028)</span>
+            </div>
+            <div class="included-item">
+              <span class="included-check">✓</span>
+              <span>Griffregister</span>
+            </div>
+            <div class="included-item">
+              <span class="included-check">✓</span>
+              <span>30 Stück 6-stündige Klausuren</span>
+            </div>
+            <div class="included-item">
+              <span class="included-check">✓</span>
+              <span>Intensivklausurenkurs (September 2028)</span>
+            </div>
+            <div class="included-item">
+              <span class="included-check">✓</span>
+              <span>Karteikarten Klausurtechnik</span>
+            </div>
+            <div class="included-item">
+              <span class="included-check">✓</span>
+              <span>20 Stück 2-/3-stündige Klausuren</span>
+            </div>
+            <div class="included-item">
+              <span class="included-check">✓</span>
+              <span>Mündlicher Vorbereitungskurs (Januar 2029)</span>
+            </div>
+            <div class="included-item">
+              <span class="included-check">✓</span>
+              <span>Karteikarten Stoffvermittlung</span>
+            </div>
+            <div class="included-item">
+              <span class="included-check">✓</span>
+              <span>Fallsammlungen (60 Klausuren)</span>
+            </div>
+            <div class="included-item">
+              <span class="included-check">✓</span>
+              <span>Zugang WLW+ Lernplattform</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing Section -->
+      <section class="pricing-section">
+        <h2 class="section-title">Studiengebühren</h2>
+        <p class="section-subtitle">Der Gesamtpreis für Master Universität und WLW-Examensvorbereitung (schriftlich und mündlich)</p>
+
+        <div class="pricing-card">
+          <div class="pricing-price">12.950 €</div>
+          <div class="pricing-label">Gesamtpreis Master + WLW-Vorbereitung</div>
+          <div class="pricing-details">
+            <p><strong>Zahlbar in 4 Raten</strong> zu je 3.237,50 € zu Beginn jedes Semesters</p>
+            <p>Enthaltene WLW-Leistungen im Einzelwert von 13.505 €</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Requirements Section -->
+      <section class="requirements-section">
+        <h2 class="section-title">Zulassungsvoraussetzungen</h2>
+        <p class="section-subtitle">Die Zugangsvoraussetzungen regelt § 26 der Studien- und Fachprüfungsordnung.</p>
+
+        <div class="requirements-grid">
+          <div class="requirement-card">
+            <h4>Hochschulabschluss</h4>
+            <p>Mit mindestens der Note 3,00 abgeschlossenes Hochschulstudium (180 ECTS) in einem wirtschaftswissenschaftlichen, juristischen, wirtschaftsjuristischen oder vergleichbaren Studiengang.</p>
+          </div>
+          <div class="requirement-card">
+            <h4>Berufserfahrung</h4>
+            <p>In der Regel mindestens einjährige einschlägige qualifizierte Berufstätigkeit nach Abschluss des Bachelorstudiums.</p>
+          </div>
+          <div class="requirement-card">
+            <h4>Bewerbungsfrist</h4>
+            <p>Für das <strong>WS 2026/27</strong> ist eine Bewerbung bis zum <strong>31.08.2026</strong> möglich.</p>
+          </div>
+          <div class="requirement-card">
+            <h4>Weitere Informationen</h4>
+            <p>Alle Details findest du auf der <a href="https://www.uni-bamberg.de/ma-stb/bewerbung-und-einschreibung/zugangsvoraussetzungen/" target="_blank">Website der Universität Bamberg</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact-section">
+        <h2 class="section-title">Noch Fragen?</h2>
+        <p class="section-subtitle">Wir beraten dich gerne persönlich.</p>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <img src="https://wlw-steuern.de/storage/files/shares/Bilder/Videos%20Website/Logo%20transparent%203.png" alt="WLW Logo" class="contact-card-logo">
+            <h4>WLW Steuerberater-Vorbereitung</h4>
+            <p><a href="https://wlw-steuern.de" target="_blank">www.wlw-steuern.de</a></p>
+            <p>Telefon: <a href="tel:+499517006600">0951 / 70066-0</a></p>
+            <p>E-Mail: <a href="mailto:info@wlw-steuern.de">info@wlw-steuern.de</a></p>
+          </div>
+          <div class="contact-card">
+            <img src="https://upload.wikimedia.org/wikipedia/de/1/1f/Otto-Friedrich-Universit%C3%A4t_Bamberg_logo.svg" alt="Universität Bamberg Logo" class="contact-card-logo">
+            <h4>Universität Bamberg</h4>
+            <p><a href="https://www.uni-bamberg.de/ma-stb/" target="_blank">www.uni-bamberg.de/ma-stb</a></p>
+            <p>Studiengangskoordination</p>
+            <p>Master Steuerberatung</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</body>
+</html>
